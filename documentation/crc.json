@@ -1,0 +1,68 @@
+[
+  {
+    "name": "organigramma",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "creazione e gestione dei cicli del dottorato",
+      "creazione e gestione dei facultymembers",
+      "creazione e gestione degli studenti",
+      "assegnazione dei facultymember (advisor) agli studenti"
+    ],
+    "collaborators": [
+      "insegnamenti"
+    ]
+  },
+  {
+    "name": "offertadidattica",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "creazione e gestione dei corsi",
+      "creazione e gestione dei docenti",
+      "creazione e gestione degli appelli",
+      "creazione e gestione delle lezioni per ciascun corso",
+      "gestione iscrizione ai corsi",
+      "gestione iscrizione agli appelli",
+      "",
+      ""
+    ],
+    "collaborators": [
+      "organigramma"
+    ]
+  },
+  {
+    "name": "approvazionetesi",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "creazione e gestione della tesi",
+      "creazione e gestione dei reviewers",
+      "assegnazione della evaluation committee",
+      "generazione delle revisioni",
+      "gestione dell'approvazione (o non) della tesi"
+    ],
+    "collaborators": [
+      "organigramma"
+    ]
+  },
+  {
+    "name": "progressreport",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "creazione e gestione del progress report",
+      "creazione e gestione degli scienziati",
+      "assegnazione della supervisory committee",
+      "generazione delle revisioni",
+      "gestione dell'approvazione (o non) del progress report"
+    ],
+    "collaborators": [
+      "organigramma"
+    ]
+  }
+]
