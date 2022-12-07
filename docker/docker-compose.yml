@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  mariadb:
+    container_name: unifi_phd-mdb
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - database-data:/var/lib/mysql
+      - ../sql:/sql
+
+volumes:
+  database-data:
