@@ -1,5 +1,7 @@
+import testpackage.*;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Test test1 = new Test("Mattia");
+        System.out.println("Hello, " + test1.getName());
     }
 }
