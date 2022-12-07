@@ -200,7 +200,7 @@
 											"top": 230,
 											"width": 775,
 											"height": 13,
-											"text": "organizationchart"
+											"text": "thesisapprovation"
 										},
 										{
 											"_type": "LabelView",
@@ -3463,7 +3463,7 @@
 											"top": 224,
 											"width": 124.96630859375,
 											"height": 13,
-											"text": "(from organizationchart)"
+											"text": "(from thesisapprovation)"
 										},
 										{
 											"_type": "LabelView",
@@ -3714,7 +3714,7 @@
 											"top": 664,
 											"width": 124.96630859375,
 											"height": 13,
-											"text": "(from organizationchart)"
+											"text": "(from thesisapprovation)"
 										},
 										{
 											"_type": "LabelView",
@@ -3965,7 +3965,7 @@
 											"top": 312,
 											"width": 124.96630859375,
 											"height": 13,
-											"text": "(from organizationchart)"
+											"text": "(from thesisapprovation)"
 										},
 										{
 											"_type": "LabelView",
@@ -6279,7 +6279,7 @@
 											"top": 966,
 											"width": 663,
 											"height": 13,
-											"text": "thesisapprovation"
+											"text": "organizationchart"
 										},
 										{
 											"_type": "LabelView",
@@ -6413,7 +6413,7 @@
 											"top": 3036,
 											"width": 140.88623046875,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -8733,7 +8733,7 @@
 											"top": -672,
 											"width": 140.88623046875,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -11099,7 +11099,7 @@
 											"top": -944,
 											"width": 136.55712890625,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -12062,7 +12062,7 @@
 											"top": -1008,
 											"width": 136.55712890625,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -12243,7 +12243,7 @@
 											"top": -840,
 											"width": 136.55712890625,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -13004,7 +13004,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "organizationchart",
+					"name": "thesisapprovation",
 					"ownedElements": [
 						{
 							"_type": "UMLClass",
@@ -16496,7 +16496,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "thesisapprovation",
+					"name": "organizationchart",
 					"ownedElements": [
 						{
 							"_type": "UMLClass",
@@ -39719,7 +39719,7 @@
 											"top": 262,
 											"width": 735,
 											"height": 13,
-											"text": "organizationchart"
+											"text": "thesisapprovation"
 										},
 										{
 											"_type": "LabelView",
@@ -39826,7 +39826,7 @@
 											"top": 1166,
 											"width": 815,
 											"height": 13,
-											"text": "thesisapprovation"
+											"text": "organizationchart"
 										},
 										{
 											"_type": "LabelView",
@@ -40311,7 +40311,7 @@
 											"top": 310,
 											"width": 287,
 											"height": 13,
-											"text": "organizationchart-businesslogic"
+											"text": "thesisapprovation-businesslogic"
 										},
 										{
 											"_type": "LabelView",
@@ -40430,7 +40430,7 @@
 											"top": 88,
 											"width": 149.5634765625,
 											"height": 13,
-											"text": "(from organizationchart)"
+											"text": "(from thesisapprovation)"
 										},
 										{
 											"_type": "LabelView",
@@ -41180,7 +41180,7 @@
 											"top": 88,
 											"width": 149.5634765625,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -41276,7 +41276,7 @@
 											"top": 1238,
 											"width": 287,
 											"height": 13,
-											"text": "thesisapprovation-businesslogic"
+											"text": "organizationchart-businesslogic"
 										},
 										{
 											"_type": "LabelView",
@@ -41290,7 +41290,7 @@
 											"top": 120,
 											"width": 149.5634765625,
 											"height": 13,
-											"text": "(from thesisapprovation)"
+											"text": "(from organizationchart)"
 										},
 										{
 											"_type": "LabelView",
@@ -41588,7 +41588,7 @@
 											"top": -882,
 											"width": 204.4580078125,
 											"height": 13,
-											"text": "(from organizationchart-businesslogic)"
+											"text": "(from thesisapprovation-businesslogic)"
 										},
 										{
 											"_type": "LabelView",
@@ -42639,7 +42639,7 @@
 											"top": 806,
 											"width": 218.9306640625,
 											"height": 13,
-											"text": "(from thesisapprovation-businesslogic)"
+											"text": "(from organizationchart-businesslogic)"
 										},
 										{
 											"_type": "LabelView",
@@ -44645,7 +44645,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGEPy3emFFbqX4="
 					},
-					"name": "organizationchart",
+					"name": "thesisapprovation",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -44686,7 +44686,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGEPy3emFFbqX4="
 					},
-					"name": "thesisapprovation",
+					"name": "organizationchart",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -44753,7 +44753,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGEWNH6d5T7wGQ="
 							},
-							"name": "thesisapprovation-businesslogic",
+							"name": "organizationchart-businesslogic",
 							"ownedElements": [
 								{
 									"_type": "UMLDependency",
@@ -45016,7 +45016,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGEPy3emFFbqX4="
 					},
-					"name": "organizationchart-businesslogic",
+					"name": "thesisapprovation-businesslogic",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",

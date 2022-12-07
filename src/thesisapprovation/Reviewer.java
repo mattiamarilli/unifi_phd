@@ -1,4 +1,4 @@
 package thesisapprovation;
 
-public class FacultyMember {
+public class Reviewer {
 }

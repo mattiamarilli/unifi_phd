@@ -1,4 +1,4 @@
 package organizationchart;
 
-public class Reviewer {
+public class FacultyMember {
 }

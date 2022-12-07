@@ -1,4 +1,4 @@
 package thesisapprovation;
 
-public class Student {
+public class Thesis {
 }

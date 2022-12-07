@@ -1,4 +1,4 @@
 package thesisapprovation;
 
-public class Cicle {
+public class Review {
 }

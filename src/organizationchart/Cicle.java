@@ -1,4 +1,4 @@
 package organizationchart;
 
-public class Thesis {
+public class Cicle {
 }
