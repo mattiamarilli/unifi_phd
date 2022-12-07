@@ -37,9 +37,9 @@
 # .idea/modules.xml
 # .idea/*.iml
 # .idea/modules
-*.iml
+# *.iml
 # *.ipr
-unifi_phd.iml
+#unifi_phd.iml
 # CMake
 cmake-build-*/
 
