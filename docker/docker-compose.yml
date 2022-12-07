@@ -12,5 +12,18 @@ services:
       - database-data:/var/lib/mysql
       - ../sql:/sql
 
+  adminer:
+    container_name: adm
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  php:
+    container_name: php
+    image: php:7-fpm-alpine
+    links:
+      - mariadb:database
+
 volumes:
   database-data:
