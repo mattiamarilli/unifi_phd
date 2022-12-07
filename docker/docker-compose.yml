@@ -11,6 +11,10 @@ services:
     volumes:
       - database-data:/var/lib/mysql
       - ../sql:/sql
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
 
   adminer:
     container_name: adm
