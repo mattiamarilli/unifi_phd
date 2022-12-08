@@ -1,7 +1,10 @@
+import organizationchart.data_access.StudentDaoImpl;
 import testpackage.*;
+import organizationchart.*;
 public class Main {
     public static void main(String[] args) {
-        Test test1 = new Test("Mattia");
-        System.out.println("Hello, " + test1.getName());
+        StudentDaoImpl studentDao = new StudentDaoImpl();
+        studentDao.getAllFacultyMember();
+
     }
 }
