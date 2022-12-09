@@ -24,3 +24,10 @@ CREATE TABLE students(
              surname VARCHAR(64) NOT NULL,
              topics VARCHAR(64) NOT NULL
 );
+
+-- find a better name
+CREATE TABLE facultymembers_cycle (
+              id_cycle INT NOT NULL REFERENCES cycles (id),
+              id_facultymember INT NOT NULL REFERENCES facultymembers (id),
+              PRIMARY KEY (id_cycle, id_facultymember)
+);
