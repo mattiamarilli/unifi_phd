@@ -10,16 +10,17 @@ import java.util.List;
 
 public class StudentDaoImpl implements StudentDao {
 
-    String jdbc_connector = "jdbc:mysql://localhost:3306/unifi_phd";
-    String user = "root";
-    String password = "test";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/unifi_phd";
+    static final String USER = "root";
+    static final String PASS = "test";
+
 
 
 
     @Override
-    public List<Student> getAllFacultyMember() {
+    public List<Student> getAllStudent() {
         try{
-            Connection connection = DriverManager.getConnection(this.jdbc_connector,this.user,this.password);
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM students");
 
@@ -36,17 +37,17 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Student getFacultyMember(int id) {
+    public Student getStudent(int id) {
         return null;
     }
 
     @Override
-    public void updateCycle(Student facultyMember) {
+    public void updateStudent(Student student) {
 
     }
 
     @Override
-    public void deleteStudent(Student facultyMember) {
+    public void deleteStudent(Student student) {
 
     }
 }

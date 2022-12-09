@@ -16,12 +16,12 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
-    public void updateCycle(FacultyMember facultyMember) {
+    public void updateFacultyMember(FacultyMember facultyMember) {
 
     }
 
     @Override
-    public void deleteStudent(FacultyMember facultyMember) {
+    public void deleteFacultyMember(FacultyMember facultyMember) {
 
     }
 }

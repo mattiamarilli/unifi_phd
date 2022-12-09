@@ -5,8 +5,8 @@ import organizationchart.Student;
 import java.util.List;
 
 public interface StudentDao {
-    List<Student> getAllFacultyMember();
-    Student getFacultyMember(int id);
-    void updateCycle(Student facultyMember);
-    void deleteStudent(Student facultyMember);
+    List<Student> getAllStudent();
+    Student getStudent(int id);
+    void updateStudent(Student student);
+    void deleteStudent(Student student);
 }

@@ -7,5 +7,5 @@ public interface CycleDao {
         List<Cycle> getAllCycle();
         Cycle getCycle(int id);
         void updateCycle(Cycle cycle);
-        void deleteStudent(Cycle cycle);
+        void deleteCycle(Cycle cycle);
 }

@@ -21,7 +21,7 @@ public class CycleDaoImpl implements CycleDao {
     }
 
     @Override
-    public void deleteStudent(Cycle cycle) {
+    public void deleteCycle(Cycle cycle) {
 
     }
 }

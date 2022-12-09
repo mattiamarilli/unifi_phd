@@ -4,7 +4,7 @@ import organizationchart.*;
 public class Main {
     public static void main(String[] args) {
         StudentDaoImpl studentDao = new StudentDaoImpl();
-        studentDao.getAllFacultyMember();
+        studentDao.getAllStudent();
 
     }
 }
