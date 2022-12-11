@@ -2,7 +2,7 @@
 
 Made by [Mattia Marilli](https://github.com/mattiamarilli) and [Giacomo Ponzuoli](https://github.com/jackponzo)
 
- - Adminer available on port **8080** if you run the project in devmode
+ - Adminer available on port **8080** 
 
 ### Requirement
  - Docker (Version 4.10.1 or latest)
