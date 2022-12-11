@@ -1,7 +1,7 @@
-DROP SCHEMA IF EXISTS unifi_phd;
-CREATE SCHEMA unifi_phd;
+DROP SCHEMA IF EXISTS oc_schema;
+CREATE SCHEMA oc_schema;
 
-USE unifi_phd;
+USE oc_schema;
 
 CREATE TABLE cycles (
              id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -31,3 +31,16 @@ CREATE TABLE facultymembers_cycle (
               id_facultymember INT NOT NULL REFERENCES facultymembers (id),
               PRIMARY KEY (id_cycle, id_facultymember)
 );
+-- find a better name
+CREATE TABLE students_cycle (
+            id_cycle INT NOT NULL REFERENCES cycles (id),
+            id_student INT NOT NULL REFERENCES students (id),
+            PRIMARY KEY (id_cycle, id_student)
+);
+
+CREATE TABLE advisors(
+            id_facultymember INT NOT NULL REFERENCES facultymembers (id),
+            id_student INT NOT NULL REFERENCES students (id),
+            PRIMARY KEY (id_facultymember, id_student)
+);
+

@@ -15,8 +15,14 @@ down:
 
 .PHONY: db
 db:
-	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/schema.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/oc-schema.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/do-schema.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/pr-schema.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/ta-schema.sql'
 
 .PHONY: data
 data:
-	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/data.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/oc-data.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/do-data.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/pr-data.sql'
+	docker exec -it unifi_phd-mdb sh -c 'mysql -uroot -ptest < /sql/ta-data.sql'
