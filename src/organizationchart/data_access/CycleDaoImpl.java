@@ -1,6 +1,6 @@
 package organizationchart.data_access;
 
-import organizationchart.Cycle;
+import organizationchart.*;
 
 import java.util.List;
 
