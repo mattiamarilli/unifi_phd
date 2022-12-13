@@ -2,23 +2,31 @@ package organizationchart;
 
 public class Student {
 
-    private int id;
+    private Integer id;
     private String name;
     private String surname;
     private String topics;
 
-    public Student(int id, String name, String surname, String topics) {
+    public Student(){}
+    public Student(String name, String surname, String topics) {
+        this.id = null;
+        this.name = name;
+        this.surname = surname;
+        this.topics = topics;
+    }
+
+    public Student(Integer id, String name, String surname, String topics) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.topics = topics;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

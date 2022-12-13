@@ -2,10 +2,7 @@ package organizationchart.data_access;
 
 import organizationchart.Student;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +32,51 @@ public class StudentDaoImpl implements StudentDao {
                 students.add(student);
             }
 
-        }catch (Exception e){ e.printStackTrace();}
-
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
         return students;
     }
 
     @Override
-    public Student getStudent(int id) {
-        return null;
+    public Student getStudent(Integer id) {
+        Student student = new Student();
+        try{
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM students WHERE id=?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()) {
+                student = new Student(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("surname"),
+                        resultSet.getString("topics")
+                );
+            }
+        }catch (Exception e)
+            {
+                e.printStackTrace();
+                return null;
+            }
+        return student;
     }
 
     @Override
     public void saveStudent(Student student) {
+        try{
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO `students` (`name`, `surname`, `topics`) VALUES (?, ?, ?)");
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setString(2, student.getSurname());
+            preparedStatement.setString(3, student.getTopics());
+            preparedStatement.executeUpdate();
 
+        }catch (Exception e)
+        {e.printStackTrace();}
     }
 
     @Override
