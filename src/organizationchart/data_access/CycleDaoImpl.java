@@ -16,6 +16,11 @@ public class CycleDaoImpl implements CycleDao {
     }
 
     @Override
+    public void saveCycle(Cycle cycle) {
+
+    }
+
+    @Override
     public void updateCycle(Cycle cycle) {
 
     }

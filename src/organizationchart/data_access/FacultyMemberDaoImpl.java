@@ -16,6 +16,11 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
+    public void saveFacultyMember(FacultyMember facultyMember) {
+
+    }
+
+    @Override
     public void updateFacultyMember(FacultyMember facultyMember) {
 
     }

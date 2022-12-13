@@ -47,6 +47,11 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    public void saveStudent(Student student) {
+
+    }
+
+    @Override
     public void updateStudent(Student student) {
 
     }
