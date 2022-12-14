@@ -7,14 +7,6 @@ public class Student {
     private String surname;
     private String topics;
 
-    public Student(){}
-    public Student(String name, String surname, String topics) {
-        this.id = null;
-        this.name = name;
-        this.surname = surname;
-        this.topics = topics;
-    }
-
     public Student(Integer id, String name, String surname, String topics) {
         this.id = id;
         this.name = name;

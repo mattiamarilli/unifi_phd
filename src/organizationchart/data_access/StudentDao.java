@@ -7,9 +7,9 @@ import java.util.List;
 public interface StudentDao {
     List<Student> getAllStudent();
     Student getStudent(Integer id);
-    void saveStudent(Student student);
-    void updateStudent(Student student);
-    void deleteStudent(Student student);
+    boolean saveStudent(Student student);
+    boolean updateStudent(Student student);
+    boolean deleteStudent(Integer id);
 
 
 }
