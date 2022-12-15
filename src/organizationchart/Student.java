@@ -2,24 +2,24 @@ package organizationchart;
 
 public class Student {
 
-    private Integer id;
+    private Integer freshman;
     private String name;
     private String surname;
     private String topics;
 
-    public Student(Integer id, String name, String surname, String topics) {
-        this.id = id;
+    public Student(Integer freshman, String name, String surname, String topics) {
+        this.freshman = freshman;
         this.name = name;
         this.surname = surname;
         this.topics = topics;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getFreshman() {
+        return freshman;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFreshman(Integer freshman) {
+        this.freshman = freshman;
     }
 
     public String getName() {

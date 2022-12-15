@@ -3,43 +3,43 @@ CREATE SCHEMA oc_schema;
 
 USE oc_schema;
 
-CREATE TABLE cycles (
-             number INT NOT NULL PRIMARY KEY,
-             year VARCHAR(64) NOT NULL,
-             description VARCHAR(2000) NOT NULL
+CREATE TABLE Cycles (
+             Number INT NOT NULL PRIMARY KEY,
+             Year VARCHAR(64) NOT NULL,
+             Description VARCHAR(2000) NOT NULL
 );
 
-CREATE TABLE facultymembers (
-            id INT NOT NULL PRIMARY KEY,
-            name VARCHAR(64) NOT NULL,
-            surname VARCHAR(64) NOT NULL,
-            specialization VARCHAR(64) NOT NULL,
-            institution VARCHAR(64) NOT NULL
+CREATE TABLE Facultymembers (
+            Freshman INT NOT NULL PRIMARY KEY,
+            Name VARCHAR(64) NOT NULL,
+            Surname VARCHAR(64) NOT NULL,
+            Specialization VARCHAR(64) NOT NULL,
+            Institution VARCHAR(64) NOT NULL
 );
 
-CREATE TABLE students(
-             id INT NOT NULL PRIMARY KEY,
-             name VARCHAR(64) NOT NULL,
-             surname VARCHAR(64) NOT NULL,
-             topics VARCHAR(64) NOT NULL
+CREATE TABLE Students(
+             Freshman INT NOT NULL PRIMARY KEY,
+             Name VARCHAR(64) NOT NULL,
+             Surname VARCHAR(64) NOT NULL,
+             Topics VARCHAR(64) NOT NULL
 );
 
 -- find a better name
-CREATE TABLE facultymembers_cycle (
-              number_cycle INT NOT NULL REFERENCES cycles (number),
-              id_facultymember INT NOT NULL REFERENCES facultymembers (id) ON DELETE CASCADE,
-              PRIMARY KEY (number_cycle, id_facultymember)
+CREATE TABLE FacultymembersCycle (
+              NumberCycle INT NOT NULL REFERENCES Cycles (Number),
+              FreshmanFacultymember INT NOT NULL REFERENCES Facultymembers (Freshman) ON DELETE CASCADE,
+              PRIMARY KEY (NumberCycle, FreshmanFacultymember)
 );
 -- find a better name
-CREATE TABLE students_cycle (
-            number_cycle INT NOT NULL REFERENCES cycles (number) ON DELETE CASCADE,
-            id_student INT NOT NULL REFERENCES students (id) ON DELETE CASCADE,
-            PRIMARY KEY (number_cycle, id_student)
+CREATE TABLE StudentsCycle (
+            NumberCycle INT NOT NULL REFERENCES Cycles (Number) ON DELETE CASCADE,
+            FreshmanStudent INT NOT NULL REFERENCES Students (Freshman) ON DELETE CASCADE,
+            PRIMARY KEY (NumberCycle, FreshmanStudent)
 );
 
-CREATE TABLE advisors(
-            id_facultymember INT NOT NULL REFERENCES facultymembers (id) ON DELETE CASCADE,
-            id_student INT NOT NULL REFERENCES students (id) ON DELETE CASCADE,
-            PRIMARY KEY (id_facultymember, id_student)
+CREATE TABLE Advisors(
+            FreshmanFacultymember INT NOT NULL REFERENCES Facultymembers (Freshman) ON DELETE CASCADE,
+            FreshmanStudent INT NOT NULL REFERENCES Students (Freshman) ON DELETE CASCADE,
+            PRIMARY KEY ( FreshmanFacultymember, FreshmanStudent)
 );
 

@@ -2,24 +2,14 @@ package organizationchart;
 
 public class Cycle {
 
-    private int id;
     private int number;
-
-    private int year;
+    private String year;
     private String description;
 
-    public Cycle(int id, int number, String description) {
-        this.id = id;
+    public Cycle(int number, String year, String description) {
         this.number = number;
+        this.year = year;
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getNumber() {
@@ -28,6 +18,14 @@ public class Cycle {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getDescription() {
