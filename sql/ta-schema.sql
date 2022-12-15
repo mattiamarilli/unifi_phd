@@ -10,29 +10,31 @@ CREATE TABLE Thesis (
   UrlDocument VARCHAR(300) NOT NULL,
   StudentFreshman INT NOT NULL,
   State VARCHAR(15),
-  PRIMARY KEY (Id)
+  PRIMARY KEY (Id, StudentFreshman)
 );
 
-CREATE TABLE Review (
-  Id INT NOT NULL AUTO_INCREMENT,
-  Title VARCHAR(120) NOT NULL,
-  Comment VARCHAR(2000) NOT NULL,
-  IdThesis INT NOT NULL REFERENCES Thesis(Id),
-  PRIMARY KEY (Id)
-);
-
--- add password
+-- add password (insert cryptographic)
 CREATE TABLE Reviewer (
   Freshman INT NOT NULL,
-  Email VARCHAR(200) NOT NULL,
   Name VARCHAR(100) NOT NULL,
   Surname VARCHAR(100) NOT NULL,
+  Password VARCHAR(2000) NOT NULL,
+  Email VARCHAR(200) NOT NULL,
   Description VARCHAR(2000) NOT NULL,
   PRIMARY KEY (Freshman)
 );
 
 CREATE TABLE EvaluationCommittee (
   IdThesis INT NOT NULL REFERENCES Thesis(Id),
-  IdReviewer INT NOT NULL REFERENCES Reviewer(Freshman)
+  IdReviewer INT NOT NULL REFERENCES Reviewer(Freshman),
+  PRIMARY KEY (IdThesis, IdReviewer)
 );
 
+CREATE TABLE Review (
+    Id INT NOT NULL AUTO_INCREMENT,
+    Title VARCHAR(120) NOT NULL,
+    Comment VARCHAR(2000) NOT NULL,
+    IdThesis INT NOT NULL REFERENCES Thesis(Id),
+    IdReviewer INT NOT NULL REFERENCES Reviewer(Freshman),
+    PRIMARY KEY (Id)
+);
