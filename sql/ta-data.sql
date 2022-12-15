@@ -1,1 +1,0 @@
-USE ta_schema;
