@@ -11,9 +11,9 @@ public interface ReviewDao {
 
     Review getReviewById(int id) throws SQLException;
 
-    void insertReview(Review review);
+    void insertReview(Review review) throws SQLException;
 
-    void updateReview(Review review);
+    void updateReview(Review review) throws SQLException;
 
-    void deleteReview(Review review);
+    void deleteReview(int idReview) throws SQLException;
 }

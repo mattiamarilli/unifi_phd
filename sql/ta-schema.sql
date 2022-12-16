@@ -10,7 +10,7 @@ CREATE TABLE Thesis (
   UrlDocument VARCHAR(300) NOT NULL,
   StudentFreshman INT NOT NULL,
   State VARCHAR(15),
-  PRIMARY KEY (Id, StudentFreshman)
+  PRIMARY KEY (Id)
 );
 
 -- add password (insert cryptographic)
