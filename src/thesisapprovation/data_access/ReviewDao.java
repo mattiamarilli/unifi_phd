@@ -2,13 +2,14 @@ package thesisapprovation.data_access;
 
 import thesisapprovation.Review;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ReviewDao {
 
-    List<Review> getAllReviews();
+    List<Review> getAllReviews() throws SQLException;
 
-    Review getReview(int id);
+    Review getReviewById(int id) throws SQLException;
 
     void insertReview(Review review);
 

@@ -14,7 +14,7 @@ CREATE TABLE Thesis (
 );
 
 -- add password (insert cryptographic)
-CREATE TABLE Reviewer (
+CREATE TABLE Reviewers (
   Freshman INT NOT NULL,
   Name VARCHAR(100) NOT NULL,
   Surname VARCHAR(100) NOT NULL,
@@ -26,15 +26,15 @@ CREATE TABLE Reviewer (
 
 CREATE TABLE EvaluationCommittee (
   IdThesis INT NOT NULL REFERENCES Thesis(Id),
-  IdReviewer INT NOT NULL REFERENCES Reviewer(Freshman),
+  IdReviewer INT NOT NULL REFERENCES Reviewers(Freshman),
   PRIMARY KEY (IdThesis, IdReviewer)
 );
 
-CREATE TABLE Review (
+CREATE TABLE Reviews (
     Id INT NOT NULL AUTO_INCREMENT,
     Title VARCHAR(120) NOT NULL,
     Comment VARCHAR(2000) NOT NULL,
     IdThesis INT NOT NULL REFERENCES Thesis(Id),
-    IdReviewer INT NOT NULL REFERENCES Reviewer(Freshman),
+    IdReviewer INT NOT NULL REFERENCES Reviewers(Freshman),
     PRIMARY KEY (Id)
 );
