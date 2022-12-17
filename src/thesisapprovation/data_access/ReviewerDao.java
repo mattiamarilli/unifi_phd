@@ -2,18 +2,19 @@ package thesisapprovation.data_access;
 
 import thesisapprovation.Reviewer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ReviewerDao {
 
-    List<Reviewer> getAllReviewers();
+    List<Reviewer> getAllReviewers() throws SQLException;
 
-    Reviewer getReviewer(int id);
+    Reviewer getReviewerByFreshman(int f) throws SQLException;
 
-    void insertReviewer(Reviewer reviewer);
+    void insertReviewer(Reviewer reviewer) throws SQLException;
 
-    void updateReviewer(Reviewer reviewer);
+    void updateReviewer(Reviewer reviewer) throws SQLException;
 
-    void deleteReviewer(Reviewer reviewer);
+    void deleteReviewer(int freshaman) throws SQLException;
 
 }

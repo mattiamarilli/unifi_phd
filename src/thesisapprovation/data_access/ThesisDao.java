@@ -2,18 +2,19 @@ package thesisapprovation.data_access;
 
 import thesisapprovation.Thesis;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ThesisDao {
 
-    List<Thesis> getAllThesis();
+    List<Thesis> getAllThesis() throws SQLException;
 
-    Thesis getThesis(int id);
+    Thesis getThesisById(int id);
 
     void insertThesis(Thesis thesis);
 
     void updateThesis(Thesis thesis);
 
-    void deleteThesis(Thesis thesis);
+    void deleteThesisById(int id);
 
 }

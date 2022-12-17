@@ -5,7 +5,8 @@ public class Reviewer {
     private int freshman;
     private String name, surname, password, email, description;
 
-    public Reviewer(String n, String s, String p, String e, String d){
+    public Reviewer(int f, String n, String s, String p, String e, String d){
+        this.freshman = f;
         this.name = n;
         this.surname = s;
         this.password = p;
@@ -61,4 +62,15 @@ public class Reviewer {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Reviewer{" +
+                "freshman=" + freshman +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
