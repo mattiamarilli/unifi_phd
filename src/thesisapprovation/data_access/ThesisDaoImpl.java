@@ -2,10 +2,7 @@ package thesisapprovation.data_access;
 
 import thesisapprovation.Thesis;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,24 +47,107 @@ public class ThesisDaoImpl implements ThesisDao{
         }
         return null;
     }
-    //TODO: finish thesis data access
+
     @Override
-    public Thesis getThesisById(int id) {
+    public Thesis getThesisById(int id) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Thesis WHERE Id = ?");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String url = rs.getString("UrlDocument");
+                int studentFreshman = rs.getInt("StudentFreshman");
+                String state = rs.getString("State");
+
+                Thesis t = new Thesis(id, title, description, url, studentFreshman, state);
+
+                //output only testing
+                System.out.println(t.toString());
+
+                return t;
+
+            }else{
+                System.out.println("Doesn't exist thesis with id=" + id);
+            }
+        }catch (SQLException ex){
+            System.out.println("Error get thesis by id");
+            ex.printStackTrace();
+        }finally{
+            conn.close();
+        }
         return null;
     }
 
     @Override
-    public void insertThesis(Thesis thesis) {
+    public void insertThesis(Thesis thesis) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES(?, ?, ?, ?, ?)");
+            stmt.setString(1, thesis.getTitle());
+            stmt.setString(2, thesis.getDescription());
+            stmt.setString(3, thesis.getUrlDocument());
+            stmt.setInt(4, thesis.getFreshmanStudent());
+            stmt.setString(5, String.valueOf(thesis.getState()));
+
+            if(stmt.executeUpdate() > 0)
+                System.out.println("Insert thesis successful");
+            else
+                System.out.println("Insert thesis not successful");
+
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            System.out.println("Error insert thesis");
+        }finally {
+            conn.close();
+        }
 
     }
 
     @Override
-    public void updateThesis(Thesis thesis) {
+    public void updateThesis(Thesis thesis) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Title= ?, Description= ?, UrlDocument= ?, State= ? WHERE Id= ?");
+            stmt.setString(1, thesis.getTitle());
+            stmt.setString(2, thesis.getDescription());
+            stmt.setString(3, thesis.getUrlDocument());
+            stmt.setString(4, String.valueOf(thesis.getState()));
+            stmt.setInt(5, thesis.getId());
 
+            if(stmt.executeUpdate() > 0)
+                System.out.println("Update thesis successful");
+            else
+                System.out.println("Update thesis not successful");
+
+        }catch (SQLException ex){
+            System.out.println("Error update thesis ");
+            ex.printStackTrace();
+        }finally {
+            conn.close();
+        }
     }
 
     @Override
-    public void deleteThesisById(int id) {
+    public void deleteThesisById(int id) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Thesis WHERE Id= ?");
+            stmt.setInt(1, id);
 
+            if(stmt.executeUpdate() > 0)
+                System.out.println("Delete thesis successful");
+            else
+                System.out.println("Delete thesis not successful");
+
+        }catch (SQLException ex){
+            System.out.println("Error delete thesis");
+            ex.printStackTrace();
+        }finally {
+            conn.close();
+        }
     }
 }

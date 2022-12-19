@@ -9,12 +9,12 @@ public interface ThesisDao {
 
     List<Thesis> getAllThesis() throws SQLException;
 
-    Thesis getThesisById(int id);
+    Thesis getThesisById(int id) throws SQLException;
 
-    void insertThesis(Thesis thesis);
+    void insertThesis(Thesis thesis) throws SQLException;
 
-    void updateThesis(Thesis thesis);
+    void updateThesis(Thesis thesis) throws SQLException;
 
-    void deleteThesisById(int id);
+    void deleteThesisById(int id) throws SQLException;
 
 }
