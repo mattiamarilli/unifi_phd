@@ -1,7 +1,7 @@
 package organizationchart.data_access;
 
+import organizationchart.FacultyMember;
 import organizationchart.Student;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +58,11 @@ public class StudentDaoImpl implements StudentDao {
                 e.printStackTrace();
                 return null;
             }
+    }
+
+    @Override
+    public List<FacultyMember> getAdvisors(Integer freshman) {
+        return null;
     }
 
     @Override
