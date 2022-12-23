@@ -8,56 +8,64 @@ import java.util.List;
 
 public class StudentDaoImpl implements StudentDao {
 
-    static final String DB_URL = "jdbc:mysql://localhost:3306/oc_schema";
-    static final String USER = "root";
-    static final String PASS = "test";
+    private Connection connection;
     
     @Override
-    public List<Student> getAllStudent() {
+    public List<Student> getAllStudent() throws SQLException{
         try{
-            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = ConnectionDao.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Students");
+
             List<Student> students = new ArrayList<Student>();
 
             while (resultSet.next()) {
-                Student student = new Student(resultSet.getInt("Freshman"),
-                        resultSet.getString("Name"),
-                        resultSet.getString("Surname"),
-                        resultSet.getString("Topics")
-                        );
-                students.add(student);
+                Integer freshman = resultSet.getInt("Freshman");
+                String name = resultSet.getString("Name");
+                String surname = resultSet.getString("Surname");
+                String email = resultSet.getString("Email");
+                String password = resultSet.getString("Password");
+                String topics = resultSet.getString("Topics");
+
+                Student s = new Student(freshman,name,surname,email,password,topics);
+
+                students.add(s);
             }
             return students;
 
-        }catch (Exception e){
+        }catch (SQLException e){
             e.printStackTrace();
-            return null;
+        }finally {
+            connection.close();
         }
+        return null;
     }
 
     @Override
-    public Student getStudent(Integer freshman) {
+    public Student getStudentByFreshman(Integer freshman) throws SQLException{
         try{
-            Student student = null;
-            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            Connection connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Students WHERE Freshman=?");
             preparedStatement.setInt(1, freshman);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()) {
-                student = new Student(resultSet.getInt("Freshman"),
-                        resultSet.getString("Name"),
-                        resultSet.getString("Surname"),
-                        resultSet.getString("Topics")
-                );
+                String name = resultSet.getString("Name");
+                String surname = resultSet.getString("Surname");
+                String email = resultSet.getString("Email");
+                String password = resultSet.getString("Password");
+                String topics = resultSet.getString("Topics");
+                Student s = new Student(freshman,name,surname,email,password,topics);
+
+                return s;
             }
-            return student;
-        }catch (Exception e)
-            {
-                e.printStackTrace();
-                return null;
-            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            connection.close();
+        }
+        return null;
     }
 
     @Override
@@ -66,58 +74,74 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean saveStudent(Student student) {
+    public boolean insertStudent(Student student) throws SQLException{
         try{
-            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO `Students` (`Freshman`,`Name`, `Surname`, `Topics`) VALUES (?,?, ?, ?)");
+                    "INSERT INTO `Students` (`Freshman`,`Name`, `Surname`,`Email`,`Password`, `Topics`) VALUES (?,?,?,?,?,?)");
             preparedStatement.setInt(1,student.getFreshman());
             preparedStatement.setString(2, student.getName());
             preparedStatement.setString(3, student.getSurname());
-            preparedStatement.setString(4, student.getTopics());
-            preparedStatement.executeUpdate();
-            return true;
+            preparedStatement.setString(4, student.getEmail());
+            preparedStatement.setString(5, student.getPassword());
+            preparedStatement.setString(6, student.getTopics());
 
-        }catch (Exception e)
-        {
+            if(preparedStatement.executeUpdate() > 0)
+                return true;
+            else
+               return false;
+
+        }catch (SQLException e){
             e.printStackTrace();
             return false;
+        }finally {
+            connection.close();
         }
     }
 
     @Override
-    public boolean updateStudent(Student student) {
+    public boolean updateStudent(Student student) throws SQLException{
         try{
-            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE `Students` SET `Name` = ?, `Surname` = ?, `Topics` = ? WHERE (`Freshman` = ?)");
+                    "UPDATE `Students` SET `Name` = ?, `Surname` = ?,`Email`=?,`Password`=?, `Topics` = ? WHERE (`Freshman` = ?)");
             preparedStatement.setString(1, student.getName());
             preparedStatement.setString(2, student.getSurname());
             preparedStatement.setString(3, student.getTopics());
-            preparedStatement.setInt(4, student.getFreshman());
-            preparedStatement.executeUpdate();
-            return true;
+            preparedStatement.setString(4, student.getEmail());
+            preparedStatement.setString(5, student.getPassword());
+            preparedStatement.setInt(6, student.getFreshman());
 
-        }catch (Exception e)
-        {
+            if(preparedStatement.executeUpdate() > 0)
+                return true;
+            else
+                return false;
+
+        }catch (SQLException e){
             e.printStackTrace();
             return false;
+        }finally {
+            connection.close();
         }
     }
 
     @Override
-    public boolean deleteStudent(Integer freshman) {
+    public boolean deleteStudent(Integer freshman) throws SQLException {
         try{
-            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM `Students` WHERE (`Freshman` = ?)");
             preparedStatement.setInt(1, freshman);
-            preparedStatement.executeUpdate();
-            return true;
-        }catch (Exception e)
-        {
+            if(preparedStatement.executeUpdate() > 0)
+                return true;
+            else
+                return false;
+        }catch (SQLException e){
             e.printStackTrace();
             return false;
+        }finally {
+            connection.close();
         }
 
     }
