@@ -73,7 +73,29 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
 
     @Override
     public Boolean insertFacultyMember(FacultyMember facultyMember) throws SQLException {
-        return false;
+        try{
+            connection = ConnectionDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO `Facultymembers` (`Freshman`,`Name`, `Surname`,`Email`,`Password`, `Specialization`, `Institution`) VALUES (?,?,?,?,?,?,?);");
+            preparedStatement.setInt(1,facultyMember.getFreshman());
+            preparedStatement.setString(2, facultyMember.getName());
+            preparedStatement.setString(3, facultyMember.getSurname());
+            preparedStatement.setString(4, facultyMember.getEmail());
+            preparedStatement.setString(5, facultyMember.getPassword());
+            preparedStatement.setString(6, facultyMember.getSpecialization());
+            preparedStatement.setString(7,facultyMember.getInstitution());
+
+            if(preparedStatement.executeUpdate() > 0)
+                return true;
+            else
+                return false;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }finally {
+            connection.close();
+        }
 
     }
 
