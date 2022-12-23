@@ -43,9 +43,9 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
-    public FacultyMember getFacultyMember(int freshman) throws SQLException {
+    public FacultyMember getFacultyMember(Integer freshman) throws SQLException {
         try{
-            Connection connection = ConnectionDao.getConnection();
+            connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Facultymembers WHERE Freshman=?");
             preparedStatement.setInt(1, freshman);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -101,12 +101,48 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
 
     @Override
     public Boolean updateFacultyMember(FacultyMember facultyMember) throws SQLException {
-        return false;
+        try{
+            connection = ConnectionDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE `Facultymembers` SET `Name` = ?, `Surname` = ?,`Email`=?,`Password`=?,`Specialization`=?,`Institution`=? WHERE (`Freshman` = ?)");
+            preparedStatement.setString(1, facultyMember.getName());
+            preparedStatement.setString(2, facultyMember.getSurname());
+            preparedStatement.setString(3, facultyMember.getEmail());
+            preparedStatement.setString(4, facultyMember.getPassword());
+            preparedStatement.setString(5, facultyMember.getSpecialization());
+            preparedStatement.setString(6, facultyMember.getInstitution());
+            preparedStatement.setInt(7, facultyMember.getFreshman());
+
+            if(preparedStatement.executeUpdate() > 0)
+                return true;
+            else
+                return false;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }finally {
+            connection.close();
+        }
 
     }
 
     @Override
-    public Boolean deleteFacultyMember(FacultyMember facultyMember) throws SQLException {
-        return false;
+    public Boolean deleteFacultyMember(Integer freshman) throws SQLException {
+        try{
+            connection = ConnectionDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM `Facultymembers` WHERE (`Freshman` = ?)");
+            preparedStatement.setInt(1, freshman);
+            if(preparedStatement.executeUpdate() > 0)
+                return true;
+            else
+                return false;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }finally {
+            connection.close();
+        }
     }
 }

@@ -1,10 +1,11 @@
 package organizationchart.data_access;
 
 import com.mysql.cj.jdbc.Driver;
+import organizationchart.Cycle;
+import organizationchart.FacultyMember;
+import thesisapprovation.data_access.ReviewDaoImpl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ConnectionDao {
     private static final String URL = "jdbc:mysql://localhost:3306/oc_schema";
@@ -19,5 +20,9 @@ public class ConnectionDao {
         } catch (SQLException ex) {
             throw new RuntimeException("Error connecting to the database", ex);
         }
+    }
+
+    public static void main(String[] args) throws SQLException {
+        //main test for connection and queries
     }
 }

@@ -1,6 +1,6 @@
 USE oc_schema;
 
-INSERT INTO `Cycles` (`Number`, `Year`, `Description`) VALUES ('1', '2000', '\"this is the first edition\"');
+INSERT INTO Cycles (`Number`, `Year`, `Description`) VALUES ('1', '2000', '\"this is the first edition\"');
 INSERT INTO `Cycles` (`Number`, `Year`, `Description`) VALUES ('2', '2001', '\"this is the second edition\"');
 INSERT INTO `Cycles` (`Number`, `Year`, `Description`) VALUES ('3', '2002', '\"this is the third edition\"');
 

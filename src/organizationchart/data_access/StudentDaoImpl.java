@@ -44,7 +44,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public Student getStudentByFreshman(Integer freshman) throws SQLException{
         try{
-            Connection connection = ConnectionDao.getConnection();
+            connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Students WHERE Freshman=?");
             preparedStatement.setInt(1, freshman);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -65,11 +65,6 @@ public class StudentDaoImpl implements StudentDao {
         }finally {
             connection.close();
         }
-        return null;
-    }
-
-    @Override
-    public List<FacultyMember> getAdvisors(Integer freshman) {
         return null;
     }
 
@@ -107,9 +102,9 @@ public class StudentDaoImpl implements StudentDao {
                     "UPDATE `Students` SET `Name` = ?, `Surname` = ?,`Email`=?,`Password`=?, `Topics` = ? WHERE (`Freshman` = ?)");
             preparedStatement.setString(1, student.getName());
             preparedStatement.setString(2, student.getSurname());
-            preparedStatement.setString(3, student.getTopics());
-            preparedStatement.setString(4, student.getEmail());
-            preparedStatement.setString(5, student.getPassword());
+            preparedStatement.setString(3, student.getEmail());
+            preparedStatement.setString(4, student.getPassword());
+            preparedStatement.setString(5, student.getTopics());
             preparedStatement.setInt(6, student.getFreshman());
 
             if(preparedStatement.executeUpdate() > 0)
@@ -128,7 +123,6 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public boolean deleteStudent(Integer freshman) throws SQLException {
         try{
-
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM `Students` WHERE (`Freshman` = ?)");
