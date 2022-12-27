@@ -5,13 +5,7 @@ public class Review {
     private String title, comment;
     int id, idReviewer, idThesis;
 
-    public Review(String t, String c, int idR, int idT){
-        this.idReviewer = idR;
-        this.idThesis = idT;
-        this.title = t;
-        this.comment = c;
-    }
-
+    //with id
     public Review(int id, String t, String c, int idR, int idT){
         this.idReviewer = idR;
         this.idThesis = idT;
@@ -19,6 +13,16 @@ public class Review {
         this.title = t;
         this.comment = c;
     }
+
+    //without id
+    public Review(String t, String c, int idR, int idT){
+        this.idReviewer = idR;
+        this.idThesis = idT;
+        this.title = t;
+        this.comment = c;
+    }
+
+
 
     public String getTitle() {
         return title;

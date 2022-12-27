@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewerDao implements ThesisApprovationDAO<Reviewer, Integer>{
+public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
 
     private Connection conn;
 

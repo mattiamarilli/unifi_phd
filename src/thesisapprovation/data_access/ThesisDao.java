@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThesisDao implements ThesisApprovationDAO<Thesis, Integer>{
+public class ThesisDao implements ThesisApprovationDao<Thesis, Integer> {
 
     private Connection conn;
     @Override

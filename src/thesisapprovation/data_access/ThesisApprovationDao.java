@@ -3,7 +3,7 @@ package thesisapprovation.data_access;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface ThesisApprovationDAO<T, K>{
+public interface ThesisApprovationDao<T, K>{
 
     List<T> getAll() throws SQLException;
 

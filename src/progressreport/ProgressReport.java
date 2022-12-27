@@ -1,6 +1,7 @@
-package thesisapprovation;
+package progressreport;
 
-public class Thesis {
+public class ProgressReport {
+
     private enum State{
         APPROVED,
         NOT_APPROVED
@@ -10,26 +11,26 @@ public class Thesis {
     private String title;
     private String description;
     private String urlDocument;
-    private int freshmanStudent;
     private State state;
+    private int freshmanStudent;
 
     //with id
-    public Thesis(int id, String t, String d, String ud, int fs, String s){
+    public ProgressReport(int id, String t, String d, String ud, String s, int fs ){
         this.id = id;
         this.title = t;
         this.description = d;
         this.urlDocument = ud;
-        this.freshmanStudent = fs;
         this.state = State.valueOf(s);
+        this.freshmanStudent = fs;
     }
 
     //without id
-    public Thesis(String t, String d, String ud, int fs){
+    public ProgressReport(String t, String d, String ud, String s, int fs ){
         this.title = t;
         this.description = d;
         this.urlDocument = ud;
+        this.state = State.valueOf(s);
         this.freshmanStudent = fs;
-        this.state = State.NOT_APPROVED; //inizialmente la tesi caricata non è approvata
     }
 
     public int getId() {
@@ -64,14 +65,6 @@ public class Thesis {
         this.urlDocument = urlDocument;
     }
 
-    public int getFreshmanStudent() {
-        return freshmanStudent;
-    }
-
-    public void setFreshmanStudent(int freshmanStudent) {
-        this.freshmanStudent = freshmanStudent;
-    }
-
     public State getState() {
         return state;
     }
@@ -80,16 +73,23 @@ public class Thesis {
         this.state = state;
     }
 
+    public int getFreshmanStudent() {
+        return freshmanStudent;
+    }
+
+    public void setFreshmanStudent(int freshmanStudent) {
+        this.freshmanStudent = freshmanStudent;
+    }
+
     @Override
     public String toString() {
-        return "Thesis{" +
+        return "ProgressReport{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", urlDocument='" + urlDocument + '\'' +
-                ", freshmanStudent=" + freshmanStudent +
                 ", state=" + state +
+                ", freshmanStudent=" + freshmanStudent +
                 '}';
     }
-
 }

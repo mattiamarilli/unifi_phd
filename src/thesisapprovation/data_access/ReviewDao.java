@@ -5,7 +5,7 @@ import thesisapprovation.Review;
 import java.sql.*;
 import java.util.*;
 
-public class ReviewDao implements ThesisApprovationDAO<Review, Integer> {
+public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
 
     private Connection conn;
 

@@ -1,4 +1,4 @@
-package thesisapprovation.data_access;
+package progressreport.data_access;
 
 import com.mysql.cj.jdbc.Driver;
 
@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class ConnectionDao {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/ta_schema";
+    private static final String URL = "jdbc:mysql://localhost:3306/pr_schema";
     public static final String USER = "root";
     public static final String PASS = "test";
 
@@ -24,18 +23,7 @@ public class ConnectionDao {
     public static void main(String[] args) throws SQLException, IOException, InterruptedException {
         //main test for connection and queries
 
-        ReviewDao prova = new ReviewDao();
-        prova.findByKey(1);
 
-        Connection connection = ConnectionDao.getConnection();
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Thesis");
-
-        while(rs.next())
-        {
-            System.out.println(rs.getString("Title")+ "\n");
-
-        }
 
     }
 }
