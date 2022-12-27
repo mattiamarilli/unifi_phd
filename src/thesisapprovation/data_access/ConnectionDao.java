@@ -2,6 +2,7 @@ package thesisapprovation.data_access;
 
 import com.mysql.cj.jdbc.Driver;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class ConnectionDao {
@@ -20,11 +21,11 @@ public class ConnectionDao {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException, InterruptedException {
         //main test for connection and queries
 
-        ReviewDaoImpl prova = new ReviewDaoImpl();
-        prova.getReviewById(1);
+        ReviewDao prova = new ReviewDao();
+        prova.findByKey(1);
 
         Connection connection = ConnectionDao.getConnection();
         Statement stmt = connection.createStatement();

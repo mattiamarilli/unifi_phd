@@ -1,9 +1,6 @@
 package organizationchart.data_access;
 
 import com.mysql.cj.jdbc.Driver;
-import organizationchart.Cycle;
-import organizationchart.FacultyMember;
-import thesisapprovation.data_access.ReviewDaoImpl;
 
 import java.sql.*;
 
