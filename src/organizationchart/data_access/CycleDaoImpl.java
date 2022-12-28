@@ -6,11 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CycleDaoImpl implements CycleDao {
+public class CycleDaoImpl implements GenericDao<Cycle,Integer> {
 
     private Connection connection;
     @Override
-    public List<Cycle> getAllCycle() throws SQLException {
+    public List<Cycle> getAll() throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             Statement statement = connection.createStatement();
@@ -37,7 +37,7 @@ public class CycleDaoImpl implements CycleDao {
     }
 
     @Override
-    public Cycle getCycle(Integer number) throws SQLException {
+    public Cycle findByKey(Integer number) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Cycles` WHERE `Number`=?");
@@ -62,7 +62,7 @@ public class CycleDaoImpl implements CycleDao {
     }
 
     @Override
-    public Boolean insertCycle(Cycle cycle) throws SQLException {
+    public Boolean insert(Cycle cycle) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -86,7 +86,7 @@ public class CycleDaoImpl implements CycleDao {
     }
 
     @Override
-    public Boolean updateCycle(Cycle cycle) throws SQLException{
+    public Boolean update(Cycle cycle) throws SQLException{
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -110,7 +110,7 @@ public class CycleDaoImpl implements CycleDao {
     }
 
     @Override
-    public Boolean deleteCycle(Integer number) throws SQLException {
+    public Boolean delete(Integer number) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(

@@ -7,11 +7,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FacultyMemberDaoImpl implements FacultyMemberDao {
+public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
 
     private Connection connection;
     @Override
-    public List<FacultyMember> getAllFacultyMember() throws SQLException {
+    public List<FacultyMember> getAll() throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             Statement statement = connection.createStatement();
@@ -43,7 +43,7 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
-    public FacultyMember getFacultyMember(Integer freshman) throws SQLException {
+    public FacultyMember findByKey(Integer freshman) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Facultymembers WHERE Freshman=?");
@@ -72,7 +72,7 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
-    public Boolean insertFacultyMember(FacultyMember facultyMember) throws SQLException {
+    public Boolean insert(FacultyMember facultyMember) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -100,7 +100,7 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
-    public Boolean updateFacultyMember(FacultyMember facultyMember) throws SQLException {
+    public Boolean update(FacultyMember facultyMember) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -128,7 +128,7 @@ public class FacultyMemberDaoImpl implements FacultyMemberDao {
     }
 
     @Override
-    public Boolean deleteFacultyMember(Integer freshman) throws SQLException {
+    public Boolean delete(Integer freshman) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(

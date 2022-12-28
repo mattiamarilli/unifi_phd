@@ -6,12 +6,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl implements GenericDao<Student,Integer> {
 
     private Connection connection;
     
     @Override
-    public List<Student> getAllStudent() throws SQLException{
+    public List<Student> getAll() throws SQLException{
         try{
             connection = ConnectionDao.getConnection();
             Statement statement = connection.createStatement();
@@ -42,7 +42,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Student getStudentByFreshman(Integer freshman) throws SQLException{
+    public Student findByKey(Integer freshman) throws SQLException{
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Students WHERE Freshman=?");
@@ -69,7 +69,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean insertStudent(Student student) throws SQLException{
+    public Boolean insert(Student student) throws SQLException{
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -95,7 +95,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean updateStudent(Student student) throws SQLException{
+    public Boolean update(Student student) throws SQLException{
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -121,7 +121,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean deleteStudent(Integer freshman) throws SQLException {
+    public Boolean delete(Integer freshman) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
