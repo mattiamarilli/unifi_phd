@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThesisDao implements ThesisApprovationDao<Thesis, Integer> {
+public class ThesisDao implements GenericDao<Thesis, Integer> {
 
     private Connection conn;
     @Override
@@ -83,7 +83,7 @@ public class ThesisDao implements ThesisApprovationDao<Thesis, Integer> {
     }
 
     @Override
-    public void insert(Thesis thesis) throws SQLException {
+    public Boolean insert(Thesis thesis) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES(?, ?, ?, ?, ?)");
@@ -94,21 +94,27 @@ public class ThesisDao implements ThesisApprovationDao<Thesis, Integer> {
             stmt.setString(5, String.valueOf(thesis.getState()));
 
             if(stmt.executeUpdate() > 0)
+            {
                 System.out.println("Insert thesis successful");
+                return true;
+            }
             else
+            {
                 System.out.println("Insert thesis not successful");
+                return false;
+            }
 
         }catch(SQLException ex){
             ex.printStackTrace();
             System.out.println("Error insert thesis");
+            return false;
         }finally {
             conn.close();
         }
-
     }
 
     @Override
-    public void update(Thesis thesis) throws SQLException {
+    public Boolean update(Thesis thesis) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Title= ?, Description= ?, UrlDocument= ?, State= ? WHERE Id= ?");
@@ -119,33 +125,47 @@ public class ThesisDao implements ThesisApprovationDao<Thesis, Integer> {
             stmt.setInt(5, thesis.getId());
 
             if(stmt.executeUpdate() > 0)
+            {
                 System.out.println("Update thesis successful");
+                return true;
+            }
             else
+            {
                 System.out.println("Update thesis not successful");
+                return false;
+            }
 
         }catch (SQLException ex){
             System.out.println("Error update thesis ");
             ex.printStackTrace();
+            return false;
         }finally {
             conn.close();
         }
     }
 
     @Override
-    public void delete(Integer id) throws SQLException {
+    public Boolean delete(Integer id) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Thesis WHERE Id= ?");
             stmt.setInt(1, id);
 
             if(stmt.executeUpdate() > 0)
+            {
                 System.out.println("Delete thesis successful");
+                return true;
+            }
             else
+            {
                 System.out.println("Delete thesis not successful");
+                return false;
+            }
 
         }catch (SQLException ex){
             System.out.println("Error delete thesis");
             ex.printStackTrace();
+            return false;
         }finally {
             conn.close();
         }

@@ -6,13 +6,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
+public class ReviewerDao implements GenericDao<Reviewer, Integer> {
 
     private Connection conn;
 
     @Override
     public List<Reviewer> getAll() throws SQLException {
-        try{
+        try {
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Reviewers");
@@ -20,7 +20,7 @@ public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
             //create empty list
             List<Reviewer> reviewers = new ArrayList<Reviewer>();
 
-            while(rs.next()){
+            while (rs.next()) {
                 int freshman = rs.getInt("Freshman");
                 String name = rs.getString("Name");
                 String surname = rs.getString("Surname");
@@ -36,13 +36,13 @@ public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
                 System.out.println(r.toString());
             }
 
-            if(reviewers.isEmpty())
+            if (reviewers.isEmpty())
                 System.out.println("Don't exist reviewers");
 
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Error get all reviewers");
             ex.printStackTrace();
-        }finally {
+        } finally {
             conn.close();
         }
         return null;
@@ -51,13 +51,13 @@ public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
     @Override
     public Reviewer findByKey(Integer f) throws SQLException {
 
-        try{
+        try {
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Reviewers WHERE Freshman= ?");
             stmt.setInt(1, f);
             ResultSet rs = stmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 String name = rs.getString("Name");
                 String surname = rs.getString("Surname");
                 String password = rs.getString("Password");
@@ -68,22 +68,22 @@ public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
                 //output reviewer only for testing
                 System.out.println(r.toString());
                 return r;
-            }else
+            } else
                 System.out.println("there aren't Reviewers with freshman=" + f);
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Error get reviewer by freshman");
             ex.printStackTrace();
-        }finally{
+        } finally {
             conn.close();
         }
         return null;
     }
 
     @Override
-    public void insert(Reviewer reviewer) throws SQLException {
+    public Boolean insert(Reviewer reviewer) throws SQLException {
 
-        try{
+        try {
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Reviewer (Freshman, Name, Surname, Password, Email, Description) VALUES (?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, reviewer.getFreshman());
@@ -93,23 +93,27 @@ public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
             stmt.setString(5, reviewer.getEmail());
             stmt.setString(6, reviewer.getDescription());
 
-            if(stmt.executeUpdate() > 0)
+            if (stmt.executeUpdate() > 0) {
                 System.out.println("Insert reviewer successful");
-            else
+                return true;
+            } else {
                 System.out.println("Insert reviewer not successful");
+                return false;
+            }
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Error insert reviewer");
             ex.printStackTrace();
-        }finally {
+            return false;
+        } finally {
             conn.close();
         }
 
     }
 
     @Override
-    public void update(Reviewer reviewer) throws SQLException {
-        try{
+    public Boolean update(Reviewer reviewer) throws SQLException {
+        try {
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("UPDATE Reviewer SET Name = ?, Surname = ?, Password = ?, Email = ?, Description = ? WHERE Freshman = ?");
             stmt.setString(1, reviewer.getName());
@@ -119,37 +123,46 @@ public class ReviewerDao implements ThesisApprovationDao<Reviewer, Integer> {
             stmt.setString(5, reviewer.getDescription());
             stmt.setInt(6, reviewer.getFreshman());
 
-            if(stmt.executeUpdate() > 0)
+            if (stmt.executeUpdate() > 0) {
                 System.out.println("Update reviewer successful");
-            else
+                return true;
+            } else {
                 System.out.println("Update reviewer not successful");
+                return false;
+            }
 
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Error update reviewer");
             ex.printStackTrace();
-        }finally {
+            return false;
+        } finally {
             conn.close();
         }
     }
 
     @Override
-    public void delete(Integer freshman) throws SQLException {
+    public Boolean delete(Integer freshman) throws SQLException {
 
-        try{
+        try {
             conn = ConnectionDao.getConnection();
             PreparedStatement ps = conn.prepareStatement("DELETE FROM Reviewer WHERE Freshman = ?");
             ps.setInt(1, freshman);
 
-            if(ps.executeUpdate() > 0)
+            if (ps.executeUpdate() > 0) {
                 System.out.println("Delete reviewer successful");
-            else
+                return true;
+            } else {
                 System.out.println("Delete reviewer not successful");
+                return false;
+            }
 
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Error delete reviewer");
             ex.printStackTrace();
-        }finally {
+            return false;
+        } finally {
             conn.close();
         }
     }
 }
+

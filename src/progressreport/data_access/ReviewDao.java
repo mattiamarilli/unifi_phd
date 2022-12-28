@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 //TODO: finish implementation
-public class ReviewDao implements GenericProgressReportDao<Review, Integer> {
+public class ReviewDao implements GenericDao<Review, Integer> {
 
     @Override
     public List<Review> getAll() throws SQLException {
@@ -19,17 +19,17 @@ public class ReviewDao implements GenericProgressReportDao<Review, Integer> {
     }
 
     @Override
-    public void insert(Review review) throws SQLException {
-
+    public Boolean insert(Review review) throws SQLException {
+        return false;
     }
 
     @Override
-    public void update(Review review) throws SQLException {
-
+    public Boolean update(Review review) throws SQLException {
+        return false;
     }
 
     @Override
-    public void delete(Integer integer) throws SQLException {
-
+    public Boolean delete(Integer integer) throws SQLException {
+        return false;
     }
 }

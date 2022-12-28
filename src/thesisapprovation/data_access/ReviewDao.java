@@ -5,7 +5,7 @@ import thesisapprovation.Review;
 import java.sql.*;
 import java.util.*;
 
-public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
+public class ReviewDao implements GenericDao<Review, Integer> {
 
     private Connection conn;
 
@@ -86,7 +86,7 @@ public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
     }
 
     @Override
-    public void insert(Review review) throws SQLException {
+    public Boolean insert(Review review) throws SQLException {
 
         try{
             conn = ConnectionDao.getConnection();
@@ -96,14 +96,21 @@ public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
             ps.setInt(3, review.getIdThesis());
             ps.setInt(4, review.getIdReviewer());
 
-            if(ps.executeUpdate() > 0)
+            if(ps.executeUpdate() > 0) {
                 System.out.println("Insert review successful");
+                return true;
+            }
             else
+            {
                 System.out.println("Insert review not successful");
+                return false;
+            }
+
 
         }catch(SQLException ex){
             System.out.println("Error insert review");
             ex.printStackTrace();
+            return false;
         }finally{
             conn.close();
         }
@@ -111,7 +118,7 @@ public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
     }
 
     @Override
-    public void update(Review review) throws SQLException {
+    public Boolean update(Review review) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement ps = conn.prepareStatement("UPDATE Review SET Title = ?, Comment = ? IdThesis = ?, IdReviewer = ? WHERE Id = ?");
@@ -122,20 +129,27 @@ public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
             ps.setInt(5, review.getId());
 
             if(ps.executeUpdate() > 0)
+            {
                 System.out.println("Update review successful");
-            else
+                return true;
+            }
+            else{
                 System.out.println("Update review not successful");
+                return false;
+            }
+
 
         }catch(SQLException ex){
             System.out.println("Error update review");
             ex.printStackTrace();
+            return false;
         }finally {
             conn.close();
         }
     }
 
     @Override
-    public void delete(Integer idReview) throws SQLException {
+    public Boolean delete(Integer idReview) throws SQLException {
 
         try{
             conn = ConnectionDao.getConnection();
@@ -143,13 +157,20 @@ public class ReviewDao implements ThesisApprovationDao<Review, Integer> {
             ps.setInt(1, idReview);
 
             if(ps.executeUpdate() > 0)
+            {
                 System.out.println("Delete review successful");
+                return true;
+            }
             else
+            {
                 System.out.println("Delete review not successful");
+                return false;
+            }
 
         }catch(SQLException ex){
             System.out.println("Error delete review");
             ex.printStackTrace();
+            return false;
         }finally{
             conn.close();
         }
