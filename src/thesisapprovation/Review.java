@@ -16,10 +16,10 @@ public class Review {
 
     //without id
     public Review(String t, String c, int idR, int idT){
-        this.idReviewer = idR;
-        this.idThesis = idT;
         this.title = t;
         this.comment = c;
+        this.idReviewer = idR;
+        this.idThesis = idT;
     }
 
 

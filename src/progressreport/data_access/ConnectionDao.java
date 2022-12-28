@@ -1,6 +1,7 @@
 package progressreport.data_access;
 
 import com.mysql.cj.jdbc.Driver;
+import thesisapprovation.Thesis;
 
 import java.io.IOException;
 import java.sql.*;
@@ -22,8 +23,7 @@ public class ConnectionDao {
 
     public static void main(String[] args) throws SQLException, IOException, InterruptedException {
         //main test for connection and queries
-
-
+        
 
     }
 }
