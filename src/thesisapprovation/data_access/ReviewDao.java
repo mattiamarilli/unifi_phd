@@ -35,22 +35,21 @@ public class ReviewDao implements GenericDao<Review, Integer> {
                 System.out.println(review.toString());
             }
 
-            if(reviews.isEmpty())
+            if(reviews.isEmpty()) {
                 System.out.println("Don't exist reviews");
-
-            //close connection
-            conn.close();
+                return null;
+            }
 
             return reviews;
 
         }catch(SQLException ex){
             System.out.println("Error get all reviews");
             ex.printStackTrace();
+            return null;
         }
         finally {
             conn.close();
         }
-        return null;
     }
 
     @Override
@@ -112,6 +111,7 @@ public class ReviewDao implements GenericDao<Review, Integer> {
             ex.printStackTrace();
             return false;
         }finally{
+            System.out.println("Connessione chiusa");
             conn.close();
         }
 

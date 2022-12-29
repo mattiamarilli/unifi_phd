@@ -23,7 +23,7 @@ public class ConnectionDao {
 
     public static void main(String[] args) throws SQLException, IOException, InterruptedException {
         //main test for connection and queries
-        
+
 
     }
 }

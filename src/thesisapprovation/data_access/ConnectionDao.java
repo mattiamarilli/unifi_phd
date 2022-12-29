@@ -3,6 +3,7 @@ package thesisapprovation.data_access;
 import com.mysql.cj.jdbc.Driver;
 import thesisapprovation.Review;
 
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.sql.*;
 
@@ -26,7 +27,7 @@ public class ConnectionDao {
         //main test for connection and queries
 
         //prova insert di una review
-        Review r = new Review("prova", "comment", 9874328, 1);
+        /*Review r = new Review("prova", "comment", 9874328, 1);
 
         ReviewDao prova = new ReviewDao();
         prova.insert(r);
@@ -42,6 +43,7 @@ public class ConnectionDao {
             System.out.println(rs.getString("Title")+ "\n");
 
         }
+        */
 
     }
 }

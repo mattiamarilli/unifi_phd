@@ -5,9 +5,6 @@ public class Student {
     private Integer freshman;
     private String name;
     private String surname;
-
-
-
     private String email;
     private String password;
     private String topics;

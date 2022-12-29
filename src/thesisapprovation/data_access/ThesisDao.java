@@ -36,16 +36,21 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
             }
 
-            if(thesisList.isEmpty())
+            if(thesisList.isEmpty()) {
                 System.out.println("Don't exist thesis");
+                return null;
+            }
+
+            return thesisList;
 
         }catch(SQLException ex){
             System.out.println("Error get all thesis");
             ex.printStackTrace();
+            return null;
         }finally {
             conn.close();
         }
-        return null;
+
     }
 
     @Override
@@ -72,14 +77,16 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
             }else{
                 System.out.println("Doesn't exist thesis with id=" + id);
+                return null;
             }
         }catch (SQLException ex){
             System.out.println("Error get thesis by id");
             ex.printStackTrace();
+            return null;
         }finally{
             conn.close();
         }
-        return null;
+
     }
 
     @Override

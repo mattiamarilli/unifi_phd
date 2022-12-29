@@ -5,6 +5,7 @@ USE pr_schema;
 
 CREATE TABLE ProgressReports (
   Id INT NOT NULL AUTO_INCREMENT,
+  Title VARCHAR(200) NOT NULL,
   Description VARCHAR(200) NOT NULL,
   UrlDocument VARCHAR(2000) NOT NULL,
   State VARCHAR(15) NOT NULL,

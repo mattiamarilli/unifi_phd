@@ -1,5 +1,5 @@
 package didacticoffer;
 
-public class Teacher {
+public class Professor {
 
 }

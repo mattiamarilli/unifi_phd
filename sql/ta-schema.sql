@@ -5,11 +5,11 @@ USE ta_schema;
 
 CREATE TABLE Thesis (
   Id INT NOT NULL AUTO_INCREMENT,
-  Title VARCHAR(120) NOT NULL,
-  Description VARCHAR(2000) NOT NULL,
-  UrlDocument VARCHAR(300) NOT NULL,
+  Title VARCHAR(120),
+  Description VARCHAR(2000),
+  UrlDocument VARCHAR(300),
   StudentFreshman INT NOT NULL,
-  State VARCHAR(15),
+  State VARCHAR(15) NOT NULL,
   PRIMARY KEY (Id)
 );
 

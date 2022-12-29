@@ -3,8 +3,8 @@ package progressreport;
 public class ProgressReport {
 
     private enum State{
-        APPROVED,
-        NOT_APPROVED
+        LOAD,
+        NOT_LOAD
     }
 
     private int id;

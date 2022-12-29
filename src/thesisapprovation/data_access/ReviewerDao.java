@@ -36,16 +36,21 @@ public class ReviewerDao implements GenericDao<Reviewer, Integer> {
                 System.out.println(r.toString());
             }
 
-            if (reviewers.isEmpty())
+            if (reviewers.isEmpty()) {
                 System.out.println("Don't exist reviewers");
+                return null;
+            }
+
+            return reviewers;
 
         } catch (SQLException ex) {
             System.out.println("Error get all reviewers");
             ex.printStackTrace();
+            return null;
         } finally {
             conn.close();
         }
-        return null;
+
     }
 
     @Override
