@@ -15,10 +15,10 @@ CREATE TABLE ProgressReports (
 
 CREATE TABLE Scientists (
   Freshman INT NOT NULL,
-  Password VARCHAR(200) NOT NULL,
   Name VARCHAR(200) NOT NULL,
   Surname VARCHAR(200) NOT NULL,
   Email VARCHAR(200) NOT NULL,
+  Password VARCHAR(200) NOT NULL,
   Description VARCHAR(2000) NOT NULL,
   PRIMARY KEY (Freshman)
 );
