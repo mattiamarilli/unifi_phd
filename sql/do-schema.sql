@@ -50,19 +50,29 @@ CREATE TABLE Appeals (
     PRIMARY KEY (Id)
 );
 
+
 CREATE TABLE StudentCareers (
         StudentFreshman INT NOT NULL,
-        CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
-        DateRegistration DATE NOT NULL,
-        DateExam DATE NOT NULL,
-        State VARCHAR(10) NOT NULL,
-        Vote VARCHAR(20) NOT NULL,
-        Note VARCHAR(2000) NOT NULL,
-        PRIMARY KEY (StudentFreshman, CodeCourse)
+        PRIMARY KEY (StudentFreshman)
+);
+
+CREATE TABLE StudyPlans(
+        StudentFreshman INT NOT NULL REFERENCES StudentCareers(StudentFreshman),
+        CodeCourse VARCHAR(16) NULL REFERENCES Courses(Code),
+        State VARCHAR(20) NOT NULL,
+        RegistrationDate DATE NOT NULL,
+        PRIMARY KEY (StudentFreshman,CodeCourse)
 );
 
 
+CREATE TABLE AppealParticipation(
+       StudentFreshman INT NOT NULL REFERENCES StudentCareers(StudentFreshman),
+       IdAppeal INT NOT NULL REFERENCES Appeals(Id),
+       PRIMARY KEY (StudentFreshman,IdAppeal),
+       Vote VARCHAR(20)
 
 
+
+)
 
 
