@@ -70,9 +70,6 @@ CREATE TABLE AppealParticipation(
        IdAppeal INT NOT NULL REFERENCES Appeals(Id),
        PRIMARY KEY (StudentFreshman,IdAppeal),
        Vote VARCHAR(20)
-
-
-
 )
 
 
