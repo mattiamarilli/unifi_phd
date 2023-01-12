@@ -29,12 +29,5 @@ CREATE TABLE SupervisoryCommittee (
   PRIMARY KEY (IdProgressReport, IdScientist)
 );
 
-CREATE TABLE Reviews (
-  Id INT NOT NULL AUTO_INCREMENT,
-  Title VARCHAR(200) NOT NULL,
-  Comment VARCHAR(2000) NOT NULL,
-  IdProgressReport INT NOT NULL REFERENCES ProgressReports(Id),
-  IdScientist INT NOT NULL REFERENCES Scientists(Freshman),
-  PRIMARY KEY (Id)
-);
+
 
