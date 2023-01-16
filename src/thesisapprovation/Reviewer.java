@@ -14,6 +14,15 @@ public class Reviewer {
         this.description = d;
     }
 
+    //without password
+    public Reviewer(int f, String n, String s, String e, String d){
+        this.freshman = f;
+        this.name = n;
+        this.surname = s;
+        this.email = e;
+        this.description = d;
+    }
+
     public int getFreshman() {
         return freshman;
     }

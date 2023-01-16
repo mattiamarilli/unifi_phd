@@ -2,6 +2,16 @@ DROP SCHEMA IF EXISTS do_schema;
 CREATE SCHEMA do_schema;
 
 USE do_schema;
+
+CREATE TABLE Courses (
+    Code VARCHAR(16) NOT NULL,
+    Title VARCHAR(200) NOT NULL,
+    Description VARCHAR(2000) NOT NULL,
+    CFU INT NOT NULL,
+    Year INT NOT NULL,
+    PRIMARY KEY (Code)
+);
+
 CREATE TABLE Professors (
     Freshman INT NOT NULL,
     Name VARCHAR(100) NOT NULL,
@@ -10,17 +20,8 @@ CREATE TABLE Professors (
     University VARCHAR(200) NOT NULL,
     Email VARCHAR(200) NOT NULL,
     Password VARCHAR(200) NOT NULL,
+    codeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
     PRIMARY KEY (Freshman)
-);
-
-CREATE TABLE Courses (
-    Code VARCHAR(16) NOT NULL,
-    Title VARCHAR(200) NOT NULL,
-    Description VARCHAR(2000) NOT NULL,
-    CFU INT NOT NULL,
-    Year INT NOT NULL,
-    ProfessorFreshman INT NOT NULL REFERENCES Professors(Freshman),
-    PRIMARY KEY (Code)
 );
 
 

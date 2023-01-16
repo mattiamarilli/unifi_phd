@@ -1,8 +1,8 @@
 USE ta_schema;
 
 -- insert values into Thesis
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Analysis and comparison between the new file proposals of the different operating systems', 'Thesis description', 'thesisSystemOperative.pdf', 7032459, 'Not approved');
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Design and development of Augmented Reality Apps', 'Thesis description', 'thesisRealityApp.pdf', 5039678, 'Not approved');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Analysis and comparison between the new file proposals of the different operating systems', 'Thesis description', 'thesisSystemOperative.pdf', 7032459, 'Not_approved');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Design and development of Augmented Reality Apps', 'Thesis description', 'thesisRealityApp.pdf', 5039678, 'Not_approved');
 INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Design and development of Apps for the management of electric vehicles', 'Thesis description', 'thesisAppElectricVehicles.pdf', 2902190, 'Approved');
 
 

@@ -27,13 +27,13 @@ public class ConnectionDao {
         //main test for connection and queries
 
         //prova insert di una review
-        /*Review r = new Review("prova", "comment", 9874328, 1);
+
 
         ReviewDao prova = new ReviewDao();
-        prova.insert(r);
+        prova.getAll();
 
 
-
+        /*
         Connection connection = ConnectionDao.getConnection();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Thesis");
@@ -43,7 +43,7 @@ public class ConnectionDao {
             System.out.println(rs.getString("Title")+ "\n");
 
         }
-        */
 
+        */
     }
 }

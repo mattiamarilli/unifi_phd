@@ -7,25 +7,21 @@ public class Review {
     private int id;
     private String title;
     private String comment;
-    private int freshmanScientist;
-    private int idProgressReport;
-
+    private SupervisoryCommittee supervisoryCommittee;
 
     //with id
-    public Review(int id, String t, String c, int fs, int ip){
+    public Review(int id, String t, String c, SupervisoryCommittee sc){
         this.id = id;
         this.title = t;
         this.comment = c;
-        this.freshmanScientist = fs;
-        this.idProgressReport = ip;
+        this.supervisoryCommittee = sc;
     }
 
     //without id
-    public Review(String t, String c, int fs, int ip){
+    public Review(String t, String c, SupervisoryCommittee sc){
         this.title = t;
         this.comment = c;
-        this.freshmanScientist = fs;
-        this.idProgressReport = ip;
+        this.supervisoryCommittee = sc;
     }
 
     public int getId() {
@@ -52,20 +48,12 @@ public class Review {
         this.comment = comment;
     }
 
-    public int getFreshmanScientist() {
-        return freshmanScientist;
+    public SupervisoryCommittee getSupervisoryCommittee() {
+        return supervisoryCommittee;
     }
 
-    public void setFreshmanScientist(int freshmanScientist) {
-        this.freshmanScientist = freshmanScientist;
-    }
-
-    public int getIdProgressReport() {
-        return idProgressReport;
-    }
-
-    public void setIdProgressReport(int idProgressReport) {
-        this.idProgressReport = idProgressReport;
+    public void setSupervisoryCommittee(SupervisoryCommittee supervisoryCommittee) {
+        this.supervisoryCommittee = supervisoryCommittee;
     }
 
     @Override
@@ -74,9 +62,7 @@ public class Review {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
-                ", freshmanScientist=" + freshmanScientist +
-                ", idProgressReport=" + idProgressReport +
+                ", supervisoryCommittee=" + supervisoryCommittee +
                 '}';
     }
-
 }

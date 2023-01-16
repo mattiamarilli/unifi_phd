@@ -1,27 +1,24 @@
 package thesisapprovation;
 
 public class Review {
-
+    int id;
     private String title, comment;
-    int id, idReviewer, idThesis;
+    private EvaluationCommittee ec;
 
     //with id
-    public Review(int id, String t, String c, int idR, int idT){
-        this.idReviewer = idR;
-        this.idThesis = idT;
+    public Review(int id, String t, String c, EvaluationCommittee ec){
+        this.ec = ec;
         this.id = id;
         this.title = t;
         this.comment = c;
     }
 
     //without id
-    public Review(String t, String c, int idR, int idT){
+    public Review(String t, String c, EvaluationCommittee ec){
+        this.ec = ec;
         this.title = t;
         this.comment = c;
-        this.idReviewer = idR;
-        this.idThesis = idT;
     }
-
 
 
     public String getTitle() {
@@ -48,31 +45,21 @@ public class Review {
         this.id = id;
     }
 
-    public int getIdReviewer() {
-        return idReviewer;
+    public EvaluationCommittee getEc() {
+        return ec;
     }
 
-    public void setIdReviewer(int idReviewer) {
-        this.idReviewer = idReviewer;
-    }
-
-    public int getIdThesis() {
-        return idThesis;
-    }
-
-    public void setIdThesis(int idThesis) {
-        this.idThesis = idThesis;
+    public void setEc(EvaluationCommittee ec) {
+        this.ec = ec;
     }
 
     @Override
     public String toString() {
         return "Review{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
-                ", id=" + id +
-                ", idReviewer=" + idReviewer +
-                ", idThesis=" + idThesis +
+                ", ec=" + ec +
                 '}';
     }
-
 }

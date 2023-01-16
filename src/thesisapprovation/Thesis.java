@@ -2,8 +2,8 @@ package thesisapprovation;
 
 public class Thesis {
     private enum State{
-        APPROVED,
-        NOT_APPROVED
+        Approved,
+        Not_approved
     }
 
     private int id;
@@ -29,7 +29,7 @@ public class Thesis {
         this.description = d;
         this.urlDocument = ud;
         this.freshmanStudent = fs;
-        this.state = State.NOT_APPROVED; //inizialmente la tesi caricata non è approvata
+        this.state = State.Not_approved; //inizialmente la tesi caricata non è approvata
     }
 
     public int getId() {
