@@ -8,7 +8,7 @@ public class Course {
     private String title;
     private String description;
     private int cfu;
-    private Year year;
+    private int year;
 
     //with code
     public Course(String c, String t, String d, int cfu){
@@ -16,15 +16,24 @@ public class Course {
         this.title = t;
         this.description = d;
         this.cfu = cfu;
-        this.year = Year.now();
+        this.year = Year.now().getValue();
     }
 
     //without code
-    public Course(String t, String d, int cfu){
+    public Course(String t, String d, int cfu, int y){
         this.title = t;
         this.description = d;
         this.cfu = cfu;
-        this.year = Year.now();
+        this.year = y;
+    }
+
+    //with code and year
+    public Course(String c, String t, String d, int cfu, int y){
+        this.code = c;
+        this.title = t;
+        this.description = d;
+        this.cfu = cfu;
+        this.year = y;
     }
 
     public String getCode() {
@@ -59,11 +68,11 @@ public class Course {
         this.cfu = cfu;
     }
 
-    public Year getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(Year year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

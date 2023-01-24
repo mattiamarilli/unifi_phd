@@ -20,7 +20,7 @@ CREATE TABLE Professors (
     University VARCHAR(200) NOT NULL,
     Email VARCHAR(200) NOT NULL,
     Password VARCHAR(200) NOT NULL,
-    codeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
+    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
     PRIMARY KEY (Freshman)
 );
 

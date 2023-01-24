@@ -76,7 +76,7 @@ public class ReviewDao implements GenericDao<Review, Integer> {
         try{
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews INNER JOIN Thesis ON idThesis = Thesis.Id INNER JOIN Reviewers ON idReviewer = FreshmanWHERE Id=" + idReview);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews INNER JOIN Thesis ON idThesis = Thesis.Id INNER JOIN Reviewers ON idReviewer = Freshman WHERE Id=" + idReview);
 
             if(rs.next()) {
                 int idR = rs.getInt(1);
@@ -105,17 +105,20 @@ public class ReviewDao implements GenericDao<Review, Integer> {
                 System.out.println(r.toString());
                 conn.close();
                 return review;
-            }else
+            }else {
                 System.out.println("there aren't Reviews with id=" + idReview);
+                return null;
+            }
 
         }catch(SQLException ex){
             System.out.println("Error get review by id");
             ex.printStackTrace();
+            return null;
         }finally {
             conn.close();
 
         }
-        return null;
+
     }
 
     @Override
@@ -145,7 +148,6 @@ public class ReviewDao implements GenericDao<Review, Integer> {
             ex.printStackTrace();
             return false;
         }finally{
-            System.out.println("Connessione chiusa");
             conn.close();
         }
 
