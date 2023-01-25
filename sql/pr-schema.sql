@@ -9,7 +9,7 @@ CREATE TABLE ProgressReports (
   Description VARCHAR(200) NOT NULL,
   UrlDocument VARCHAR(2000) NOT NULL,
   State VARCHAR(15) NOT NULL,
-  StudentFreshman INT NOT NULL,
+  StudentFreshman INT UNIQUE NOT NULL,
   PRIMARY KEY (Id)
 );
 

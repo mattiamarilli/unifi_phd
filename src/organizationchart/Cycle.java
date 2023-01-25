@@ -1,5 +1,7 @@
 package organizationchart;
 
+
+//TODO: perché year è String ?
 public class Cycle {
 
     private int number;

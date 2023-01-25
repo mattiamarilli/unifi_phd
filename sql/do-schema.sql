@@ -28,12 +28,12 @@ CREATE TABLE Professors (
 CREATE TABLE Lessons (
     Id INT NOT NULL AUTO_INCREMENT,
     Date DATE NOT NULL,
-    StartTime TIME(2) NOT NULL,
+    StartTime TIME NOT NULL,
     EndTime TIME NOT NULL,
     Room INT,
     UniversityComplex VARCHAR(200),
     University VARCHAR(200),
-    Mode VARCHAR(7) NOT NULL,
+    Mode VARCHAR(8) NOT NULL,
     CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
     PRIMARY KEY (Id)
 );
@@ -46,7 +46,7 @@ CREATE TABLE Appeals (
     UniversityComplex VARCHAR(200),
     University VARCHAR(200),
     Note VARCHAR(200),
-    Mode VARCHAR(7) NOT NULL,
+    Mode VARCHAR(8) NOT NULL,
     CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
     PRIMARY KEY (Id)
 );

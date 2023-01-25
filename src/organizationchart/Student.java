@@ -1,5 +1,8 @@
 package organizationchart;
 
+//TODO: relazione con l'advisor dove  è inserita?
+//TODO: perché nel db è presente la tabella advisor? Dato che uno studente può avere al massimo un advisor potevamo mettere una foreign key in student?
+
 public class Student {
 
     private Integer freshman;

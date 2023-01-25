@@ -15,7 +15,7 @@ public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
         try{
             connection = ConnectionDao.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Facultymembers");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM FacultyMembers");
 
             List<FacultyMember> facultymembers = new ArrayList<FacultyMember>();
 
@@ -46,7 +46,7 @@ public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
     public FacultyMember findByKey(Integer freshman) throws SQLException {
         try{
             connection = ConnectionDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Facultymembers WHERE Freshman=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM FacultyMembers WHERE Freshman=?");
             preparedStatement.setInt(1, freshman);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -76,7 +76,7 @@ public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO `Facultymembers` (`Freshman`,`Name`, `Surname`,`Email`,`Password`, `Specialization`, `Institution`) VALUES (?,?,?,?,?,?,?);");
+                    "INSERT INTO `FacultyMembers` (`Freshman`,`Name`, `Surname`,`Email`,`Password`, `Specialization`, `Institution`) VALUES (?,?,?,?,?,?,?);");
             preparedStatement.setInt(1,facultyMember.getFreshman());
             preparedStatement.setString(2, facultyMember.getName());
             preparedStatement.setString(3, facultyMember.getSurname());
@@ -104,7 +104,7 @@ public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE `Facultymembers` SET `Name` = ?, `Surname` = ?,`Email`=?,`Password`=?,`Specialization`=?,`Institution`=? WHERE (`Freshman` = ?)");
+                    "UPDATE `FacultyMembers` SET `Name` = ?, `Surname` = ?,`Email`=?,`Password`=?,`Specialization`=?,`Institution`=? WHERE (`Freshman` = ?)");
             preparedStatement.setString(1, facultyMember.getName());
             preparedStatement.setString(2, facultyMember.getSurname());
             preparedStatement.setString(3, facultyMember.getEmail());
@@ -132,7 +132,7 @@ public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
         try{
             connection = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM `Facultymembers` WHERE (`Freshman` = ?)");
+                    "DELETE FROM `FacultyMembers` WHERE (`Freshman` = ?)");
             preparedStatement.setInt(1, freshman);
             if(preparedStatement.executeUpdate() > 0)
                 return true;

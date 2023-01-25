@@ -5,9 +5,9 @@ import java.util.Date;
 public class StudyPlan {
 
     private enum State{
-        registered,
-        attended,
-        accredited
+        Registered, //iscritto
+        Attended, //frequentato
+        Accredited //accreditato
     }
 
     private StudentCareer studentCareer;

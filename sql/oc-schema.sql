@@ -9,7 +9,7 @@ CREATE TABLE Cycles (
              Description VARCHAR(2000) NOT NULL
 );
 
-CREATE TABLE Facultymembers (
+CREATE TABLE FacultyMembers (
             Freshman INT NOT NULL PRIMARY KEY,
             Name VARCHAR(64) NOT NULL,
             Surname VARCHAR(64) NOT NULL,
@@ -29,10 +29,10 @@ CREATE TABLE Students(
 );
 
 -- find a better name
-CREATE TABLE FacultymembersCycle (
+CREATE TABLE FacultyMembersCycle (
               NumberCycle INT NOT NULL REFERENCES Cycles (Number),
-              FreshmanFacultymember INT NOT NULL REFERENCES Facultymembers (Freshman) ON DELETE CASCADE,
-              PRIMARY KEY (NumberCycle, FreshmanFacultymember)
+              FreshmanFacultyMember INT NOT NULL REFERENCES FacultyMembers (Freshman) ON DELETE CASCADE,
+              PRIMARY KEY (NumberCycle, FreshmanFacultyMember)
 );
 -- find a better name
 CREATE TABLE StudentsCycle (
@@ -42,8 +42,8 @@ CREATE TABLE StudentsCycle (
 );
 
 CREATE TABLE Advisors(
-            FreshmanFacultymember INT NOT NULL REFERENCES Facultymembers (Freshman) ON DELETE CASCADE,
+            FreshmanFacultyMember INT NOT NULL REFERENCES FacultyMembers (Freshman) ON DELETE CASCADE,
             FreshmanStudent INT NOT NULL REFERENCES Students (Freshman) ON DELETE CASCADE,
-            PRIMARY KEY ( FreshmanFacultymember, FreshmanStudent)
+            PRIMARY KEY ( FreshmanFacultyMember, FreshmanStudent)
 );
 
