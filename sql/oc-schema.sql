@@ -25,25 +25,10 @@ CREATE TABLE Students(
              Surname VARCHAR(64) NOT NULL,
              Email VARCHAR(200) NOT NULL,
              Password VARCHAR(2000) NOT NULL,
-             Topics VARCHAR(64) NOT NULL
+             Topics VARCHAR(64) NOT NULL,
+             Cycle INT NOT NULL REFERENCES Cycles(Number),
+             Advisor INT REFERENCES FacultyMembers(Freshman)
 );
 
--- find a better name
-CREATE TABLE FacultyMembersCycle (
-              NumberCycle INT NOT NULL REFERENCES Cycles (Number),
-              FreshmanFacultyMember INT NOT NULL REFERENCES FacultyMembers (Freshman) ON DELETE CASCADE,
-              PRIMARY KEY (NumberCycle, FreshmanFacultyMember)
-);
--- find a better name
-CREATE TABLE StudentsCycle (
-            NumberCycle INT NOT NULL REFERENCES Cycles (Number) ON DELETE CASCADE,
-            FreshmanStudent INT NOT NULL REFERENCES Students (Freshman) ON DELETE CASCADE,
-            PRIMARY KEY (NumberCycle, FreshmanStudent)
-);
 
-CREATE TABLE Advisors(
-            FreshmanFacultyMember INT NOT NULL REFERENCES FacultyMembers (Freshman) ON DELETE CASCADE,
-            FreshmanStudent INT NOT NULL REFERENCES Students (Freshman) ON DELETE CASCADE,
-            PRIMARY KEY ( FreshmanFacultyMember, FreshmanStudent)
-);
 

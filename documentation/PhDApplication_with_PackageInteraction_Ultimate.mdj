@@ -461,7 +461,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAGD1oqP5lRNiGU="
 									},
-									"text": "1..*"
+									"text": "1"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -736,7 +736,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAGD1oqhZFSKQpg="
 									},
-									"text": "1..*"
+									"text": "1"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -12582,7 +12582,7 @@
 									"$ref": "AAAAAAGD1ol3o1Lrs7Q="
 								},
 								"aggregation": "shared",
-								"multiplicity": "1..*"
+								"multiplicity": "1"
 							}
 						}
 					]
@@ -12640,7 +12640,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "freshman",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12649,7 +12650,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "name",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12658,7 +12660,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "surname",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12667,7 +12670,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "email",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12676,7 +12680,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "password",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12685,7 +12690,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "specialization",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12694,7 +12700,8 @@
 										"$ref": "AAAAAAGD1omrdFM/7FI="
 									},
 									"name": "institution",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -12733,7 +12740,7 @@
 											"$ref": "AAAAAAGD1ol3o1Lrs7Q="
 										},
 										"aggregation": "shared",
-										"multiplicity": "1..*"
+										"multiplicity": "1"
 									}
 								},
 								{
@@ -12974,7 +12981,8 @@
 										"$ref": "AAAAAAGD1oldNlLBsY8="
 									},
 									"name": "freshman",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12983,7 +12991,8 @@
 										"$ref": "AAAAAAGD1oldNlLBsY8="
 									},
 									"name": "name",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -12992,7 +13001,8 @@
 										"$ref": "AAAAAAGD1oldNlLBsY8="
 									},
 									"name": "surname",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13001,7 +13011,8 @@
 										"$ref": "AAAAAAGD1oldNlLBsY8="
 									},
 									"name": "email",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13010,7 +13021,8 @@
 										"$ref": "AAAAAAGD1oldNlLBsY8="
 									},
 									"name": "password",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13019,7 +13031,8 @@
 										"$ref": "AAAAAAGD1oldNlLBsY8="
 									},
 									"name": "topics",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -13068,7 +13081,8 @@
 										"$ref": "AAAAAAGD1ol3o1Lrs7Q="
 									},
 									"name": "number",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13086,7 +13100,8 @@
 										"$ref": "AAAAAAGD1ol3o1Lrs7Q="
 									},
 									"name": "year",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13095,7 +13110,8 @@
 										"$ref": "AAAAAAGD1ol3o1Lrs7Q="
 									},
 									"name": "description",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -13402,7 +13418,8 @@
 										"$ref": "AAAAAAGD1o11513QFPU="
 									},
 									"name": "Registered",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13411,7 +13428,8 @@
 										"$ref": "AAAAAAGD1o11513QFPU="
 									},
 									"name": "Attended",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13420,7 +13438,8 @@
 										"$ref": "AAAAAAGD1o11513QFPU="
 									},
 									"name": "Accredited",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -13469,7 +13488,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "freshman",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13478,7 +13498,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "name",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13487,7 +13508,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "surname",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13496,7 +13518,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "specialization",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13505,7 +13528,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "university",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13514,7 +13538,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "email",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13523,7 +13548,8 @@
 										"$ref": "AAAAAAGD1o7/7GKCTvI="
 									},
 									"name": "password",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -13662,7 +13688,8 @@
 										"$ref": "AAAAAAGD1om8ulNpslA="
 									},
 									"name": "code",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13671,7 +13698,8 @@
 										"$ref": "AAAAAAGD1om8ulNpslA="
 									},
 									"name": "title",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13680,7 +13708,8 @@
 										"$ref": "AAAAAAGD1om8ulNpslA="
 									},
 									"name": "description",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13689,7 +13718,8 @@
 										"$ref": "AAAAAAGD1om8ulNpslA="
 									},
 									"name": "cfu",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13698,7 +13728,8 @@
 										"$ref": "AAAAAAGD1om8ulNpslA="
 									},
 									"name": "year",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -13717,7 +13748,8 @@
 										"$ref": "AAAAAAGD1oxX+1huahk="
 									},
 									"name": "registrationDate",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							],
 							"operations": [
@@ -13833,7 +13865,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "id",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13842,7 +13875,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "date",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13851,7 +13885,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "startTime",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13860,7 +13895,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "endTime",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13869,7 +13905,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "room",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13878,7 +13915,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "universityComplex",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -13887,7 +13925,8 @@
 										"$ref": "AAAAAAGD57qA61F2J9o="
 									},
 									"name": "university",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -14079,7 +14118,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "id",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14088,7 +14128,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "date",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14097,7 +14138,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "startTime",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14106,7 +14148,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "room",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14115,7 +14158,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "universityComplex",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14124,7 +14168,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "university",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14133,7 +14178,8 @@
 										"$ref": "AAAAAAGD52J+jpYa+Qg="
 									},
 									"name": "note",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -14243,7 +14289,8 @@
 										"$ref": "AAAAAAGD8bH7+qxxUw4="
 									},
 									"name": "Presence",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14252,7 +14299,8 @@
 										"$ref": "AAAAAAGD8bH7+qxxUw4="
 									},
 									"name": "Online",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -14302,7 +14350,8 @@
 										"$ref": "AAAAAAGD8bIlsbTD6U8="
 									},
 									"name": "Presence",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -14311,7 +14360,8 @@
 										"$ref": "AAAAAAGD8bIlsbTD6U8="
 									},
 									"name": "Online",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -14466,7 +14516,8 @@
 										"$ref": "AAAAAAGEFb8lFzbiX64="
 									},
 									"name": "freshmanStudent",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
@@ -14485,7 +14536,8 @@
 										"$ref": "AAAAAAGFpVLqUp2lqyg="
 									},
 									"name": "vote",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						}
@@ -16261,7 +16313,8 @@
 										"$ref": "AAAAAAGD1xygCQXEw7E="
 									},
 									"name": "Load",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -16270,7 +16323,8 @@
 										"$ref": "AAAAAAGD1xygCQXEw7E="
 									},
 									"name": "Not_load",
-									"visibility": "private"
+									"visibility": "private",
+									"type": ""
 								}
 							]
 						},
