@@ -170,4 +170,3 @@ public class ReviewerDao implements GenericDao<Reviewer, Integer> {
         }
     }
 }
-

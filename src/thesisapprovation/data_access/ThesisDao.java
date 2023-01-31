@@ -177,4 +177,35 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             conn.close();
         }
     }
+
+    public Boolean insertEvaluation(Integer idThesis, Integer reviewerFreshman) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO EvaluationCommittee (IdThesis,IdReviewer) VALUES(?, ?)");
+            stmt.setInt(1, idThesis);
+            stmt.setInt(2, reviewerFreshman);
+
+
+            if(stmt.executeUpdate() > 0)
+            {
+                System.out.println("Insert evaluation successful");
+                return true;
+            }
+            else
+            {
+                System.out.println("Insert evaluation not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            System.out.println("Error insert evaluation");
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
 }
+
+
+
