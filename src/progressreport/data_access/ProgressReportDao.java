@@ -177,4 +177,32 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
         }
 
     }
+
+    public Boolean insertSupervisory(Integer idProgressReport, Integer idScientist) throws SQLException {
+        try{
+            conn = thesisapprovation.data_access.ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO SupervisoryCommittee (IdProgressReport,IdScientist) VALUES(?, ?)");
+            stmt.setInt(1, idProgressReport);
+            stmt.setInt(2, idScientist);
+
+
+            if(stmt.executeUpdate() > 0)
+            {
+                System.out.println("Insert evaluation successful");
+                return true;
+            }
+            else
+            {
+                System.out.println("Insert evaluation not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            System.out.println("Error insert evaluation");
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
 }

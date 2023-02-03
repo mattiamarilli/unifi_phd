@@ -26,7 +26,7 @@ CREATE TABLE Students(
              Email VARCHAR(200) NOT NULL,
              Password VARCHAR(2000) NOT NULL,
              Topics VARCHAR(64) NOT NULL,
-             Cycle INT NOT NULL REFERENCES Cycles(Number),
+             Cycle INT REFERENCES Cycles(Number),
              Advisor INT REFERENCES FacultyMembers(Freshman)
 );
 

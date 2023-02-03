@@ -176,4 +176,31 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             conn.close();
         }
     }
+
+    public List<Integer> getStudents(Integer scientistFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT StudentFreshman FROM SupervisoryCommittee INNER JOIN ProgressReports ON IdProgressReport = Id WHERE IdScientist = ?");
+            stmt.setInt(1, scientistFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Integer> idStudents = new ArrayList<Integer>();
+
+            while(rs.next()){
+                Integer f = rs.getInt("studentFreshman");
+                idStudents.add(f);
+            }
+
+            return idStudents;
+        }catch (SQLException ex){
+            System.out.println("Error getting id's ");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+
+
+    }
+
 }
