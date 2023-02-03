@@ -1,5 +1,4 @@
 package thesisapprovation.business_logic;
 
-public interface ThesisApprovationService {
-
+public class ThesisApprovationService {
 }
