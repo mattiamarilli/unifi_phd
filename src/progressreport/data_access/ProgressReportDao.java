@@ -57,7 +57,7 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
 
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ProgressReports WHERE Id = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ProgressReports WHERE StudentFreshman = ?");
             stmt.setInt(1, integer);
             ResultSet rs = stmt.executeQuery();
 
