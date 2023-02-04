@@ -17,4 +17,10 @@ class ProgressReportServiceTest {
     @Test
     void getStudentSupervisored() {
     }
+
+    @Test
+    void testJUnit() {
+        ProgressReportService progressReportService = new ProgressReportService();
+        assertEquals(true,progressReportService.testJUnit());
+    }
 }

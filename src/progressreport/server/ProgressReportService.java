@@ -16,7 +16,7 @@ public class ProgressReportService {
     private ReviewDao reviewDao;
     private ScientistDao scientistDao;
 
-    private ProgressReportProxy proxy;
+    private ProgressReportProxy progressReportProxy;
     public ProgressReportService() {
         progressReportDao = new ProgressReportDao();
         reviewDao = new ReviewDao();
@@ -37,14 +37,16 @@ public class ProgressReportService {
         List<Student> students = new ArrayList<Student>();
 
         for(Integer i: idStudents){
-            Student s = proxy.getStudentsInformation(i);
+            Student s = progressReportProxy.getStudentsInformation(i);
             students.add(s);
         }
 
         return students;
     }
 
-
+public boolean testJUnit(){
+        return true;
+}
 
 
 
