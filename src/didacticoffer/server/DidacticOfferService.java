@@ -1,4 +1,4 @@
-package didacticoffer.business_logic;
+package didacticoffer.server;
 
 public class DidacticOfferService {
 }

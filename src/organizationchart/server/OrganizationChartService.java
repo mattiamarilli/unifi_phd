@@ -4,10 +4,10 @@ import organizationchart.data_access.*;
 
 import java.sql.SQLException;
 
-public class Server {
+public class OrganizationChartService {
 
     private StudentDaoImpl studentDao;
-    public Server() {
+    public OrganizationChartService() {
         studentDao = new StudentDaoImpl();
     }
 

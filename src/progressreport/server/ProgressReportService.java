@@ -4,20 +4,20 @@ import organizationchart.Student;
 import progressreport.ProgressReport;
 import progressreport.data_access.ProgressReportDao;
 import progressreport.data_access.ScientistDao;
-import progressreport.proxy.Proxy;
+import progressreport.proxy.ProgressReportProxy;
 import thesisapprovation.data_access.ReviewDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
+public class ProgressReportService {
     private ProgressReportDao progressReportDao;
     private ReviewDao reviewDao;
     private ScientistDao scientistDao;
 
-    private Proxy proxy;
-    public Server() {
+    private ProgressReportProxy proxy;
+    public ProgressReportService() {
         progressReportDao = new ProgressReportDao();
         reviewDao = new ReviewDao();
         scientistDao = new ScientistDao();

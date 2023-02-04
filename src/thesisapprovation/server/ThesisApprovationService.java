@@ -1,4 +1,4 @@
-package thesisapprovation.business_logic;
+package thesisapprovation.server;
 
 public class ThesisApprovationService {
 }
