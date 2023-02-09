@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class OrganizationChartService {
 
-    private StudentDaoImpl studentDao;
+    private StudentDao studentDao;
     public OrganizationChartService() {
-        studentDao = new StudentDaoImpl();
+        studentDao = new StudentDao();
     }
 
     public Student getStudentById(Integer idStudent) throws SQLException {

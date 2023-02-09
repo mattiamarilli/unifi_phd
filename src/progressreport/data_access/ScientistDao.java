@@ -1,5 +1,6 @@
 package progressreport.data_access;
 
+import progressreport.ProgressReport;
 import progressreport.Scientist;
 
 import java.sql.*;
@@ -199,8 +200,37 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
         }finally {
             conn.close();
         }
+    }
 
+    public ProgressReport getProgressReportByScientistStudent(Integer scientistFreshman, Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Id, Title, ProgressReports.Description, UrlDocument FROM Scientists INNER JOIN SupervisoryCommittee ON IdScientist=Freshman INNER JOIN ProgressReports ON IdProgressReport = Id WHERE State = \"Load\" AND Freshman = ? AND StudentFreshman = ?");
+            stmt.setInt(1, scientistFreshman);
+            stmt.setInt(2, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
 
+            if(rs.next()){
+                Integer id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String url = rs.getString("UrlDocument");
+
+                ProgressReport pr = new ProgressReport(id, title, description, url, studentFreshman);
+
+                return pr;
+            }else{
+                System.out.println("Student doesn't load the progress report");
+                return null;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error get progress report by scientist and student");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
     }
 
 }

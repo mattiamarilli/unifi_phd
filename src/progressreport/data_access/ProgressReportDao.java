@@ -1,6 +1,7 @@
 package progressreport.data_access;
 
 import progressreport.ProgressReport;
+import progressreport.Scientist;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -128,11 +129,11 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
 
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE ProgressReports SET Title = ?, Description = ?, UrlDocument = ?, State = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE ProgressReports SET Title = ?, Description = ?, UrlDocument = ? WHERE Id = ?");
             stmt.setString(1, progressReport.getTitle());
             stmt.setString(2, progressReport.getDescription());
             stmt.setString(3, progressReport.getUrlDocument());
-            stmt.setString(4, String.valueOf(progressReport.getState()));
+            stmt.setInt(4, progressReport.getId());
 
             if(stmt.executeUpdate() > 0){
                 System.out.println("Update progress report successful");
@@ -205,4 +206,62 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             conn.close();
         }
     }
+
+    public boolean updateState(Integer studentFreshman, String state) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE ProgressReports SET State = ? WHERE StudentFreshman = ?");
+            stmt.setString(1, state);
+            stmt.setInt(2, studentFreshman);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update state progress report successful");
+                return true;
+            }else{
+                System.out.println("Update state progress report not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error update state progress report");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Scientist> getScientists(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Scientists.Description FROM ProgressReports INNER JOIN SupervisoryCommittee ON Id = IdProgressReport INNER JOIN Scientists ON IdScientist = Freshman WHERE StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Scientist> scientists = new ArrayList<Scientist>();
+
+            while(rs.next()){
+                Integer f = rs.getInt("Freshman");
+                String n = rs.getString("Name");
+                String s = rs.getString("Surname");
+                String e = rs.getString("Email");
+                String d = rs.getString("Description");
+
+                Scientist scientist = new Scientist(f, n, s, e, d);
+
+                scientists.add(scientist);
+            }
+
+            return scientists;
+
+        }catch(SQLException ex){
+            System.out.println("Error get scientists by student freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+
 }

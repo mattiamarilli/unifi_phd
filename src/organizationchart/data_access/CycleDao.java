@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CycleDaoImpl implements GenericDao<Cycle,Integer> {
+public class CycleDao implements GenericDao<Cycle,Integer> {
 
     private Connection connection;
     @Override

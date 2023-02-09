@@ -1,13 +1,12 @@
 package organizationchart.data_access;
 
 import organizationchart.FacultyMember;
-import organizationchart.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FacultyMemberDaoImpl implements GenericDao<FacultyMember,Integer> {
+public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
 
     private Connection connection;
     @Override

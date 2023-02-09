@@ -24,14 +24,40 @@ public class ProgressReport {
         this.freshmanStudent = fs;
     }
 
-    //without id
-    public ProgressReport(String t, String d, String ud, String s, int fs ){
+    //costruttore vuoto (utilizzato quando allo studente è assegnata la supervisory committee ma non ha caricato il progress report)
+    public ProgressReport(int id, int fs){
+        this.id = id;
+        this.state = State.Not_load;
+        this.freshmanStudent = fs;
+    }
+
+    //without id (utilizzato quando viene caricata per la prima volta)
+    public ProgressReport(String t, String d, String ud, int fs ){
         this.title = t;
         this.description = d;
         this.urlDocument = ud;
-        this.state = State.valueOf(s);
+        this.state = State.Load;
         this.freshmanStudent = fs;
     }
+
+    //utilizzato dal scientist quando desidere visualizzare il progress report di uno specifico studente
+    public ProgressReport(int id, String t, String d, String ud, int fs ){
+        this.id = id;
+        this.title = t;
+        this.description = d;
+        this.urlDocument = ud;
+        this.state = State.Load;
+        this.freshmanStudent = fs;
+    }
+
+    //with id without state (utilizzato quando il progress report viene modificato dallo studente, il quale non può modificare lo stato)
+    public ProgressReport(int id, String t, String d, String ud){
+        this.id = id;
+        this.title = t;
+        this.description = d;
+        this.urlDocument = ud;
+    }
+
 
     public int getId() {
         return id;

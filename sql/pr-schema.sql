@@ -5,9 +5,9 @@ USE pr_schema;
 
 CREATE TABLE ProgressReports (
   Id INT NOT NULL AUTO_INCREMENT,
-  Title VARCHAR(200) NOT NULL,
-  Description VARCHAR(200) NOT NULL,
-  UrlDocument VARCHAR(2000) NOT NULL,
+  Title VARCHAR(200),
+  Description VARCHAR(200),
+  UrlDocument VARCHAR(2000),
   State VARCHAR(15) NOT NULL,
   StudentFreshman INT UNIQUE NOT NULL,
   PRIMARY KEY (Id)
@@ -24,8 +24,8 @@ CREATE TABLE Scientists (
 );
 
 CREATE TABLE SupervisoryCommittee (
-  IdProgressReport INT NOT NULL REFERENCES ProgressReports(Id),
-  IdScientist INT NOT NULL REFERENCES Scientists(Freshman),
+  IdProgressReport INT NOT NULL REFERENCES ProgressReports(Id) ON DELETE CASCADE,
+  IdScientist INT NOT NULL REFERENCES Scientists(Freshman) ON DELETE CASCADE,
   PRIMARY KEY (IdProgressReport, IdScientist)
 );
 
