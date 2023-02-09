@@ -90,7 +90,32 @@ public class ProgressReportService {
         return scientistDao.getProgressReportByScientistStudent(idScientist, idStudent);
     }
 
-public boolean testJUnit(){
+    //delete scientist
+    public void deleteScientist(Integer idScientist) throws SQLException{
+        scientistDao.delete(idScientist);
+    }
+
+    //update scientist
+    public void updateScientist(Integer idScientist, String name, String surname, String email, String description) throws SQLException{
+        Scientist s = new Scientist(idScientist, name, surname, email, description);
+        scientistDao.update(s);
+    }
+
+    //update password scientist
+    public void updatePasswordScientist(Integer idScientist, String password) throws SQLException{
+        scientistDao.updatePassword(idScientist, password);
+    }
+
+    //METODI PER LA SupervisoryCommittee
+
+    //inserimento SupervisoryCommittee
+    public void insertSupervisoryCommittee(Integer idProgressReport, Integer idScientist) throws SQLException{
+        progressReportDao.insertSupervisory(idProgressReport, idScientist);
+    }
+
+
+
+    public boolean testJUnit(){
         return true;
 }
 

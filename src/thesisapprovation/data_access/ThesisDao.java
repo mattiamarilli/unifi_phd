@@ -1,5 +1,6 @@
 package thesisapprovation.data_access;
 
+import thesisapprovation.Reviewer;
 import thesisapprovation.Thesis;
 
 import java.sql.*;
@@ -124,12 +125,11 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
     public Boolean update(Thesis thesis) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Title= ?, Description= ?, UrlDocument= ?, State= ? WHERE Id= ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Title= ?, Description= ?, UrlDocument= ? WHERE Id= ?");
             stmt.setString(1, thesis.getTitle());
             stmt.setString(2, thesis.getDescription());
             stmt.setString(3, thesis.getUrlDocument());
-            stmt.setString(4, String.valueOf(thesis.getState()));
-            stmt.setInt(5, thesis.getId());
+            stmt.setInt(4, thesis.getId());
 
             if(stmt.executeUpdate() > 0)
             {
@@ -205,6 +205,63 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             conn.close();
         }
     }
+
+    public boolean updateState(Integer studentFreshman, String state) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET State = ? WHERE StudentFreshman = ?");
+            stmt.setString(1, state);
+            stmt.setInt(2, studentFreshman);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update state successful");
+                return true;
+            }else{
+                System.out.println("Update state not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error update state");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Reviewer> getReviewersByStudent(Integer studentFreshman) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Reviewers.Description FROM Thesis INNER JOIN EvaluationCommittee ON Id = IdThesis INNER JOIN Reviewers ON Freshman = IdReviewer WHERE StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Reviewer> reviewers = new ArrayList<Reviewer>();
+
+            while(rs.next()){
+                int freshman = rs.getInt("Freshman");
+                String name = rs.getString("Name");
+                String surname = rs.getString("Surname");
+                String email = rs.getString("Email");
+                String description = rs.getString("Description");
+
+                Reviewer r = new Reviewer(freshman, name, surname, email, description);
+
+                reviewers.add(r);
+            }
+
+            return reviewers;
+
+        }catch(SQLException ex){
+            System.out.println("Error get reviewers by student");
+            ex.printStackTrace();
+            return null;
+        }finally{
+            conn.close();
+        }
+    }
+
 }
 
 

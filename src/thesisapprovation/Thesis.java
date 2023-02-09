@@ -23,7 +23,7 @@ public class Thesis {
         this.state = State.valueOf(s);
     }
 
-    //without id
+    //without id (utilizzato quando è inserita per la prima volta)
     public Thesis(String t, String d, String ud, int fs){
         this.title = t;
         this.description = d;

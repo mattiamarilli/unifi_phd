@@ -127,13 +127,12 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
 
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE Scientists SET Name= ?, Surname= ?, Email= ?, Password= ?, Description= ? WHERE Freshman= ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Scientists SET Name= ?, Surname= ?, Email= ?, Description= ? WHERE Freshman= ?");
             stmt.setString(1, scientist.getName());
             stmt.setString(2, scientist.getSurname());
             stmt.setString(3, scientist.getEmail());
-            stmt.setString(4, scientist.getPassword());
-            stmt.setString(5, scientist.getDescription());
-            stmt.setInt(6, scientist.getFreshman());
+            stmt.setString(4, scientist.getDescription());
+            stmt.setInt(5, scientist.getFreshman());
 
             if(stmt.executeUpdate() > 0){
                 System.out.println("Update scientist successful");
@@ -232,5 +231,30 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             conn.close();
         }
     }
+
+    public boolean updatePassword(Integer idScientist, String password) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Scientists SET Password = ? WHERE Freshman = ?");
+            stmt.setString(1, password);
+            stmt.setInt(2, idScientist);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update password successful");
+                return true;
+            }else{
+                System.out.println("Update password not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error update password");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
 
 }
