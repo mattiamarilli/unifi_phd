@@ -1,5 +1,6 @@
 package thesisapprovation.server;
 
+import thesisapprovation.Review;
 import thesisapprovation.Reviewer;
 import thesisapprovation.Thesis;
 import thesisapprovation.data_access.ReviewDao;
@@ -40,9 +41,24 @@ public class ThesisApprovationService {
         thesisDao.updateState(studentFreshman, state);
     }
 
+    //elimina thesis
+    public void deleteThesis(Integer id) throws SQLException{
+        thesisDao.delete(id);
+    }
+
     //visualizza reviewer della propria Evaluation Committee
     public List<Reviewer> getReviewersByStudent(Integer studentFreshman) throws SQLException{
         return thesisDao.getReviewersByStudent(studentFreshman);
+    }
+
+    //visualizza reviews by reviewer and student
+    public Review getReviewByStudentReviewer(Integer studentFreshman, Integer freshmanReviewer) throws SQLException{
+        return thesisDao.getReviewsByStudentReviewer(studentFreshman, freshmanReviewer);
+    }
+
+    //inserimento evaluationCommittee
+    public void insertEvaluationCommittee(Integer idThesis, Integer reviewerFreshman) throws SQLException{
+        thesisDao.insertEvaluation(idThesis, reviewerFreshman);
     }
 
 }

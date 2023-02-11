@@ -1,5 +1,7 @@
 package thesisapprovation.data_access;
 
+import thesisapprovation.EvaluationCommittee;
+import thesisapprovation.Review;
 import thesisapprovation.Reviewer;
 import thesisapprovation.Thesis;
 
@@ -261,6 +263,57 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             conn.close();
         }
     }
+
+    public Review getReviewsByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Thesis.Id as ThesisId, Thesis.Title as ThesisTitle, Thesis.Description as ThesisDescription, Thesis.UrlDocument, Thesis.StudentFreshman, Thesis.State, Reviewers.Freshman as ReviewerFreshman, Reviewers.Name, Reviewers.Surname, Reviewers.Email, Reviewers.Description as ReviewersDescription, Reviews.Id as ReviewId, Reviews.Title as ReviewTitle, Reviews.Comment as ReviewComment FROM Thesis \n" +
+                    "INNER JOIN EvaluationCommittee ON IdThesis = Thesis.Id\n" +
+                    "INNER JOIN Reviewers ON Freshman = EvaluationCommittee.IdReviewer\n" +
+                    "INNER JOIN Reviews ON Reviews.IdThesis = EvaluationCommittee.IdThesis AND Reviews.IdReviewer = EvaluationCommittee.IdReviewer\n" +
+                    "WHERE StudentFreshman = ? AND Reviewers.Freshman = ?");
+
+            stmt.setInt(1, studentFreshman);
+            stmt.setInt(2, reviewerFreshman);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                int thesisId = rs.getInt("ThesisId");
+                String thesisTitle = rs.getString("ThesisTitle");
+                String thesisDescription = rs.getString("ThesisDescription");
+                String urlDocument = rs.getString("UrlDocument");
+                String state = rs.getString("State");
+                String name = rs.getString("Name");
+                String surname = rs.getString("Surname");
+                String email = rs.getString("Email");
+                String reviewersDescription = rs.getString("ReviewersDescription");
+                int reviewId = rs.getInt("ReviewId");
+                String reviewTitle = rs.getString("ReviewTitle");
+                String reviewComment = rs.getString("ReviewComment");
+
+                Thesis t = new Thesis(thesisId, thesisTitle, thesisDescription, urlDocument, studentFreshman, state);
+                Reviewer r = new Reviewer(reviewerFreshman, name, surname, email, reviewersDescription);
+                EvaluationCommittee ec = new EvaluationCommittee(t, r);
+
+                Review review = new Review(reviewId, reviewTitle, reviewComment, ec);
+
+                return review;
+
+            }else{
+                System.out.println("Doesn't exist review ");
+                return null;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error gets review by student and reviewer");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 
 }
 

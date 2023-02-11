@@ -25,8 +25,8 @@ CREATE TABLE Reviewers (
 );
 
 CREATE TABLE EvaluationCommittee (
-  IdThesis INT NOT NULL REFERENCES Thesis(Id),
-  IdReviewer INT NOT NULL REFERENCES Reviewers(Freshman),
+  IdThesis INT NOT NULL REFERENCES Thesis(Id) ON DELETE CASCADE,
+  IdReviewer INT NOT NULL REFERENCES Reviewers(Freshman) ON DELETE CASCADE,
   PRIMARY KEY (IdThesis, IdReviewer)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE Reviews (
     Id INT NOT NULL AUTO_INCREMENT,
     Title VARCHAR(120) NOT NULL,
     Comment VARCHAR(2000) NOT NULL,
-    IdThesis INT NOT NULL REFERENCES Thesis(Id),
-    IdReviewer INT NOT NULL REFERENCES Reviewers(Freshman),
+    IdThesis INT NOT NULL REFERENCES Thesis(Id) ON DELETE CASCADE,
+    IdReviewer INT NOT NULL REFERENCES Reviewers(Freshman) ON DELETE CASCADE,
     PRIMARY KEY (Id)
 );
