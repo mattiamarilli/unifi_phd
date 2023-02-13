@@ -36990,14 +36990,6 @@
 				},
 				{
 					"_type": "UMLUseCase",
-					"_id": "AAAAAAGD+vXNnQ0ZDyw=",
-					"_parent": {
-						"$ref": "AAAAAAGD+vXNng2GJu4="
-					},
-					"name": "UseCase1"
-				},
-				{
-					"_type": "UMLUseCase",
 					"_id": "AAAAAAGD+vXNnQ0cbrI=",
 					"_parent": {
 						"$ref": "AAAAAAGD+vXNng2GJu4="
@@ -37065,14 +37057,6 @@
 				},
 				{
 					"_type": "UMLUseCase",
-					"_id": "AAAAAAGD+vXNnQ0gSos=",
-					"_parent": {
-						"$ref": "AAAAAAGD+vXNng2GJu4="
-					},
-					"name": "UseCase2"
-				},
-				{
-					"_type": "UMLUseCase",
 					"_id": "AAAAAAGD+vXNnQ0hQ8U=",
 					"_parent": {
 						"$ref": "AAAAAAGD+vXNng2GJu4="
@@ -37086,14 +37070,6 @@
 						"$ref": "AAAAAAGD+vXNng2GJu4="
 					},
 					"name": "aggiunge gli appelli al corso"
-				},
-				{
-					"_type": "UMLUseCase",
-					"_id": "AAAAAAGD+vXNnQ0jL4A=",
-					"_parent": {
-						"$ref": "AAAAAAGD+vXNng2GJu4="
-					},
-					"name": "UseCase3"
 				},
 				{
 					"_type": "UMLUseCase",
