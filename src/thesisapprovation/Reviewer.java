@@ -23,6 +23,11 @@ public class Reviewer {
         this.description = d;
     }
 
+    //utilizzato per generare l'evaluation committee
+    public Reviewer(int f){
+        this.freshman = f;
+    }
+
     public int getFreshman() {
         return freshman;
     }

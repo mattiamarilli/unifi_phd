@@ -1,11 +1,11 @@
 USE ta_schema;
 
 -- insert values into Thesis
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Analysis and comparison between the new file proposals of the different operating systems', 'Thesis description', 'thesisSystemOperative.pdf', 7032459, 'Not_approved');
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Design and development of Augmented Reality Apps', 'Thesis description', 'thesisRealityApp.pdf', 5039678, 'Not_approved');
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('Design and development of Apps for the management of electric vehicles', 'Thesis description', 'thesisAppElectricVehicles.pdf', 2902190, 'Approved');
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('A Cloud Infrastructure for Large Scale Health Monitoring in Older Adult Care Facilities', 'Thesis description', 'cloudInfrastructure.pdf', 8034573, 'Approved');
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES('', '', '', 3492482, 'Not_approved');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Analysis and comparison between the new file proposals of the different operating systems', 'Thesis description', 'thesisSystemOperative.pdf', 7032459, 'Not_approved', 'Load');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Design and development of Augmented Reality Apps', 'Thesis description', 'thesisRealityApp.pdf', 5039678, 'Not_approved', 'Not_load');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Design and development of Apps for the management of electric vehicles', 'Thesis description', 'thesisAppElectricVehicles.pdf', 2902190, 'Approved', 'Load');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('A Cloud Infrastructure for Large Scale Health Monitoring in Older Adult Care Facilities', 'Thesis description', 'cloudInfrastructure.pdf', 8034573, 'Approved', 'Load');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('', '', '', 3492482, 'Not_approved', 'Load');
 
 -- insert values Reviewer
 INSERT INTO Reviewers (Freshman, Name, Surname, Password, Email, Description) VALUES(9874328, 'Giuseppe', 'Anastasi', 'Password', 'giuseppe.anastasi@yahoo.com', 'Pervasive computing; Internet of Things; Smart Cities');

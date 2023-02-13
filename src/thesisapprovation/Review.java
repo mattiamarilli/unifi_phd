@@ -13,7 +13,7 @@ public class Review {
         this.comment = c;
     }
 
-    //without id
+    //without id (usata quando viene caricata per la prima volta)
     public Review(String t, String c, EvaluationCommittee ec){
         this.ec = ec;
         this.title = t;

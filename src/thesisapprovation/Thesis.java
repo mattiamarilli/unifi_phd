@@ -6,21 +6,37 @@ public class Thesis {
         Not_approved
     }
 
+    private enum Load{
+        Load,
+        Not_load
+    }
+
     private int id;
     private String title;
     private String description;
     private String urlDocument;
-    private int freshmanStudent;
+    private int studentFreshman;
     private State state;
+    private Load load;
+
+
+    //costruttore vuoto (utilizzato quando viene assegnata l'evaluation committee allo studente ma ancora non ha caricato la tesi
+    public Thesis(int id, int fs){
+        this.id = id;
+        this.studentFreshman = fs;
+        this.state = State.Not_approved;
+        this.load = Load.Not_load;
+    }
 
     //with id
-    public Thesis(int id, String t, String d, String ud, int fs, String s){
+    public Thesis(int id, String t, String d, String ud, int fs, String s, String l){
         this.id = id;
         this.title = t;
         this.description = d;
         this.urlDocument = ud;
-        this.freshmanStudent = fs;
+        this.studentFreshman = fs;
         this.state = State.valueOf(s);
+        this.load = Load.valueOf(l);
     }
 
     //without id (utilizzato quando è inserita per la prima volta)
@@ -28,8 +44,14 @@ public class Thesis {
         this.title = t;
         this.description = d;
         this.urlDocument = ud;
-        this.freshmanStudent = fs;
+        this.studentFreshman = fs;
         this.state = State.Not_approved; //inizialmente la tesi caricata non è approvata
+        this.load = Load.Not_load; //inizialmente non è consegnata ma è in bozza
+    }
+
+    //usato per generare l'evaluation committee
+    public Thesis(int id){
+        this.id = id;
     }
 
     public int getId() {
@@ -64,12 +86,12 @@ public class Thesis {
         this.urlDocument = urlDocument;
     }
 
-    public int getFreshmanStudent() {
-        return freshmanStudent;
+    public int getStudentFreshman() {
+        return studentFreshman;
     }
 
-    public void setFreshmanStudent(int freshmanStudent) {
-        this.freshmanStudent = freshmanStudent;
+    public void setStudentFreshman(int studentFreshman) {
+        this.studentFreshman = studentFreshman;
     }
 
     public State getState() {
@@ -80,6 +102,14 @@ public class Thesis {
         this.state = state;
     }
 
+    public Load getLoad() {
+        return load;
+    }
+
+    public void setLoad(Load load) {
+        this.load = load;
+    }
+
     @Override
     public String toString() {
         return "Thesis{" +
@@ -87,7 +117,7 @@ public class Thesis {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", urlDocument='" + urlDocument + '\'' +
-                ", freshmanStudent=" + freshmanStudent +
+                ", freshmanStudent=" + studentFreshman +
                 ", state=" + state +
                 '}';
     }

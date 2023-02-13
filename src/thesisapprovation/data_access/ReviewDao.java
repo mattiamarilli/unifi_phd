@@ -18,29 +18,32 @@ public class ReviewDao implements GenericDao<Review, Integer> {
         try{
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from Reviews inner join Thesis on idThesis = Thesis.Id inner join Reviewers on idReviewer = Freshman");
+            ResultSet rs = stmt.executeQuery("select Reviews.Id as ReviewId, Reviews.Title as ReviewTitle, Reviews.Comment as ReviewComment, IdThesis, Thesis.Title as ThesisTitle, Thesis.Description as ThesisDescription, UrlDocument, StudentFreshman, Thesis.State, Thesis.Loaded, Reviewers.Freshman as ReviewerFreshman, Name, Surname, Email, Reviewers.Description as ReviewerDescription\n" +
+                    "from Reviews inner join Thesis on idThesis = Thesis.Id \n" +
+                    "inner join Reviewers on idReviewer = Freshman");
 
             //create empty list
             List<Review> reviews = new ArrayList<Review>();
 
             while(rs.next()){
-                int idReview = rs.getInt(1);
-                String title = rs.getString(2);
-                String comment = rs.getString(3);
-                int idThesis = rs.getInt(4);
-                int idReviewer = rs.getInt(5);
-                String titleThesis = rs.getString(7);
-                String descriptionThesis = rs.getString(8);
-                String urlDocument = rs.getString(9);
-                int studentFreshman = rs.getInt(10);
-                String state = rs.getString(11);
-                String name = rs.getString(13);
-                String surname = rs.getString(14);
-                String email = rs.getString(16);
-                String description = rs.getString(17);
+                int idReview = rs.getInt("ReviewId");
+                String title = rs.getString("ReviewTitle");
+                String comment = rs.getString("ReviewComment");
+                int idThesis = rs.getInt("IdThesis");
+                int idReviewer = rs.getInt("ReviewerFreshman");
+                String thesisTitle = rs.getString("ThesisTitle");
+                String thesisDescription = rs.getString("ThesisDescription");
+                String urlDocument = rs.getString("UrlDocument");
+                int studentFreshman = rs.getInt("StudentFreshman");
+                String state = rs.getString("State");
+                String load = rs.getString("Loaded");
+                String name = rs.getString("Name");
+                String surname = rs.getString("Surname");
+                String email = rs.getString("Email");
+                String description = rs.getString("ReviewerDescription");
 
 
-                Thesis t = new Thesis(idThesis, titleThesis, descriptionThesis, urlDocument, studentFreshman, state);
+                Thesis t = new Thesis(idThesis, thesisTitle, thesisDescription, urlDocument, studentFreshman, state, load);
                 Reviewer r = new Reviewer(idReviewer, name, surname, email, description);
 
                 EvaluationCommittee ec = new EvaluationCommittee(t, r);
@@ -76,31 +79,33 @@ public class ReviewDao implements GenericDao<Review, Integer> {
         try{
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews INNER JOIN Thesis ON idThesis = Thesis.Id INNER JOIN Reviewers ON idReviewer = Freshman WHERE Id=" + idReview);
+            ResultSet rs = stmt.executeQuery("select Reviews.Id as ReviewId, Reviews.Title as ReviewTitle, Reviews.Comment as ReviewComment, IdThesis, Thesis.Title as ThesisTitle, Thesis.Description as ThesisDescription, UrlDocument, StudentFreshman, Thesis.State, Thesis.Loaded, Reviewers.Freshman as ReviewerFreshman, Name, Surname, Email, Reviewers.Description as ReviewerDescription\n" +
+                    "from Reviews inner join Thesis on idThesis = Thesis.Id \n" +
+                    "inner join Reviewers on idReviewer = Freshman WHERE ReviewId = " + idReview);
 
             if(rs.next()) {
-                int idR = rs.getInt(1);
-                String title = rs.getString(2);
-                String comment = rs.getString(3);
-                int idThesis = rs.getInt(4);
-                int idReviewer = rs.getInt(5);
-                String titleThesis = rs.getString(7);
-                String descriptionThesis = rs.getString(8);
-                String urlDocument = rs.getString(9);
-                int studentFreshman = rs.getInt(10);
-                String state = rs.getString(11);
-                String name = rs.getString(13);
-                String surname = rs.getString(14);
-                String email = rs.getString(16);
-                String description = rs.getString(17);
+                String title = rs.getString("ReviewTitle");
+                String comment = rs.getString("ReviewComment");
+                int idThesis = rs.getInt("IdThesis");
+                int idReviewer = rs.getInt("ReviewerFreshman");
+                String thesisTitle = rs.getString("ThesisTitle");
+                String thesisDescription = rs.getString("ThesisDescription");
+                String urlDocument = rs.getString("UrlDocument");
+                int studentFreshman = rs.getInt("StudentFreshman");
+                String state = rs.getString("State");
+                String load = rs.getString("Loaded");
+                String name = rs.getString("Name");
+                String surname = rs.getString("Surname");
+                String email = rs.getString("Email");
+                String description = rs.getString("ReviewerDescription");
 
 
-                Thesis t = new Thesis(idThesis, titleThesis, descriptionThesis, urlDocument, studentFreshman, state);
+                Thesis t = new Thesis(idThesis, thesisTitle, thesisDescription, urlDocument, studentFreshman, state, load);
                 Reviewer r = new Reviewer(idReviewer, name, surname, email, description);
 
                 EvaluationCommittee ec = new EvaluationCommittee(t, r);
 
-                Review review = new Review(idR, title, comment, ec);
+                Review review = new Review(idReview, title, comment, ec);
                 //output review only testing
                 System.out.println(r.toString());
                 conn.close();
@@ -157,12 +162,10 @@ public class ReviewDao implements GenericDao<Review, Integer> {
     public Boolean update(Review review) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement ps = conn.prepareStatement("UPDATE Review SET Title = ?, Comment = ? IdThesis = ?, IdReviewer = ? WHERE Id = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE Review SET Title = ?, Comment = ? WHERE Id = ?");
             ps.setString(1, review.getTitle());
             ps.setString(2, review.getComment());
-            ps.setInt(3, review.getEc().getThesis().getId());
-            ps.setInt(4, review.getEc().getReviewer().getFreshman());
-            ps.setInt(5, review.getId());
+            ps.setInt(3, review.getId());
 
             if(ps.executeUpdate() > 0)
             {

@@ -36,7 +36,7 @@ public class ProgressReport {
         this.title = t;
         this.description = d;
         this.urlDocument = ud;
-        this.state = State.Load;
+        this.state = State.Not_load; //inizialmente non è consegnata ma è in bozza
         this.freshmanStudent = fs;
     }
 

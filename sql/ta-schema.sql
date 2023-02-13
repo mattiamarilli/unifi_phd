@@ -10,6 +10,7 @@ CREATE TABLE Thesis (
   UrlDocument VARCHAR(300),
   StudentFreshman INT NOT NULL,
   State VARCHAR(15) NOT NULL,
+  Loaded VARCHAR(15) NOT NULL,
   PRIMARY KEY (Id)
 );
 

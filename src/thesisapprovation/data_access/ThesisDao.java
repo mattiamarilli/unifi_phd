@@ -29,8 +29,9 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 String url = rs.getString("UrlDocument");
                 int studentFreshman = rs.getInt("StudentFreshman");
                 String state = rs.getString("State");
+                String load = rs.getString("Loaded");
 
-                Thesis t = new Thesis(id, title, description, url, studentFreshman, state);
+                Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
 
                 thesisList.add(t);
 
@@ -70,8 +71,9 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 String url = rs.getString("UrlDocument");
                 int studentFreshman = rs.getInt("StudentFreshman");
                 String state = rs.getString("State");
+                String load = rs.getString("Loaded");
 
-                Thesis t = new Thesis(id, title, description, url, studentFreshman, state);
+                Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
 
                 //output only testing
                 System.out.println(t.toString());
@@ -96,12 +98,13 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
     public Boolean insert(Thesis thesis) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State) VALUES(?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES(?, ?, ?, ?, ?, ?)");
             stmt.setString(1, thesis.getTitle());
             stmt.setString(2, thesis.getDescription());
             stmt.setString(3, thesis.getUrlDocument());
-            stmt.setInt(4, thesis.getFreshmanStudent());
+            stmt.setInt(4, thesis.getStudentFreshman());
             stmt.setString(5, String.valueOf(thesis.getState()));
+            stmt.setString(6, String.valueOf(thesis.getLoad()));
 
             if(stmt.executeUpdate() > 0)
             {
@@ -183,7 +186,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
     public Boolean insertEvaluation(Integer idThesis, Integer reviewerFreshman) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO EvaluationCommittee (IdThesis,IdReviewer) VALUES(?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO EvaluationCommittee (IdThesis, IdReviewer) VALUES(?, ?)");
             stmt.setInt(1, idThesis);
             stmt.setInt(2, reviewerFreshman);
 
@@ -208,7 +211,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
         }
     }
 
-    public boolean updateState(Integer studentFreshman, String state) throws SQLException{
+    public boolean updateStateThesis(Integer studentFreshman, String state) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET State = ? WHERE StudentFreshman = ?");
@@ -225,6 +228,30 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
         }catch(SQLException ex){
             System.out.println("Error update state");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public boolean updateLoadedThesis(Integer studentFreshman, String stateLoaded) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Loaded = ? WHERE StudentFreshman = ?");
+            stmt.setString(1, stateLoaded);
+            stmt.setInt(2, studentFreshman);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update loaded successful");
+                return true;
+            }else{
+                System.out.println("Update loaded not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error update loaded by student");
             ex.printStackTrace();
             return false;
         }finally {
@@ -267,7 +294,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
     public Review getReviewsByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT Thesis.Id as ThesisId, Thesis.Title as ThesisTitle, Thesis.Description as ThesisDescription, Thesis.UrlDocument, Thesis.StudentFreshman, Thesis.State, Reviewers.Freshman as ReviewerFreshman, Reviewers.Name, Reviewers.Surname, Reviewers.Email, Reviewers.Description as ReviewersDescription, Reviews.Id as ReviewId, Reviews.Title as ReviewTitle, Reviews.Comment as ReviewComment FROM Thesis \n" +
+            PreparedStatement stmt = conn.prepareStatement("SELECT Thesis.Id as ThesisId, Thesis.Title as ThesisTitle, Thesis.Description as ThesisDescription, Thesis.UrlDocument, Thesis.StudentFreshman, Thesis.State, Thesis.Loaded, Reviewers.Freshman as ReviewerFreshman, Reviewers.Name, Reviewers.Surname, Reviewers.Email, Reviewers.Description as ReviewersDescription, Reviews.Id as ReviewId, Reviews.Title as ReviewTitle, Reviews.Comment as ReviewComment FROM Thesis \n" +
                     "INNER JOIN EvaluationCommittee ON IdThesis = Thesis.Id\n" +
                     "INNER JOIN Reviewers ON Freshman = EvaluationCommittee.IdReviewer\n" +
                     "INNER JOIN Reviews ON Reviews.IdThesis = EvaluationCommittee.IdThesis AND Reviews.IdReviewer = EvaluationCommittee.IdReviewer\n" +
@@ -284,6 +311,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 String thesisDescription = rs.getString("ThesisDescription");
                 String urlDocument = rs.getString("UrlDocument");
                 String state = rs.getString("State");
+                String load = rs.getString("Loaded");
                 String name = rs.getString("Name");
                 String surname = rs.getString("Surname");
                 String email = rs.getString("Email");
@@ -292,7 +320,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 String reviewTitle = rs.getString("ReviewTitle");
                 String reviewComment = rs.getString("ReviewComment");
 
-                Thesis t = new Thesis(thesisId, thesisTitle, thesisDescription, urlDocument, studentFreshman, state);
+                Thesis t = new Thesis(thesisId, thesisTitle, thesisDescription, urlDocument, studentFreshman, state, load);
                 Reviewer r = new Reviewer(reviewerFreshman, name, surname, email, reviewersDescription);
                 EvaluationCommittee ec = new EvaluationCommittee(t, r);
 
@@ -314,6 +342,37 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
         }
     }
 
+    public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Thesis WHERE StudentFreshman = ? AND Loaded = 'Load'");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                int id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String url = rs.getString("UrlDocument");
+                String state = rs.getString("State");
+                String load = rs.getString("Loaded");
+
+                Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
+                return t;
+            }else{
+                System.out.println("Doesn't load thesis by student");
+                return null;
+            }
+
+
+        }catch(SQLException ex){
+            System.out.println("Error gets thesis by student freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
 
 }
 
