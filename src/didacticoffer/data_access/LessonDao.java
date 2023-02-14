@@ -139,20 +139,64 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
         }catch (SQLException ex){
             System.out.println("Error insert lesson");
             ex.printStackTrace();
+            return false;
         }finally {
             conn.close();
         }
-        return null;
     }
 
-    //TODO: finire
     @Override
     public Boolean update(Lesson lesson) throws SQLException {
-        return null;
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Lessons SET Date = ?, StartTime = ?, EndTime = ?, Room = ?, UniversityComplex = ?, University = ?, Mode = ?, CodeCourse = ? WHERE Id = ?");
+            stmt.setDate(1, lesson.getDate());
+            stmt.setTime(2, lesson.getStartTime());
+            stmt.setTime(3, lesson.getEndTime());
+            stmt.setInt(4, lesson.getRoom());
+            stmt.setString(5, lesson.getUniversityComplex());
+            stmt.setString(6, lesson.getUniversity());
+            stmt.setString(7, String.valueOf(lesson.getMode()));
+            stmt.setString(8, lesson.getCourse().getCode());
+            stmt.setInt(9, lesson.getId());
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update lesson successful");
+                return true;
+            }else{
+                System.out.println("Update lesson not successful");
+                return false;
+            }
+
+        }catch(SQLException ex) {
+            System.out.println("Error update lesson");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
     }
 
     @Override
     public Boolean delete(Integer idLesson) throws SQLException {
-        return null;
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Lessons WHERE Id = ?");
+            stmt.setInt(1, idLesson);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Delete lesson successful");
+                return true;
+            }else{
+                System.out.println("Delete lesson not successful");
+                return false;
+            }
+        }catch (SQLException ex){
+            System.out.println("Error delete lesson");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
     }
 }

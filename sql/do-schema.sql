@@ -20,7 +20,7 @@ CREATE TABLE Professors (
     University VARCHAR(200) NOT NULL,
     Email VARCHAR(200) NOT NULL,
     Password VARCHAR(200) NOT NULL,
-    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
+    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code) ON DELETE CASCADE,
     PRIMARY KEY (Freshman)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE Lessons (
     UniversityComplex VARCHAR(200),
     University VARCHAR(200),
     Mode VARCHAR(8) NOT NULL,
-    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
+    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code) ON DELETE CASCADE,
     PRIMARY KEY (Id)
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE Appeals (
     University VARCHAR(200),
     Note VARCHAR(200),
     Mode VARCHAR(8) NOT NULL,
-    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code),
+    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code) ON DELETE CASCADE,
     PRIMARY KEY (Id)
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE StudentCareers (
 );
 
 CREATE TABLE StudyPlans(
-        StudentFreshman INT NOT NULL REFERENCES StudentCareers(StudentFreshman),
-        CodeCourse VARCHAR(16) NULL REFERENCES Courses(Code),
+        StudentFreshman INT NOT NULL REFERENCES StudentCareers(StudentFreshman) ON DELETE CASCADE,
+        CodeCourse VARCHAR(16) NULL REFERENCES Courses(Code) ON DELETE CASCADE,
         State VARCHAR(20) NOT NULL,
         RegistrationDate DATE NOT NULL,
         PRIMARY KEY (StudentFreshman,CodeCourse)
@@ -67,8 +67,8 @@ CREATE TABLE StudyPlans(
 
 
 CREATE TABLE AppealParticipation(
-       StudentFreshman INT NOT NULL REFERENCES StudentCareers(StudentFreshman),
-       IdAppeal INT NOT NULL REFERENCES Appeals(Id),
+       StudentFreshman INT NOT NULL REFERENCES StudentCareers(StudentFreshman) ON DELETE CASCADE,
+       IdAppeal INT NOT NULL REFERENCES Appeals(Id) ON DELETE CASCADE ,
        PRIMARY KEY (StudentFreshman,IdAppeal),
        Vote VARCHAR(20)
 )

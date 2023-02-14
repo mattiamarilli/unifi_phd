@@ -1,7 +1,7 @@
 package didacticoffer;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Appeal {
 
@@ -42,6 +42,8 @@ public class Appeal {
         this.mode = Modality.valueOf(m);
         this.course = c;
     }
+
+
 
     public int getId() {
         return id;
