@@ -10,9 +10,19 @@ public class Professor {
     private String password;
     private Course course;
 
-    //with id
-    public Professor(int id, String n, String s, String specialization, String u, String e, String p, Course c){
-        this.freshman = id;
+    //with freshman and without course (utilizzato quando viene inserito per la prima volta)
+    public Professor(int freshman, String n, String s, String specialization, String u, String e, String p){
+        this.freshman = freshman;
+        this.name = n;
+        this.surname = s;
+        this.specialization = specialization;
+        this.university = u;
+        this.email = e;
+        this.password = p;
+    }
+
+    public Professor(int freshman, String n, String s, String specialization, String u, String e, String p, Course c){
+        this.freshman = freshman;
         this.name = n;
         this.surname = s;
         this.specialization = specialization;
@@ -22,14 +32,14 @@ public class Professor {
         this.course = c;
     }
 
-    //without id
-    public Professor(String n, String s, String specialization, String u, String e, String p, Course c){
+    //without password
+    public Professor(Integer freshman, String n, String s, String specialization, String u, String e,Course c){
+        this.freshman = freshman;
         this.name = n;
         this.surname = s;
         this.specialization = specialization;
         this.university = u;
         this.email = e;
-        this.password = p;
         this.course = c;
     }
 

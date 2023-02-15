@@ -113,7 +113,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
     public Boolean insert(Professor professor) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password) VALUES (?, ?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, professor.getFreshman());
             stmt.setString(2, professor.getName());
             stmt.setString(3, professor.getSurname());
@@ -121,7 +121,6 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             stmt.setString(5, professor.getUniversity());
             stmt.setString(6, professor.getEmail());
             stmt.setString(7, professor.getPassword());
-            stmt.setString(8, professor.getCourse().getCode());
 
             if(stmt.executeUpdate() > 0){
                 System.out.println("Insert professor successful");
@@ -145,15 +144,14 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
     public Boolean update(Professor professor) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Name = ?, Surname= ?, Specialization= ?, University= ?, Email= ?, Password= ?, CodeCourse= ? WHERE Freshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Name = ?, Surname= ?, Specialization= ?, University= ?, Email= ?, CodeCourse= ? WHERE Freshman = ?");
             stmt.setString(1, professor.getName());
             stmt.setString(2, professor.getSurname());
             stmt.setString(3, professor.getSpecialization());
             stmt.setString(4, professor.getUniversity());
             stmt.setString(5, professor.getEmail());
-            stmt.setString(6, professor.getPassword());
-            stmt.setString(7, professor.getCourse().getCode());
-            stmt.setInt(8, professor.getFreshman());
+            stmt.setString(6, professor.getCourse().getCode());
+            stmt.setInt(7, professor.getFreshman());
 
             if(stmt.executeUpdate() > 0){
                 System.out.println("Update professor successful");
@@ -195,4 +193,82 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             conn.close();
         }
     }
+
+    public Boolean updatePasswordProfessor(Integer freshman, String password) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Passoword = ? WHERE Freshman = ?");
+            stmt.setString(1, password);
+            stmt.setInt(2, freshman);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update password professor successful");
+                return true;
+            }else{
+                System.out.println("Update password professor not successful");
+                return true;
+            }
+
+        }catch (SQLException ex){
+            System.out.println("Error update password professor");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public Boolean updateCodeCourseProfessor(Integer professorFreshman, String codeCourse) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET CodeCourse = ? WHERE Freshman = ?");
+            stmt.setString(1, codeCourse);
+            stmt.setInt(2, professorFreshman);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update password professor successful");
+                return true;
+            }else{
+                System.out.println("Update password professor not successful");
+                return true;
+            }
+
+        }catch (SQLException ex){
+            System.out.println("Error update password professor");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+
+    public List<Integer> getStudentFreshmenByProfessor(Integer professorFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT StudentCareers.Studentfreshman FROM Professors\n" +
+                    "INNER JOIN Courses ON Professors.CodeCourse = Code\n" +
+                    "INNER JOIN StudyPlans ON StudyPlans.CodeCourse = Courses.Code\n" +
+                    "INNER JOIN StudentCareers ON StudentCareers.StudentFreshman = StudyPlans.StudentFreshman\n" +
+                    "WHERE Professors.Freshman = ?");
+            stmt.setInt(1, professorFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Integer> studentFreshmen = new ArrayList<Integer>();
+
+            while(rs.next()){
+                studentFreshmen.add(rs.getInt("StudentFreshman"));
+            }
+
+            return studentFreshmen;
+
+        }catch (SQLException ex){
+            System.out.println("Error get student freshmen by professor");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 }

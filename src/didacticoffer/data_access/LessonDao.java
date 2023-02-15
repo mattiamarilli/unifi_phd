@@ -25,6 +25,9 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
                 Date date = rs.getDate("Date");
                 Time startTime = rs.getTime("StartTime");
                 Time endTime = rs.getTime("EndTime");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
                 String mode = rs.getString("Mode");
                 String code = rs.getString("CodeCourse");
                 String title = rs.getString("Title");
@@ -33,16 +36,8 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
                 int year = rs.getInt("Year");
 
                 Course course = new Course(code, title, description, cfu, year);
-                if(mode == "Presence") {
-                    int room = rs.getInt("Room");
-                    String universityComplex = rs.getString("UniversityComplex");
-                    String university = rs.getString("University");
 
-                    lessons.add(new Lesson(id, date, startTime, endTime, room, universityComplex, university, mode, course));
-
-                }else{
-                    lessons.add(new Lesson(id, date, startTime, endTime, mode, course));
-                }
+                lessons.add(new Lesson(id, date, startTime, endTime, room, universityComplex, university, mode, course));
             }
 
             return lessons;
@@ -69,6 +64,9 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
                 Date date = rs.getDate("Date");
                 Time startTime = rs.getTime("StartTime");
                 Time endTime = rs.getTime("EndTime");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
                 String mode = rs.getString("Mode");
                 String code = rs.getString("CodeCourse");
                 String title = rs.getString("Title");
@@ -77,16 +75,8 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
                 int year = rs.getInt("Year");
 
                 Course course = new Course(code, title, description, cfu, year);
-                if(mode == "Presence") {
-                    int room = rs.getInt("Room");
-                    String universityComplex = rs.getString("UniversityComplex");
-                    String university = rs.getString("University");
 
-                    return new Lesson(idLesson, date, startTime, endTime, room, universityComplex, university, mode, course);
-
-                }else{
-                    return new Lesson(idLesson, date, startTime, endTime, mode, course);
-                }
+                return new Lesson(idLesson, date, startTime, endTime, room, universityComplex, university, mode, course);
             }else{
                 System.out.println("Doesn't exist lesson with id =" + idLesson);
                 return null;
@@ -107,26 +97,15 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
     public Boolean insert(Lesson lesson) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt;
-            if(String.valueOf(lesson.getMode()) == "Presence") {
-                stmt = conn.prepareStatement("INSERT INTO Lessons(Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-                stmt.setDate(1, lesson.getDate());
-                stmt.setTime(2, lesson.getStartTime());
-                stmt.setTime(3, lesson.getEndTime());
-                stmt.setInt(4, lesson.getRoom());
-                stmt.setString(5, lesson.getUniversityComplex());
-                stmt.setString(6, lesson.getUniversity());
-                stmt.setString(7, String.valueOf(lesson.getMode()));
-                stmt.setString(8, lesson.getCourse().getCode());
-
-            }else{
-                stmt = conn.prepareStatement("INSERT INTO Lessons(Date, StartTime, EndTime, Mode, CodeCourse) VALUES(?, ?, ?, ?, ?)");
-                stmt.setDate(1, lesson.getDate());
-                stmt.setTime(2, lesson.getStartTime());
-                stmt.setTime(3, lesson.getEndTime());
-                stmt.setString(4, String.valueOf(lesson.getMode()));
-                stmt.setString(5, lesson.getCourse().getCode());
-            }
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Lessons(Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt.setDate(1, lesson.getDate());
+            stmt.setTime(2, lesson.getStartTime());
+            stmt.setTime(3, lesson.getEndTime());
+            stmt.setInt(4, lesson.getRoom());
+            stmt.setString(5, lesson.getUniversityComplex());
+            stmt.setString(6, lesson.getUniversity());
+            stmt.setString(7, String.valueOf(lesson.getMode()));
+            stmt.setString(8, lesson.getCourse().getCode());
 
             if(stmt.executeUpdate() > 0) {
                 System.out.println("Insert lesson successful");

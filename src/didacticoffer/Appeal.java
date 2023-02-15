@@ -20,7 +20,7 @@ public class Appeal {
     private Modality mode;
     private Course course;
 
-    //constructor for appeal in presence
+    //with id
     public Appeal(int id, Date d, Time st, int r, String uc, String u, String n, String m, Course c){
         this.id = id;
         this.date = d;
@@ -33,17 +33,21 @@ public class Appeal {
         this.course = c;
     }
 
-    //constructor for online appeal
-    public Appeal(int id, Date d, Time st, String n, String m, Course c){
-        this.id = id;
+    //without id (usato quando è inserito per la prima volta)
+    public Appeal(Date d, Time st, int r, String uc, String u, String n, String m, Course c){
         this.date = d;
         this.startTime = st;
+        this.room = r;
+        this.universityComplex = uc;
+        this.university = u;
         this.note = n;
         this.mode = Modality.valueOf(m);
         this.course = c;
     }
 
-
+    public Appeal(Integer id){
+        this.id = id;
+    }
 
     public int getId() {
         return id;

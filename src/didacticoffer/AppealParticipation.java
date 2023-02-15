@@ -11,6 +11,12 @@ public class AppealParticipation {
         this.vote = v;
     }
 
+    //usato quando viene inserito la prima volta
+    public AppealParticipation(StudentCareer sc, Appeal a){
+        this.studentCareer = sc;
+        this.appeal = a;
+    }
+
     public StudentCareer getStudentCareer() {
         return studentCareer;
     }

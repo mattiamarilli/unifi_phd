@@ -165,4 +165,20 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             conn.close();
         }
     }
+
+    public Boolean deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("");
+
+            return false;
+        }catch (SQLException ex){
+            System.out.println("Error delete appeal participation by student");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
 }

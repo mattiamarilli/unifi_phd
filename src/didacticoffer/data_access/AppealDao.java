@@ -26,6 +26,9 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 Date date = rs.getDate("Date");
                 Time startTime = rs.getTime("StartTime");
                 String note = rs.getString("Note");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
                 String mode = rs.getString("Mode");
                 String codeCourse = rs.getString("CodeCourse");
                 String title = rs.getString("Title");
@@ -35,15 +38,7 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
 
                 Course c = new Course(codeCourse, title, description, cfu, year);
 
-                if(mode == "Presence"){
-                    int room = rs.getInt("Room");
-                    String universityComplex = rs.getString("UniversityComplex");
-                    String university = rs.getString("University");
-
-                    appeals.add(new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c));
-                }else{
-                    appeals.add(new Appeal(id, date, startTime, note, mode, c));
-                }
+                appeals.add(new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c));
             }
 
             return appeals;
@@ -73,6 +68,9 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 Date date = rs.getDate("Date");
                 Time startTime = rs.getTime("StartTime");
                 String note = rs.getString("Note");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
                 String mode = rs.getString("Mode");
                 String codeCourse = rs.getString("CodeCourse");
                 String title = rs.getString("Title");
@@ -82,15 +80,7 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
 
                 Course c = new Course(codeCourse, title, description, cfu, year);
 
-                if(mode == "Presence"){
-                    int room = rs.getInt("Room");
-                    String universityComplex = rs.getString("UniversityComplex");
-                    String university = rs.getString("University");
-
-                    return new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
-                }else{
-                    return new Appeal(id, date, startTime, note, mode, c);
-                }
+                return new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
             }else{
                 System.out.println("Doesn't exist appeal with id= " + idAppeal);
                 return null;

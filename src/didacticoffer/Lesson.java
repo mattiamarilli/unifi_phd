@@ -20,7 +20,7 @@ public class Lesson {
     private Modality mode;
     private Course course;
 
-    //constructor for lesson in presence
+    //with id
     public Lesson(int id, Date d, Time st, Time et, int r, String uc, String u, String m, Course c){
         this.id = id;
         this.date = d;
@@ -33,12 +33,14 @@ public class Lesson {
         this.course = c;
     }
 
-    //constructor for online lesson (without room, university, university complex)
-    public Lesson(int id, Date d, Time st, Time et, String m, Course c){
-        this.id = id;
+    //without id (usato quando è inserita per la prima volta)
+    public Lesson(Date d, Time st, Time et, int r, String uc, String u, String m, Course c){
         this.date = d;
         this.startTime = st;
         this.endTime = et;
+        this.room = r;
+        this.universityComplex = uc;
+        this.university = u;
         this.mode = Modality.valueOf(m);
         this.course = c;
     }

@@ -10,7 +10,7 @@ public class Course {
     private int cfu;
     private int year;
 
-    //with code
+    //with code (utlizzato quando inserito per la prima volta)
     public Course(String c, String t, String d, int cfu){
         this.code = c;
         this.title = t;
@@ -34,6 +34,11 @@ public class Course {
         this.description = d;
         this.cfu = cfu;
         this.year = y;
+    }
+
+    //constructor with only code (utlizzato per inserire il professore)
+    public Course(String code){
+        this.code = code;
     }
 
     public String getCode() {

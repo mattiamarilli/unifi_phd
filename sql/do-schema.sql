@@ -20,7 +20,7 @@ CREATE TABLE Professors (
     University VARCHAR(200) NOT NULL,
     Email VARCHAR(200) NOT NULL,
     Password VARCHAR(200) NOT NULL,
-    CodeCourse VARCHAR(16) NOT NULL REFERENCES Courses(Code) ON DELETE CASCADE,
+    CodeCourse VARCHAR(16) REFERENCES Courses(Code) ON DELETE SET NULL,
     PRIMARY KEY (Freshman)
 );
 
@@ -71,6 +71,4 @@ CREATE TABLE AppealParticipation(
        IdAppeal INT NOT NULL REFERENCES Appeals(Id) ON DELETE CASCADE ,
        PRIMARY KEY (StudentFreshman,IdAppeal),
        Vote VARCHAR(20)
-)
-
-
+);

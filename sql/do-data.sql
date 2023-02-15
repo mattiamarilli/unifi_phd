@@ -17,19 +17,20 @@ INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Ema
 INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (1229371, 'Laura', 'Carnevali', 'Quantitative evaluation; Formal methods; Real-time systems', 'University of Florence', 'laura.carnevali@unifi.it', 'Password', 'B056592');
 INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (1329371, 'Angelo', 'Freni', 'Microwave and millimeter wave systems; Numerical techniques for antenna analysis', 'University of Florence', 'angelo.freni@unifi.it', 'Password', 'B087592');
 INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (1429371, 'Alessandro', 'Piva', 'Multimedia security; Image processing', 'University of Florence', 'alessandro.piva@unifi.it', 'Password', 'B087592');
+INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password) VALUES (6840482, 'Matteo', 'Farfugli', 'Pattern recognition and machine learning for human activity recognition', 'University of Siena', 'matteo.farfugli@unisi.it', 'Password');
 
 
 -- insert lessons
 INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2022-12-28', '8:30', '10:30', 001, 'Centro Didattico Morgagni', 'University of Florence', 'Presence', 'B032592');
 INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-01-04', '9:30', '11:30', 005, 'Santa Marta', 'University of Florence', 'Presence', 'B032592');
 
-INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2022-09-30', '14:00', '16:00', null, '', '', 'Online', 'B037592');
-INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2022-11-26', '8:40', '11:40', null, '', '', 'Online', 'B037592');
+INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2022-09-30', '14:00', '16:00', null, null, null, 'Online', 'B037592');
+INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2022-11-26', '8:40', '11:40', null, null, null, 'Online', 'B037592');
 INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2022-12-02', '17:15', '19:15', 014, 'Santa Marta', 'University of Florence', 'Presence', 'B037592');
 
-INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-04', '8:30', '9:30', null, '', '', 'Online', 'B056592');
-INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-11', '8:30', '9:30', null, '', '', 'Online', 'B056592');
-INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-18', '10:00', '11:00', null, '', '', 'Online', 'B056592');
+INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-04', '8:30', '9:30', null, null, null, 'Online', 'B056592');
+INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-11', '8:30', '9:30', null, null, null, 'Online', 'B056592');
+INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-18', '10:00', '11:00', null, null, null, 'Online', 'B056592');
 
 INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-01', '14:30', '17:30', 164, 'Centro Didattico Morgagni', 'University of Florence', 'Presence', 'B087592');
 INSERT INTO Lessons (Date, StartTime, EndTime, Room, UniversityComplex, University, Mode, CodeCourse) VALUES ('2023-03-08', '14:30', '17:30', 164, 'Centro Didattico Morgagni', 'University of Florence', 'Presence', 'B087592');
