@@ -172,4 +172,29 @@ public class CourseDao implements GenericDao<Course, String>{
             conn.close();
         }
     }
+
+    public Boolean updateStateStudyPlan(String courseCode, String state) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE StudyPlans SET State = ? WHERE CodeCourse = ?");
+            stmt.setString(1, state);
+            stmt.setString(2, courseCode);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update state study plan successful");
+                return true;
+            }else{
+                System.out.println("Update state study plan not successful");
+                return false;
+            }
+
+        }catch (SQLException ex){
+            System.out.println("Error update state study plane");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
 }

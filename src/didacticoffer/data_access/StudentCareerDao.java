@@ -142,6 +142,32 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
         }
     }
 
+    public Boolean deleteStudyPlan(Integer studentFreshman, String courseCode) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM StudyPlans \n" +
+                    "WHERE StudentFreshman = ? AND CodeCourse = ?");
+            stmt.setInt(1, studentFreshman);
+            stmt.setString(2, courseCode);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Delete study plan successful");
+                return true;
+            }else{
+                System.out.println("Delete study plan not successful");
+                return false;
+            }
+
+        }catch (SQLException ex){
+            System.out.println("Error delete study plan");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+
     public Boolean insertAppealParticipation(AppealParticipation appealParticipation) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
@@ -169,9 +195,19 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
     public Boolean deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM AppealParticipation \n" +
+                    "WHERE IdAppeal = ? AND StudentFreshman = ?");
+            stmt.setInt(1, idAppeal);
+            stmt.setInt(2, studentFreshman);
 
-            return false;
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Delete appeal participation by student successful");
+                return true;
+            }else{
+                System.out.println("Delete appeal participation by student not successful");
+                return false;
+            }
+
         }catch (SQLException ex){
             System.out.println("Error delete appeal participation by student");
             ex.printStackTrace();
@@ -180,5 +216,76 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             conn.close();
         }
     }
+
+    public List<Course> getCoursesByStudentFreshman(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Courses.Code, Courses.Title, Courses.Description, Courses.CFU, Courses.Year FROM StudentCareers\n" +
+                    "INNER JOIN StudyPlans ON StudentCareers.Studentfreshman = StudyPlans.Studentfreshman\n" +
+                    "INNER JOIN Courses ON Courses.Code = StudyPlans.CodeCourse\n" +
+                    "WHERE StudentCareers.Studentfreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Course> courses = new ArrayList<Course>();
+
+            while(rs.next()){
+                String code = rs.getString("Code");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+
+                Course c = new Course(code, title, description, cfu, year);
+
+                courses.add(c);
+            }
+
+            return courses;
+
+        }catch (SQLException ex){
+            System.out.println("Error get courses by student freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Course> getCoursesAccreditedByStudentFreshman(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Courses.Code, Courses.Title, Courses.Description, Courses.CFU, Courses.Year FROM StudentCareers\n" +
+                    "INNER JOIN StudyPlans ON StudentCareers.Studentfreshman = StudyPlans.Studentfreshman\n" +
+                    "INNER JOIN Courses ON Courses.Code = StudyPlans.CodeCourse\n" +
+                    "WHERE StudentCareers.StudentFreshman = ? AND StudyPlans.State = 'Accredited'");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Course> courses = new ArrayList<Course>();
+
+            while(rs.next()){
+                String code = rs.getString("Code");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+
+                Course c = new Course(code, title, description, cfu, year);
+
+                courses.add(c);
+            }
+
+            return courses;
+
+        }catch(SQLException ex){
+            System.out.println("Error get courses accredited by student freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 
 }

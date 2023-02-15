@@ -195,4 +195,72 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             conn.close();
         }
     }
+
+    public Boolean updateStateStudentStudyPlan(Integer studentFreshman, String courseCode, String state) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE StudyPlans SET State = ? WHERE StudentFreshman = ? AND CodeCourse = ?");
+            stmt.setString(1, state);
+            stmt.setInt(2, studentFreshman);
+            stmt.setString(3, courseCode);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Update state student study plan successful");
+                return true;
+            }else{
+                System.out.println("Update state student study plan not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error update state student study plan");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Appeal> getAppealsByCourseCode(String courseCode) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Id, Date, StartTime, Room, UniversityComplex, University, Note, Mode, CodeCourse, Title, Description, CFU, Year \n" +
+                    "FROM Appeals\n" +
+                    "INNER JOIN Courses ON CodeCourse = Code\n" +
+                    "WHERE CodeCourse = ?");
+            stmt.setString(1, courseCode);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Appeal> appeals = new ArrayList<Appeal>();
+
+            while(rs.next()){
+                int id = rs.getInt("Id");
+                Date date = rs.getDate("Date");
+                Time startTime = rs.getTime("StartTime");
+                String note = rs.getString("Note");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
+                String mode = rs.getString("Mode");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+
+                Course c = new Course(courseCode, title, description, cfu, year);
+                Appeal a = new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
+                appeals.add(a);
+            }
+
+            return appeals;
+
+        }catch(SQLException ex){
+            System.out.println("Error get appeals by course code");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 }

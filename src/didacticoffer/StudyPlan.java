@@ -16,7 +16,7 @@ public class StudyPlan {
     private Date registrationDate;
 
     //utilizzato quando è inserito la prima volta
-    public StudyPlan(StudentCareer sc, Course c,Date rd){
+    public StudyPlan(StudentCareer sc, Course c, Date rd){
         this.studentCareer = sc;
         this.course = c;
         this.state = State.Registered; //la prima volta è iscritto (registered)

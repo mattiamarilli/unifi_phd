@@ -95,6 +95,11 @@ public class DidacticOfferService {
         courseDao.delete(code);
     }
 
+    //update course status (usato quando il professore ha terminato il corso ed definisce il corso "frequentato")
+    public void updateStateStudyPlan(String courseCode, String state) throws SQLException{
+        courseDao.updateStateStudyPlan(courseCode, state);
+    }
+
 
     //METODI DI LessonDao
 
@@ -139,6 +144,16 @@ public class DidacticOfferService {
         appealDao.delete(idAppeal);
     }
 
+    //accept vote by student
+    public void acceptVoteByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
+        Appeal a = appealDao.findByKey(idAppeal);
+        appealDao.updateStateStudentStudyPlan(studentFreshman, a.getCourse().getCode(), "Accredited");
+    }
+
+    //visualizza appelli in base al course code
+    public List<Appeal> getAppealsByCourseCode(String courseCode) throws SQLException{
+        return appealDao.getAppealsByCourseCode(courseCode);
+    }
 
     //METODI DI StudentCareerDao
 
@@ -163,6 +178,32 @@ public class DidacticOfferService {
         studentCareerDao.insertAppealParticipation(ap);
     }
 
+    //delete appeal participation by student freshman
+    public void deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
+        studentCareerDao.deleteAppealParticipationByStudent(studentFreshman, idAppeal);
+    }
 
+    //insert study plan by student freshman and course code
+    public void insertStudyPlan(Integer studentFreshman, String courseCode, Date date) throws SQLException{
+        StudentCareer sc = new StudentCareer(studentFreshman);
+        Course c = new Course(courseCode);
+        StudyPlan studyPlan = new StudyPlan(sc, c, date);
+        studentCareerDao.insertStudyPlan(studyPlan);
+    }
+
+    //delete study plan by student and course code
+    public void deleteStudyPlan(Integer studentFreshman, String courseCode) throws SQLException{
+        studentCareerDao.deleteStudyPlan(studentFreshman, courseCode);
+    }
+
+    //visualizza corsi iscritti
+    public List<Course> getCoursesByStudentFreshman(Integer studentFreshman) throws SQLException{
+        return studentCareerDao.getCoursesByStudentFreshman(studentFreshman);
+    }
+
+    //visualizza corsi superati
+    public List<Course> getCoursesAccreditedByStudentFreshman(Integer studentFreshman) throws SQLException{
+        return studentCareerDao.getCoursesAccreditedByStudentFreshman(studentFreshman);
+    }
 
 }
