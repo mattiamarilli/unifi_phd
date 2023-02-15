@@ -30,7 +30,7 @@ public class ThesisApprovationService {
 
     //METODI PER ThesisDao
 
-    //inserimento thesis
+    //inserimento thesis (ovvero carica la tesi)
     public void insertThesis(String title, String description, String urlDocument, Integer studentFreshman) throws SQLException {
         Thesis t = new Thesis(title, description, urlDocument, studentFreshman);
         thesisDao.insert(t);
@@ -42,7 +42,7 @@ public class ThesisApprovationService {
         thesisDao.update(t);
     }
 
-    //modifica state by studentFresman
+    //modifica state by studentFreshman
     public void updateStateThesis(Integer studentFreshman, String state) throws SQLException{
         thesisDao.updateStateThesis(studentFreshman, state);
     }
@@ -51,7 +51,6 @@ public class ThesisApprovationService {
     public void updateLoadedThesis(Integer studentFreshman, String loaded) throws SQLException{
         thesisDao.updateLoadedThesis(studentFreshman, loaded);
     }
-
 
     //elimina thesis
     public void deleteThesis(Integer id) throws SQLException{
@@ -78,6 +77,11 @@ public class ThesisApprovationService {
         thesisDao.insertEvaluation(idThesis, reviewerFreshman);
     }
 
+    //visualizza tesi by student
+    public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException{
+        Thesis t = thesisDao.getThesisByStudent(studentFreshman);
+        return t;
+    }
 
     //METODI PER ReviewerDao
 
@@ -103,7 +107,7 @@ public class ThesisApprovationService {
         reviewerDao.updatePassword(freshman, password);
     }
 
-    //visualizza tutti gli studenti
+    //visualizza tutti gli studenti by reviewer freshman
     public List<Student> getStudentsByReviewer(Integer reviewerFreshman) throws SQLException{
         List<Integer> studentFreshmen = reviewerDao.getStudentFreshmen(reviewerFreshman);
         List<Student> students = new ArrayList<Student>();
@@ -114,12 +118,6 @@ public class ThesisApprovationService {
         }
 
         return students;
-    }
-
-    //visualizza tesi by student
-    public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException{
-        Thesis t = thesisDao.getThesisByStudent(studentFreshman);
-        return t;
     }
 
 

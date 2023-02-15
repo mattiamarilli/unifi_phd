@@ -26,7 +26,7 @@ public class ProgressReportService {
 
     //PARTE METODI ProgressReportDao
 
-    //inserimento progress report
+    //inserimento progress report (ovvero carica progress report)
     public void insertProgressReport(String title, String description, String url, Integer freshman) throws SQLException {
         ProgressReport pr = new ProgressReport(title, description, url, freshman);
         progressReportDao.insert(pr);
@@ -38,8 +38,8 @@ public class ProgressReportService {
         progressReportDao.update(pr);
     }
 
-    //modifica state progress report (usato quando il progress report è in bozza)
-    public void updateState(Integer studentFreshman, String state) throws SQLException {
+    //modifica state progress report (usato quando viene consegnato il progress report oppure quando viene ritirato dalla consegna)
+    public void updateStateProgressReport(Integer studentFreshman, String state) throws SQLException {
         progressReportDao.updateState(studentFreshman, state);
     }
 
