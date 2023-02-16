@@ -4,29 +4,33 @@ package organizationchart;
 //TODO: perché year è String ? è uguale
 public class Cycle {
 
-    private int number;
-    private String year;
+    private String number;
+    private int year;
     private String description;
 
-    public Cycle(int number, String year, String description) {
+    public Cycle(String number, int year, String description) {
         this.number = number;
         this.year = year;
         this.description = description;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
+    public Cycle(String number){
         this.number = number;
     }
 
-    public String getYear() {
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

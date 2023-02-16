@@ -4,8 +4,8 @@ CREATE SCHEMA oc_schema;
 USE oc_schema;
 
 CREATE TABLE Cycles (
-             Number INT NOT NULL PRIMARY KEY,
-             Year VARCHAR(64) NOT NULL,
+             Number VARCHAR(64) NOT NULL PRIMARY KEY,
+             Year INT NOT NULL,
              Description VARCHAR(2000) NOT NULL
 );
 
@@ -26,7 +26,8 @@ CREATE TABLE Students(
              Email VARCHAR(200) NOT NULL,
              Password VARCHAR(2000) NOT NULL,
              Topics VARCHAR(64) NOT NULL,
-             Cycle INT REFERENCES Cycles(Number),
+             Cycle INT NOT NULL REFERENCES Cycles(Number),
+             Year INT NOT NULL,
              Advisor INT REFERENCES FacultyMembers(Freshman)
 );
 

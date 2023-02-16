@@ -10,12 +10,23 @@ public class FacultyMember {
     private String specialization;
     private String institution;
 
-    public FacultyMember(int freshman, String name, String surname,String email, String password, String specialization, String institution) {
+    //with password
+    public FacultyMember(int freshman, String name, String surname, String email, String password, String specialization, String institution) {
         this.freshman = freshman;
         this.name = name;
         this.surname = surname;
         this.email= email;
         this.password =password;
+        this.specialization = specialization;
+        this.institution = institution;
+    }
+
+    //without password
+    public FacultyMember(int freshman, String name, String surname, String email, String specialization, String institution) {
+        this.freshman = freshman;
+        this.name = name;
+        this.surname = surname;
+        this.email= email;
         this.specialization = specialization;
         this.institution = institution;
     }

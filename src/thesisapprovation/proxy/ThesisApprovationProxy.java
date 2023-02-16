@@ -12,6 +12,6 @@ public class ThesisApprovationProxy {
     }
 
     public Student getStudentsInformation(Integer idStudent) throws SQLException {
-        return ocService.getStudentById(idStudent);
+        return ocService.getStudentByFreshman(idStudent);
     }
 }

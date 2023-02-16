@@ -1,8 +1,5 @@
 package organizationchart;
 
-//TODO: relazione con l'advisor dove  è inserita?
-//TODO: perché nel db è presente la tabella advisor? Dato che uno studente può avere al massimo un advisor potevamo mettere una foreign key in student?
-
 public class Student {
 
     private Integer freshman;
@@ -11,13 +8,53 @@ public class Student {
     private String email;
     private String password;
     private String topics;
+    private Cycle cycle;
+    private int year;
+    private FacultyMember advisor;
 
-    public Student(Integer freshman, String name, String surname, String email, String password, String topics) {
+
+    //without advisor (utilizzato la prima volta che viene inserito)
+    public Student(Integer freshman, String name, String surname, String email, String password, String topics, Cycle cycle, int year) {
+        this.freshman = freshman;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.topics = topics;
+        this.cycle = cycle;
+        this.year = year;
+    }
+
+    //with advisor
+    public Student(Integer freshman, String name, String surname, String email, String password, String topics, Cycle cycle, int year, FacultyMember advisor) {
         this.freshman = freshman;
         this.name = name;
         this.surname = surname;
         this.email= email;
         this.password =password;
+        this.topics = topics;
+        this.cycle = cycle;
+        this.year = year;
+        this.advisor = advisor;
+    }
+
+    //without password
+    public Student(Integer freshman, String name, String surname, String email, String topics, Cycle cycle, int year, FacultyMember advisor) {
+        this.freshman = freshman;
+        this.name = name;
+        this.surname = surname;
+        this.email= email;
+        this.topics = topics;
+        this.cycle = cycle;
+        this.year = year;
+        this.advisor = advisor;
+    }
+
+    public Student(Integer freshman, String name, String surname, String email, String topics){
+        this.freshman = freshman;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
         this.topics = topics;
     }
 
@@ -58,5 +95,26 @@ public class Student {
 
     public void setTopics(String topics) {
         this.topics = topics;
+    }
+
+    public FacultyMember getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(FacultyMember advisor) {
+        this.advisor = advisor;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "freshman=" + freshman +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", topics='" + topics + '\'' +
+                ", advisor=" + advisor +
+                '}';
     }
 }
