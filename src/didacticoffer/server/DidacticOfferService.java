@@ -150,6 +150,11 @@ public class DidacticOfferService {
         appealDao.updateStateStudentStudyPlan(studentFreshman, a.getCourse().getCode(), "Accredited");
     }
 
+    //inserimento voto
+    public void updateVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException{
+        appealDao.insertVote(studentFreshman, idAppeal, vote);
+    }
+
     //visualizza appelli in base al course code
     public List<Appeal> getAppealsByCourseCode(String courseCode) throws SQLException{
         return appealDao.getAppealsByCourseCode(courseCode);
@@ -205,5 +210,8 @@ public class DidacticOfferService {
     public List<Course> getCoursesAccreditedByStudentFreshman(Integer studentFreshman) throws SQLException{
         return studentCareerDao.getCoursesAccreditedByStudentFreshman(studentFreshman);
     }
+
+    //visualizza partecipazione appelli
+
 
 }

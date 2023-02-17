@@ -19,10 +19,12 @@ public class Thesis {
     private State state;
     private Load load;
 
-
-    //costruttore vuoto (utilizzato quando viene assegnata l'evaluation committee allo studente ma ancora non ha caricato la tesi
-    public Thesis(int id, int fs){
+    //usato per inserire/modificare la tesi in bozza (in quanto se la modifichi la tesi ancora non è stata approvata e nemmeno caricata)
+    public Thesis(int id, String t, String d, String ud, int fs){
         this.id = id;
+        this.title = t;
+        this.description = d;
+        this.urlDocument = ud;
         this.studentFreshman = fs;
         this.state = State.Not_approved;
         this.load = Load.Not_load;
@@ -39,19 +41,11 @@ public class Thesis {
         this.load = Load.valueOf(l);
     }
 
-    //without id (utilizzato quando è inserita per la prima volta)
-    public Thesis(String t, String d, String ud, int fs){
-        this.title = t;
-        this.description = d;
-        this.urlDocument = ud;
-        this.studentFreshman = fs;
-        this.state = State.Not_approved; //inizialmente la tesi caricata non è approvata
-        this.load = Load.Not_load; //inizialmente non è consegnata ma è in bozza
-    }
-
     //usato per generare l'evaluation committee
-    public Thesis(int id){
-        this.id = id;
+    public Thesis(int fs){
+        this.studentFreshman = fs;
+        this.state = State.Not_approved;
+        this.load = Load.Not_load;
     }
 
     public int getId() {

@@ -24,15 +24,15 @@ public class ProgressReportService {
         scientistDao = new ScientistDao();
     }
 
-    //PARTE METODI ProgressReportDao
+    //METODI DI ProgressReportDao
 
-    //inserimento progress report (ovvero carica progress report)
-    public void insertProgressReport(String title, String description, String url, Integer freshman) throws SQLException {
-        ProgressReport pr = new ProgressReport(title, description, url, freshman);
+    //inserimento studente nel microservizio del progress report
+    public void insertStudentToProgressReport(Integer studentFreshman) throws SQLException{
+        ProgressReport pr = new ProgressReport(studentFreshman);
         progressReportDao.insert(pr);
     }
 
-    //modifica del progress report (da parte dello studente)
+    //inserimento/modifica del progress report in bozza, ovvero ancora non è stato consegnato (da parte dello studente)
     public void updateProgressReport(Integer id, String title, String description, String urlDocument) throws SQLException {
         ProgressReport pr = new ProgressReport(id, title, description, urlDocument);
         progressReportDao.update(pr);
@@ -46,6 +46,11 @@ public class ProgressReportService {
     //elimina progress report
     public void deleteProgressReport(Integer id) throws SQLException{
         progressReportDao.delete(id);
+    }
+
+    //delete progress report by student freshman
+    public void deleteProgressReportByStudent(Integer studentFreshman) throws SQLException{
+        progressReportDao.deleteProgressReportByStudent(studentFreshman);
     }
 
     //get progress report tramite la matricola studente

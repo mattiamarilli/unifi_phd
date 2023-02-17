@@ -98,13 +98,10 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
     public Boolean insert(Thesis thesis) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES(?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, thesis.getTitle());
-            stmt.setString(2, thesis.getDescription());
-            stmt.setString(3, thesis.getUrlDocument());
-            stmt.setInt(4, thesis.getStudentFreshman());
-            stmt.setString(5, String.valueOf(thesis.getState()));
-            stmt.setString(6, String.valueOf(thesis.getLoad()));
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Thesis (StudentFreshman, State, Loaded) VALUES(?, ?, ?)");
+            stmt.setInt(1, thesis.getStudentFreshman());
+            stmt.setString(2, String.valueOf(thesis.getState()));
+            stmt.setString(3, String.valueOf(thesis.getLoad()));
 
             if(stmt.executeUpdate() > 0)
             {
@@ -140,9 +137,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             {
                 System.out.println("Update thesis successful");
                 return true;
-            }
-            else
-            {
+            }else{
                 System.out.println("Update thesis not successful");
                 return false;
             }
@@ -167,9 +162,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             {
                 System.out.println("Delete thesis successful");
                 return true;
-            }
-            else
-            {
+            }else{
                 System.out.println("Delete thesis not successful");
                 return false;
             }
@@ -195,9 +188,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             {
                 System.out.println("Insert evaluation successful");
                 return true;
-            }
-            else
-            {
+            }else{
                 System.out.println("Insert evaluation not successful");
                 return false;
             }
@@ -369,6 +360,30 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             System.out.println("Error gets thesis by student freshman");
             ex.printStackTrace();
             return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public Boolean deleteThesisByStudent(Integer studentFreshman) throws SQLException {
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Thesis WHERE StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+
+            if(stmt.executeUpdate() > 0)
+            {
+                System.out.println("Delete thesis by student successful");
+                return true;
+            }else{
+                System.out.println("Delete thesis by student not successful");
+                return false;
+            }
+
+        }catch (SQLException ex){
+            System.out.println("Error delete thesis by student");
+            ex.printStackTrace();
+            return false;
         }finally {
             conn.close();
         }

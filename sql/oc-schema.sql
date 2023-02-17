@@ -16,7 +16,8 @@ CREATE TABLE FacultyMembers (
             Email VARCHAR(200) NOT NULL,
             Password VARCHAR(2000) NOT NULL,
             Specialization VARCHAR(64) NOT NULL,
-            Institution VARCHAR(64) NOT NULL
+            Institution VARCHAR(64) NOT NULL,
+            Cycle VARCHAR(64) NOT NULL REFERENCES Cycles(Number) ON DELETE CASCADE
 );
 
 CREATE TABLE Students(
@@ -26,9 +27,9 @@ CREATE TABLE Students(
              Email VARCHAR(200) NOT NULL,
              Password VARCHAR(2000) NOT NULL,
              Topics VARCHAR(64) NOT NULL,
-             Cycle INT NOT NULL REFERENCES Cycles(Number),
+             Cycle VARCHAR(64) NOT NULL REFERENCES Cycles(Number) ON DELETE CASCADE,
              Year INT NOT NULL,
-             Advisor INT REFERENCES FacultyMembers(Freshman)
+             Advisor INT REFERENCES FacultyMembers(Freshman) ON DELETE SET NULL
 );
 
 

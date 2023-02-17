@@ -38,16 +38,15 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 String cycleNumber = rs.getString("CycleNumber");
                 Integer cycleYear = rs.getInt("CycleYear");
                 String descriptionCycle = rs.getString("DescriptionCycle");
-
                 Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
+
                 Integer advisorFreshman = rs.getInt("Advisor");
                 String advisorName = rs.getString("AdvisorName");
                 String advisorSurname = rs.getString("AdvisorSurname");
                 String advisorEmail = rs.getString("AdvisorEmail");
                 String advisorSpecialization = rs.getString("AdvisorSpecialization");
                 String advisorInstitution = rs.getString("AdvisorInstitution");
-
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution);
+                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
 
                 Student s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycle, studentYear, advisor);
 
@@ -99,7 +98,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 String advisorSpecialization = rs.getString("AdvisorSpecialization");
                 String advisorInstitution = rs.getString("AdvisorInstitution");
 
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution);
+                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
 
                 Student s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor);
 
@@ -298,7 +297,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 String cycleNumber = rs.getString("CycleNumber");
                 Integer cycleYear = rs.getInt("CycleYear");
                 String descriptionCycle = rs.getString("DescriptionCycle");
-
+                Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
 
                 Integer advisorFreshman = rs.getInt("Advisor");
                 String advisorName = rs.getString("AdvisorName");
@@ -306,9 +305,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 String advisorEmail = rs.getString("AdvisorEmail");
                 String advisorSpecialization = rs.getString("AdvisorSpecialization");
                 String advisorInstitution = rs.getString("AdvisorInstitution");
-
-                Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution);
+                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
 
                 students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
             }
@@ -324,5 +321,92 @@ public class StudentDao implements GenericDao<Student,Integer> {
         }
     }
 
+    public List<Student> getStudentsByCycle(String cycleNumber) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Students.Freshman AS StudentFreshman, Students.Name AS StudentName, Students.Surname AS StudentSurname, Students.Email AS StudentEmail, \n" +
+                    "Students.Topics AS StudentTopics, Students.Year AS StudentYear, Advisor,  \n" +
+                    "Number AS CycleNumber, Cycles.Year AS CycleYear, Cycles.Description AS DescriptionCycle, FacultyMembers.Name AS AdvisorName, FacultyMembers.Surname AS AdvisorSurname,\n" +
+                    "FacultyMembers.Email AS AdvisorEmail, FacultyMembers.Specialization AS AdvisorSpecialization, FacultyMembers.Institution AS AdvisorInstitution\n" +
+                    "FROM Students\n" +
+                    "INNER JOIN Cycles ON Cycle = Number\n" +
+                    "LEFT JOIN FacultyMembers ON Advisor = FacultyMembers.Freshman\n" +
+                    "WHERE Cycles.Number = ?");
+            stmt.setString(1, cycleNumber);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Student> students = new ArrayList<Student>();
+
+            while(rs.next()) {
+                Integer studentFreshman = rs.getInt("StudentFreshman");
+                String studentName = rs.getString("Name");
+                String studentSurname = rs.getString("Surname");
+                String studentEmail = rs.getString("Email");
+                String studentTopics = rs.getString("Topics");
+                int studentYear = rs.getInt("StudentYear");
+
+                Integer cycleYear = rs.getInt("CycleYear");
+                String descriptionCycle = rs.getString("DescriptionCycle");
+                Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
+
+                Integer advisorFreshman = rs.getInt("Advisor");
+                String advisorName = rs.getString("AdvisorName");
+                String advisorSurname = rs.getString("AdvisorSurname");
+                String advisorEmail = rs.getString("AdvisorEmail");
+                String advisorSpecialization = rs.getString("AdvisorSpecialization");
+                String advisorInstitution = rs.getString("AdvisorInstitution");
+                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
+
+                students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
+            }
+
+            return students;
+
+        }catch (SQLException ex){
+            System.out.println("Error get students by cycle");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Student> getStudentsByAdvisor(Integer advisorFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Topics, Cycle, Year\n" +
+                    "FROM Students\n" +
+                    "WHERE Advisor = ?");
+            stmt.setInt(1, advisorFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Student> students = new ArrayList<Student>();
+
+            while(rs.next()){
+                Integer studentFreshman = rs.getInt("Freshman");
+                String studentName = rs.getString("Name");
+                String studentSurname = rs.getString("Surname");
+                String studentEmail = rs.getString("Email");
+                String studentTopics = rs.getString("Topics");
+                Integer studentYear = rs.getInt("Year");
+
+                String cycleNumber = rs.getString("Cycle");
+                Cycle cycle = new Cycle(cycleNumber);
+
+                FacultyMember advisor = new FacultyMember(advisorFreshman);
+
+                students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
+            }
+
+            return students;
+
+        }catch (SQLException ex){
+            System.out.println("Error get students by advisor freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
 
 }

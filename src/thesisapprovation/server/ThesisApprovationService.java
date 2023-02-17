@@ -30,15 +30,15 @@ public class ThesisApprovationService {
 
     //METODI PER ThesisDao
 
-    //inserimento thesis (ovvero carica la tesi)
-    public void insertThesis(String title, String description, String urlDocument, Integer studentFreshman) throws SQLException {
-        Thesis t = new Thesis(title, description, urlDocument, studentFreshman);
+    //inserimento student into thesis approvation
+    public void insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException {
+        Thesis t = new Thesis(studentFreshman);
         thesisDao.insert(t);
     }
 
-    //modifica thesis by studentfreshman
-    public void updateThesis(String title, String description, String urlDocument, Integer studentFreshman) throws SQLException{
-        Thesis t = new Thesis(title, description, urlDocument, studentFreshman);
+    //inserimento/modifica thesis by studentfreshman in bozza
+    public void updateThesis(Integer id, String title, String description, String urlDocument, Integer studentFreshman) throws SQLException{
+        Thesis t = new Thesis(id, title, description, urlDocument, studentFreshman);
         thesisDao.update(t);
     }
 
@@ -55,6 +55,11 @@ public class ThesisApprovationService {
     //elimina thesis
     public void deleteThesis(Integer id) throws SQLException{
         thesisDao.delete(id);
+    }
+
+    //delete thesis by student
+    public void deleteThesisByStudent(Integer studentFreshman) throws SQLException{
+        thesisDao.deleteThesisByStudent(studentFreshman);
     }
 
     //visualizza reviewer della propria Evaluation Committee

@@ -32191,11 +32191,11 @@
 												"$ref": "AAAAAAGD+vXNnAylnoE="
 											},
 											"font": "Arial;13;1",
-											"left": 604,
+											"left": 608,
 											"top": 291.5,
-											"width": 62,
+											"width": 79,
 											"height": 13,
-											"text": "crud ciclo"
+											"text": "crud ciclo ok"
 										},
 										{
 											"_type": "LabelView",
@@ -32226,9 +32226,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 599,
+									"left": 603,
 									"top": 284.5,
-									"width": 72,
+									"width": 90.18994140625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGD+vXNnAyhhK8="
@@ -32328,7 +32328,7 @@
 							"containerChangeable": true,
 							"left": 584,
 							"top": 280,
-							"width": 102,
+							"width": 127,
 							"height": 35,
 							"nameCompartment": {
 								"$ref": "AAAAAAGD+vXNnAylnoE="
@@ -32499,7 +32499,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 555,
-									"top": 283,
+									"top": 284,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -32519,7 +32519,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 552,
-									"top": 270,
+									"top": 271,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -32539,7 +32539,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 562,
-									"top": 310,
+									"top": 311,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -32588,7 +32588,7 @@
 								"$ref": "AAAAAAGD+vXNmQqB8wY="
 							},
 							"lineStyle": 1,
-							"points": "176:340;583:302",
+							"points": "176:340;583:303",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGD+vXNnAysPd8="
@@ -38087,7 +38087,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGD+vXNng2GJu4="
 					},
-					"name": "crud ciclo"
+					"name": "crud ciclo ok"
 				},
 				{
 					"_type": "UMLUseCase",

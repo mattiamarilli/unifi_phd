@@ -287,5 +287,9 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
         }
     }
 
+    //TODO: finire
+    public List<AppealParticipation> getAppealParticipation(Integer studentFreshman) throws SQLException{
+        return null;
+    }
 
 }

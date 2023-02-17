@@ -10,8 +10,10 @@ public class FacultyMember {
     private String specialization;
     private String institution;
 
+    private Cycle cycle;
+
     //with password
-    public FacultyMember(int freshman, String name, String surname, String email, String password, String specialization, String institution) {
+    public FacultyMember(int freshman, String name, String surname, String email, String password, String specialization, String institution, Cycle cycle) {
         this.freshman = freshman;
         this.name = name;
         this.surname = surname;
@@ -19,16 +21,22 @@ public class FacultyMember {
         this.password =password;
         this.specialization = specialization;
         this.institution = institution;
+        this.cycle = cycle;
     }
 
     //without password
-    public FacultyMember(int freshman, String name, String surname, String email, String specialization, String institution) {
+    public FacultyMember(int freshman, String name, String surname, String email, String specialization, String institution, Cycle cycle) {
         this.freshman = freshman;
         this.name = name;
         this.surname = surname;
         this.email= email;
         this.specialization = specialization;
         this.institution = institution;
+        this.cycle = cycle;
+    }
+
+    public FacultyMember(int freshman){
+        this.freshman = freshman;
     }
 
     public int getFreshman() {
@@ -75,5 +83,27 @@ public class FacultyMember {
 
     public void setInstitution(String institution) {
         this.institution = institution;
+    }
+
+    public Cycle getCycle() {
+        return cycle;
+    }
+
+    public void setCycle(Cycle cycle) {
+        this.cycle = cycle;
+    }
+
+    @Override
+    public String toString() {
+        return "FacultyMember{" +
+                "freshman=" + freshman +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", institution='" + institution + '\'' +
+                ", cycle=" + cycle +
+                '}';
     }
 }

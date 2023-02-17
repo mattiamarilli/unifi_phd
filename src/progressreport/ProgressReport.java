@@ -24,14 +24,13 @@ public class ProgressReport {
         this.freshmanStudent = fs;
     }
 
-    //costruttore vuoto (utilizzato quando allo studente è assegnata la supervisory committee ma non ha caricato il progress report)
-    public ProgressReport(int id, int fs){
-        this.id = id;
-        this.state = State.Not_load;
+    //utilizzato quando viene inserito la prima volta
+    public ProgressReport(int fs){
         this.freshmanStudent = fs;
+        this.state = State.Not_load;
     }
 
-    //without id (utilizzato quando viene caricata per la prima volta)
+    //without id
     public ProgressReport(String t, String d, String ud, int fs ){
         this.title = t;
         this.description = d;

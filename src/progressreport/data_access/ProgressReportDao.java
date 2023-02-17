@@ -263,5 +263,29 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
         }
     }
 
+    public Boolean deleteProgressReportByStudent(Integer studentFreshman) throws SQLException {
+
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM ProgressReports WHERE StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+
+            if(stmt.executeUpdate() > 0){
+                System.out.println("Delete progress report by student successful");
+                return true;
+            }else{
+                System.out.println("Delete progress report by student not successful");
+                return false;
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error delete progress report by student");
+            ex.printStackTrace();
+            return false;
+        }finally {
+            conn.close();
+        }
+
+    }
 
 }
