@@ -1,9 +1,6 @@
 package didacticoffer.data_access;
 
-import didacticoffer.AppealParticipation;
-import didacticoffer.Course;
-import didacticoffer.StudentCareer;
-import didacticoffer.StudyPlan;
+import didacticoffer.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -288,8 +285,46 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
     }
 
     //TODO: finire
-    public List<AppealParticipation> getAppealParticipation(Integer studentFreshman) throws SQLException{
-        return null;
+    public List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT StudentCareers.StudentFreshman, IdAppeal, Vote, Date, StartTime, Room, UniversityComplex, University, Note, Mode, CodeCourse\n" +
+                    "FROM StudentCareers\n" +
+                    "INNER JOIN AppealParticipation ON AppealParticipation.StudentFreshman =StudentCareers.StudentFreshman\n" +
+                    "INNER JOIN Appeals ON IdAppeal = Id");
+            ResultSet rs = stmt.executeQuery();
+
+            List<AppealParticipation> appealParticipation = new ArrayList<AppealParticipation>();
+            StudentCareer sc = new StudentCareer(studentFreshman);
+
+            while(rs.next()){
+                Integer idAppeal = rs.getInt("IdAppeal");
+                String vote = rs.getString("Vote");
+                Date date = rs.getDate("Date");
+                Time startTime = rs.getTime("StartTime");
+                Integer room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
+                String note = rs.getString("Note");
+                String mode = rs.getString("Mode");
+                String codeCourse = rs.getString("CodeCourse");
+
+                Course c = new Course(codeCourse);
+                Appeal a = new Appeal(idAppeal, date, startTime, room, universityComplex, university, note, mode, c);
+                
+                appealParticipation.add(new AppealParticipation(sc, a, vote));
+            }
+            
+            return appealParticipation;
+
+        }catch(SQLException ex){
+            System.out.println("Error get appeal participation by student");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+
     }
 
 }

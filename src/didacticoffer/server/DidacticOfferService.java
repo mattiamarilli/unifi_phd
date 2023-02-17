@@ -211,7 +211,9 @@ public class DidacticOfferService {
         return studentCareerDao.getCoursesAccreditedByStudentFreshman(studentFreshman);
     }
 
-    //visualizza partecipazione appelli
-
+    //visualizza partecipazione appelli by student
+    public List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException{
+        return studentCareerDao.getAppealParticipationByStudent(studentFreshman);
+    }
 
 }
