@@ -153,4 +153,9 @@ public class OrganizationChartService {
         facultyMemberDao.delete(fmFreshman);
     }
 
+    //get all faculty members
+    public List<FacultyMember> getAllFacultyMembers() throws SQLException{
+        return facultyMemberDao.getAll();
+    }
+
 }
