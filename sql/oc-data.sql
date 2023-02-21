@@ -1,15 +1,21 @@
 USE oc_schema;
 
-INSERT INTO Cycles (Number, Year, Description) VALUES ('1', 2000, '\"this is the first edition\"');
-INSERT INTO Cycles (Number, Year, Description) VALUES ('2', 2001, '\"this is the second edition\"');
-INSERT INTO Cycles (Number, Year, Description) VALUES ('3', 2002, '\"this is the third edition\"');
+INSERT INTO Cycles (Number, Year, Description) VALUES ('XXVI', 2019, 'Information Technology, Systems and Telecommunications');
+INSERT INTO Cycles (Number, Year, Description) VALUES ('XXVII', 2020, 'IComputer and automation engineering');
+INSERT INTO Cycles (Number, Year, Description) VALUES ('XXVIII', 2021, 'Automatic and Optimization');
+INSERT INTO Cycles (Number, Year, Description) VALUES ('XXIX', 2022, 'Telematics and information society');
+INSERT INTO Cycles (Number, Year, Description) VALUES ('XXX', 2023, 'Electronics and electromagnetism');
 
-INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (345,'Mario', 'Rossi','email@test.io','testpassword', 'Spec1', 'istit1', '1');
-INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (112,'Luca', 'Bianchi','email@test.io','testpassword', 'Spec2', 'istit2', '1');
-INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (321,'Giovanni', 'Verdi','email@test.io','testpassword', 'Spec3', 'istit3', '2');
-INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (453,'Francesco', 'Giallo','email@test.io','testpassword', 'Spec4', 'istit4', '3');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (5849204, 'Sayal', 'Dais', 'sayal.dais@gmail.com', 'Password', 'Smart Living, Cyber-Physical Systems, Sensor and IoT Networking', 'Missouri University of Science and Technology', 'XXVI');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (0593183, 'Gianluca', 'Dini', 'gianluca.dini@unipi.it', 'Password', 'Distributed systems; Cyber-security', 'University of Pisa', 'XXVI');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (3840149, 'Paolo', 'Fresconi', 'paolo.fresconi@unifi.it', 'Password', 'Machine Learning; Bioinformatics', 'University of Florence', 'XXVIII');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (0281392, 'Marco', 'Gori', 'marco.gori@unisi.it', 'Password', 'Machine Learning; Computer Vision', 'University of Siena', 'XXVII');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (5739219, 'Witold', 'Pedrycz', 'witold.pedrycz@gmail.com', 'Password', 'Computational Intelligence, fuzzy modeling, Granular Computing, knowledge discovery', 'University of Alberta', 'XXVIII');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (5749249, 'Franco', 'Scarselli', 'franco.scarselli@unisi.it', 'Password', 'Machine Learning; Artificial neural networks', 'University of Siena', 'XXVII');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (0427190, 'Giovanni', 'Stea', 'giovanni.stea@unipi.it', 'Password', 'Networking; Quality of Service; Performance Evaluation', 'University of Pisa', 'XXIX');
+INSERT INTO FacultyMembers (Freshman, Name, Surname, Email, Password, Specialization, Institution, Cycle) VALUES (0093821, 'Monica', 'Bianchini', 'monica.bianchini@unisi.it', 'Password', 'Machine learning', 'University of Siena', 'XXX');
 
-INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year, Advisor) VALUES (8283,'Pippo','email@test.io','testpassword', 'Rossi', 'SWE', 1, 2, 345);
-INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (9292,'Paperino', 'Bianchi','email@test.io','testpassword', 'AI', 2, 3);
-INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (8222,'Minnie', 'Verdi','email@test.io','testpassword', 'deep learning', 3, 4);
-INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (2345,'Zio', 'Paperone','email@test.io','testpassword', 'make money', 1, 4);
+INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year, Advisor) VALUES (7328102, 'Luca', 'Biandini', 'luca.biandini@unifi.it', 'Password', '', 'XXVIII', 2, 3840149);
+INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year, Advisor) VALUES (9302912, 'Federico', 'Nocentini', 'federico.nocentini@unif.it', 'Password', '', 'XXVIII', 2, 5739219);
+INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year, Advisor) VALUES (3920391, 'Lorenzo', 'Agnolucci', 'lorenzo.agnolucci@unifi.it', 'Password', '', 'XXVII', 3, 0281392);
+INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (3923920, 'Alessandro', 'Betti', 'alessandro.betti@unifi.it', 'Password', '', 'XXVI', 4);

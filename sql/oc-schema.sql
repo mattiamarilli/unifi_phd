@@ -15,7 +15,7 @@ CREATE TABLE FacultyMembers (
             Surname VARCHAR(64) NOT NULL,
             Email VARCHAR(200) NOT NULL,
             Password VARCHAR(2000) NOT NULL,
-            Specialization VARCHAR(64) NOT NULL,
+            Specialization VARCHAR(2000) NOT NULL,
             Institution VARCHAR(64) NOT NULL,
             Cycle VARCHAR(64) NOT NULL REFERENCES Cycles(Number) ON DELETE CASCADE
 );
