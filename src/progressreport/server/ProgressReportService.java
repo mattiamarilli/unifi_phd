@@ -27,30 +27,30 @@ public class ProgressReportService {
     //METODI DI ProgressReportDao
 
     //inserimento studente nel microservizio del progress report
-    public void insertStudentToProgressReport(Integer studentFreshman) throws SQLException{
+    public Boolean insertStudentToProgressReport(Integer studentFreshman) throws SQLException{
         ProgressReport pr = new ProgressReport(studentFreshman);
-        progressReportDao.insert(pr);
+        return progressReportDao.insert(pr);
     }
 
     //inserimento/modifica del progress report in bozza, ovvero ancora non è stato consegnato (da parte dello studente)
-    public void updateProgressReport(Integer id, String title, String description, String urlDocument) throws SQLException {
+    public Boolean updateProgressReport(Integer id, String title, String description, String urlDocument) throws SQLException {
         ProgressReport pr = new ProgressReport(id, title, description, urlDocument);
-        progressReportDao.update(pr);
+        return progressReportDao.update(pr);
     }
 
     //modifica state progress report (usato quando viene consegnato il progress report oppure quando viene ritirato dalla consegna)
-    public void updateStateProgressReport(Integer studentFreshman, String state) throws SQLException {
-        progressReportDao.updateState(studentFreshman, state);
+    public Boolean updateStateProgressReport(Integer studentFreshman, String state) throws SQLException {
+        return progressReportDao.updateState(studentFreshman, state);
     }
 
     //elimina progress report
-    public void deleteProgressReport(Integer id) throws SQLException{
-        progressReportDao.delete(id);
+    public Boolean deleteProgressReport(Integer id) throws SQLException{
+        return progressReportDao.delete(id);
     }
 
     //delete progress report by student freshman
-    public void deleteProgressReportByStudent(Integer studentFreshman) throws SQLException{
-        progressReportDao.deleteProgressReportByStudent(studentFreshman);
+    public Boolean deleteProgressReportByStudent(Integer studentFreshman) throws SQLException{
+        return progressReportDao.deleteProgressReportByStudent(studentFreshman);
     }
 
     //get progress report tramite la matricola studente
@@ -64,28 +64,28 @@ public class ProgressReportService {
     }
 
     //inserimento SupervisoryCommittee
-    public void insertSupervisoryCommittee(Integer idProgressReport, Integer idScientist) throws SQLException{
-        progressReportDao.insertSupervisory(idProgressReport, idScientist);
+    public Boolean insertSupervisoryCommittee(Integer idProgressReport, Integer idScientist) throws SQLException{
+        return progressReportDao.insertSupervisory(idProgressReport, idScientist);
     }
 
 
     //PARTE METODI ScientistDao
 
     //inserimento scienziato
-    public void insertScientist(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException {
+    public Boolean insertScientist(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException {
         Scientist s = new Scientist(freshman, name, surname, password, email, description);
-        scientistDao.insert(s);
+        return scientistDao.insert(s);
     }
 
     //update scientist
-    public void updateScientist(Integer idScientist, String name, String surname, String email, String description) throws SQLException{
+    public Boolean updateScientist(Integer idScientist, String name, String surname, String email, String description) throws SQLException{
         Scientist s = new Scientist(idScientist, name, surname, email, description);
-        scientistDao.update(s);
+        return scientistDao.update(s);
     }
 
     //update password scientist
-    public void updatePasswordScientist(Integer idScientist, String password) throws SQLException{
-        scientistDao.updatePassword(idScientist, password);
+    public Boolean updatePasswordScientist(Integer idScientist, String password) throws SQLException{
+        return scientistDao.updatePassword(idScientist, password);
     }
 
     //get studenti tramite la matricola del scientist
@@ -107,21 +107,14 @@ public class ProgressReportService {
     }
 
     //delete scientist
-    public void deleteScientist(Integer idScientist) throws SQLException{
-        scientistDao.delete(idScientist);
+    public Boolean deleteScientist(Integer idScientist) throws SQLException{
+        return scientistDao.delete(idScientist);
     }
 
 
-    public boolean testJUnit(){
+    public Boolean testJUnit(){
         return true;
 }
-
-
-
-
-
-
-
 
 
 }

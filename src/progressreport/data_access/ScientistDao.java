@@ -180,7 +180,10 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
     public List<Integer> getStudents(Integer scientistFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT StudentFreshman FROM SupervisoryCommittee INNER JOIN ProgressReports ON IdProgressReport = Id WHERE IdScientist = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT StudentFreshman \n" +
+                    "FROM SupervisoryCommittee\n" +
+                    "INNER JOIN ProgressReports ON IdProgressReport = Id \n" +
+                    "WHERE IdScientist = ?");
             stmt.setInt(1, scientistFreshman);
             ResultSet rs = stmt.executeQuery();
 
@@ -204,7 +207,11 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
     public ProgressReport getProgressReportByScientistStudent(Integer scientistFreshman, Integer studentFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT Id, Title, ProgressReports.Description, UrlDocument FROM Scientists INNER JOIN SupervisoryCommittee ON IdScientist=Freshman INNER JOIN ProgressReports ON IdProgressReport = Id WHERE State = \"Load\" AND Freshman = ? AND StudentFreshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Id, Title, ProgressReports.Description, UrlDocument \n" +
+                    "FROM Scientists \n" +
+                    "INNER JOIN SupervisoryCommittee ON IdScientist=Freshman \n" +
+                    "INNER JOIN ProgressReports ON IdProgressReport = Id \n" +
+                    "WHERE State = 'Load' AND Freshman = ? AND StudentFreshman = ?");
             stmt.setInt(1, scientistFreshman);
             stmt.setInt(2, studentFreshman);
             ResultSet rs = stmt.executeQuery();

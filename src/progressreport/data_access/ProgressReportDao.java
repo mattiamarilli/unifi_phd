@@ -98,7 +98,7 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
 
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ProgressReports(Title, Description, UrlDocument, State, StudentFreshaman) VALUES(?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ProgressReports(Title, Description, UrlDocument, State, StudentFreshman) VALUES(?, ?, ?, ?, ?)");
             stmt.setString(1, progressReport.getTitle());
             stmt.setString(2, progressReport.getDescription());
             stmt.setString(3, progressReport.getUrlDocument());
@@ -181,7 +181,7 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
 
     public Boolean insertSupervisory(Integer idProgressReport, Integer idScientist) throws SQLException {
         try{
-            conn = thesisapprovation.data_access.ConnectionDao.getConnection();
+            conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO SupervisoryCommittee (IdProgressReport,IdScientist) VALUES(?, ?)");
             stmt.setInt(1, idProgressReport);
             stmt.setInt(2, idScientist);
@@ -234,7 +234,11 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
     public List<Scientist> getScientists(Integer studentFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Scientists.Description FROM ProgressReports INNER JOIN SupervisoryCommittee ON Id = IdProgressReport INNER JOIN Scientists ON IdScientist = Freshman WHERE StudentFreshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Scientists.Description \n" +
+                    "FROM ProgressReports \n" +
+                    "INNER JOIN SupervisoryCommittee ON Id = IdProgressReport \n" +
+                    "INNER JOIN Scientists ON IdScientist = Freshman \n" +
+                    "WHERE StudentFreshman = ?");
             stmt.setInt(1, studentFreshman);
             ResultSet rs = stmt.executeQuery();
 
