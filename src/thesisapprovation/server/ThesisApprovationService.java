@@ -25,7 +25,6 @@ public class ThesisApprovationService {
         System.out.println("Error");
         this.reviewDao = new ReviewDao();
         this.reviewerDao = new ReviewerDao();
-        this.thesisApprovationProxy = new ThesisApprovationProxy();
     }
 
     //METODI PER ThesisDao
@@ -153,6 +152,5 @@ public class ThesisApprovationService {
     public Boolean deleteReview(Integer idReview) throws SQLException{
         return reviewDao.delete(idReview);
     }
-
 
 }
