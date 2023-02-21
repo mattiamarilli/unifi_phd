@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProgressReportServiceTest {
 
-    private ProgressReportService prService = new ProgressReportService();
+    final ProgressReportService prService = new ProgressReportService();
 
     @Test
     void insertStudentToProgressReport() throws SQLException {
@@ -29,14 +29,14 @@ class ProgressReportServiceTest {
 
     @Test
     void updateStateProgressReport() throws SQLException{
-        assertEquals(true, prService.updateStateProgressReport(4728520, "Load"));
+        assertEquals(true, prService.updateStateProgressReport(3820539, "Load"));
         //error freshman
         assertEquals(false, prService.updateStateProgressReport(0, "Load"));
     }
 
     @Test
     void deleteProgressReport() throws SQLException{
-        assertEquals(true, prService.deleteProgressReport(9));
+        assertEquals(true, prService.deleteProgressReport(6));
         //error id
         assertEquals(false, prService.deleteProgressReport(0));
     }

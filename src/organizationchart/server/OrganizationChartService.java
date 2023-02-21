@@ -114,6 +114,8 @@ public class OrganizationChartService {
     public void deleteCycle(String cycleNumber) throws SQLException{
         List<Student> students = studentDao.getStudentsByCycle(cycleNumber);
         cycleDao.delete(cycleNumber);
+
+
         //elimino gli studenti del ciclo (eliminato) anche negli altri microservizi
         for(Student s : students){
             ocProxy.deleteStudentDidacticOffer(s.getFreshman());

@@ -19,10 +19,10 @@ public class ThesisApprovationService {
     private ThesisDao thesisDao;
     private ReviewDao reviewDao;
     private ReviewerDao reviewerDao;
-
     private ThesisApprovationProxy thesisApprovationProxy;
     public ThesisApprovationService(){
         this.thesisDao = new ThesisDao();
+        System.out.println("Error");
         this.reviewDao = new ReviewDao();
         this.reviewerDao = new ReviewerDao();
         this.thesisApprovationProxy = new ThesisApprovationProxy();
@@ -31,35 +31,35 @@ public class ThesisApprovationService {
     //METODI PER ThesisDao
 
     //inserimento student into thesis approvation
-    public void insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException {
+    public Boolean insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException {
         Thesis t = new Thesis(studentFreshman);
-        thesisDao.insert(t);
+        return thesisDao.insert(t);
     }
 
-    //inserimento/modifica thesis by studentfreshman in bozza
+    //inserimento/modifica thesis by student freshman in bozza
     public void updateThesis(Integer id, String title, String description, String urlDocument, Integer studentFreshman) throws SQLException{
         Thesis t = new Thesis(id, title, description, urlDocument, studentFreshman);
         thesisDao.update(t);
     }
 
     //modifica state by studentFreshman
-    public void updateStateThesis(Integer studentFreshman, String state) throws SQLException{
-        thesisDao.updateStateThesis(studentFreshman, state);
+    public Boolean updateStateThesis(Integer studentFreshman, String state) throws SQLException{
+        return thesisDao.updateStateThesis(studentFreshman, state);
     }
 
     //modifica loaded by student freshman (utlizzato quando viene consegnata la tesi oppure quando viene ritirata dalla consegna)
-    public void updateLoadedThesis(Integer studentFreshman, String loaded) throws SQLException{
-        thesisDao.updateLoadedThesis(studentFreshman, loaded);
+    public Boolean updateLoadedThesis(Integer studentFreshman, String loaded) throws SQLException{
+        return thesisDao.updateLoadedThesis(studentFreshman, loaded);
     }
 
     //elimina thesis
-    public void deleteThesis(Integer id) throws SQLException{
-        thesisDao.delete(id);
+    public Boolean deleteThesis(Integer id) throws SQLException{
+        return thesisDao.delete(id);
     }
 
     //delete thesis by student
-    public void deleteThesisByStudent(Integer studentFreshman) throws SQLException{
-        thesisDao.deleteThesisByStudent(studentFreshman);
+    public Boolean deleteThesisByStudent(Integer studentFreshman) throws SQLException{
+        return thesisDao.deleteThesisByStudent(studentFreshman);
     }
 
     //visualizza reviewer della propria Evaluation Committee
@@ -78,8 +78,8 @@ public class ThesisApprovationService {
     }
 
     //inserimento evaluationCommittee
-    public void insertEvaluationCommittee(Integer idThesis, Integer reviewerFreshman) throws SQLException{
-        thesisDao.insertEvaluation(idThesis, reviewerFreshman);
+    public Boolean insertEvaluationCommittee(Integer idThesis, Integer reviewerFreshman) throws SQLException{
+        return thesisDao.insertEvaluation(idThesis, reviewerFreshman);
     }
 
     //visualizza tesi by student
@@ -91,25 +91,25 @@ public class ThesisApprovationService {
     //METODI PER ReviewerDao
 
     //Inserimento Reviewer
-    public void insertReviewer(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException{
+    public Boolean insertReviewer(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException{
         Reviewer r = new Reviewer(freshman, name, surname, password, email, description);
-        reviewerDao.insert(r);
+        return reviewerDao.insert(r);
     }
 
     //elimina reviewer
-    public void deleteReviewer(Integer freshman) throws SQLException{
-        reviewDao.delete(freshman);
+    public Boolean deleteReviewer(Integer freshman) throws SQLException{
+        return reviewDao.delete(freshman);
     }
 
     //modifica reviewer
-    public void updateReviewer(Integer freshman, String name, String surname, String email, String description) throws SQLException{
+    public Boolean updateReviewer(Integer freshman, String name, String surname, String email, String description) throws SQLException{
         Reviewer r = new Reviewer(freshman, name, surname, email, description);
-        reviewerDao.update(r);
+        return reviewerDao.update(r);
     }
 
     //modifica password reviewer
-    public void updatePasswordReviewer(Integer freshman, String password) throws SQLException{
-        reviewerDao.updatePassword(freshman, password);
+    public Boolean updatePasswordReviewer(Integer freshman, String password) throws SQLException{
+        return reviewerDao.updatePassword(freshman, password);
     }
 
     //visualizza tutti gli studenti by reviewer freshman
@@ -129,29 +129,29 @@ public class ThesisApprovationService {
     //METODI PER ReviewDao
 
     //inserimento review
-    public void insertReview(Integer idThesis, Integer reviewerFreshman, String title, String comment) throws SQLException{
+    public Boolean insertReview(Integer idThesis, Integer reviewerFreshman, String title, String comment) throws SQLException{
         Reviewer r = new Reviewer(reviewerFreshman);
         Thesis t = new Thesis(idThesis);
         EvaluationCommittee ec = new EvaluationCommittee(t, r);
 
         Review review = new Review(title, comment, ec);
 
-        reviewDao.insert(review);
+        return reviewDao.insert(review);
     }
 
     //modifica review
-    public void updateReview(Integer idThesis, Integer reviewerFreshman, Integer idReview, String title, String comment) throws SQLException{
+    public Boolean updateReview(Integer idThesis, Integer reviewerFreshman, Integer idReview, String title, String comment) throws SQLException{
         Reviewer r = new Reviewer(reviewerFreshman);
         Thesis t = new Thesis(idThesis);
         EvaluationCommittee ec = new EvaluationCommittee(t, r);
 
         Review review = new Review(idReview, title, comment, ec);
-        reviewDao.update(review);
+        return reviewDao.update(review);
     }
 
     //elimina review
-    public void deleteReview(Integer idReview) throws SQLException{
-        reviewDao.delete(idReview);
+    public Boolean deleteReview(Integer idReview) throws SQLException{
+        return reviewDao.delete(idReview);
     }
 
 
