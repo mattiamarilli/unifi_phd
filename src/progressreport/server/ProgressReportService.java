@@ -111,10 +111,4 @@ public class ProgressReportService {
         return scientistDao.delete(idScientist);
     }
 
-
-    public Boolean testJUnit(){
-        return true;
-}
-
-
 }

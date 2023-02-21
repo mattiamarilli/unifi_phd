@@ -115,9 +115,4 @@ class ProgressReportServiceTest {
         assertEquals(false, prService.deleteScientist(0));
     }
 
-    @Test
-    void testJUnit() {
-        assertEquals(true, prService.testJUnit());
-    }
-
 }
