@@ -18,7 +18,6 @@ public class OrganizationChartService {
         this.studentDao = new StudentDao();
         this.cycleDao = new CycleDao();
         this.facultyMemberDao = new FacultyMemberDao();
-        this.ocProxy = new OrganizationChartProxy();
     }
 
     //METODI DI StudentDao
@@ -30,6 +29,8 @@ public class OrganizationChartService {
         Cycle c = new Cycle(numberCycle);
         Student s = new Student(studentFreshman, name, surname, email, password, topics, c, 1);
         studentDao.insert(s);
+
+        this.ocProxy = new OrganizationChartProxy();
         //inserisco lo studente anche nel microservizio del progress report
         ocProxy.insertStudentToProgressReport(studentFreshman);
         //inserisco lo studente anche nel microservizio dell'offerta didattica
@@ -57,6 +58,7 @@ public class OrganizationChartService {
     public void updateStudentYear(Integer studentFreshman, Integer year) throws SQLException{
         studentDao.updateYear(studentFreshman, year);
         if(year == 3){ //inserisco lo studente nel microservizio delle tesi
+            this.ocProxy = new OrganizationChartProxy();
             ocProxy.insertStudentToThesisApprovation(studentFreshman);
         }
     }
@@ -65,6 +67,7 @@ public class OrganizationChartService {
     public void deleteStudent(Integer studentFreshman) throws SQLException{
         studentDao.delete(studentFreshman);
         //elimino lo studente anche negli altri microservizi
+        this.ocProxy = new OrganizationChartProxy();
         ocProxy.deleteStudentDidacticOffer(studentFreshman);
         ocProxy.deleteStudentProgressReport(studentFreshman);
         ocProxy.deleteStudentThesisApprovation(studentFreshman);
@@ -115,7 +118,7 @@ public class OrganizationChartService {
         List<Student> students = studentDao.getStudentsByCycle(cycleNumber);
         cycleDao.delete(cycleNumber);
 
-
+        this.ocProxy = new OrganizationChartProxy();
         //elimino gli studenti del ciclo (eliminato) anche negli altri microservizi
         for(Student s : students){
             ocProxy.deleteStudentDidacticOffer(s.getFreshman());

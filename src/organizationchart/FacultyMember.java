@@ -93,17 +93,18 @@ public class FacultyMember {
         this.cycle = cycle;
     }
 
+
+
     @Override
-    public String toString() {
-        return "FacultyMember{" +
-                "freshman=" + freshman +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", institution='" + institution + '\'' +
-                ", cycle=" + cycle +
-                '}';
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(!(obj instanceof FacultyMember))
+            return false;
+
+        FacultyMember fm = (FacultyMember) obj;
+
+        return (Integer.compare(this.freshman, fm.freshman) == 0) && (this.name.equals(fm.name)) && (this.surname.equals(fm.surname)) && (this.email.equals(fm.email))
+                && (this.specialization.equals(fm.specialization)) && (this.institution.equals(fm.institution)) && (this.cycle.equals(fm.cycle));
     }
 }

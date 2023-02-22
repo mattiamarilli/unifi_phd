@@ -7,11 +7,10 @@ import java.sql.SQLException;
 public class ProgressReportProxy {
 
     private OrganizationChartService ocService;
-    public ProgressReportProxy() {
-        ocService = new OrganizationChartService();
-    }
+    public ProgressReportProxy() {}
 
     public Student getStudentsInformation(Integer idStudent) throws SQLException {
+        this.ocService = new OrganizationChartService();
         return ocService.getStudentByFreshman(idStudent);
     }
 

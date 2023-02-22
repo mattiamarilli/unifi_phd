@@ -50,6 +50,18 @@ public class Student {
         this.advisor = advisor;
     }
 
+    //without password and advisor
+    public Student(Integer freshman, String name, String surname, String email, String topics, Cycle cycle, int year) {
+        this.freshman = freshman;
+        this.name = name;
+        this.surname = surname;
+        this.email= email;
+        this.topics = topics;
+        this.cycle = cycle;
+        this.year = year;
+    }
+
+
     public Student(Integer freshman, String name, String surname, String email, String topics){
         this.freshman = freshman;
         this.name = name;
@@ -114,7 +126,21 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", topics='" + topics + '\'' +
-                ", advisor=" + advisor +
+                ", cycle=" + cycle.toString() +
+                ", year=" + year +
+                ", advisor=" + advisor.toString() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(!(obj instanceof Student))
+            return false;
+        Student s = (Student) obj;
+        return (Integer.compare(this.freshman, s.freshman) == 0) && (this.name.equals(s.name)) && (this.surname.equals(s.surname)) && (this.email.equals(s.email))
+                && (this.topics.equals(s.topics)) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0)
+                && (this.advisor.equals(s.advisor));
     }
 }

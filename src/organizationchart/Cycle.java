@@ -39,4 +39,24 @@ public class Cycle {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Cycle{" +
+                "number='" + number + '\'' +
+                ", year=" + year +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(!(obj instanceof Cycle))
+            return false;
+
+        Cycle c = (Cycle) obj;
+        return (this.number.equals(c.number)) && (Integer.compare(this.year, c.year) == 0) && (this.description.equals(c.description));
+    }
 }

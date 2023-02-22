@@ -16,8 +16,8 @@ public class ProgressReportService {
     private ProgressReportDao progressReportDao;
     private ReviewDao reviewDao;
     private ScientistDao scientistDao;
-
     private ProgressReportProxy progressReportProxy;
+
     public ProgressReportService() {
         progressReportDao = new ProgressReportDao();
         reviewDao = new ReviewDao();
@@ -93,6 +93,7 @@ public class ProgressReportService {
         List<Integer> idStudents = scientistDao.getStudents(scientistFreshman);
         List<Student> students = new ArrayList<Student>();
 
+        this.progressReportProxy = new ProgressReportProxy();
         for(Integer i: idStudents){
             Student s = progressReportProxy.getStudentsInformation(i);
             students.add(s);

@@ -19,3 +19,5 @@ INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Y
 INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year, Advisor) VALUES (9302912, 'Federico', 'Nocentini', 'federico.nocentini@unif.it', 'Password', '', 'XXVIII', 2, 5739219);
 INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year, Advisor) VALUES (3920391, 'Lorenzo', 'Agnolucci', 'lorenzo.agnolucci@unifi.it', 'Password', '', 'XXVII', 3, 0281392);
 INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (3923920, 'Alessandro', 'Betti', 'alessandro.betti@unifi.it', 'Password', '', 'XXVI', 4);
+INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (3820392, 'Alessandro', 'Danieli', 'alessandro.danieli@unifi.it', 'Password', '', 'XXVI', 4);
+INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (4728103, 'Enrico', 'Meloni', 'enrico.meloni@unifi.it', 'Password', 'Machine Learning and Explainable AI', 'XXVI', 4);

@@ -22,7 +22,6 @@ public class ThesisApprovationService {
     private ThesisApprovationProxy thesisApprovationProxy;
     public ThesisApprovationService(){
         this.thesisDao = new ThesisDao();
-        System.out.println("Error");
         this.reviewDao = new ReviewDao();
         this.reviewerDao = new ReviewerDao();
     }
@@ -116,6 +115,7 @@ public class ThesisApprovationService {
         List<Integer> studentFreshmen = reviewerDao.getStudentFreshmen(reviewerFreshman);
         List<Student> students = new ArrayList<Student>();
 
+        this.thesisApprovationProxy = new ThesisApprovationProxy();
         for(Integer i : studentFreshmen){
             Student s = thesisApprovationProxy.getStudentsInformation(i);
             students.add(s);

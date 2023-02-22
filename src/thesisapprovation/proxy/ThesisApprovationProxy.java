@@ -8,11 +8,10 @@ import java.sql.SQLException;
 
 public class ThesisApprovationProxy {
     private OrganizationChartService ocService;
-    public ThesisApprovationProxy() {
-        this.ocService = new OrganizationChartService();
-    }
+    public ThesisApprovationProxy() {}
 
     public Student getStudentsInformation(Integer idStudent) throws SQLException {
+        this.ocService = new OrganizationChartService();
         return ocService.getStudentByFreshman(idStudent);
     }
 }

@@ -80,10 +80,10 @@ public class StudentDao implements GenericDao<Student,Integer> {
             ResultSet rs = stmt.executeQuery();
 
             if(rs.next()) {
-                String studentName = rs.getString("Name");
-                String studentSurname = rs.getString("Surname");
-                String studentEmail = rs.getString("Email");
-                String studentTopics = rs.getString("Topics");
+                String studentName = rs.getString("StudentName");
+                String studentSurname = rs.getString("StudentSurname");
+                String studentEmail = rs.getString("StudentEmail");
+                String studentTopics = rs.getString("StudentTopics");
                 int studentYear = rs.getInt("StudentYear");
 
                 String cycleNumber = rs.getString("CycleNumber");

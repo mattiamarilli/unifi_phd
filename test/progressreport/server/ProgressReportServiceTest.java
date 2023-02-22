@@ -1,6 +1,9 @@
 package progressreport.server;
 
+import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
+import organizationchart.Cycle;
+import organizationchart.FacultyMember;
 import organizationchart.Student;
 import progressreport.ProgressReport;
 import progressreport.Scientist;
@@ -96,6 +99,21 @@ class ProgressReportServiceTest {
     @Test
     void getStudentBySupervisory() throws SQLException{
         //TODO: inserire per bene i dati per farlo
+        List<Student> students = new ArrayList<Student>();
+
+        Cycle c1 = new Cycle("XXVIII", 2021, "Automatic and Optimization");
+        FacultyMember a1 = new FacultyMember(3840149, "Paolo", "Fresconi", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics", "University of Florence", c1);
+        students.add(new Student(7328102, "Luca", "Biandini", "luca.biandini@unifi.it", "", c1, 2, a1));
+
+        Cycle c2 = new Cycle("XXVI", 2019, "Information Technology, Systems and Telecommunications");
+        students.add(new Student(3820392, "Alessandro", "Danieli", "alessandro.danieli@unifi.it", "", c2, 4));
+
+        Cycle c3 = new Cycle("XXVII", 2020, "IComputer and automation engineering");
+        FacultyMember a3 = new FacultyMember(281392, "Marco", "Gori", "marco.gori@unisi.it", "Machine Learning; Computer Vision", "University of Siena", c2);
+        students.add(new Student(3920391, "Lorenzo", "Agnolucci", "lorenzo.agnolucci@unifi.it", "", c3, 3, a3));
+
+        assertEquals(students.get(1), prService.getStudentBySupervisory(4029304).get(1));
+
     }
 
     @Test
