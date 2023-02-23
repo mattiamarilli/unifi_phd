@@ -33,4 +33,14 @@ public class EvaluationCommittee {
                 ", reviewer=" + reviewer +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(!(obj instanceof EvaluationCommittee))
+            return false;
+        EvaluationCommittee ec = (EvaluationCommittee) obj;
+        return (this.thesis.equals(ec.getThesis())) && (this.reviewer.equals(ec.getReviewer()));
+    }
 }

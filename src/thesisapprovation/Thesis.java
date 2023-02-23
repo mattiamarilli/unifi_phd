@@ -41,12 +41,19 @@ public class Thesis {
         this.load = Load.valueOf(l);
     }
 
-    //usato per generare l'evaluation committee
-    public Thesis(int fs){
+    //usato per inserire lo studente all'interno del microservizio
+    public Thesis(int fs, String state){
         this.studentFreshman = fs;
-        this.state = State.Not_approved;
+        this.state = State.valueOf(state);
         this.load = Load.Not_load;
     }
+
+    //utilizzato per inserire la review
+    public Thesis (int id){
+        this.id = id;
+    }
+
+    public Thesis(){}
 
     public int getId() {
         return id;
@@ -116,4 +123,16 @@ public class Thesis {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(!(obj instanceof Thesis))
+            return false;
+
+        Thesis t = (Thesis) obj;
+        return (Integer.compare(this.id, t.getId()) == 0) && (java.util.Objects.equals(this.description, t.getDescription()))
+                && (java.util.Objects.equals(this.urlDocument, t.getUrlDocument()) && (java.util.Objects.equals(this.state, t.getState()))
+                && (Integer.compare(this.studentFreshman, t.getStudentFreshman()) == 0));
+    }
 }

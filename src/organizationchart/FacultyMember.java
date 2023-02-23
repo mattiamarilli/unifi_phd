@@ -116,7 +116,9 @@ public class FacultyMember {
 
         FacultyMember fm = (FacultyMember) obj;
 
-        return (Integer.compare(this.freshman, fm.freshman) == 0) && (this.name.equals(fm.name)) && (this.surname.equals(fm.surname)) && (this.email.equals(fm.email))
-                && (this.specialization.equals(fm.specialization)) && (this.institution.equals(fm.institution)) && (this.cycle.equals(fm.cycle));
+        return (Integer.compare(this.freshman, fm.getFreshman()) == 0) && (java.util.Objects.equals(this.name, fm.getName()))
+                && (java.util.Objects.equals(this.surname, fm.getSurname())) && (java.util.Objects.equals(this.email, fm.getEmail()))
+                && (java.util.Objects.equals(this.specialization, fm.getSpecialization())) && (java.util.Objects.equals(this.institution, fm.getInstitution()))
+                && (this.cycle.equals(fm.cycle));
     }
 }

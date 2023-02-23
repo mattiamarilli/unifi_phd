@@ -75,9 +75,6 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
                 Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
 
-                //output only testing
-                System.out.println(t.toString());
-
                 return t;
 
             }else{
@@ -282,14 +279,14 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
         }
     }
 
-    public Review getReviewsByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException{
+    public Review getReviewByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("SELECT Thesis.Id as ThesisId, Thesis.Title as ThesisTitle, Thesis.Description as ThesisDescription, Thesis.UrlDocument, Thesis.StudentFreshman, Thesis.State, Thesis.Loaded, Reviewers.Freshman as ReviewerFreshman, Reviewers.Name, Reviewers.Surname, Reviewers.Email, Reviewers.Description as ReviewersDescription, Reviews.Id as ReviewId, Reviews.Title as ReviewTitle, Reviews.Comment as ReviewComment FROM Thesis \n" +
                     "INNER JOIN EvaluationCommittee ON IdThesis = Thesis.Id\n" +
                     "INNER JOIN Reviewers ON Freshman = EvaluationCommittee.IdReviewer\n" +
                     "INNER JOIN Reviews ON Reviews.IdThesis = EvaluationCommittee.IdThesis AND Reviews.IdReviewer = EvaluationCommittee.IdReviewer\n" +
-                    "WHERE StudentFreshman = ? AND Reviewers.Freshman = ?");
+                    "WHERE StudentFreshman = ? AND EvaluationCommittee.IdReviewer = ?");
 
             stmt.setInt(1, studentFreshman);
             stmt.setInt(2, reviewerFreshman);

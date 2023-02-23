@@ -62,4 +62,16 @@ public class Review {
                 ", ec=" + ec +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(!(obj instanceof Review))
+            return false;
+
+        Review r = (Review) obj;
+        return (Integer.compare(this.id, r.getId()) == 0) && (java.util.Objects.equals(this.title, r.getTitle()))
+                && (java.util.Objects.equals(this.comment, r.getComment())) && (this.ec.equals(r.getEc()));
+    }
 }

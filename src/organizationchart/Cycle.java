@@ -57,6 +57,7 @@ public class Cycle {
             return false;
 
         Cycle c = (Cycle) obj;
-        return (this.number.equals(c.number)) && (Integer.compare(this.year, c.year) == 0) && (this.description.equals(c.description));
+        return (java.util.Objects.equals(this.number, c.getNumber())) && (Integer.compare(this.year, c.getYear()) == 0)
+                && (java.util.Objects.equals(this.description, c.getDescription()));
     }
 }

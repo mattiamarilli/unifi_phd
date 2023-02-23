@@ -10,6 +10,7 @@ import thesisapprovation.data_access.ReviewerDao;
 import thesisapprovation.data_access.ThesisDao;
 import thesisapprovation.proxy.ThesisApprovationProxy;
 
+import java.awt.desktop.SystemEventListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ThesisApprovationService {
 
     //inserimento student into thesis approvation
     public Boolean insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException {
-        Thesis t = new Thesis(studentFreshman);
+        Thesis t = new Thesis(studentFreshman, "Not_approved");
         return thesisDao.insert(t);
     }
 
@@ -67,7 +68,7 @@ public class ThesisApprovationService {
 
     //visualizza reviews by reviewer and student
     public Review getReviewByStudentReviewer(Integer studentFreshman, Integer freshmanReviewer) throws SQLException{
-        return thesisDao.getReviewsByStudentReviewer(studentFreshman, freshmanReviewer);
+        return thesisDao.getReviewByStudentReviewer(studentFreshman, freshmanReviewer);
     }
 
     //visualizza thesis by id (utilizzato dallo studente per visualizzare la sua tesi)
@@ -82,8 +83,7 @@ public class ThesisApprovationService {
 
     //visualizza tesi by student
     public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException{
-        Thesis t = thesisDao.getThesisByStudent(studentFreshman);
-        return t;
+        return thesisDao.getThesisByStudent(studentFreshman);
     }
 
     //METODI PER ReviewerDao
@@ -96,7 +96,7 @@ public class ThesisApprovationService {
 
     //elimina reviewer
     public Boolean deleteReviewer(Integer freshman) throws SQLException{
-        return reviewDao.delete(freshman);
+        return reviewerDao.delete(freshman);
     }
 
     //modifica reviewer
@@ -139,9 +139,9 @@ public class ThesisApprovationService {
     }
 
     //modifica review
-    public Boolean updateReview(Integer idThesis, Integer reviewerFreshman, Integer idReview, String title, String comment) throws SQLException{
-        Reviewer r = new Reviewer(reviewerFreshman);
-        Thesis t = new Thesis(idThesis);
+    public Boolean updateReview(Integer idReview, String title, String comment) throws SQLException{
+        Reviewer r = new Reviewer();
+        Thesis t = new Thesis();
         EvaluationCommittee ec = new EvaluationCommittee(t, r);
 
         Review review = new Review(idReview, title, comment, ec);

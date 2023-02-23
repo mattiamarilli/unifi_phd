@@ -28,6 +28,8 @@ public class Reviewer {
         this.freshman = f;
     }
 
+    public Reviewer(){}
+
     public int getFreshman() {
         return freshman;
     }
@@ -96,7 +98,7 @@ public class Reviewer {
             return false;
         Reviewer r = (Reviewer) obj;
 
-        return (Integer.compare(this.freshman, r.freshman) == 0) && (java.util.Objects.equals(this.name, r.name)) && (java.util.Objects.equals(this.surname, r.surname))
-                && (java.util.Objects.equals(this.password, r.password)) && (java.util.Objects.equals(this.email, r.email)) && (java.util.Objects.equals(this.description, r.description));
+        return (Integer.compare(this.freshman, r.getFreshman()) == 0) && (java.util.Objects.equals(this.name, r.getName())) && (java.util.Objects.equals(this.surname, r.getSurname()))
+                && (java.util.Objects.equals(this.password, r.getPassword())) && (java.util.Objects.equals(this.email, r.getEmail())) && (java.util.Objects.equals(this.description, r.getDescription()));
     }
 }

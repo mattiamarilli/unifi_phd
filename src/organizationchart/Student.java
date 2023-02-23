@@ -140,12 +140,14 @@ public class Student {
             return false;
         Student s = (Student) obj;
 
-        if (this.advisor == null && s.advisor == null) {
-            return (Integer.compare(this.freshman, s.freshman) == 0) && (this.name.equals(s.name)) && (this.surname.equals(s.surname)) && (this.email.equals(s.email))
-                    && (this.topics.equals(s.topics)) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0);
+        if (this.advisor == null && s.getAdvisor() == null) {
+            return (Integer.compare(this.freshman, s.getFreshman()) == 0) && (java.util.Objects.equals(this.name, s.getName()))
+                    && (java.util.Objects.equals(this.surname, s.getSurname())) && (java.util.Objects.equals(this.email, s.getEmail()))
+                    && (java.util.Objects.equals(this.topics, s.getTopics())) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0);
         } else {
-            return (Integer.compare(this.freshman, s.freshman) == 0) && (this.name.equals(s.name)) && (this.surname.equals(s.surname)) && (this.email.equals(s.email))
-                    && (this.topics.equals(s.topics)) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0)
+            return (Integer.compare(this.freshman, s.getFreshman()) == 0) && (java.util.Objects.equals(this.name, s.getName()))
+                    && (java.util.Objects.equals(this.surname, s.getSurname())) && (java.util.Objects.equals(this.email, s.getEmail()))
+                    && (java.util.Objects.equals(this.topics, s.getTopics())) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0)
                     && (this.advisor.equals(s.advisor));
         }
     }
