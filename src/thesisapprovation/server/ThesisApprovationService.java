@@ -35,14 +35,14 @@ public class ThesisApprovationService {
     }
 
     //inserimento/modifica thesis by student freshman in bozza
-    public void updateThesis(Integer id, String title, String description, String urlDocument, Integer studentFreshman) throws SQLException{
+    public Boolean updateThesis(Integer id, String title, String description, String urlDocument, Integer studentFreshman) throws SQLException{
         Thesis t = new Thesis(id, title, description, urlDocument, studentFreshman);
-        thesisDao.update(t);
+        return thesisDao.update(t);
     }
 
-    //modifica state by studentFreshman
-    public Boolean updateStateThesis(Integer studentFreshman, String state) throws SQLException{
-        return thesisDao.updateStateThesis(studentFreshman, state);
+    //modifica state by id thesis
+    public Boolean updateStateThesis(Integer idThesis, String state) throws SQLException{
+        return thesisDao.updateStateThesis(idThesis, state);
     }
 
     //modifica loaded by student freshman (utlizzato quando viene consegnata la tesi oppure quando viene ritirata dalla consegna)
@@ -50,7 +50,7 @@ public class ThesisApprovationService {
         return thesisDao.updateLoadedThesis(studentFreshman, loaded);
     }
 
-    //elimina thesis
+    //elimina thesis by id
     public Boolean deleteThesis(Integer id) throws SQLException{
         return thesisDao.delete(id);
     }

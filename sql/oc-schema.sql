@@ -10,7 +10,7 @@ CREATE TABLE Cycles (
 );
 
 CREATE TABLE FacultyMembers (
-            Freshman INT NOT NULL PRIMARY KEY,
+            Freshman INT NOT NULL DEFAULT -1 PRIMARY KEY,
             Name VARCHAR(64) NOT NULL,
             Surname VARCHAR(64) NOT NULL,
             Email VARCHAR(200) NOT NULL,
@@ -26,11 +26,10 @@ CREATE TABLE Students(
              Surname VARCHAR(64) NOT NULL,
              Email VARCHAR(200) NOT NULL,
              Password VARCHAR(2000) NOT NULL,
-             Topics VARCHAR(64) NOT NULL,
+             Topics VARCHAR(2000) NOT NULL,
              Cycle VARCHAR(64) NOT NULL REFERENCES Cycles(Number) ON DELETE CASCADE,
              Year INT NOT NULL,
              Advisor INT REFERENCES FacultyMembers(Freshman) ON DELETE SET NULL
 );
-
 
 

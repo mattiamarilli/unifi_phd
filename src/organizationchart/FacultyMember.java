@@ -93,7 +93,19 @@ public class FacultyMember {
         this.cycle = cycle;
     }
 
-
+    @Override
+    public String toString() {
+        return "FacultyMember{" +
+                "freshman=" + freshman +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", institution='" + institution + '\'' +
+                ", cycle=" + cycle +
+                '}';
+    }
 
     @Override
     public boolean equals(Object obj) {

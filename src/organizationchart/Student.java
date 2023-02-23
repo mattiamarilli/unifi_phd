@@ -126,21 +126,27 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", topics='" + topics + '\'' +
-                ", cycle=" + cycle.toString() +
+                ", cycle=" + cycle +
                 ", year=" + year +
-                ", advisor=" + advisor.toString() +
+                ", advisor=" + advisor +
                 '}';
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == this)
+        if (obj == this)
             return true;
-        if(!(obj instanceof Student))
+        if (!(obj instanceof Student))
             return false;
         Student s = (Student) obj;
-        return (Integer.compare(this.freshman, s.freshman) == 0) && (this.name.equals(s.name)) && (this.surname.equals(s.surname)) && (this.email.equals(s.email))
-                && (this.topics.equals(s.topics)) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0)
-                && (this.advisor.equals(s.advisor));
+
+        if (this.advisor == null && s.advisor == null) {
+            return (Integer.compare(this.freshman, s.freshman) == 0) && (this.name.equals(s.name)) && (this.surname.equals(s.surname)) && (this.email.equals(s.email))
+                    && (this.topics.equals(s.topics)) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0);
+        } else {
+            return (Integer.compare(this.freshman, s.freshman) == 0) && (this.name.equals(s.name)) && (this.surname.equals(s.surname)) && (this.email.equals(s.email))
+                    && (this.topics.equals(s.topics)) && (this.cycle.equals(s.cycle)) && (Integer.compare(this.year, s.year) == 0)
+                    && (this.advisor.equals(s.advisor));
+        }
     }
 }

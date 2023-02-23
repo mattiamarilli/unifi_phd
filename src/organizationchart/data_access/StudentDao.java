@@ -41,14 +41,18 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
 
                 Integer advisorFreshman = rs.getInt("Advisor");
-                String advisorName = rs.getString("AdvisorName");
-                String advisorSurname = rs.getString("AdvisorSurname");
-                String advisorEmail = rs.getString("AdvisorEmail");
-                String advisorSpecialization = rs.getString("AdvisorSpecialization");
-                String advisorInstitution = rs.getString("AdvisorInstitution");
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
-
-                Student s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycle, studentYear, advisor);
+                Student s;
+                if(advisorFreshman == 0){
+                     s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycle, studentYear, null);
+                }else{
+                    String advisorName = rs.getString("AdvisorName");
+                    String advisorSurname = rs.getString("AdvisorSurname");
+                    String advisorEmail = rs.getString("AdvisorEmail");
+                    String advisorSpecialization = rs.getString("AdvisorSpecialization");
+                    String advisorInstitution = rs.getString("AdvisorInstitution");
+                    FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
+                    s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycle, studentYear, advisor);
+                }
 
                 students.add(s);
             }
@@ -91,16 +95,23 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 String descriptionCycle = rs.getString("DescriptionCycle");
 
                 Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
+
+                Student s;
+
                 Integer advisorFreshman = rs.getInt("Advisor");
-                String advisorName = rs.getString("AdvisorName");
-                String advisorSurname = rs.getString("AdvisorSurname");
-                String advisorEmail = rs.getString("AdvisorEmail");
-                String advisorSpecialization = rs.getString("AdvisorSpecialization");
-                String advisorInstitution = rs.getString("AdvisorInstitution");
+                if(advisorFreshman == 0){
+                    s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, null);
+                }else{
+                    String advisorName = rs.getString("AdvisorName");
+                    String advisorSurname = rs.getString("AdvisorSurname");
+                    String advisorEmail = rs.getString("AdvisorEmail");
+                    String advisorSpecialization = rs.getString("AdvisorSpecialization");
+                    String advisorInstitution = rs.getString("AdvisorInstitution");
 
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
+                    FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
 
-                Student s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor);
+                    s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor);
+                }
 
                 return s;
             }else{
@@ -300,14 +311,19 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
 
                 Integer advisorFreshman = rs.getInt("Advisor");
-                String advisorName = rs.getString("AdvisorName");
-                String advisorSurname = rs.getString("AdvisorSurname");
-                String advisorEmail = rs.getString("AdvisorEmail");
-                String advisorSpecialization = rs.getString("AdvisorSpecialization");
-                String advisorInstitution = rs.getString("AdvisorInstitution");
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
 
-                students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
+                if(advisorFreshman == 0){
+                    students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, null));
+                }else{
+                    String advisorName = rs.getString("AdvisorName");
+                    String advisorSurname = rs.getString("AdvisorSurname");
+                    String advisorEmail = rs.getString("AdvisorEmail");
+                    String advisorSpecialization = rs.getString("AdvisorSpecialization");
+                    String advisorInstitution = rs.getString("AdvisorInstitution");
+                    FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
+
+                    students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
+                }
             }
 
             return students;

@@ -226,12 +226,12 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
         }
     }
 
-    public boolean updateLoadedThesis(Integer studentFreshman, String stateLoaded) throws SQLException{
+    public boolean updateLoadedThesis(Integer idThesis, String stateLoaded) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Loaded = ? WHERE StudentFreshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Thesis SET Loaded = ? WHERE Id = ?");
             stmt.setString(1, stateLoaded);
-            stmt.setInt(2, studentFreshman);
+            stmt.setInt(2, idThesis);
 
             if(stmt.executeUpdate() > 0){
                 System.out.println("Update loaded successful");

@@ -87,4 +87,16 @@ public class Reviewer {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(!(obj instanceof Reviewer))
+            return false;
+        Reviewer r = (Reviewer) obj;
+
+        return (Integer.compare(this.freshman, r.freshman) == 0) && (java.util.Objects.equals(this.name, r.name)) && (java.util.Objects.equals(this.surname, r.surname))
+                && (java.util.Objects.equals(this.password, r.password)) && (java.util.Objects.equals(this.email, r.email)) && (java.util.Objects.equals(this.description, r.description));
+    }
 }

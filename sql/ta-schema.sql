@@ -8,7 +8,7 @@ CREATE TABLE Thesis (
   Title VARCHAR(120),
   Description VARCHAR(2000),
   UrlDocument VARCHAR(300),
-  StudentFreshman INT NOT NULL,
+  StudentFreshman INT NOT NULL UNIQUE,
   State VARCHAR(15) NOT NULL,
   Loaded VARCHAR(15) NOT NULL,
   PRIMARY KEY (Id)
