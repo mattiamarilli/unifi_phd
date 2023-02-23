@@ -17,7 +17,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
             conn = ConnectionDao.getConnection();
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT Students.Freshman AS StudentFreshman, Students.Name AS StudentName, Students.Surname AS StudentSurname, Students.Email AS StudentEmail, \n" +
-                    "Students.Password AS StudentPassword, Students.Topics AS StudentTopics, Students.Year AS StudentYear, Advisor,  \n" +
+                    "Students.Topics AS StudentTopics, Students.Year AS StudentYear, Advisor,  \n" +
                     "Number AS CycleNumber, Cycles.Year AS CycleYear, Cycles.Description AS DescriptionCycle, FacultyMembers.Name AS AdvisorName, FacultyMembers.Surname AS AdvisorSurname,\n" +
                     "FacultyMembers.Email AS AdvisorEmail, FacultyMembers.Specialization AS AdvisorSpecialization, FacultyMembers.Institution AS AdvisorInstitution\n" +
                     "FROM Students\n" +
@@ -27,12 +27,11 @@ public class StudentDao implements GenericDao<Student,Integer> {
             List<Student> students = new ArrayList<Student>();
 
             while (rs.next()) {
-                Integer studentFreshman = rs.getInt("Freshman");
-                String studentName = rs.getString("Name");
-                String studentSurname = rs.getString("Surname");
-                String studentEmail = rs.getString("Email");
-                String studentPassword = rs.getString("Password");
-                String studentTopics = rs.getString("Topics");
+                Integer studentFreshman = rs.getInt("StudentFreshman");
+                String studentName = rs.getString("StudentName");
+                String studentSurname = rs.getString("StudentSurname");
+                String studentEmail = rs.getString("StudentEmail");
+                String studentTopics = rs.getString("StudentTopics");
                 int studentYear = rs.getInt("StudentYear");
 
                 String cycleNumber = rs.getString("CycleNumber");
@@ -43,7 +42,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 Integer advisorFreshman = rs.getInt("Advisor");
                 Student s;
                 if(advisorFreshman == 0){
-                     s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycle, studentYear, null);
+                     s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, null);
                 }else{
                     String advisorName = rs.getString("AdvisorName");
                     String advisorSurname = rs.getString("AdvisorSurname");
@@ -51,7 +50,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
                     String advisorSpecialization = rs.getString("AdvisorSpecialization");
                     String advisorInstitution = rs.getString("AdvisorInstitution");
                     FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
-                    s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycle, studentYear, advisor);
+                    s = new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor);
                 }
 
                 students.add(s);
@@ -134,13 +133,15 @@ public class StudentDao implements GenericDao<Student,Integer> {
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Students (Freshman, Name, Surname, Email, Password, Topics, Cycle, Year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setInt(1,student.getFreshman());
             stmt.setString(2, student.getName());
             stmt.setString(3, student.getSurname());
             stmt.setString(4, student.getEmail());
             stmt.setString(5, student.getPassword());
             stmt.setString(6, student.getTopics());
+            stmt.setString(7, student.getCycle().getNumber());
+            stmt.setInt(8, student.getYear());
 
             if(stmt.executeUpdate() > 0) {
                 System.out.println("Insert student successful");
@@ -151,6 +152,7 @@ public class StudentDao implements GenericDao<Student,Integer> {
             }
 
         }catch (SQLException e){
+            System.out.println("Error insert student");
             e.printStackTrace();
             return false;
         }finally {
@@ -299,10 +301,10 @@ public class StudentDao implements GenericDao<Student,Integer> {
 
             while(rs.next()) {
                 Integer studentFreshman = rs.getInt("StudentFreshman");
-                String studentName = rs.getString("Name");
-                String studentSurname = rs.getString("Surname");
-                String studentEmail = rs.getString("Email");
-                String studentTopics = rs.getString("Topics");
+                String studentName = rs.getString("StudentName");
+                String studentSurname = rs.getString("StudentSurname");
+                String studentEmail = rs.getString("StudentEmail");
+                String studentTopics = rs.getString("StudentTopics");
                 int studentYear = rs.getInt("StudentYear");
 
                 String cycleNumber = rs.getString("CycleNumber");
@@ -355,10 +357,10 @@ public class StudentDao implements GenericDao<Student,Integer> {
 
             while(rs.next()) {
                 Integer studentFreshman = rs.getInt("StudentFreshman");
-                String studentName = rs.getString("Name");
-                String studentSurname = rs.getString("Surname");
-                String studentEmail = rs.getString("Email");
-                String studentTopics = rs.getString("Topics");
+                String studentName = rs.getString("StudentName");
+                String studentSurname = rs.getString("StudentSurname");
+                String studentEmail = rs.getString("StudentEmail");
+                String studentTopics = rs.getString("StudentTopics");
                 int studentYear = rs.getInt("StudentYear");
 
                 Integer cycleYear = rs.getInt("CycleYear");

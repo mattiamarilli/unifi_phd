@@ -25,52 +25,61 @@ public class OrganizationChartService {
     //TODO: quando viene inserito o cancellato uno studente deve essere cancellato anche negli altri microservizi?
 
     //inserimento student
-    public void insertStudent(Integer studentFreshman, String name, String surname, String email, String password, String topics, String numberCycle) throws SQLException{
+    public Boolean insertStudent(Integer studentFreshman, String name, String surname, String email, String password, String topics, String numberCycle) throws SQLException{
         Cycle c = new Cycle(numberCycle);
         Student s = new Student(studentFreshman, name, surname, email, password, topics, c, 1);
-        studentDao.insert(s);
+        Boolean result = studentDao.insert(s);
 
-        this.ocProxy = new OrganizationChartProxy();
-        //inserisco lo studente anche nel microservizio del progress report
-        ocProxy.insertStudentToProgressReport(studentFreshman);
-        //inserisco lo studente anche nel microservizio dell'offerta didattica
-        ocProxy.insertStudentToDidacticOffer(studentFreshman);
+        if(result) {
+            this.ocProxy = new OrganizationChartProxy();
+            //inserisco lo studente anche nel microservizio del progress report
+            ocProxy.insertStudentToProgressReport(studentFreshman);
+            //inserisco lo studente anche nel microservizio dell'offerta didattica
+            ocProxy.insertStudentToDidacticOffer(studentFreshman);
+        }
+
+        return result;
 
     }
 
     //update student profile
-    public void updateStudent(Integer studentFreshman, String name, String surname, String email, String topics) throws SQLException{
+    public Boolean updateStudent(Integer studentFreshman, String name, String surname, String email, String topics) throws SQLException{
         Student s = new Student(studentFreshman, name, surname, email, topics);
-        studentDao.update(s);
+        return studentDao.update(s);
     }
 
     //update student password
-    public void updateStudentPassword(Integer studentFreshman, String password) throws SQLException{
-        studentDao.updatePassword(studentFreshman, password);
+    public Boolean updateStudentPassword(Integer studentFreshman, String password) throws SQLException{
+        return studentDao.updatePassword(studentFreshman, password);
     }
 
     //update student advisor (utilizzato per assegnare l'dvisor allo studente)
-    public void updateStudentAdvisor(Integer studentFreshman, Integer advisorFreshman) throws SQLException{
-        studentDao.updateAdvisor(studentFreshman, advisorFreshman);
+    public Boolean updateStudentAdvisor(Integer studentFreshman, Integer advisorFreshman) throws SQLException{
+        return studentDao.updateAdvisor(studentFreshman, advisorFreshman);
     }
 
     //update student year (usato quando lo studente viene passato all'anno successivo)
-    public void updateStudentYear(Integer studentFreshman, Integer year) throws SQLException{
-        studentDao.updateYear(studentFreshman, year);
-        if(year == 3){ //inserisco lo studente nel microservizio delle tesi
+    public Boolean updateStudentYear(Integer studentFreshman, Integer year) throws SQLException{
+        Boolean result = studentDao.updateYear(studentFreshman, year);
+        if(year == 3 && result){ //inserisco lo studente nel microservizio delle tesi
             this.ocProxy = new OrganizationChartProxy();
             ocProxy.insertStudentToThesisApprovation(studentFreshman);
         }
+        return result;
     }
 
     //delete student
-    public void deleteStudent(Integer studentFreshman) throws SQLException{
-        studentDao.delete(studentFreshman);
+    public Boolean deleteStudent(Integer studentFreshman) throws SQLException{
+        Boolean result = studentDao.delete(studentFreshman);
         //elimino lo studente anche negli altri microservizi
-        this.ocProxy = new OrganizationChartProxy();
-        ocProxy.deleteStudentDidacticOffer(studentFreshman);
-        ocProxy.deleteStudentProgressReport(studentFreshman);
-        ocProxy.deleteStudentThesisApprovation(studentFreshman);
+        if(result) {
+            this.ocProxy = new OrganizationChartProxy();
+            ocProxy.deleteStudentDidacticOffer(studentFreshman);
+            ocProxy.deleteStudentProgressReport(studentFreshman);
+            ocProxy.deleteStudentThesisApprovation(studentFreshman);
+        }
+
+        return result;
     }
 
     //get all students
@@ -102,21 +111,21 @@ public class OrganizationChartService {
     //METODI DI CycleDao
 
     //insert cycle
-    public void insertCycle(String cycleNumber, Integer year, String description) throws SQLException{
+    public Boolean insertCycle(String cycleNumber, Integer year, String description) throws SQLException{
         Cycle c = new Cycle(cycleNumber, year, description);
-        cycleDao.insert(c);
+        return cycleDao.insert(c);
     }
 
     //update cycle
-    public void updateCycle(String cycleNumber, Integer year, String description) throws SQLException {
+    public Boolean updateCycle(String cycleNumber, Integer year, String description) throws SQLException {
         Cycle c = new Cycle(cycleNumber, year, description);
-        cycleDao.update(c);
+        return cycleDao.update(c);
     }
 
     //delete cycle
-    public void deleteCycle(String cycleNumber) throws SQLException{
+    public Boolean deleteCycle(String cycleNumber) throws SQLException{
         List<Student> students = studentDao.getStudentsByCycle(cycleNumber);
-        cycleDao.delete(cycleNumber);
+        Boolean result = cycleDao.delete(cycleNumber);
 
         this.ocProxy = new OrganizationChartProxy();
         //elimino gli studenti del ciclo (eliminato) anche negli altri microservizi
@@ -125,6 +134,8 @@ public class OrganizationChartService {
             ocProxy.deleteStudentProgressReport(s.getFreshman());
             ocProxy.deleteStudentThesisApprovation(s.getFreshman());
         }
+
+        return result;
     }
 
     //get all cycles
@@ -135,27 +146,27 @@ public class OrganizationChartService {
     //METODI DI FacultyMembersDao
 
     //insert faculty member
-    public void insertFacultyMember(Integer freshman, String name, String surname, String email, String password, String specialization, String institution, String cycleNumber) throws SQLException{
+    public Boolean insertFacultyMember(Integer freshman, String name, String surname, String email, String password, String specialization, String institution, String cycleNumber) throws SQLException{
         Cycle c = new Cycle(cycleNumber);
         FacultyMember facultyMember = new FacultyMember(freshman, name, surname, email, password, specialization, institution, c);
-        facultyMemberDao.insert(facultyMember);
+        return facultyMemberDao.insert(facultyMember);
     }
 
     //update faculty member profile
-    public void updateFacultyMember(Integer freshman, String name, String surname, String email, String specialization, String institution, String cycleNumber) throws SQLException{
+    public Boolean updateFacultyMember(Integer freshman, String name, String surname, String email, String specialization, String institution, String cycleNumber) throws SQLException{
         Cycle c = new Cycle(cycleNumber);
         FacultyMember facultyMember = new FacultyMember(freshman, name, surname, email, specialization, institution, c);
-        facultyMemberDao.update(facultyMember);
+        return facultyMemberDao.update(facultyMember);
     }
 
     //update faculty member password
-    public void updateFacultyMemberPassword(Integer fmFreshman, String password) throws SQLException{
-        facultyMemberDao.updateFacultyMemberPassword(fmFreshman, password);
+    public Boolean updateFacultyMemberPassword(Integer fmFreshman, String password) throws SQLException{
+        return facultyMemberDao.updateFacultyMemberPassword(fmFreshman, password);
     }
 
     //delete faculty member
-    public void deleteFacultyMember(Integer fmFreshman) throws SQLException{
-        facultyMemberDao.delete(fmFreshman);
+    public Boolean deleteFacultyMember(Integer fmFreshman) throws SQLException{
+        return facultyMemberDao.delete(fmFreshman);
     }
 
     //get all faculty members
