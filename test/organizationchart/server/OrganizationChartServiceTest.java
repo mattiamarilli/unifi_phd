@@ -1,6 +1,7 @@
 package organizationchart.server;
 
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.ls.LSInput;
 import organizationchart.Cycle;
 import organizationchart.FacultyMember;
 import organizationchart.Student;
@@ -15,11 +16,40 @@ class OrganizationChartServiceTest {
 
     private OrganizationChartService ocService = new OrganizationChartService();
 
+
+    @Test
+    void getStudentsByCycle() throws SQLException{
+        List<Student> students = new ArrayList<Student>();
+
+        Cycle c = new Cycle("XXVI", 2019, "Information Technology, Systems and Telecommunications");
+        students.add(new Student(3820392, "Alessandro", "Danieli", "alessandro.danieli@unifi.it", "", c, 4, null));
+        students.add(new Student(3923920, "Alessandro", "Betti", "alessandro.betti@unifi.it", "", c, 4, null));
+        students.add(new Student(4728103, "Enrico", "Meloni", "enrico.meloni@unifi.it", "Machine Learning and Explainable AI", c, 4, null));
+
+        assertEquals(students, ocService.getStudentsByCycle("XXVI"));
+
+        //error cycle number
+        List<Student> students_empty = new ArrayList<Student>();
+        assertEquals(students_empty, ocService.getStudentsByCycle("X"));
+    }
+
+    @Test
+    void getAllCycles() throws SQLException{
+        List<Cycle> cycles = new ArrayList<Cycle>();
+
+        cycles.add(new Cycle("XXIX", 2022, "Telematics and information society"));
+        cycles.add(new Cycle("XXVI", 2019, "Information Technology, Systems and Telecommunications"));
+        cycles.add(new Cycle("XXVII", 2020, "IComputer and automation engineering"));
+        cycles.add(new Cycle("XXVIII", 2021, "Automatic and Optimization"));
+
+        assertEquals(cycles, ocService.getAllCycles());
+    }
+
     @Test
     void insertStudent() throws SQLException {
-        assertEquals(true, ocService.insertStudent(9999999, "Name Test", "Surname Test", "test@test@unifi.it", "Password Test", "Topics Test", "XXX" ));
+        assertEquals(true, ocService.insertStudent(9999999, "Name Test", "Surname Test", "test@test@unifi.it", "Password Test", "Topics Test", "XXVII" ));
         //error insert students
-        assertEquals(false, ocService.insertStudent(9999999, "Name Test", "Surname Test", "test@test@unifi.it", "Password Test", "Topics Test", "XXX" ));
+        assertEquals(false, ocService.insertStudent(9999999, "Name Test", "Surname Test", "test@test@unifi.it", "Password Test", "Topics Test", "XXVII" ));
     }
 
     @Test
@@ -61,41 +91,11 @@ class OrganizationChartServiceTest {
     }
 
     @Test
-    void getAllStudents() throws SQLException{
-        List<Student> students = new ArrayList<Student>();
-
-        Cycle c2 = new Cycle("XXVI", 2019, "Information Technology, Systems and Telecommunications");
-        students.add(new Student(3820392, "Alessandro", "Danieli", "alessandro.danieli@unifi.it", "", c2, 4, null));
-
-        students.add(new Student(3923920, "Alessandro", "Betti", "alessandro.betti@unifi.it", "", c2, 4, null));
-
-        students.add(new Student(4728103, "Enrico (update)", "Meloni (update)", "enrico.meloni@unifi.it (update)", "topics update", c2, 4, null));
-
-        Cycle c1 = new Cycle("XXVII", 2020, "IComputer and automation engineering");
-        FacultyMember a1 = new FacultyMember(5749249, "Franco", "Scarselli", "franco.scarselli@unisi.it", "Machine Learning; Artificial neural networks", "University of Siena", c1);
-        students.add(new Student(102829, "Tommaso", "Aldinucci", "tommaso.aldinucci@unifi.it", "TBD", c1, 3, a1));
-
-        students.add(new Student(3920391, "Lorenzo", "Agnolucci", "lorenzo.agnolucci@unifi.it", "", c1, 3, a1));
-
-        FacultyMember a2 = new FacultyMember(281392, "Marco", "Gori", "marco.gori@unisi.it", "Machine Learning; Computer Vision", "University of Siena", c1);
-        students.add(new Student(7028492, "Matteo", "Barbetti", "matteo.barbetti@unifi.it", "Smart Computing Techniques applied to Medical Physics, Nuclear Physics and Particle Physics", c1, 3, a2));
-
-        Cycle c3 = new Cycle("XXVIII", 2021, "Automatic and Optimization");
-        FacultyMember a3 = new FacultyMember(5739219, "Witold", "Pedrycz", "witold.pedrycz@gmail.com", "Computational Intelligence, fuzzy modeling, Granular Computing, knowledge discovery", "University of Alberta", c3);
-        students.add(new Student(9302912, "Federico", "Nocentini", "federico.nocentini@unifi.it", "", c3, 3, a3 ));
-
-        Cycle c4 = new Cycle("XXX", 2023, "Electronics and electromagnetism");
-        students.add(new Student(9999999, "Name Test", "Surname Test", "test@test@unifi.it", "Topics Test", c4, 1, null));
-
-        assertEquals(students, ocService.getAllStudents());
-    }
-
-    @Test
     void getStudentByFreshman() throws SQLException{
         Cycle c1 = new Cycle("XXVII", 2020, "IComputer and automation engineering");
         FacultyMember a1 = new FacultyMember(5749249, "Franco", "Scarselli", "franco.scarselli@unisi.it", "Machine Learning; Artificial neural networks", "University of Siena", c1);
-        Student s = new Student(3920391, "Lorenzo", "Agnolucci", "lorenzo.agnolucci@unifi.it", "", c1, 3, a1);
-        assertEquals(s, ocService.getStudentByFreshman(3920391));
+        Student s = new Student(102829, "Tommaso", "Aldinucci", "tommaso.aldinucci@unifi.it", "TBD", c1, 3, a1);
+        assertEquals(s, ocService.getStudentByFreshman(102829));
         //error student freshman
         assertNull(ocService.getStudentByFreshman(0));
     }
@@ -108,14 +108,10 @@ class OrganizationChartServiceTest {
         FacultyMember a1 = new FacultyMember(5749249, "Franco", "Scarselli", "franco.scarselli@unisi.it", "Machine Learning; Artificial neural networks", "University of Siena", c1);
         students.add(new Student(102829, "Tommaso", "Aldinucci", "tommaso.aldinucci@unifi.it", "TBD", c1, 3, a1));
 
-        students.add(new Student(3920391, "Lorenzo", "Agnolucci", "lorenzo.agnolucci@unifi.it", "", c1, 3, a1));
-
         FacultyMember a2 = new FacultyMember(281392, "Marco", "Gori", "marco.gori@unisi.it", "Machine Learning; Computer Vision", "University of Siena", c1);
-        students.add(new Student(7028492, "Matteo", "Barbetti", "matteo.barbetti@unifi.it", "Smart Computing Techniques applied to Medical Physics, Nuclear Physics and Particle Physics", c1, 3, a2));
+        students.add(new Student(3920391, "Lorenzo", "Agnolucci", "lorenzo.agnolucci@unifi.it", "", c1, 3, a2));
 
-        Cycle c3 = new Cycle("XXVIII", 2021, "Automatic and Optimization");
-        FacultyMember a3 = new FacultyMember(5739219, "Witold", "Pedrycz", "witold.pedrycz@gmail.com", "Computational Intelligence, fuzzy modeling, Granular Computing, knowledge discovery", "University of Alberta", c3);
-        students.add(new Student(9302912, "Federico", "Nocentini", "federico.nocentini@unifi.it", "", c3, 3, a3 ));
+        students.add(new Student(7028492, "Matteo", "Barbetti", "matteo.barbetti@unifi.it", "Smart Computing Techniques applied to Medical Physics, Nuclear Physics and Particle Physics", c1, 3, a2));
 
         assertEquals(students, ocService.getStudentsByYear(3));
 
@@ -124,48 +120,64 @@ class OrganizationChartServiceTest {
         assertEquals(students_empty, ocService.getStudentsByYear(0));
     }
 
-    @Test
-    void getStudentsByCycle() throws SQLException{
 
+    @Test
+    void getStudentsByAdvisor() throws SQLException{
+        List<Student> students = new ArrayList<Student>();
+
+        Cycle c = new Cycle("XXVII", 2020, "IComputer and automation engineering");
+        FacultyMember a = new FacultyMember(281392);
+        students.add(new Student(7028492, "Matteo", "Barbetti", "matteo.barbetti@unifi.it", "Smart Computing Techniques applied to Medical Physics, Nuclear Physics and Particle Physics", c, 3, a));
+        assertEquals(students, ocService.getStudentsByAdvisor(281392));
     }
 
     @Test
-    void getStudentsByAdvisor() {
+    void insertCycle() throws SQLException{
+        assertEquals(true, ocService.insertCycle("X", 2010, "Cycle test"));
+        //error insert cycle (already exists)
+        assertEquals(false, ocService.insertCycle("XXVI", 2019, "Description test"));
     }
 
     @Test
-    void insertCycle() {
+    void updateCycle() throws SQLException{
+        assertEquals(true, ocService.updateCycle("XXVIII", 2021, "Automatic and Optimization (update)"));
+        //error update (cycle doesn't exist)
+        assertEquals(false, ocService.updateCycle("", 2010, "Description test update"));
     }
 
     @Test
-    void updateCycle() {
+    void deleteCycle() throws SQLException{
+        assertEquals(true, ocService.deleteCycle("XXX"));
+        //error delete cycle (doesn't exist)
+        assertEquals(false, ocService.deleteCycle(""));
     }
 
     @Test
-    void deleteCycle() {
+    void insertFacultyMember() throws SQLException{
+        assertEquals(true, ocService.insertFacultyMember(1111111, "Name test", "Surname test", "test@test.it", "Password test", "Specialization test", "Institution test", "XXVI"));
+        //error insert faculty member (already exists)
+        assertEquals(false, ocService.insertFacultyMember(593183, "Name test", "Surname test", "test@test.it", "Password test", "Specialization test", "Institution test", "XXVI"));
     }
 
     @Test
-    void getAllCycles() {
+    void updateFacultyMember() throws SQLException{
+        assertEquals(true, ocService.updateFacultyMember(3840149, "Paolo (update)", "Fresconi (update)", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics (update)", "University of Florence", "XXVIII"));
+        //error update (doesn't exist faculty member)
+        assertEquals(false, ocService.updateFacultyMember(0, "Paolo (update)", "Fresconi (update)", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics (update)", "University of Florence", "XXVIII"));
     }
 
     @Test
-    void insertFacultyMember() {
+    void updateFacultyMemberPassword() throws SQLException{
+        assertEquals(true, ocService.updateFacultyMemberPassword(5849204, "Password update"));
+        //error password update
+        assertEquals(false, ocService.updateFacultyMemberPassword(0, "Password update"));
     }
 
     @Test
-    void updateFacultyMember() {
+    void deleteFacultyMember() throws SQLException{
+        assertEquals(true, ocService.deleteFacultyMember(427190));
+        //error delete faculty member
+        assertEquals(false, ocService.deleteFacultyMember(0));
     }
 
-    @Test
-    void updateFacultyMemberPassword() {
-    }
-
-    @Test
-    void deleteFacultyMember() {
-    }
-
-    @Test
-    void getAllFacultyMembers() {
-    }
 }

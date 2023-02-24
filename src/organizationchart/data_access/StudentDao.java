@@ -368,14 +368,18 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 Cycle cycle = new Cycle(cycleNumber, cycleYear, descriptionCycle);
 
                 Integer advisorFreshman = rs.getInt("Advisor");
-                String advisorName = rs.getString("AdvisorName");
-                String advisorSurname = rs.getString("AdvisorSurname");
-                String advisorEmail = rs.getString("AdvisorEmail");
-                String advisorSpecialization = rs.getString("AdvisorSpecialization");
-                String advisorInstitution = rs.getString("AdvisorInstitution");
-                FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
+                if(advisorFreshman == 0){
+                    students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, null));
+                }else{
+                    String advisorName = rs.getString("AdvisorName");
+                    String advisorSurname = rs.getString("AdvisorSurname");
+                    String advisorEmail = rs.getString("AdvisorEmail");
+                    String advisorSpecialization = rs.getString("AdvisorSpecialization");
+                    String advisorInstitution = rs.getString("AdvisorInstitution");
+                    FacultyMember advisor = new FacultyMember(advisorFreshman, advisorName, advisorSurname, advisorEmail, advisorSpecialization, advisorInstitution, cycle);
+                    students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
+                }
 
-                students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
             }
 
             return students;
@@ -392,8 +396,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
     public List<Student> getStudentsByAdvisor(Integer advisorFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Topics, Cycle, Year\n" +
+            PreparedStatement stmt = conn.prepareStatement("SELECT Freshman, Name, Surname, Email, Topics, Cycle, Students.Year as StudentYear, Advisor, Cycles.Year as CycleYear, Description\n" +
                     "FROM Students\n" +
+                    "INNER JOIN Cycles ON Cycle = Number\n" +
                     "WHERE Advisor = ?");
             stmt.setInt(1, advisorFreshman);
             ResultSet rs = stmt.executeQuery();
@@ -406,10 +411,12 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 String studentSurname = rs.getString("Surname");
                 String studentEmail = rs.getString("Email");
                 String studentTopics = rs.getString("Topics");
-                Integer studentYear = rs.getInt("Year");
+                Integer studentYear = rs.getInt("StudentYear");
 
                 String cycleNumber = rs.getString("Cycle");
-                Cycle cycle = new Cycle(cycleNumber);
+                Integer cycleYear = rs.getInt("CycleYear");
+                String cycleDescription = rs.getString("Description");
+                Cycle cycle = new Cycle(cycleNumber, cycleYear, cycleDescription);
 
                 FacultyMember advisor = new FacultyMember(advisorFreshman);
 

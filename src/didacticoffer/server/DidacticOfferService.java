@@ -25,7 +25,6 @@ public class DidacticOfferService {
         this.lessonDao = new LessonDao();
         this.appealDao = new AppealDao();
         this.studentCareerDao = new StudentCareerDao();
-        this.didacticOfferProxy = new DidacticOfferProxy();
     }
 
     //METODI PER ProfessorDao
@@ -68,6 +67,7 @@ public class DidacticOfferService {
         List<Integer> studentFreshmen = professorDao.getStudentFreshmenByProfessor(professorFreshman);
         List<Student> students = new ArrayList<Student>();
 
+        this.didacticOfferProxy = new DidacticOfferProxy();
         for(Integer i : studentFreshmen){
             Student s = didacticOfferProxy.getStudentsInformation(i);
             students.add(s);
