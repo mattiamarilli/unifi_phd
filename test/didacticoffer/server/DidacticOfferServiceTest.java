@@ -85,8 +85,8 @@ class DidacticOfferServiceTest {
 
     @Test
     void updateStateStudyPlan() throws SQLException {
-        assertEquals(true,doService.updateStateStudyPlan("B032592",7328102,"Attended"));
-        assertEquals(false,doService.updateStateStudyPlan("B032592",9999999,"Attended"));
+        assertEquals(true,doService.updateStateStudyPlan("B032592","Attended"));
+        assertEquals(false,doService.updateStateStudyPlan("9999999","Attended"));
     }
 
     @Test
@@ -130,7 +130,10 @@ class DidacticOfferServiceTest {
     }
 
     @Test
-    void acceptVoteByStudent() {
+    void acceptVoteByStudent() throws SQLException {
+        assertEquals(true,doService.acceptVoteByStudent(7028492,7));
+        assertEquals(false,doService.acceptVoteByStudent(7028492,212121));
+        assertEquals(false,doService.acceptVoteByStudent(3333,7));
     }
 
     @Test

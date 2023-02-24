@@ -96,8 +96,8 @@ public class DidacticOfferService {
     }
 
     //update course status (usato quando il professore ha terminato il corso ed definisce il corso "frequentato")
-    public Boolean updateStateStudyPlan(String courseCode,Integer studentFreshman, String state) throws SQLException{
-        return courseDao.updateStateStudyPlan(courseCode,studentFreshman, state);
+    public Boolean updateStateStudyPlan(String courseCode, String state) throws SQLException{
+        return courseDao.updateStateStudyPlan(courseCode, state);
     }
 
 
@@ -145,9 +145,11 @@ public class DidacticOfferService {
     }
 
     //accept vote by student
-    public void acceptVoteByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
+    public Boolean acceptVoteByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
+        if(appealDao.findByKey(idAppeal) == null)
+            return false;
         Appeal a = appealDao.findByKey(idAppeal);
-        appealDao.updateStateStudentStudyPlan(studentFreshman, a.getCourse().getCode(), "Accredited");
+        return appealDao.updateStateStudentStudyPlan(studentFreshman, a.getCourse().getCode(), "Accredited");
     }
 
     //inserimento voto
