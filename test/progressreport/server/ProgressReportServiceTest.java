@@ -1,6 +1,6 @@
 package progressreport.server;
 
-import junit.framework.Assert;
+
 import org.junit.jupiter.api.Test;
 import organizationchart.Cycle;
 import organizationchart.FacultyMember;
