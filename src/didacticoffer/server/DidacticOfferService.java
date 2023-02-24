@@ -30,31 +30,31 @@ public class DidacticOfferService {
     //METODI PER ProfessorDao
 
     //inserimento professor
-    public void insertProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String password) throws SQLException {
+    public Boolean insertProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String password) throws SQLException {
         Professor p = new Professor(freshman, name, surname, specialization, university, email, password);
-        professorDao.insert(p);
+        return professorDao.insert(p);
     }
 
     //course assignment to the professor
-    public void updateCodeCourseProfessor(Integer professorFreshman, String codeCourse) throws SQLException{
-        professorDao.updateCodeCourseProfessor(professorFreshman, codeCourse);
+    public Boolean updateCodeCourseProfessor(Integer professorFreshman, String codeCourse) throws SQLException{
+        return professorDao.updateCodeCourseProfessor(professorFreshman, codeCourse);
     }
 
     //modifica professor by freshman
-    public void updateProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String codeCourse) throws SQLException{
+    public Boolean updateProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String codeCourse) throws SQLException{
         Course course = new Course(codeCourse);
         Professor p = new Professor(freshman, name, surname, specialization, university, email, course);
-        professorDao.update(p);
+        return professorDao.update(p);
     }
 
     //modifica password professor by freshman
-    public void updatePasswordProfessor(Integer freshman, String password) throws SQLException{
-        professorDao.updatePasswordProfessor(freshman, password);
+    public Boolean updatePasswordProfessor(Integer freshman, String password) throws SQLException{
+        return professorDao.updatePasswordProfessor(freshman, password);
     }
 
     //elimina professor
-    public void deleteProfessor(Integer freshman) throws SQLException{
-        professorDao.delete(freshman);
+    public Boolean deleteProfessor(Integer freshman) throws SQLException{
+        return professorDao.delete(freshman);
     }
 
     //get all professors
@@ -79,25 +79,25 @@ public class DidacticOfferService {
     //METODI DI CourseDao
 
     //inserimento course
-    public void insertCourse(String code, String title, String description, Integer cfu) throws SQLException{
-        Course c = new Course(code, title, description, cfu);
-        courseDao.insert(c);
+    public Boolean insertCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException{
+        Course c = new Course(code, title, description, cfu,year);
+        return courseDao.insert(c);
     }
 
     //modifica course
-    public void updateCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException{
+    public Boolean updateCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException{
         Course c = new Course(code, title, description, cfu, year);
-        courseDao.update(c);
+        return courseDao.update(c);
     }
 
     //elimina course
-    public void deleteCourse(String code) throws SQLException{
-        courseDao.delete(code);
+    public Boolean deleteCourse(String code) throws SQLException{
+        return courseDao.delete(code);
     }
 
     //update course status (usato quando il professore ha terminato il corso ed definisce il corso "frequentato")
-    public void updateStateStudyPlan(String courseCode, String state) throws SQLException{
-        courseDao.updateStateStudyPlan(courseCode, state);
+    public Boolean updateStateStudyPlan(String courseCode,Integer studentFreshman, String state) throws SQLException{
+        return courseDao.updateStateStudyPlan(courseCode,studentFreshman, state);
     }
 
 

@@ -16,7 +16,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
         try{
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Professors");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Professors INNER JOIN Courses ON Professors.CodeCourse = Courses.Code;");
 
             List<Professor> professors = new ArrayList<Professor>();
 
@@ -197,7 +197,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
     public Boolean updatePasswordProfessor(Integer freshman, String password) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Passoword = ? WHERE Freshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Password = ? WHERE Freshman = ?");
             stmt.setString(1, password);
             stmt.setInt(2, freshman);
 
@@ -206,7 +206,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
                 return true;
             }else{
                 System.out.println("Update password professor not successful");
-                return true;
+                return false;
             }
 
         }catch (SQLException ex){
