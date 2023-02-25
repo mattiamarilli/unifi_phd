@@ -230,7 +230,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
                 return true;
             }else{
                 System.out.println("Update password professor not successful");
-                return true;
+                return false;
             }
 
         }catch (SQLException ex){

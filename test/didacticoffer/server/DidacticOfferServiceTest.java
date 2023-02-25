@@ -2,10 +2,13 @@ package didacticoffer.server;
 
 import didacticoffer.Course;
 import didacticoffer.Professor;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,25 +21,15 @@ class DidacticOfferServiceTest {
     private DidacticOfferService doService = new DidacticOfferService();
 
     @Test
-    void getAllProfessors() throws SQLException {
-//        List<Professor> professors = new ArrayList<Professor>();
-//
-//        Course c2 = new Course("B037592", "Genetic Algorithms", "Description course", 2, 2022);
-//        Professor p2 = new Professor(1129371, "Giorgio", "Battistelli", "Control Systems; Sensor networks", "University of Florence", "giorgio.battistelli@unifi.it", "Password", c2);
-//        professors.add(p2);
-
-        //assertEquals(professors,doService.getAllProfessors());
-    }
-
-    @Test
-    void insertProfessor() throws SQLException {
+    void insertProfessor() throws SQLException, IOException {
         assertEquals(true,doService.insertProfessor(9999999,"Name Test","Surname Test","Test Specialization","Test University","test@unifi.it","testpassword"));
         assertEquals(false,doService.insertProfessor(9999999,"Name Test","Surname Test","Test Specialization","Test University","test@unifi.it","testpassword"));
     }
 
     @Test
-    void updateCodeCourseProfessor() {
-        //perchè dovremmo cambiare il codice del corso a un docente?
+    void updateCodeCourseProfessor() throws SQLException {
+        assertEquals(true,doService.updateCodeCourseProfessor(9876583,"B184721"));
+        assertEquals(false,doService.updateCodeCourseProfessor(000,"B184721"));
     }
 
     @Test
@@ -58,11 +51,6 @@ class DidacticOfferServiceTest {
         assertEquals(false,doService.deleteProfessor(0));
     }
 
-
-
-    @Test
-    void getAllStudentsByProfessor() {
-    }
 
     @Test
     void insertCourse() throws SQLException {
@@ -90,42 +78,50 @@ class DidacticOfferServiceTest {
     }
 
     @Test
-    void insertLesson() throws ParseException {
-        //TODO: comprendere questione date e time, perchè sono sql objects??
-//        String date_string = "26-09-1989";
-//        //Instantiating the SimpleDateFormat class
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM--dd");
-//        //Parsing the given String to Date object
-//        Date date = formatter.parse(date_string);
-//        assertEquals(true,doService.insertLesson((d, "8:30", "10:30", 002, "Centro Didattico Morgagni", "University of Florence", "Presence", "B032592"));
-    }
-
-    @Test
-    void updateLesson() {
-        //TODO: comprendere questione date e time, perchè sono sql objects??
-    }
-
-    @Test
-    void deleteLesson() {
-        //TODO: comprendere questione date e time, perchè sono sql objects??
+    void insertLesson() throws ParseException, SQLException {
+        Date d = new Date(10000);
+        Time t = new Time(1000);
+        assertEquals(true,doService.insertLesson(d, t, t, 002, "Centro Didattico Morgagni", "University of Florence", "Presence", "B032592"));
+        assertEquals(false,doService.insertLesson(d, t, t, 002, "Centro Didattico Morgagni", "University of Florence", "Presence", "e032"));
 
     }
 
     @Test
-    void insertAppeal() {
-        //TODO: comprendere questione date e time, perchè sono sql objects??
+    void updateLesson() throws SQLException {
+        Date d = new Date(10000);
+        Time t = new Time(1000);
+        assertEquals(true,doService.updateLesson(1,d, t, t, 001, "Centro Didattico Morgagni", "University of Florence", "Presence", "B032592"));
+        assertEquals(false,doService.updateLesson(9888,d, t, t, 001, "Centro Didattico Morgagni", "University of Florence", "Presence", "B032592"));
+    }
+
+    @Test
+    void deleteLesson() throws SQLException {
+        assertEquals(true,doService.deleteLesson(9));
+        assertEquals(false,doService.deleteLesson(282828));
+    }
+
+    @Test
+    void insertAppeal() throws SQLException {
+        Date d = new Date(10000);
+        Time t = new Time(1000);
+        assertEquals(true,doService.insertAppeal(d,t,002,"Centro Didattico Morgagni", "University of Florence","note", "Presence", "B032592"));
+        assertEquals(false,doService.insertAppeal(d,t,002,"Centro Didattico Morgagni", "University of Florence","note", "Presence", "wee2"));
 
     }
 
     @Test
-    void updateAppeal() {
-        //TODO: comprendere questione date e time, perchè sono sql objects??
+    void updateAppeal() throws SQLException {
+        Date d = new Date(10000);
+        Time t = new Time(1000);
+        assertEquals(true,doService.updateAppeal(1,d, t, 001, "Centro Didattico Morgagni", "University of Florence","note", "Presence", "B032592"));
+        assertEquals(false,doService.updateAppeal(9888,d, t, 001, "Centro Didattico Morgagni", "University of Florence","note" ,"Presence", "dadc2"));
 
     }
 
     @Test
-    void deleteAppeal() {
-        //TODO: comprendere questione date e time, perchè sono sql objects??
+    void deleteAppeal() throws SQLException {
+        assertEquals(true,doService.deleteAppeal(9));
+        assertEquals(false,doService.deleteAppeal(282828));
 
     }
 
@@ -137,35 +133,49 @@ class DidacticOfferServiceTest {
     }
 
     @Test
-    void updateVote() {
+    void updateVote() throws SQLException {
+        assertEquals(true,doService.updateVote(9302912,6,"30 e lode"));
+        assertEquals(false,doService.updateVote(9302912,7,"30 e lode"));
+        assertEquals(false,doService.updateVote(3333,7,"30 e lode"));
     }
 
     @Test
-    void getAppealsByCourseCode() {
+    void insertStudentCareer() throws SQLException {
+        assertEquals(true,doService.insertStudentCareer(8967222));
+        assertEquals(false,doService.insertStudentCareer(8967222));
     }
 
     @Test
-    void insertStudentCareer() {
+    void deleteStudentCareer() throws SQLException {
+        assertEquals(true,doService.deleteStudentCareer(102829));
+        assertEquals(false,doService.deleteStudentCareer(3333233));
     }
 
     @Test
-    void deleteStudentCareer() {
+    void insertAppealParticipation() throws SQLException {
+        assertEquals(true,doService.insertAppealParticipation(7028492,21));
+        assertEquals(false,doService.insertAppealParticipation(3333333,21));
     }
 
     @Test
-    void insertAppealParticipation() {
+    void deleteAppealParticipationByStudent() throws SQLException {
+        assertEquals(true,doService.deleteAppealParticipationByStudent(102829,22));
+        assertEquals(false,doService.deleteAppealParticipationByStudent(300232,22));
+        assertEquals(false,doService.deleteAppealParticipationByStudent(102829,11));
+
     }
 
     @Test
-    void deleteAppealParticipationByStudent() {
+    void insertStudyPlan() throws SQLException {
+        Date d = new Date(100000);
+        assertEquals(true,doService.insertStudyPlan(7328102,"A009381",d));
+        assertEquals(false,doService.insertStudyPlan(929299,"A232323232",d));
     }
 
     @Test
-    void insertStudyPlan() {
-    }
-
-    @Test
-    void deleteStudyPlan() {
+    void deleteStudyPlan() throws SQLException {
+        assertEquals(true,doService.deleteStudyPlan(4728103,"A009381"));
+        assertEquals(false,doService.deleteStudyPlan(93829211,"232322"));
     }
 
     @Test
@@ -178,5 +188,17 @@ class DidacticOfferServiceTest {
 
     @Test
     void getAppealParticipationByStudent() {
+    }
+
+    @Test
+    void getAllProfessors()  {
+    }
+
+    @Test
+    void getAppealsByCourseCode() {
+    }
+
+    @Test
+    void getAllStudentsByProfessor() {
     }
 }

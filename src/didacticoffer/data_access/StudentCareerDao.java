@@ -93,7 +93,7 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
     public Boolean delete(Integer studentFreshman) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("DELETE * FROM StudentCareers WHERE StudentFreshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM StudentCareers WHERE StudentFreshman = ?");
             stmt.setInt(1, studentFreshman);
 
             if(stmt.executeUpdate() > 0){

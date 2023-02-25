@@ -266,7 +266,7 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
     public Boolean insertVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE AppealParticpation SET Vote = ? WHERE StudentFreshman = ? AND IdAppeal = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE AppealParticipation SET Vote = ? WHERE StudentFreshman = ? AND IdAppeal = ?");
             stmt.setString(1, vote);
             stmt.setInt(2, studentFreshman);
             stmt.setInt(3, idAppeal);

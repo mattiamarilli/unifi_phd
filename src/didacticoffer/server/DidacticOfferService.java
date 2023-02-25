@@ -104,44 +104,44 @@ public class DidacticOfferService {
     //METODI DI LessonDao
 
     //inserimento lesson
-    public void insertLesson(Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException{
+    public Boolean insertLesson(Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException{
         Course c = new Course(codeCourse);
         Lesson lesson = new Lesson(date, startTime, endTime, room, universityComplex, university, mode, c);
-        lessonDao.insert(lesson);
+        return lessonDao.insert(lesson);
     }
 
     //modifica lesson
-    public void updateLesson(Integer id, Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException {
+    public Boolean updateLesson(Integer id, Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException {
         Course c = new Course(codeCourse);
         Lesson lesson = new Lesson(id, date, startTime, endTime, room, universityComplex, university, mode, c);
-        lessonDao.update(lesson);
+        return lessonDao.update(lesson);
     }
 
     //elimina lesson
-    public void deleteLesson(Integer idLesson) throws SQLException{
-        lessonDao.delete(idLesson);
+    public Boolean deleteLesson(Integer idLesson) throws SQLException{
+        return lessonDao.delete(idLesson);
     }
 
 
     //METODI DI AppealDao
 
     //inserimento appeal
-    public void insertAppeal(Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException{
+    public Boolean insertAppeal(Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException{
         Course c = new Course(codeCourse);
         Appeal appeal = new Appeal(date, startTime, room, universityComplex, university, note, mode, c);
-        appealDao.insert(appeal);
+        return appealDao.insert(appeal);
     }
 
     //modifico appeal
-    public void updateAppeal(Integer id, Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException{
+    public Boolean updateAppeal(Integer id, Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException{
         Course c = new Course(codeCourse);
         Appeal appeal = new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
-        appealDao.update(appeal);
+        return appealDao.update(appeal);
     }
 
     //elimina appeal
-    public void deleteAppeal(Integer idAppeal) throws SQLException{
-        appealDao.delete(idAppeal);
+    public Boolean deleteAppeal(Integer idAppeal) throws SQLException{
+       return appealDao.delete(idAppeal);
     }
 
     //accept vote by student
@@ -153,8 +153,8 @@ public class DidacticOfferService {
     }
 
     //inserimento voto
-    public void updateVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException{
-        appealDao.insertVote(studentFreshman, idAppeal, vote);
+    public Boolean updateVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException{
+        return appealDao.insertVote(studentFreshman, idAppeal, vote);
     }
 
     //visualizza appelli in base al course code
@@ -165,42 +165,42 @@ public class DidacticOfferService {
     //METODI DI StudentCareerDao
 
     //inserimento student career
-    public void insertStudentCareer(Integer studentFreshman) throws SQLException{
+    public Boolean insertStudentCareer(Integer studentFreshman) throws SQLException{
         StudentCareer sc = new StudentCareer(studentFreshman);
-        studentCareerDao.insert(sc);
+        return studentCareerDao.insert(sc);
     }
 
     //elimina student career
-    public void deleteStudentCareer(Integer studentFreshman) throws SQLException{
-        studentCareerDao.delete(studentFreshman);
+    public Boolean deleteStudentCareer(Integer studentFreshman) throws SQLException{
+        return studentCareerDao.delete(studentFreshman);
     }
 
     //insert appeal participation
-    public void insertAppealParticipation(Integer studentFreshman, Integer idAppeal) throws SQLException{
+    public Boolean insertAppealParticipation(Integer studentFreshman, Integer idAppeal) throws SQLException{
         Appeal a = new Appeal(idAppeal);
         StudentCareer sc = new StudentCareer(studentFreshman);
 
         AppealParticipation ap = new AppealParticipation(sc, a);
 
-        studentCareerDao.insertAppealParticipation(ap);
+        return studentCareerDao.insertAppealParticipation(ap);
     }
 
     //delete appeal participation by student freshman
-    public void deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
-        studentCareerDao.deleteAppealParticipationByStudent(studentFreshman, idAppeal);
+    public Boolean deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException{
+        return studentCareerDao.deleteAppealParticipationByStudent(studentFreshman, idAppeal);
     }
 
     //insert study plan by student freshman and course code
-    public void insertStudyPlan(Integer studentFreshman, String courseCode, Date date) throws SQLException{
+    public Boolean insertStudyPlan(Integer studentFreshman, String courseCode, Date date) throws SQLException{
         StudentCareer sc = new StudentCareer(studentFreshman);
         Course c = new Course(courseCode);
         StudyPlan studyPlan = new StudyPlan(sc, c, date);
-        studentCareerDao.insertStudyPlan(studyPlan);
+        return studentCareerDao.insertStudyPlan(studyPlan);
     }
 
     //delete study plan by student and course code
-    public void deleteStudyPlan(Integer studentFreshman, String courseCode) throws SQLException{
-        studentCareerDao.deleteStudyPlan(studentFreshman, courseCode);
+    public Boolean deleteStudyPlan(Integer studentFreshman, String courseCode) throws SQLException{
+        return studentCareerDao.deleteStudyPlan(studentFreshman, courseCode);
     }
 
     //visualizza corsi iscritti
