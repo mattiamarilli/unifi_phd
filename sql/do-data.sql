@@ -36,7 +36,6 @@ INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Ema
 INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (9764829, 'Leonardo', 'Montecchi', 'Model-Driven Engineering and its Application to Dependability Analysis', 'University of Campinas', 'leonardo.montecchi@gmail.com', 'Password', 'C583013');
 INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (9737482, 'Graziano', 'Chesi', 'Recent trends in memristors theory and applications', 'University of Pisa', 'graziano.chesi@unipi.it', 'Password', 'B043910');
 INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password, CodeCourse) VALUES (9876583, 'Stefano', 'Maddio', 'Indoor Wireless Positioning', 'University of Siena', 'stefano.maddio@unisi.it', 'Password', 'B184721');
-INSERT INTO Professors (Freshman, Name, Surname, Specialization, University, Email, Password) VALUES (6840482, 'Matteo', 'Farfugli', 'Pattern recognition and machine learning for human activity recognition', 'University of Siena', 'matteo.farfugli@unisi.it', 'Password');
 
 
 -- insert lessons

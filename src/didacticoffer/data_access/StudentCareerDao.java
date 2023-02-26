@@ -291,7 +291,8 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             PreparedStatement stmt = conn.prepareStatement("SELECT StudentCareers.StudentFreshman, IdAppeal, Vote, Date, StartTime, Room, UniversityComplex, University, Note, Mode, CodeCourse\n" +
                     "FROM StudentCareers\n" +
                     "INNER JOIN AppealParticipation ON AppealParticipation.StudentFreshman =StudentCareers.StudentFreshman\n" +
-                    "INNER JOIN Appeals ON IdAppeal = Id");
+                    "INNER JOIN Appeals ON IdAppeal = Id WHERE StudentCareers.StudentFreshman = ? ");
+            stmt.setInt(1, studentFreshman);
             ResultSet rs = stmt.executeQuery();
 
             List<AppealParticipation> appealParticipation = new ArrayList<AppealParticipation>();

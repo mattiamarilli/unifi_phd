@@ -106,7 +106,6 @@ class DidacticOfferServiceTest {
         Time t = new Time(1000);
         assertEquals(true,doService.insertAppeal(d,t,002,"Centro Didattico Morgagni", "University of Florence","note", "Presence", "B032592"));
         assertEquals(false,doService.insertAppeal(d,t,002,"Centro Didattico Morgagni", "University of Florence","note", "Presence", "wee2"));
-
     }
 
     @Test
@@ -115,14 +114,12 @@ class DidacticOfferServiceTest {
         Time t = new Time(1000);
         assertEquals(true,doService.updateAppeal(1,d, t, 001, "Centro Didattico Morgagni", "University of Florence","note", "Presence", "B032592"));
         assertEquals(false,doService.updateAppeal(9888,d, t, 001, "Centro Didattico Morgagni", "University of Florence","note" ,"Presence", "dadc2"));
-
     }
 
     @Test
     void deleteAppeal() throws SQLException {
         assertEquals(true,doService.deleteAppeal(9));
         assertEquals(false,doService.deleteAppeal(282828));
-
     }
 
     @Test
@@ -162,7 +159,6 @@ class DidacticOfferServiceTest {
         assertEquals(true,doService.deleteAppealParticipationByStudent(102829,22));
         assertEquals(false,doService.deleteAppealParticipationByStudent(300232,22));
         assertEquals(false,doService.deleteAppealParticipationByStudent(102829,11));
-
     }
 
     @Test
@@ -179,26 +175,38 @@ class DidacticOfferServiceTest {
     }
 
     @Test
-    void getCoursesByStudentFreshman() {
+    void getCoursesByStudentFreshman() throws SQLException {
+        Integer size = doService.getCoursesByStudentFreshman(5849204).size();
+        assertEquals(0,size);
     }
 
     @Test
-    void getCoursesAccreditedByStudentFreshman() {
+    void getCoursesAccreditedByStudentFreshman() throws SQLException {
+        Integer size = doService.getCoursesAccreditedByStudentFreshman(4728103).size();
+        assertEquals(3,size);
     }
 
     @Test
-    void getAppealParticipationByStudent() {
+    void getAppealParticipationByStudent() throws SQLException {
+        Integer size = doService.getAppealParticipationByStudent(4728103).size();
+        assertEquals(3,size);
     }
 
     @Test
-    void getAllProfessors()  {
+    void getAllProfessors() throws SQLException {
+        Integer size = doService.getAllProfessors().size();
+        assertEquals(13,size);
     }
 
     @Test
-    void getAppealsByCourseCode() {
+    void getAppealsByCourseCode() throws SQLException {
+        Integer size = doService.getAppealsByCourseCode("B032592").size();
+        assertEquals(2,size);
     }
 
     @Test
-    void getAllStudentsByProfessor() {
+    void getAllStudentsByProfessor() throws SQLException {
+        Integer size = doService.getAllStudentsByProfessor(1029371).size();
+        assertEquals(1,size);
     }
 }
