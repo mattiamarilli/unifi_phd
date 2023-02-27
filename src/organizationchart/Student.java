@@ -140,12 +140,11 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", topics='" + topics + '\'' +
                 ", cycle=" + cycle +
                 ", year=" + year +
                 ", advisor=" + advisor +
-                '}';
+                "}";
     }
 
     @Override

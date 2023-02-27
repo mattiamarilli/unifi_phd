@@ -216,4 +216,40 @@ public class ReviewDao implements GenericDao<Review, Integer> {
 
     }
 
+    public List<Review> getAllReviewsByReviewer(Integer reviewerFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * \n" +
+                    "FROM Reviews \n" +
+                    "WHERE IdReviewer = ?");
+            stmt.setInt(1, reviewerFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Review> reviews = new ArrayList<Review>();
+
+            while(rs.next()){
+                Integer id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String comment = rs.getString("Comment");
+                Integer idThesis = rs.getInt("IdThesis");
+                Thesis t = new Thesis(idThesis);
+                Reviewer r = new Reviewer(reviewerFreshman);
+                EvaluationCommittee ec = new EvaluationCommittee(t, r);
+                reviews.add(new Review(id, title, comment, ec));
+            }
+
+            if(reviews.size() == 0)
+                System.out.println("Don't exist reviews by reviewer freshman");
+
+            return reviews;
+
+        }catch (SQLException ex){
+            System.out.println("Error get all reviews by reviewer freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 }

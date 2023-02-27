@@ -4,7 +4,7 @@ USE ta_schema;
 INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Analysis and comparison between the new file proposals of the different operating systems', 'Thesis description', 'thesisSystemOperative.pdf', 0102829, 'Not_approved', 'Load');
 INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Design and development of Augmented Reality Apps', 'Thesis description', 'thesisRealityApp.pdf', 7028492, 'Not_approved', 'Not_load');
 INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Design and development of Apps for the management of electric vehicles', 'Thesis description', 'thesisAppElectricVehicles.pdf', 3820392, 'Approved', 'Load');
-INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('', '', '', 3920391, 'Not_approved', 'Load');
+INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('', '', '', 3920391, 'Not_approved', 'Not_load');
 INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Deep Learning Methods for Document Image Understanding', 'Thesis description', 'thesisDeepLearning.pdf', 3923920, 'Approved', 'Load');
 INSERT INTO Thesis (Title, Description, UrlDocument, StudentFreshman, State, Loaded) VALUES('Network Monitoring and Management in the Future Internet', 'Thesis description', 'thesisNetworkMonitoring.pdf', 4728103, 'Approved', 'Load');
 

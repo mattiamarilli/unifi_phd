@@ -1,6 +1,7 @@
 package thesisapprovation.data_access;
 
 import thesisapprovation.Reviewer;
+import thesisapprovation.Thesis;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,8 +71,6 @@ public class ReviewerDao implements GenericDao<Reviewer, Integer> {
                 String description = rs.getString("Description");
                 Reviewer r = new Reviewer(f, name, surname, password, email, description);
 
-                //output reviewer only for testing
-                System.out.println(r.toString());
                 return r;
             } else
                 System.out.println("there aren't Reviewers with freshman=" + f);
@@ -213,6 +212,44 @@ public class ReviewerDao implements GenericDao<Reviewer, Integer> {
 
         }catch(SQLException ex){
             System.out.println("Error get student freshmen by reviewer");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Thesis> getThesisLoadedNotApprovedByReviewer(Integer reviewerFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Id, Title, Description, UrlDocument, StudentFreshman, State, Loaded \n" +
+                    "FROM EvaluationCommittee\n" +
+                    "INNER JOIN Thesis ON IdThesis = Id\n" +
+                    "WHERE Loaded = \"Load\" AND State = \"Not_approved\" AND IdReviewer = ?");
+            stmt.setInt(1, reviewerFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Thesis> thesisList = new ArrayList<Thesis>();
+
+            while (rs.next()){
+                Integer id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String url = rs.getString("UrlDocument");
+                Integer studentFreshman = rs.getInt("StudentFreshman");
+                String state = rs.getString("State");
+                String loaded = rs.getString("Loaded");
+
+                thesisList.add(new Thesis(id, title, description, url, studentFreshman, state, loaded));
+            }
+
+            if(thesisList.size() == 0)
+                System.out.println("Don't exist thesis loaded and not approved");
+
+            return thesisList;
+
+        }catch (SQLException ex){
+            System.out.println("Error get thesis loaded and not approved");
             ex.printStackTrace();
             return null;
         }finally {

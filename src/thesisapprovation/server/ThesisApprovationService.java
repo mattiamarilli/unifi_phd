@@ -14,6 +14,7 @@ import java.awt.desktop.SystemEventListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class ThesisApprovationService {
 
@@ -105,6 +106,11 @@ public class ThesisApprovationService {
         return reviewerDao.update(r);
     }
 
+    //get reviewer by freshman
+    public Reviewer getReviewerByFreshman(Integer reviewerFreshman) throws SQLException{
+        return reviewerDao.findByKey(reviewerFreshman);
+    }
+
     //modifica password reviewer
     public Boolean updatePasswordReviewer(Integer freshman, String password) throws SQLException{
         return reviewerDao.updatePassword(freshman, password);
@@ -122,6 +128,10 @@ public class ThesisApprovationService {
         }
 
         return students;
+    }
+
+    public List<Thesis> getThesisLoadedNotApproved(Integer reviewerFreshman) throws SQLException{
+        return reviewerDao.getThesisLoadedNotApprovedByReviewer(reviewerFreshman);
     }
 
 
@@ -151,6 +161,11 @@ public class ThesisApprovationService {
     //elimina review
     public Boolean deleteReview(Integer idReview) throws SQLException{
         return reviewDao.delete(idReview);
+    }
+
+    //get all reviews by reviewer freshman
+    public List<Review> getAllReviewsByReviewer(Integer reviewerFreshman) throws SQLException{
+        return reviewDao.getAllReviewsByReviewer(reviewerFreshman);
     }
 
 }
