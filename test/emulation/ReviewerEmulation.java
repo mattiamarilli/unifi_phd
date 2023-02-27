@@ -3,6 +3,7 @@ package emulation;
 import org.junit.jupiter.api.Test;
 import organizationchart.Student;
 import organizationchart.server.*;
+import thesisapprovation.Review;
 import thesisapprovation.Thesis;
 import thesisapprovation.server.*;
 import progressreport.server.*;
@@ -127,11 +128,23 @@ public class ReviewerEmulation {
                 case 6:
                     System.out.println("\nUpdate review");
 
-                    System.out.println("\nGet reviews: ");
-                    System.out.println();
+                    System.out.println("\nGet reviews by reviewer freshman: ");
+                    List<Review> reviews = taService.getAllReviewsByReviewer(reviewerFreshman);
+                    for(Review r : reviews)
+                        System.out.println("- " + r.toString());
 
+                    System.out.print("\nInsert id review: ");
+                    int idReview = sc.nextInt();
+                    System.out.print("Insert new title: ");
+                    String title = sc.next();
+                    System.out.print("Insert new comment: ");
+                    String comment = sc.next();
 
+                    taService.updateReview(idReview, reviewerFreshman, title, comment);
 
+                    System.out.println("\nReviews after update by reviewer freshman: ");
+                    for(Review r : taService.getAllReviewsByReviewer(reviewerFreshman))
+                        System.out.println("- " + r.toString());
                     break;
             }
 

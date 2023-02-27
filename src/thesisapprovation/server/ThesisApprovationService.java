@@ -153,8 +153,8 @@ public class ThesisApprovationService {
     }
 
     //modifica review
-    public Boolean updateReview(Integer idReview, String title, String comment) throws SQLException{
-        Reviewer r = new Reviewer();
+    public Boolean updateReview(Integer idReview, Integer reviewerFreshman, String title, String comment) throws SQLException{
+        Reviewer r = new Reviewer(reviewerFreshman);
         Thesis t = new Thesis();
         EvaluationCommittee ec = new EvaluationCommittee(t, r);
 

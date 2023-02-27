@@ -169,9 +169,9 @@ class ThesisApprovationServiceTest {
 
     @Test
     void updateReview() throws SQLException{
-        assertEquals(true, taService.updateReview(2, "Title update", "Comment update"));
+        assertEquals(true, taService.updateReview(2, 7389203, "Title update", "Comment update"));
         //error id thesis
-        assertEquals(false, taService.updateReview(0, "Title update", "Comment update"));
+        assertEquals(false, taService.updateReview(0, 7389203, "Title update", "Comment update"));
 
     }
 

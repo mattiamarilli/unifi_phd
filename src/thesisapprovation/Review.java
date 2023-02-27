@@ -59,7 +59,6 @@ public class Review {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
-                ", ec=" + ec +
                 '}';
     }
 

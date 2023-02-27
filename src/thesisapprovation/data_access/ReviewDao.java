@@ -162,10 +162,11 @@ public class ReviewDao implements GenericDao<Review, Integer> {
     public Boolean update(Review review) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement ps = conn.prepareStatement("UPDATE Reviews SET Title = ?, Comment = ? WHERE Id = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE Reviews SET Title = ?, Comment = ? WHERE Id = ? AND IdReviewer = ?");
             ps.setString(1, review.getTitle());
             ps.setString(2, review.getComment());
             ps.setInt(3, review.getId());
+            ps.setInt(4, review.getEc().getReviewer().getFreshman());
 
             if(ps.executeUpdate() > 0)
             {
