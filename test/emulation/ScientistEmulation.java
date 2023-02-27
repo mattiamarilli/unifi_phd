@@ -9,5 +9,6 @@ import didacticoffer.server.*;
 public class ScientistEmulation {
     @Test
     void name() {
+
     }
 }

@@ -78,6 +78,10 @@ public class DidacticOfferService {
 
     //METODI DI CourseDao
 
+    public List<Course> getAllCourses() throws SQLException {
+        return courseDao.getAll();
+    }
+
     //inserimento course
     public Boolean insertCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException{
         Course c = new Course(code, title, description, cfu,year);
