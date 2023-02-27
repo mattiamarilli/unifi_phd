@@ -71,6 +71,9 @@ public class ProgressReportService {
 
     //PARTE METODI ScientistDao
 
+    public List<Scientist> getAllScientist() throws SQLException {
+        return scientistDao.getAll();
+    }
     //inserimento scienziato
     public Boolean insertScientist(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException {
         Scientist s = new Scientist(freshman, name, surname, password, email, description);

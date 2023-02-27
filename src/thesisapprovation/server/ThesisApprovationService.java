@@ -95,6 +95,10 @@ public class ThesisApprovationService {
         return reviewerDao.insert(r);
     }
 
+    public List<Reviewer> getAllReviewer() throws SQLException {
+        return reviewerDao.getAll();
+    }
+
     //elimina reviewer
     public Boolean deleteReviewer(Integer freshman) throws SQLException{
         return reviewerDao.delete(freshman);

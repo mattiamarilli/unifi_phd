@@ -5,6 +5,7 @@ public class ProgressReport {
     private enum State{
         Load,
         Not_load
+
     }
 
     private int id;
@@ -90,8 +91,8 @@ public class ProgressReport {
         this.urlDocument = urlDocument;
     }
 
-    public State getState() {
-        return state;
+    public String getState() {
+        return state.toString();
     }
 
     public void setState(State state) {
