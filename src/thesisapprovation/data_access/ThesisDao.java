@@ -330,10 +330,50 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
         }
     }
 
+    public Thesis getThesisByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * \n" +
+                    "FROM EvaluationCommittee\n" +
+                    "INNER JOIN Thesis ON IdThesis = Id\n" +
+                    "WHERE IdReviewer = ? AND StudentFreshman = ? AND Loaded = \"Load\"\n");
+            stmt.setInt(1, reviewerFreshman);
+            stmt.setInt(2, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                int id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String url = rs.getString("UrlDocument");
+                String state = rs.getString("State");
+                String load = rs.getString("Loaded");
+
+                Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
+                return t;
+            }else{
+                System.out.println("Doesn't load thesis by student");
+                return null;
+            }
+
+
+        }catch(SQLException ex){
+            System.out.println("Error gets thesis by student freshman");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+
     public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Thesis WHERE StudentFreshman = ? AND Loaded = 'Load'");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * \n" +
+                    "FROM EvaluationCommittee\n" +
+                    "INNER JOIN Thesis ON IdThesis = Id\n" +
+                    "WHERE AND StudentFreshman = ? AND Loaded = \"Load\"\n");
             stmt.setInt(1, studentFreshman);
             ResultSet rs = stmt.executeQuery();
 
@@ -361,6 +401,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             conn.close();
         }
     }
+
 
     public Boolean deleteThesisByStudent(Integer studentFreshman) throws SQLException {
         try{

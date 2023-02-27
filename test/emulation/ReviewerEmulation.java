@@ -20,6 +20,9 @@ public class ReviewerEmulation {
         final int reviewerFreshman = 5940249;
 
         ThesisApprovationService taService = new ThesisApprovationService();
+        List<Review> reviews;
+        int idReview;
+        int studentFreshman;
 
         Scanner sc = new Scanner(System.in);
         int variable;
@@ -35,7 +38,7 @@ public class ReviewerEmulation {
             System.out.println("Case 5: Insert review");
             System.out.println("Case 6: Update review");
             System.out.println("Case 7: Delete review");
-            System.out.println("Case 8: View review");
+            System.out.println("Case 8: View reviews");
 
             System.out.print("\nPlease enter the variable value: ");
             variable=sc.nextInt();
@@ -99,9 +102,9 @@ public class ReviewerEmulation {
                     }
 
                     System.out.print("Insert student freshman: ");
-                    int studentFreshman = sc.nextInt();
+                    studentFreshman = sc.nextInt();
 
-                    System.out.println(taService.getThesisByStudent(studentFreshman));
+                    System.out.println(taService.getThesisByStudentReviewer(studentFreshman, reviewerFreshman));
                     break;
                 case 5:
                     System.out.println("\nCase 5: Insert review");
@@ -129,12 +132,12 @@ public class ReviewerEmulation {
                     System.out.println("\nUpdate review");
 
                     System.out.println("\nGet reviews by reviewer freshman: ");
-                    List<Review> reviews = taService.getAllReviewsByReviewer(reviewerFreshman);
+                    reviews = taService.getAllReviewsByReviewer(reviewerFreshman);
                     for(Review r : reviews)
                         System.out.println("- " + r.toString());
 
                     System.out.print("\nInsert id review: ");
-                    int idReview = sc.nextInt();
+                    idReview = sc.nextInt();
                     System.out.print("Insert new title: ");
                     String title = sc.next();
                     System.out.print("Insert new comment: ");
@@ -144,6 +147,26 @@ public class ReviewerEmulation {
 
                     System.out.println("\nReviews after update by reviewer freshman: ");
                     for(Review r : taService.getAllReviewsByReviewer(reviewerFreshman))
+                        System.out.println("- " + r.toString());
+                    break;
+                case 7:
+                    System.out.println("\nDelete review");
+
+                    System.out.println("\nGet reviews by reviewer freshman: ");
+                    reviews = taService.getAllReviewsByReviewer(reviewerFreshman);
+                    for(Review r : reviews)
+                        System.out.println("- " + r.toString());
+
+                    System.out.print("\nInsert id review: ");
+                    idReview = sc.nextInt();
+                    taService.deleteReview(idReview);
+                    break;
+                case 8:
+                    System.out.println("\nView reviews");
+
+                    System.out.println("\nGet reviews by reviewer freshman: ");
+                    reviews = taService.getAllReviewsByReviewer(reviewerFreshman);
+                    for(Review r : reviews)
                         System.out.println("- " + r.toString());
                     break;
             }

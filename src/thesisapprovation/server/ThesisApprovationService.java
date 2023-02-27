@@ -83,6 +83,10 @@ public class ThesisApprovationService {
     }
 
     //visualizza tesi by student
+    public Thesis getThesisByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException{
+        return thesisDao.getThesisByStudentReviewer(studentFreshman, reviewerFreshman);
+    }
+
     public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException{
         return thesisDao.getThesisByStudent(studentFreshman);
     }

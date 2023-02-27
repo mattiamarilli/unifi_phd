@@ -104,11 +104,11 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void getThesisByStudent() throws SQLException{
+    void getThesisByStudentReviewer() throws SQLException{
         Thesis t = new Thesis(5, "Deep Learning Methods for Document Image Understanding", "Thesis description", "thesisDeepLearning.pdf", 3923920, "Approved", "Load");
-        assertEquals(t, taService.getThesisByStudent(3923920));
+        assertEquals(t, taService.getThesisByStudentReviewer(3923920, 3294503));
         //thesis not load
-        assertNull(taService.getThesisByStudent(7028492));
+        assertNull(taService.getThesisByStudentReviewer(7028492, 5940249));
     }
 
     @Test
