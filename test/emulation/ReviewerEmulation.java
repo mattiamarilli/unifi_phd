@@ -52,7 +52,7 @@ public class ReviewerEmulation {
                     System.out.println("\nEdit profile");
 
                     System.out.println("\nReviewer before update:");
-                    System.out.println(taService.getReviewerByFreshman(reviewerFreshman).toString());
+                    System.out.println(taService.getReviewerByFreshman(reviewerFreshman));
 
                     System.out.print("Name: ");
                     String name = sc.next();
@@ -66,7 +66,7 @@ public class ReviewerEmulation {
 
                     if(result) {
                         System.out.println("\nReviewer after update:");
-                        System.out.println(taService.getReviewerByFreshman(reviewerFreshman).toString());
+                        System.out.println(taService.getReviewerByFreshman(reviewerFreshman));
                     }else
                         System.out.println("Error edit profile");
                     break;
@@ -74,7 +74,7 @@ public class ReviewerEmulation {
                     System.out.println("\nEdit password");
 
                     System.out.println("Reviewer before password update:");
-                    System.out.println(taService.getReviewerByFreshman(reviewerFreshman).toString());
+                    System.out.println(taService.getReviewerByFreshman(reviewerFreshman));
 
                     System.out.print("New password: ");
                     String password = sc.next();
@@ -82,7 +82,7 @@ public class ReviewerEmulation {
 
                     if(result){
                         System.out.println("Reviewer after update:");
-                        System.out.println(taService.getReviewerByFreshman(reviewerFreshman).toString());
+                        System.out.println(taService.getReviewerByFreshman(reviewerFreshman));
                     }else
                         System.out.println("Error edit password");
                     break;
@@ -169,11 +169,11 @@ public class ReviewerEmulation {
                     for(Review r : reviews)
                         System.out.println("- " + r.toString());
                     break;
+                default:
+                    break;
             }
 
         }while (variable != 0);
-
-
 
     }
 }

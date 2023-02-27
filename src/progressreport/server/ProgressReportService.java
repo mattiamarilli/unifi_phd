@@ -91,6 +91,11 @@ public class ProgressReportService {
         return scientistDao.updatePassword(idScientist, password);
     }
 
+    //get scientist by freshman
+    public Scientist getScientistByFreshman(Integer scientistFreshman) throws SQLException{
+        return scientistDao.findByKey(scientistFreshman);
+    }
+
     //get studenti tramite la matricola del scientist
     public List<Student> getStudentBySupervisory(Integer scientistFreshman) throws SQLException {
         List<Integer> idStudents = scientistDao.getStudents(scientistFreshman);

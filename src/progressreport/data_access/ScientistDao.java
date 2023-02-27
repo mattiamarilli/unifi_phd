@@ -59,7 +59,7 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
 
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Scientist WHERE Freshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Scientists WHERE Freshman = ?");
             stmt.setInt(1, integer);
             ResultSet rs = stmt.executeQuery();
 
@@ -72,9 +72,6 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
                 String d = rs.getString("Description");
 
                 Scientist scientist = new Scientist(f, n, s, p, e, d);
-
-                //only for testing
-                System.out.println(scientist.toString());
 
                 return scientist;
             }else{
