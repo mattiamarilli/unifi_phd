@@ -373,7 +373,7 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             PreparedStatement stmt = conn.prepareStatement("SELECT * \n" +
                     "FROM EvaluationCommittee\n" +
                     "INNER JOIN Thesis ON IdThesis = Id\n" +
-                    "WHERE AND StudentFreshman = ? AND Loaded = \"Load\"\n");
+                    "WHERE StudentFreshman = ? AND Loaded = \"Load\"");
             stmt.setInt(1, studentFreshman);
             ResultSet rs = stmt.executeQuery();
 

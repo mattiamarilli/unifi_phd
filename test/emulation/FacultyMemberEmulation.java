@@ -7,9 +7,6 @@ import didacticoffer.server.*;
 
 public class FacultyMemberEmulation {
 
-    @Test
-    void name() {
-    }
 
 
 }

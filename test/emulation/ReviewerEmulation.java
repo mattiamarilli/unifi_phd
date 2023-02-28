@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import organizationchart.Student;
 import organizationchart.server.*;
 import thesisapprovation.Review;
+import thesisapprovation.Reviewer;
 import thesisapprovation.Thesis;
 import thesisapprovation.server.*;
 import progressreport.server.*;
@@ -12,10 +13,12 @@ import didacticoffer.server.*;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ReviewerEmulation {
 
-
+    ThesisApprovationService tas = new ThesisApprovationService();
 
     public static void main(String[] args) throws SQLException {
 
@@ -178,4 +181,6 @@ public class ReviewerEmulation {
         }while (variable != 0);
 
     }
+
+
 }
