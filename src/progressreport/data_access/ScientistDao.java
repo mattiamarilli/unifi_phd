@@ -177,7 +177,7 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
     public List<Integer> getStudents(Integer scientistFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT StudentFreshman \n" +
+            PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT StudentFreshman \n" +
                     "FROM SupervisoryCommittee\n" +
                     "INNER JOIN ProgressReports ON IdProgressReport = Id \n" +
                     "WHERE IdScientist = ?");
@@ -201,7 +201,7 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
         }
     }
 
-    public ProgressReport getProgressReportByScientistStudent(Integer scientistFreshman, Integer studentFreshman) throws SQLException{
+    public List<ProgressReport> getProgressReportByScientistStudent(Integer scientistFreshman, Integer studentFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
             PreparedStatement stmt = conn.prepareStatement("SELECT Id, Title, ProgressReports.Description, UrlDocument \n" +
@@ -213,19 +213,22 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             stmt.setInt(2, studentFreshman);
             ResultSet rs = stmt.executeQuery();
 
-            if(rs.next()){
+            List<ProgressReport> progressReports = new ArrayList<ProgressReport>();
+
+            while(rs.next()){
                 Integer id = rs.getInt("Id");
                 String title = rs.getString("Title");
                 String description = rs.getString("Description");
                 String url = rs.getString("UrlDocument");
 
-                ProgressReport pr = new ProgressReport(id, title, description, url, studentFreshman);
-
-                return pr;
-            }else{
-                System.out.println("Student doesn't load the progress report");
-                return null;
+                progressReports.add(new ProgressReport(id, title, description, url, studentFreshman));
             }
+
+            if(progressReports.isEmpty()){
+                System.out.println("Student doesn't load the progress report");
+            }
+
+            return progressReports;
 
         }catch(SQLException ex){
             System.out.println("Error get progress report by scientist and student");

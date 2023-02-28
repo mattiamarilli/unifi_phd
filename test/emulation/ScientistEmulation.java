@@ -1,12 +1,15 @@
 package emulation;
 
 import org.junit.jupiter.api.Test;
+import organizationchart.Student;
 import organizationchart.server.*;
+import progressreport.ProgressReport;
 import thesisapprovation.server.*;
 import progressreport.server.*;
 import didacticoffer.server.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ScientistEmulation {
@@ -19,6 +22,7 @@ public class ScientistEmulation {
         Scanner sc = new Scanner(System.in);
         int variable;
         Boolean result;
+        List<Student> students;
 
         do{
 
@@ -76,9 +80,26 @@ public class ScientistEmulation {
                     break;
                 case 3:
                     System.out.println("\nGet students' profile");
+
+                    students = prService.getStudentBySupervisory(scientistFreshman);
+                    for(Student s : students)
+                        System.out.println(s.toString());
                     break;
                 case 4:
-                    System.out.println("\nView progress report by id");
+                    System.out.println("\nView progress reports");
+
+                    System.out.println("\nGet students' profile");
+
+                    students = prService.getStudentBySupervisory(scientistFreshman);
+                    for(Student s : students)
+                        System.out.println(s.toString());
+
+                    System.out.print("\nInsert student freshman you want to view the Progress Report: ");
+                    int studentFreshman = sc.nextInt();
+
+                    System.out.println("View progress reports by student freshman:");
+                    for(ProgressReport pr : prService.getProgressReportByScientistStudent(scientistFreshman, studentFreshman))
+                        System.out.println("- " + pr.toString());
                     break;
                 default:
                     break;

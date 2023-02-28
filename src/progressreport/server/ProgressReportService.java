@@ -111,7 +111,7 @@ public class ProgressReportService {
     }
 
     //get progress report by scientist and student (ovvero lo scienziato visualizza il progress report dello studente selezionato)
-    public ProgressReport getProgressReportByScientistStudent(Integer idScientist, Integer idStudent) throws SQLException{
+    public List<ProgressReport> getProgressReportByScientistStudent(Integer idScientist, Integer idStudent) throws SQLException{
         return scientistDao.getProgressReportByScientistStudent(idScientist, idStudent);
     }
 
