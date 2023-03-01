@@ -157,8 +157,11 @@ public class Emulation {
 
     //FacultyMember
 
-
     @Test
-    void name() {
+    void advisoredStudentCarrear() throws SQLException {
+        List<FacultyMember> facultyMembers = ocs.getAllFacultyMembers();
+        List<Student> studentsAdivsored = ocs.getStudentsByAdvisor(facultyMembers.get(1).getFreshman());
+        assertEquals(2,dos.getCoursesByStudentFreshman(studentsAdivsored.get(0).getFreshman()).size());
     }
+
 }
