@@ -1,7 +1,9 @@
 package didacticoffer.data_access;
 
 import didacticoffer.Appeal;
+import didacticoffer.AppealParticipation;
 import didacticoffer.Course;
+import didacticoffer.StudentCareer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -102,7 +104,7 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
 
             String mode = String.valueOf(appeal.getMode());
 
-            if(mode == "Presence"){
+            if(mode.equals("Presence")){
                 stmt = conn.prepareStatement("INSERT INTO Appeals (Date, StartTime, Room, UniversityComplex, University, Note, Mode, CodeCourse) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
                 stmt.setDate(1, appeal.getDate());
                 stmt.setTime(2, appeal.getStartTime());
@@ -288,4 +290,39 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
         }
     }
 
+    public List<AppealParticipation> getAppealParticipationWithoutVoteByCourseCode(String courseCode) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT StudentFreshman, IdAppeal, Vote\n" +
+                    "FROM AppealParticipation\n" +
+                    "INNER JOIN Appeals ON IdAppeal = Id\n" +
+                    "WHERE CodeCourse = ? AND Vote IS NULL \n");
+            stmt.setString(1, courseCode);
+            ResultSet rs = stmt.executeQuery();
+
+            List<AppealParticipation> appealParticipations = new ArrayList<AppealParticipation>();
+
+            while(rs.next()){
+                StudentCareer sc = new StudentCareer(rs.getInt("StudentFreshman"));
+                Appeal a = new Appeal(rs.getInt("IdAppeal"));
+                appealParticipations.add(new AppealParticipation(sc, a));
+            }
+
+            if(appealParticipations.isEmpty())
+                System.out.println("Don't exist appeal participation without vote by course code");
+
+            return appealParticipations;
+
+        }catch(SQLException ex){
+            System.out.println("Error get student freshmen without vote by course code");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+
 }
+
+

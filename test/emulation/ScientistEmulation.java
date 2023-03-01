@@ -1,13 +1,8 @@
 package emulation;
 
-import org.junit.jupiter.api.Test;
 import organizationchart.Student;
-import organizationchart.server.*;
 import progressreport.ProgressReport;
-import thesisapprovation.server.*;
 import progressreport.server.*;
-import didacticoffer.server.*;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;

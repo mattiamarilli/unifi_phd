@@ -87,9 +87,8 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
 
                 Course c = new Course(codeCourse, title, description, cfu, year);
                 Professor p = new Professor(freshman, name, surname, specialization, university, email, password, c);
-                
-                return p;
 
+                return p;
             }else{
                 System.out.println("Doesn't exist professor with freshman= " + integer);
                 return null;

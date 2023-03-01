@@ -13,7 +13,7 @@ public class Appeal {
     private int id;
     private Date date;
     private Time startTime;
-    private int room;
+    private Integer room;
     private String universityComplex;
     private String university;
     private String note;
@@ -21,7 +21,7 @@ public class Appeal {
     private Course course;
 
     //with id
-    public Appeal(int id, Date d, Time st, int r, String uc, String u, String n, String m, Course c){
+    public Appeal(int id, Date d, Time st, Integer r, String uc, String u, String n, String m, Course c){
         this.id = id;
         this.date = d;
         this.startTime = st;
@@ -34,7 +34,7 @@ public class Appeal {
     }
 
     //without id (usato quando è inserito per la prima volta)
-    public Appeal(Date d, Time st, int r, String uc, String u, String n, String m, Course c){
+    public Appeal(Date d, Time st, Integer r, String uc, String u, String n, String m, Course c){
         this.date = d;
         this.startTime = st;
         this.room = r;
@@ -77,7 +77,7 @@ public class Appeal {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(Integer room) {
         this.room = room;
     }
 

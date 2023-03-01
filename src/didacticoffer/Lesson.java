@@ -14,14 +14,14 @@ public class Lesson {
     private Date date;
     private Time startTime;
     private Time endTime;
-    private int room;
+    private Integer room;
     private String universityComplex;
     private String university;
     private Modality mode;
     private Course course;
 
     //with id
-    public Lesson(int id, Date d, Time st, Time et, int r, String uc, String u, String m, Course c){
+    public Lesson(int id, Date d, Time st, Time et, Integer r, String uc, String u, String m, Course c){
         this.id = id;
         this.date = d;
         this.startTime = st;
@@ -34,7 +34,7 @@ public class Lesson {
     }
 
     //without id (usato quando è inserita per la prima volta)
-    public Lesson(Date d, Time st, Time et, int r, String uc, String u, String m, Course c){
+    public Lesson(Date d, Time st, Time et, Integer r, String uc, String u, String m, Course c){
         this.date = d;
         this.startTime = st;
         this.endTime = et;
@@ -77,11 +77,11 @@ public class Lesson {
         this.endTime = endTime;
     }
 
-    public int getRoom() {
+    public Integer getRoom() {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(Integer room) {
         this.room = room;
     }
 

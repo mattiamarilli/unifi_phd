@@ -130,6 +130,12 @@ public class DidacticOfferService {
         return lessonDao.delete(idLesson);
     }
 
+    //get lessons by courseCode
+    public List<Lesson> getLessonsByCourseCode(String courseCode) throws SQLException{
+        return lessonDao.getLessonsByCourseCode(courseCode);
+    }
+
+
 
     //METODI DI AppealDao
 
@@ -163,6 +169,11 @@ public class DidacticOfferService {
     //inserimento voto
     public Boolean updateVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException{
         return appealDao.insertVote(studentFreshman, idAppeal, vote);
+    }
+
+    //get students without vote in appeal participation by code course
+    public List<AppealParticipation> getAppealParticipationWithoutVoteByCourseCode(String courseCode) throws SQLException{
+        return appealDao.getAppealParticipationWithoutVoteByCourseCode(courseCode);
     }
 
     //visualizza appelli in base al course code
