@@ -22,8 +22,6 @@ public class OrganizationChartService {
 
     //METODI DI StudentDao
 
-    //TODO: quando viene inserito o cancellato uno studente deve essere cancellato anche negli altri microservizi?
-
     //inserimento student
     public Boolean insertStudent(Integer studentFreshman, String name, String surname, String email, String password, String topics, String numberCycle) throws SQLException{
         Cycle c = new Cycle(numberCycle);
@@ -153,9 +151,8 @@ public class OrganizationChartService {
     }
 
     //update faculty member profile
-    public Boolean updateFacultyMember(Integer freshman, String name, String surname, String email, String specialization, String institution, String cycleNumber) throws SQLException{
-        Cycle c = new Cycle(cycleNumber);
-        FacultyMember facultyMember = new FacultyMember(freshman, name, surname, email, specialization, institution, c);
+    public Boolean updateFacultyMember(Integer freshman, String name, String surname, String email, String specialization, String institution) throws SQLException{
+        FacultyMember facultyMember = new FacultyMember(freshman, name, surname, email, specialization, institution);
         return facultyMemberDao.update(facultyMember);
     }
 
@@ -167,6 +164,10 @@ public class OrganizationChartService {
     //delete faculty member
     public Boolean deleteFacultyMember(Integer fmFreshman) throws SQLException{
         return facultyMemberDao.delete(fmFreshman);
+    }
+
+    public FacultyMember getFacultyMember(Integer freshman) throws SQLException{
+        return facultyMemberDao.findByKey(freshman);
     }
 
     //get all faculty members

@@ -328,6 +328,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 }
             }
 
+            if(students.isEmpty())
+                System.out.println("There aren't students in this year");
+
             return students;
 
         }catch(SQLException ex){
@@ -382,6 +385,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
 
             }
 
+            if(students.isEmpty())
+                System.out.println("There aren't students in this cycle");
+
             return students;
 
         }catch (SQLException ex){
@@ -422,6 +428,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
 
                 students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
             }
+
+            if(students.isEmpty())
+                System.out.println("Doesn't advise any student");
 
             return students;
 

@@ -35,6 +35,17 @@ public class FacultyMember {
         this.cycle = cycle;
     }
 
+    //without cycle
+    public FacultyMember(int freshman, String name, String surname, String email, String specialization, String institution) {
+        this.freshman = freshman;
+        this.name = name;
+        this.surname = surname;
+        this.email= email;
+        this.specialization = specialization;
+        this.institution = institution;
+    }
+
+
     public FacultyMember(int freshman){
         this.freshman = freshman;
     }

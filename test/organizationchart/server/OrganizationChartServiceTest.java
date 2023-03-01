@@ -161,9 +161,9 @@ class OrganizationChartServiceTest {
 
     @Test
     void updateFacultyMember() throws SQLException{
-        assertEquals(true, ocService.updateFacultyMember(3840149, "Paolo (update)", "Fresconi (update)", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics (update)", "University of Florence", "XXVIII"));
+        assertEquals(true, ocService.updateFacultyMember(3840149, "Paolo (update)", "Fresconi (update)", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics (update)", "University of Florence"));
         //error update (doesn't exist faculty member)
-        assertEquals(false, ocService.updateFacultyMember(0, "Paolo (update)", "Fresconi (update)", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics (update)", "University of Florence", "XXVIII"));
+        assertEquals(false, ocService.updateFacultyMember(0, "Paolo (update)", "Fresconi (update)", "paolo.fresconi@unifi.it", "Machine Learning; Bioinformatics (update)", "University of Florence"));
     }
 
     @Test
