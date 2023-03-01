@@ -34,8 +34,8 @@ class DidacticOfferServiceTest {
 
     @Test
     void updateProfessor() throws SQLException {
-        assertEquals(true,doService.updateProfessor(1029371,"Franchesco (update)", "Chiti (update)","Statistical signal processing; Remote sensing (update)","University of Florence (update)","francesco.chiti@unifi.it (update)", "B032592"));
-        assertEquals(false,doService.updateProfessor(0,"Franchesco (update)", "Chiti (update)","Statistical signal processing; Remote sensing (update)","University of Florence (update)","francesco.chiti@unifi.it (update)", "B032592"));
+        assertEquals(true,doService.updateProfessor(1029371,"Franchesco (update)", "Chiti (update)","Statistical signal processing; Remote sensing (update)","University of Florence (update)","francesco.chiti@unifi.it (update)"));
+        assertEquals(false,doService.updateProfessor(0,"Franchesco (update)", "Chiti (update)","Statistical signal processing; Remote sensing (update)","University of Florence (update)","francesco.chiti@unifi.it (update)"));
 
     }
 

@@ -41,9 +41,8 @@ public class DidacticOfferService {
     }
 
     //modifica professor by freshman
-    public Boolean updateProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String codeCourse) throws SQLException{
-        Course course = new Course(codeCourse);
-        Professor p = new Professor(freshman, name, surname, specialization, university, email, course);
+    public Boolean updateProfessor(Integer freshman, String name, String surname, String specialization, String university, String email) throws SQLException{
+        Professor p = new Professor(freshman, name, surname, specialization, university, email);
         return professorDao.update(p);
     }
 
@@ -55,6 +54,11 @@ public class DidacticOfferService {
     //elimina professor
     public Boolean deleteProfessor(Integer freshman) throws SQLException{
         return professorDao.delete(freshman);
+    }
+
+    //gets professor by freshman
+    public Professor getProfessorByFreshman(Integer professorFreshman) throws SQLException{
+        return professorDao.findByKey(professorFreshman);
     }
 
     //get all professors

@@ -43,6 +43,16 @@ public class Professor {
         this.course = c;
     }
 
+    //without password and codecourse (utilizzando per la modifica del profilo del professore)
+    public Professor(Integer freshman, String n, String s, String specialization, String u, String e){
+        this.freshman = freshman;
+        this.name = n;
+        this.surname = s;
+        this.specialization = specialization;
+        this.university = u;
+        this.email = e;
+    }
+
     public int getFreshman() {
         return freshman;
     }

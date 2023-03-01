@@ -87,10 +87,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
 
                 Course c = new Course(codeCourse, title, description, cfu, year);
                 Professor p = new Professor(freshman, name, surname, specialization, university, email, password, c);
-
-                //output only for testing
-                System.out.println(p.toString());
-
+                
                 return p;
 
             }else{
@@ -144,14 +141,13 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
     public Boolean update(Professor professor) throws SQLException {
         try{
             conn = ConnectionDao.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Name = ?, Surname= ?, Specialization= ?, University= ?, Email= ?, CodeCourse= ? WHERE Freshman = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE Professors SET Name = ?, Surname = ?, Specialization = ?, University = ?, Email= ? WHERE Freshman = ?");
             stmt.setString(1, professor.getName());
             stmt.setString(2, professor.getSurname());
             stmt.setString(3, professor.getSpecialization());
             stmt.setString(4, professor.getUniversity());
             stmt.setString(5, professor.getEmail());
-            stmt.setString(6, professor.getCourse().getCode());
-            stmt.setInt(7, professor.getFreshman());
+            stmt.setInt(6, professor.getFreshman());
 
             if(stmt.executeUpdate() > 0){
                 System.out.println("Update professor successful");
