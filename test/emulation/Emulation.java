@@ -67,11 +67,8 @@ public class Emulation {
     void assignCourse() throws SQLException {
         List<Professor> professors = dos.getAllProfessors();
         List<Course> courses = dos.getAllCourses();
-
         dos.updateCodeCourseProfessor(professors.get(2).getFreshman(),courses.get(3).getCode());
-
         List<Professor> professorsAfter = dos.getAllProfessors();
-
         assertEquals(professorsAfter.get(2).getCourse().getCode(),courses.get(3).getCode());
     }
 
