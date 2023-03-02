@@ -22,28 +22,4 @@ public class ConnectionDao {
             throw new RuntimeException("Error connecting to the database", ex);
         }
     }
-
-    public static void main(String[] args) throws SQLException, IOException, InterruptedException {
-        //main test for connection and queries
-
-        //prova insert di una review
-
-
-        ReviewDao prova = new ReviewDao();
-        prova.getAll();
-
-
-        /*
-        Connection connection = ConnectionDao.getConnection();
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Thesis");
-
-        while(rs.next())
-        {
-            System.out.println(rs.getString("Title")+ "\n");
-
-        }
-
-        */
-    }
 }

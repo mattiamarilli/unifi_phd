@@ -19,7 +19,4 @@ public class ConnectionDao {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        //main test for connection and queries
-    }
 }
