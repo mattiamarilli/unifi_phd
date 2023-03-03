@@ -322,6 +322,34 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
         }
     }
 
+    public List<Appeal> getAppealsByStudentFreshman(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT *\n" +
+                    "FROM StudyPlans\n" +
+                    "INNER JOIN Courses ON Courses.Code = StudyPlans.CodeCourse\n" +
+                    "INNER JOIN Appeals ON Appeals.CodeCourse = Courses.Code\n" +
+                    "WHERE StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Appeal> appeals = new ArrayList<Appeal>();
+
+            while(rs.next()){
+
+            }
+
+            if(appeals.isEmpty())
+                System.out.println("Don't exist appeals");
+
+            return appeals;
+        }catch(SQLException ex){
+            System.out.println("Error get appeals by student freshman");
+            ex.printStackTrace();
+        }finally {
+            conn.close();
+        }
+    }
 
 }
 

@@ -186,6 +186,10 @@ public class DidacticOfferService {
         return appealDao.getAppealsByCourseCode(courseCode);
     }
 
+    public List<Appeal> getAppealsByStudentFreshman(Integer studentFreshman) throws SQLException{
+
+    }
+
     //METODI DI StudentCareerDao
 
     //inserimento student career

@@ -86,8 +86,8 @@ public class StudentEmulation {
                         System.out.println(fm);
                     break;
                 case 4:
-                    System.out.println("\nView appeals: ");
-                    
+                    System.out.println("\nView appeals by student freshman: ");
+
                     break;
                 case 5:
                     System.out.println("\nAccept vote");
