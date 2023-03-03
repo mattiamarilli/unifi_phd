@@ -32,9 +32,6 @@ public class ReviewerDao implements GenericDao<Reviewer, Integer> {
                 Reviewer r = new Reviewer(freshman, name, surname, password, email, description);
 
                 reviewers.add(r);
-
-                //output only for testing
-                System.out.println(r.toString());
             }
 
             if (reviewers.isEmpty()) {

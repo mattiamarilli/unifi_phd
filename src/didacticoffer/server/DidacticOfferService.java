@@ -66,6 +66,11 @@ public class DidacticOfferService {
         return professorDao.getAll();
     }
 
+    //get all professors without course
+    public List<Professor> getAllProfessorsWithoutCourse() throws SQLException{
+        return professorDao.getProfessorsWithoutCourse();
+    }
+
     //get students enrolled in the professor's course
     public List<Student> getAllStudentsByProfessor(Integer professorFreshman) throws SQLException{
         List<Integer> studentFreshmen = professorDao.getStudentFreshmenByProfessor(professorFreshman);

@@ -29,10 +29,6 @@ public class CourseDao implements GenericDao<Course, String>{
                 Course c = new Course(code, title, description, cfu, year);
 
                 courses.add(c);
-
-                //output only for testing
-                System.out.println(c.toString());
-
             }
 
             if(courses.isEmpty()) {
@@ -70,9 +66,6 @@ public class CourseDao implements GenericDao<Course, String>{
                 int year = rs.getInt("Year");
 
                 Course c = new Course(code, title, description, cfu, year);
-
-                //output only for testing
-                System.out.println(c.toString());
 
                 return c;
 

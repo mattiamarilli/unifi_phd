@@ -16,7 +16,7 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
         try{
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Progresseports");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ProgressReports");
 
             List<ProgressReport> progressReports = new ArrayList<ProgressReport>();
 
@@ -26,14 +26,11 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
                 String d = rs.getString("Description");
                 String ud = rs.getString("UrlDocument");
                 String s = rs.getString("State");
-                int fs = rs.getInt("FreshmanStudent");
+                int fs = rs.getInt("StudentFreshman");
 
                 ProgressReport pr = new ProgressReport(id, t, d, ud, s, fs);
 
                 progressReports.add(pr);
-
-                //only for testing
-                System.out.println(pr.toString());
             }
 
             if(progressReports.isEmpty()) {
@@ -187,13 +184,10 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             stmt.setInt(2, idScientist);
 
 
-            if(stmt.executeUpdate() > 0)
-            {
+            if(stmt.executeUpdate() > 0) {
                 System.out.println("Insert evaluation successful");
                 return true;
-            }
-            else
-            {
+            }else{
                 System.out.println("Insert evaluation not successful");
                 return false;
             }

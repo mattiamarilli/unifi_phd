@@ -34,10 +34,6 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
 
                 thesisList.add(t);
-
-                //output only testing
-                System.out.println(t.toString());
-
             }
 
             if(thesisList.isEmpty()) {
@@ -422,6 +418,41 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             System.out.println("Error delete thesis by student");
             ex.printStackTrace();
             return false;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Thesis> getThesesLoadedNotApproved() throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT *\n" +
+                    "FROM Thesis\n" +
+                    "WHERE Loaded = \"Load\" AND State = \"Not_approved\"");
+            ResultSet rs = stmt.executeQuery();
+
+            List<Thesis> theses = new ArrayList<Thesis>();
+
+            while (rs.next()){
+                int id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String url = rs.getString("UrlDocument");
+                int studentFreshman = rs.getInt("StudentFreshman");
+                String state = rs.getString("State");
+                String load = rs.getString("Loaded");
+
+                theses.add(new Thesis(id,title, description, url, studentFreshman, state, load));
+            }
+
+            if(theses.isEmpty())
+                System.out.println("Don't exist theses loaded and not approved");
+
+            return theses;
+        }catch(SQLException ex){
+            System.out.println("Error get all theses not approved");
+            ex.printStackTrace();
+            return null;
         }finally {
             conn.close();
         }

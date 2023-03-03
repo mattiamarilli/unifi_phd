@@ -68,10 +68,15 @@ public class ProgressReportService {
         return progressReportDao.insertSupervisory(idProgressReport, idScientist);
     }
 
+    //get all progress reports
+    public List<ProgressReport> getAllProgressReports() throws SQLException{
+        return progressReportDao.getAll();
+    }
+
 
     //PARTE METODI ScientistDao
 
-    public List<Scientist> getAllScientist() throws SQLException {
+    public List<Scientist> getAllScientists() throws SQLException {
         return scientistDao.getAll();
     }
     //inserimento scienziato

@@ -16,7 +16,7 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
         try{
             conn = ConnectionDao.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Professors INNER JOIN Courses ON Professors.CodeCourse = Courses.Code;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Professors LEFT JOIN Courses ON Professors.CodeCourse = Courses.Code;");
 
             List<Professor> professors = new ArrayList<Professor>();
 
@@ -38,9 +38,6 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
                 Professor p = new Professor(freshman, name, surname, specialization, university, email, password, c);
 
                 professors.add(p);
-
-                //output only for testing
-                System.out.println(p.toString());
 
             }
 
@@ -265,5 +262,39 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             conn.close();
         }
     }
+
+    public List<Professor> getProfessorsWithoutCourse() throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Professors \n" +
+                    "WHERE CodeCourse is NULL");
+
+            List<Professor> professors = new ArrayList<Professor>();
+
+            while(rs.next()){
+                int freshman = rs.getInt("Freshman");
+                String name = rs.getString("Name");
+                String surname = rs.getString("Surname");
+                String specialization = rs.getString("Specialization");
+                String university = rs.getString("University");
+                String email = rs.getString("Email");
+
+                professors.add(new Professor(freshman, name, surname, specialization, university, email));
+            }
+            if(professors.isEmpty())
+                System.out.println("Don't exist professors without course");
+
+            return professors;
+
+        }catch(SQLException ex){
+            System.out.println("Error get professors without course");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 
 }

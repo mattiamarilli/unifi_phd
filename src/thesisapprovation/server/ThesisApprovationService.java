@@ -62,6 +62,16 @@ public class ThesisApprovationService {
         return thesisDao.deleteThesisByStudent(studentFreshman);
     }
 
+    //get all theses
+    public List<Thesis> getAllThesis() throws SQLException{
+        return thesisDao.getAll();
+    }
+
+    //get all theses loaded and not approved
+    public List<Thesis> getThesesLoadedNotApproved() throws SQLException{
+        return thesisDao.getThesesLoadedNotApproved();
+    }
+
     //visualizza reviewer della propria Evaluation Committee
     public List<Reviewer> getReviewersByStudent(Integer studentFreshman) throws SQLException{
         return thesisDao.getReviewersByStudent(studentFreshman);
@@ -99,7 +109,7 @@ public class ThesisApprovationService {
         return reviewerDao.insert(r);
     }
 
-    public List<Reviewer> getAllReviewer() throws SQLException {
+    public List<Reviewer> getAllReviewers() throws SQLException {
         return reviewerDao.getAll();
     }
 

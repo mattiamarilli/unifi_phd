@@ -25,17 +25,30 @@ public class AdminEmulation {
 
     public static void main(String[] args) throws SQLException{
         OrganizationChartService ocService = new OrganizationChartService();
+        ProgressReportService prService = new ProgressReportService();
+        DidacticOfferService doService = new DidacticOfferService();
+        ThesisApprovationService taService = new ThesisApprovationService();
 
 
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
-        int variable, studentFreshman, fmFreshman, studentYear, cycleYear;
+        int variable, studentFreshman, fmFreshman, studentYear, cycleYear, scientistFreshman, progressReportId, professorFreshman;
+        int courseCfu, courseYear, reviewerFreshman, thesisId;
         String studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycleNumber, cycleDescription;
-        String fmName, fmSurname, fmEmail, fmPassword, fmSpecialization, fmInstitution;
+        String fmName, fmSurname, fmEmail, fmPassword, fmSpecialization, fmInstitution, scientistName;
+        String scientistSurname, scientistEmail, scientistPassword, scientistDescription, professorName, professorSurname;
+        String professorSpecialization, professorUniversity, professorEmail, professorPassword, courseCode, courseTitle;
+        String courseDescription, reviewerName, reviewerSurname, reviewerPassword, reviewerEmail, reviewerDescription;
         Boolean result;
         List<Student> students;
         List<FacultyMember> facultyMembers;
         List<Cycle> cycles;
+        List<Scientist> scientists;
+        List<ProgressReport> progressReports;
+        List<Professor> professors;
+        List<Course> courses;
+        List<Thesis> theses;
+        List<Reviewer> reviewers;
 
 
         do{
@@ -59,6 +72,21 @@ public class AdminEmulation {
             System.out.println("Case 13: Insert scientist");
             System.out.println("Case 14: Delete scientist");
             System.out.println("Case 15: Insert supervisory committee");
+
+            System.out.println("Case 16: Insert professor");
+            System.out.println("Case 17: View all professors");
+            System.out.println("Case 18: Delete professor");
+
+            System.out.println("Case 19: Insert course");
+            System.out.println("Case 20: View all courses");
+            System.out.println("Case 21: Update course");
+            System.out.println("Case 22: Delete course");
+            System.out.println("Case 23: Assign course to professor");
+
+            System.out.println("Case 24: Insert reviewer");
+            System.out.println("Case 25: Delete reviewer");
+            System.out.println("Case 26: Insert evaluation committee");
+            System.out.println("Case 27: Change the status of theses");
 
             System.out.print("\nEnter value the variable: ");
             variable = sc.nextInt();
@@ -248,12 +276,229 @@ public class AdminEmulation {
                     break;
                 case 13:
                     System.out.println("\nInsert scientist");
+
+                    System.out.print("\nInsert scientist freshman: ");
+                    scientistFreshman = sc.nextInt();
+                    System.out.print("Insert scientist name: ");
+                    scientistName = sc.next();
+                    System.out.print("Insert scientist surname: ");
+                    scientistSurname = sc.next();
+                    System.out.print("Insert scientist email: ");
+                    scientistEmail = sc.next();
+                    System.out.print("Insert scientist password: ");
+                    scientistPassword = sc.next();
+                    System.out.print("Insert scientist description: ");
+                    scientistDescription = sc.next();
+                    prService.insertScientist(scientistFreshman, scientistName, scientistSurname, scientistPassword, scientistEmail, scientistDescription);
                     break;
                 case 14:
                     System.out.println("\nDelete scientist");
+
+                    System.out.println("\nView all scientists freshmen: ");
+                    scientists = prService.getAllScientists();
+                    for(Scientist s : scientists)
+                        System.out.println("- " + s.getFreshman());
+
+                    System.out.print("\nInsert scientist freshman you want delete: ");
+                    scientistFreshman = sc.nextInt();
+                    prService.deleteScientist(scientistFreshman);
                     break;
                 case 15:
                     System.out.println("\nInsert supervisory committee");
+
+                    System.out.println("\nView all progress reports id and student freshmen: ");
+                    progressReports = prService.getAllProgressReports();
+                    for(ProgressReport pr : progressReports)
+                        System.out.println("- id: " + pr.getId() + ", student freshmen: " + pr.getFreshmanStudent());
+
+                    System.out.print("\nInsert progress report id you want to insert in the Supervisory Committee: ");
+                    progressReportId = sc.nextInt();
+
+                    System.out.println("\nView all scientists freshmen: ");
+                    scientists = prService.getAllScientists();
+                    for(Scientist s : scientists)
+                        System.out.println("- " + s.getFreshman());
+                    System.out.print("\nInsert scientist freshman you want to insert in the Supervisory Committee: ");
+                    scientistFreshman = sc.nextInt();
+                    prService.insertSupervisoryCommittee(progressReportId, scientistFreshman);
+                    break;
+                case 16:
+                    System.out.println("\nInsert professor");
+
+                    System.out.print("\nInsert professor freshmen: ");
+                    professorFreshman = sc.nextInt();
+                    System.out.print("Insert professor name: ");
+                    professorName = sc.next();
+                    System.out.print("Insert professor surname: ");
+                    professorSurname = sc.next();
+                    System.out.print("Insert professor specialization: ");
+                    professorSpecialization = sc.next();
+                    System.out.print("Insert professor university: ");
+                    professorUniversity = sc.next();
+                    System.out.print("Insert professor email: ");
+                    professorEmail = sc.next();
+                    System.out.print("Insert professor password: ");
+                    professorPassword = sc.next();
+                    doService.insertProfessor(professorFreshman, professorName, professorSurname, professorSpecialization, professorUniversity, professorEmail, professorPassword);
+                    break;
+                case 17:
+                    System.out.println("\nView all professors: ");
+                    professors = doService.getAllProfessors();
+                    for(Professor p : professors)
+                        System.out.println(p);
+                    break;
+                case 18:
+                    System.out.println("\nDelete professor");
+
+                    System.out.println("\nView all professors freshmen: ");
+                    professors = doService.getAllProfessors();
+                    for(Professor p : professors)
+                        System.out.println("- " + p.getFreshman());
+
+                    System.out.print("\nInsert professor freshmen you want delete: ");
+                    professorFreshman = sc.nextInt();
+                    doService.deleteProfessor(professorFreshman);
+                    break;
+                case 19:
+                    System.out.println("\nInsert course");
+
+                    System.out.print("\nInsert course code: ");
+                    courseCode = sc.next();
+                    System.out.print("Insert course title: ");
+                    courseTitle = sc.next();
+                    System.out.print("Insert course description: ");
+                    courseDescription = sc.next();
+                    System.out.print("Insert course cfu: ");
+                    courseCfu = sc.nextInt();
+                    System.out.print("Insert course year: ");
+                    courseYear = sc.nextInt();
+                    doService.insertCourse(courseCode, courseTitle, courseDescription, courseCfu, courseYear);
+                    break;
+                case 20:
+                    System.out.println("\nView all courses: ");
+
+                    courses = doService.getAllCourses();
+                    for(Course c : courses)
+                        System.out.println(c);
+                    break;
+                case 21:
+                    System.out.println("\nUpdate course");
+
+                    System.out.println("\nView all courses code: ");
+
+                    courses = doService.getAllCourses();
+                    for(Course c : courses)
+                        System.out.println("- " + c.getCode());
+
+                    System.out.print("\nInsert course code you want to edit: ");
+                    courseCode = sc.next();
+
+                    System.out.print("Insert new title: ");
+                    courseTitle = sc.next();
+                    System.out.print("Insert new description: ");
+                    courseDescription = sc.next();
+                    System.out.print("Insert new cfu: ");
+                    courseCfu = sc.nextInt();
+                    System.out.print("Insert new year: ");
+                    courseYear = sc.nextInt();
+                    doService.updateCourse(courseCode, courseTitle, courseDescription, courseCfu, courseYear);
+                    break;
+                case 22:
+                    System.out.println("\nDelete course");
+
+                    System.out.println("\nView all courses code: ");
+
+                    courses = doService.getAllCourses();
+                    for(Course c : courses)
+                        System.out.println("- " + c.getCode());
+
+                    System.out.print("\nInsert course code you want to delete: ");
+                    courseCode = sc.next();
+                    doService.deleteCourse(courseCode);
+                    break;
+                case 23:
+                    System.out.println("\nAssign course to professor");
+
+                    System.out.println("\nView all professors freshmen without course");
+                    professors = doService.getAllProfessorsWithoutCourse();
+                    for(Professor p : professors)
+                        System.out.println("- " + p.getFreshman());
+
+                    System.out.print("\nInsert professor freshmen you want assign to course: ");
+                    professorFreshman = sc.nextInt();
+
+                    System.out.println("\nView all courses code and titles: ");
+                    courses = doService.getAllCourses();
+                    for(Course c : courses)
+                        System.out.println("- Code: " + c.getCode() + ", Title: " + c.getTitle());
+
+                    System.out.print("\nInsert course code you want assign to professor: ");
+                    courseCode = sc.next();
+
+                    doService.updateCodeCourseProfessor(professorFreshman, courseCode);
+                case 24:
+                    System.out.println("\nInsert reviewer");
+
+                    System.out.print("\nInsert reviewer freshman: ");
+                    reviewerFreshman = sc.nextInt();
+                    System.out.print("Insert reviewer name: ");
+                    reviewerName = sc.next();
+                    System.out.print("Insert reviewer surname: ");
+                    reviewerSurname = sc.next();
+                    System.out.print("Insert reviewer password: ");
+                    reviewerPassword = sc.next();
+                    System.out.print("Insert reviewer email: ");
+                    reviewerEmail = sc.next();
+                    System.out.print("Insert reviewer description: ");
+                    reviewerDescription = sc.next();
+
+                    taService.insertReviewer(reviewerFreshman, reviewerName, reviewerSurname, reviewerPassword, reviewerEmail, reviewerDescription);
+                    break;
+                case 25:
+                    System.out.println("\nDelete reviewer");
+
+                    System.out.println("\nView all reviewers freshmen: ");
+                    reviewers = taService.getAllReviewers();
+                    for(Reviewer r : reviewers)
+                        System.out.println("- " + r.getFreshman());
+
+                    System.out.print("\nInsert reviewer freshman you want to delete: ");
+                    reviewerFreshman = sc.nextInt();
+
+                    taService.deleteReviewer(reviewerFreshman);
+                    break;
+                case 26:
+                    System.out.println("\nInsert evaluation committee");
+
+                    System.out.println("\nView all theses id and students freshmen: ");
+                    theses = taService.getAllThesis();
+                    for(Thesis t : theses)
+                        System.out.println("- Id: " + t.getId() + ", student freshman: " + t.getStudentFreshman());
+
+                    System.out.print("\nInsert theses id you want to insert in the evaluation committee: ");
+                    thesisId = sc.nextInt();
+
+                    System.out.println("\nView all reviewers freshmen:");
+                    reviewers = taService.getAllReviewers();
+                    for(Reviewer r : reviewers)
+                        System.out.println("- " + r.getFreshman());
+
+                    System.out.print("\nInsert reviewer freshmen you want to insert in the evaluation committee: ");
+                    reviewerFreshman = sc.nextInt();
+
+                    taService.insertEvaluationCommittee(thesisId, reviewerFreshman);
+                    break;
+                case 27:
+                    System.out.println("\nChange the status of theses");
+
+                    System.out.println("\nView all theses that aren't approved and loaded: ");
+                    theses = taService.getThesesLoadedNotApproved();
+                    for(Thesis t : theses)
+                        System.out.println("- Title: " + t.getTitle() + ", student freshman: " + t.getStudentFreshman());
+
+                    System.out.print("\nInsert student freshman you want to change status: ");
+                    studentFreshman = sc.nextInt();
+                    taService.updateStateThesis(studentFreshman, "Approved");
                     break;
                 default:
                     break;

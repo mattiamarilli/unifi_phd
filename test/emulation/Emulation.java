@@ -75,7 +75,7 @@ public class Emulation {
     @Test
     void insertEvaluationCommittee() throws SQLException {
         List<Student> students = ocs.getAllStudents();
-        List<Reviewer> reviewers = tas.getAllReviewer();
+        List<Reviewer> reviewers = tas.getAllReviewers();
         Thesis t = tas.getThesisByStudent(students.get(1).getFreshman());
         tas.insertEvaluationCommittee(t.getId(),reviewers.get(3).getFreshman());
         assertEquals(tas.getReviewersByStudent(students.get(1).getFreshman()).get(2).getFreshman(),reviewers.get(3).getFreshman());
@@ -85,7 +85,7 @@ public class Emulation {
     @Test
     void insertSupervisoryCommittee() throws SQLException {
         List<Student> students = ocs.getAllStudents();
-        List<Scientist> scientists = prs.getAllScientist();
+        List<Scientist> scientists = prs.getAllScientists();
         ProgressReport p = prs.getProgressReportByStudent(students.get(1).getFreshman());
         prs.insertSupervisoryCommittee(p.getId(),scientists.get(3).getFreshman());
         assertEquals(prs.getScientistsByStudent(students.get(1).getFreshman()).get(0).getFreshman(),scientists.get(3).getFreshman());
@@ -109,7 +109,7 @@ public class Emulation {
     //Reviewer
     @Test
     void viewStudentProfileReviewer() throws SQLException {
-        List<Reviewer> reviewers = tas.getAllReviewer();
+        List<Reviewer> reviewers = tas.getAllReviewers();
         assertEquals(2,tas.getStudentsByReviewer(reviewers.get(0).getFreshman()).size());
     }
 
@@ -117,7 +117,7 @@ public class Emulation {
 
     @Test
     void viewStudentProfileScientist() throws SQLException {
-        List<Scientist> scientists = prs.getAllScientist();
+        List<Scientist> scientists = prs.getAllScientists();
         assertEquals(2,prs.getStudentBySupervisory(scientists.get(1).getFreshman()).size());
     }
 

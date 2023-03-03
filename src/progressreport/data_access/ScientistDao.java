@@ -33,10 +33,6 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
                 Scientist scientist = new Scientist(f, n, s, p, e, d);
 
                 scientists.add(scientist);
-
-                //only for testing
-                System.out.println(scientist.toString());
-
             }
 
             if(scientists.isEmpty())
