@@ -87,8 +87,7 @@ public class StudentEmulation {
                     break;
                 case 4:
                     System.out.println("\nView appeals: ");
-
-                    appeals = doService.
+                    
                     break;
                 case 5:
                     System.out.println("\nAccept vote");
