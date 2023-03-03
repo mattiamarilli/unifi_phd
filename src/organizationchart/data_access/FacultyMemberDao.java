@@ -39,6 +39,10 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
 
                 facultyMembers.add(f);
             }
+
+            if(facultyMembers.isEmpty())
+                System.out.println("Don't exist faculty members");
+
             return facultyMembers;
 
         }catch (SQLException e){
@@ -158,10 +162,13 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
             conn = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM FacultyMembers WHERE Freshman = ?");
             preparedStatement.setInt(1, fmFreshman);
-            if(preparedStatement.executeUpdate() > 0)
+            if(preparedStatement.executeUpdate() > 0) {
+                System.out.println("Delete faculty member successful");
                 return true;
-            else
+            }else {
+                System.out.println("Delete faculty member not successful");
                 return false;
+            }
         }catch (SQLException e){
             e.printStackTrace();
             return false;

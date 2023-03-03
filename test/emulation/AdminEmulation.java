@@ -2,6 +2,7 @@ package emulation;
 import didacticoffer.Course;
 import didacticoffer.Professor;
 import org.junit.jupiter.api.Test;
+import organizationchart.Cycle;
 import organizationchart.FacultyMember;
 import organizationchart.Student;
 import organizationchart.server.*;
@@ -28,11 +29,13 @@ public class AdminEmulation {
 
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
-        int variable, studentFreshman, fmFreshman, studentYear;
-        String studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycleNumber;
+        int variable, studentFreshman, fmFreshman, studentYear, cycleYear;
+        String studentName, studentSurname, studentEmail, studentPassword, studentTopics, cycleNumber, cycleDescription;
+        String fmName, fmSurname, fmEmail, fmPassword, fmSpecialization, fmInstitution;
         Boolean result;
         List<Student> students;
         List<FacultyMember> facultyMembers;
+        List<Cycle> cycles;
 
 
         do{
@@ -43,6 +46,19 @@ public class AdminEmulation {
             System.out.println("Case 3: Delete student");
             System.out.println("Case 4: Assign advisor to student");
             System.out.println("Case 5: Promotes student next year");
+
+            System.out.println("Case 6: Insert cycle");
+            System.out.println("Case 7: View all cycles");
+            System.out.println("Case 8: Update cycle");
+            System.out.println("Case 9: Delete cycle");
+
+            System.out.println("Case 10: Insert faculty member");
+            System.out.println("Case 11: View all faculty members");
+            System.out.println("Case 12: Delete faculty member");
+
+            System.out.println("Case 13: Insert scientist");
+            System.out.println("Case 14: Delete scientist");
+            System.out.println("Case 15: Insert supervisory committee");
 
             System.out.print("\nEnter value the variable: ");
             variable = sc.nextInt();
@@ -144,11 +160,104 @@ public class AdminEmulation {
                     else
                         System.out.println("\nStudent promotion not successful");
                     break;
+                case 6:
+                    System.out.println("\nInsert cycle");
+
+                    System.out.print("\nInsert cycle number: ");
+                    cycleNumber = sc.next();
+                    System.out.print("Insert cycle year: ");
+                    cycleYear = sc.nextInt();
+                    System.out.print("Insert cycle description: ");
+                    cycleDescription = sc.next();
+
+                    ocService.insertCycle(cycleNumber, cycleYear, cycleDescription);
+                    break;
+                case 7:
+                    System.out.println("\nView all cycles:");
+
+                    cycles = ocService.getAllCycles();
+                    for(Cycle c : cycles)
+                        System.out.println(c);
+                    break;
+                case 8:
+                    System.out.println("\nUpdate cycle");
+
+                    System.out.println("\nView all cycles numbers: ");
+                    cycles = ocService.getAllCycles();
+                    for(Cycle c : cycles)
+                        System.out.println("- " + c.getNumber());
+
+                    System.out.print("\nInsert cycle number you want edit: ");
+                    cycleNumber = sc.next();
+                    System.out.print("Insert new year: ");
+                    cycleYear = sc.nextInt();
+                    System.out.print("Insert new description: ");
+                    cycleDescription = sc.next();
+                    ocService.updateCycle(cycleNumber, cycleYear, cycleDescription);
+                    break;
+                case 9:
+                    System.out.println("\nDelete cycle");
+
+                    System.out.println("\nView all cycles numbers: ");
+                    cycles = ocService.getAllCycles();
+                    for(Cycle c : cycles)
+                        System.out.println("- " + c.getNumber());
+                    System.out.print("\nInsert cycle number you want delete: ");
+                    cycleNumber = sc.next();
+                    ocService.deleteCycle(cycleNumber);
+                    break;
+                case 10:
+                    System.out.println("\nInsert faculty member");
+
+                    System.out.print("\nInsert faculty member freshman: ");
+                    fmFreshman = sc.nextInt();
+                    System.out.print("Insert faculty member name: ");
+                    fmName = sc.next();
+                    System.out.print("Insert faculty member surname: ");
+                    fmSurname = sc.next();
+                    System.out.print("Insert faculty member email: ");
+                    fmEmail = sc.next();
+                    System.out.print("Insert faculty member password: ");
+                    fmPassword = sc.next();
+                    System.out.print("Insert faculty member specialization: ");
+                    fmSpecialization = sc.next();
+                    System.out.print("Insert faculty member institution: ");
+                    fmInstitution = sc.next();
+                    System.out.print("Insert faculty member cycle: ");
+                    cycleNumber = sc.next();
+
+                    ocService.insertFacultyMember(fmFreshman, fmName, fmSurname, fmEmail, fmPassword, fmSpecialization, fmInstitution, cycleNumber);
+                    break;
+                case 11:
+                    System.out.println("\nView all faculty members: ");
+                    facultyMembers = ocService.getAllFacultyMembers();
+                    for(FacultyMember fm : facultyMembers)
+                        System.out.println(fm);
+                    break;
+                case 12:
+                    System.out.println("\nDelete faculty member");
+
+                    System.out.println("\nView all faculty members freshmen: ");
+                    facultyMembers = ocService.getAllFacultyMembers();
+                    for(FacultyMember fm : facultyMembers)
+                        System.out.println("- " + fm.getFreshman());
+
+                    System.out.print("\nInsert faculty member freshman you want delete: ");
+                    fmFreshman = sc.nextInt();
+                    ocService.deleteFacultyMember(fmFreshman);
+                    break;
+                case 13:
+                    System.out.println("\nInsert scientist");
+                    break;
+                case 14:
+                    System.out.println("\nDelete scientist");
+                    break;
+                case 15:
+                    System.out.println("\nInsert supervisory committee");
+                    break;
                 default:
                     break;
             }
-
-
         }while(variable != 0);
     }
 }
