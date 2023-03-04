@@ -336,7 +336,23 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             List<Appeal> appeals = new ArrayList<Appeal>();
 
             while(rs.next()){
+                int id = rs.getInt("Id");
+                Date date = rs.getDate("Date");
+                Time startTime = rs.getTime("StartTime");
+                String note = rs.getString("Note");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
+                String mode = rs.getString("Mode");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+                String courseCode = rs.getString("CodeCourse");
 
+                Course c = new Course(courseCode, title, description, cfu, year);
+                Appeal a = new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
+                appeals.add(a);
             }
 
             if(appeals.isEmpty())
@@ -346,10 +362,107 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
         }catch(SQLException ex){
             System.out.println("Error get appeals by student freshman");
             ex.printStackTrace();
+            return null;
         }finally {
             conn.close();
         }
     }
+
+    public List<Appeal> getAppealsToAccept(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT IdAppeal, Date, StartTime, Room, UniversityComplex, University, Note, Mode, Code, Title, Description, CFU, Year\n" +
+                    "FROM StudyPlans\n" +
+                    "INNER JOIN AppealParticipation ON AppealParticipation.StudentFreshman = StudyPlans.StudentFreshman\n" +
+                    "INNER JOIN Appeals ON IdAppeal = Id\n" +
+                    "INNER JOIN Courses ON Appeals.CodeCourse = Code\n" +
+                    "WHERE State = \"Attended\" AND Vote is NOT NULL AND Vote >= 18 AND StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Appeal> appeals = new ArrayList<Appeal>();
+
+            while(rs.next()){
+                int id = rs.getInt("Id");
+                Date date = rs.getDate("Date");
+                Time startTime = rs.getTime("StartTime");
+                String note = rs.getString("Note");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
+                String mode = rs.getString("Mode");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+                String courseCode = rs.getString("Code");
+
+                Course c = new Course(courseCode, title, description, cfu, year);
+                Appeal a = new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
+                appeals.add(a);
+            }
+
+            if(appeals.isEmpty())
+                System.out.println("Don't exist appeals you want accept");
+
+            return appeals;
+
+        }catch (SQLException ex){
+            System.out.println("Error get appeals to accept");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public List<Appeal> getAppealsToRegister(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT Id, Date, StartTime, Room, UniversityComplex, University, Note, Mode, Code, Title, Description, CFU, Year\n" +
+                    "FROM StudyPlans\n" +
+                    "INNER JOIN Courses ON StudyPlans.CodeCourse = Code\n" +
+                    "INNER JOIN Appeals ON Appeals.CodeCourse = Code\n" +
+                    "WHERE State = \"Attended\" AND StudyPlans.StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Appeal> appeals = new ArrayList<Appeal>();
+
+            while(rs.next()){
+                int id = rs.getInt("Id");
+                Date date = rs.getDate("Date");
+                Time startTime = rs.getTime("StartTime");
+                String note = rs.getString("Note");
+                int room = rs.getInt("Room");
+                String universityComplex = rs.getString("UniversityComplex");
+                String university = rs.getString("University");
+                String mode = rs.getString("Mode");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+                String courseCode = rs.getString("Code");
+
+                Course c = new Course(courseCode, title, description, cfu, year);
+                Appeal a = new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
+                appeals.add(a);
+            }
+
+            if(appeals.isEmpty())
+                System.out.println("Don't exist appeals you want register");
+
+            return appeals;
+
+        }catch (SQLException ex){
+            System.out.println("Error get appeals to register");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 
 }
 

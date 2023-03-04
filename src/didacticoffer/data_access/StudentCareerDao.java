@@ -284,7 +284,7 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
         }
     }
 
-    //TODO: finire
+
     public List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException{
         try{
             conn = ConnectionDao.getConnection();
@@ -325,7 +325,43 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
         }finally {
             conn.close();
         }
-
     }
+
+    public List<StudyPlan> getStudyPlansByStudent(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT *\n" +
+                    "FROM StudyPlans\n" +
+                    "WHERE StudentFreshman = ?");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<StudyPlan> studyPlans = new ArrayList<StudyPlan>();
+
+            while(rs.next()){
+                String courseCode = rs.getString("CodeCourse");
+                String state = rs.getString("State");
+                Date registrationDat = rs.getDate("RegistrationDate");
+
+                Course c = new Course(courseCode);
+                StudentCareer sc = new StudentCareer(studentFreshman);
+
+                studyPlans.add(new StudyPlan(sc, c, state, registrationDat));
+            }
+
+            if(studyPlans.isEmpty())
+                System.out.println("Don't exist study plans");
+
+            return studyPlans;
+
+        }catch (SQLException ex){
+            System.out.println("Error get study plans by student");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 
 }

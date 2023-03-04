@@ -191,4 +191,47 @@ public class CourseDao implements GenericDao<Course, String>{
         }
     }
 
+    public List<Course> getCoursesNotRegisteredByStudent(Integer studentFreshman) throws SQLException{
+        try{
+            conn = ConnectionDao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * \n" +
+                    "FROM Courses\n" +
+                    "WHERE Code NOT IN (\n" +
+                    "SELECT CodeCourse\n" +
+                    "FROM StudyPlans \n" +
+                    "WHERE StudentFreshman = ?)");
+            stmt.setInt(1, studentFreshman);
+            ResultSet rs = stmt.executeQuery();
+
+            List<Course> courses = new ArrayList<Course>();
+
+            while(rs.next()){
+                String code = rs.getString("Code");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                int cfu = rs.getInt("CFU");
+                int year = rs.getInt("Year");
+
+                Course c = new Course(code, title, description, cfu, year);
+
+                courses.add(c);
+            }
+
+            if(courses.isEmpty()) {
+                System.out.println("Don't exist courses");
+                return null;
+            }
+
+            return courses;
+
+
+        }catch(SQLException ex){
+            System.out.println("Error get all courses");
+            ex.printStackTrace();
+            return null;
+        }finally {
+            conn.close();
+        }
+    }
+
 }

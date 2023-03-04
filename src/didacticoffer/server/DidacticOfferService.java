@@ -91,6 +91,10 @@ public class DidacticOfferService {
         return courseDao.getAll();
     }
 
+    public List<Course> getCoursesNotRegisteredByStudent(Integer studentFreshman) throws SQLException{
+        return courseDao.getCoursesNotRegisteredByStudent(studentFreshman);
+    }
+
     //inserimento course
     public Boolean insertCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException{
         Course c = new Course(code, title, description, cfu,year);
@@ -187,7 +191,15 @@ public class DidacticOfferService {
     }
 
     public List<Appeal> getAppealsByStudentFreshman(Integer studentFreshman) throws SQLException{
+        return appealDao.getAppealsByStudentFreshman(studentFreshman);
+    }
 
+    public List<Appeal> getAppealsToAccept(Integer studentFreshman) throws SQLException{
+        return appealDao.getAppealsToAccept(studentFreshman);
+    }
+
+    public List<Appeal> getAppealsToRegister(Integer studentFreshman) throws SQLException{
+        return appealDao.getAppealsToRegister(studentFreshman);
     }
 
     //METODI DI StudentCareerDao
@@ -241,9 +253,17 @@ public class DidacticOfferService {
         return studentCareerDao.getCoursesAccreditedByStudentFreshman(studentFreshman);
     }
 
+
+    //visualizza corsi registrati
+
     //visualizza partecipazione appelli by student
     public List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException{
         return studentCareerDao.getAppealParticipationByStudent(studentFreshman);
+    }
+
+    //get study plans by student
+    public List<StudyPlan> getStudyPlansByStudent(Integer studentFreshman) throws SQLException{
+        return studentCareerDao.getStudyPlansByStudent(studentFreshman);
     }
 
 }
