@@ -6,12 +6,12 @@
     "type": 1,
     "responsibilities": [
       "creazione e gestione dei cicli del dottorato",
-      "creazione e gestione dei facultymembers",
+      "creazione e gestione dei faculty member",
       "creazione e gestione degli studenti",
-      "assegnazione dei facultymember (advisor) agli studenti"
+      "assegnazione dei faculty member (advisor) agli studenti"
     ],
     "collaborators": [
-      "insegnamenti"
+      "offertadidattica"
     ]
   },
   {
@@ -57,9 +57,7 @@
     "responsibilities": [
       "creazione e gestione del progress report",
       "creazione e gestione degli scienziati",
-      "assegnazione della supervisory committee",
-      "generazione delle revisioni",
-      "gestione dell'approvazione (o non) del progress report"
+      "assegnazione della supervisory committee"
     ],
     "collaborators": [
       "organigramma"
