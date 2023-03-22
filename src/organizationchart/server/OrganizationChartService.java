@@ -7,9 +7,12 @@ import organizationchart.proxy.OrganizationChartProxy;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 public class OrganizationChartService {
 
+    final int millisecondsDelay = 5000;
+    private Boolean available = true;
     private StudentDao studentDao;
     private CycleDao cycleDao;
     private FacultyMemberDao facultyMemberDao;
@@ -19,6 +22,25 @@ public class OrganizationChartService {
         this.cycleDao = new CycleDao();
         this.facultyMemberDao = new FacultyMemberDao();
     }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public static void emulateDelay() throws InterruptedException {
+        Random random = new Random();
+        int number = random.nextInt(100);
+
+        if(number <= 95)
+            Thread.sleep(random.nextInt(7) + 3);
+        else
+            Thread.sleep(random.nextInt(20) + 20);
+    }
+
 
     //METODI DI StudentDao
 
