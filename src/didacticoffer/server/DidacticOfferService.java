@@ -10,8 +10,12 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DidacticOfferService {
+
+    final int millisecondsDelay = 5000;
+    private  Boolean available = true;
     private ProfessorDao professorDao;
     private CourseDao courseDao;
     private LessonDao lessonDao;
@@ -27,12 +31,38 @@ public class DidacticOfferService {
         this.studentCareerDao = new StudentCareerDao();
     }
 
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public void emulateDelay() throws InterruptedException {
+        Random random = new Random();
+        int number = random.nextInt(100);
+        if (number <= 95)
+            Thread.sleep(random.nextInt(7)+3);
+        else
+            Thread.sleep(random.nextInt(20)+20);
+    }
     //METODI PER ProfessorDao
 
     //inserimento professor
-    public Boolean insertProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String password) throws SQLException {
-        Professor p = new Professor(freshman, name, surname, specialization, university, email, password);
-        return professorDao.insert(p);
+    public Boolean insertProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String password) throws SQLException, InterruptedException {
+
+        if (available) {
+            Professor p = new Professor(freshman, name, surname, specialization, university, email, password);
+            emulateDelay();
+            return professorDao.insert(p);
+        }
+        else
+        {
+            Thread.sleep(millisecondsDelay);
+            return false;
+        }
+
     }
 
     //course assignment to the professor
