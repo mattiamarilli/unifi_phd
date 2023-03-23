@@ -23,7 +23,7 @@ class DidacticOfferServiceTest {
     private DidacticOfferService doService = new DidacticOfferService();
 
     @Test
-    void insertProfessor() throws SQLException, IOException {
+    void insertProfessor() throws SQLException, IOException, InterruptedException {
         assertEquals(true,doService.insertProfessor(9999999,"Name Test","Surname Test","Test Specialization","Test University","test@unifi.it","testpassword"));
         assertEquals(false,doService.insertProfessor(9999999,"Name Test","Surname Test","Test Specialization","Test University","test@unifi.it","testpassword"));
     }
@@ -207,7 +207,7 @@ class DidacticOfferServiceTest {
     }
 
     @Test
-    void getAllStudentsByProfessor() throws SQLException {
+    void getAllStudentsByProfessor() throws SQLException, InterruptedException {
         Integer size = doService.getAllStudentsByProfessor(1029371).size();
         assertEquals(1,size);
     }

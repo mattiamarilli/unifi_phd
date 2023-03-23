@@ -10,7 +10,7 @@ public class ThesisApprovationProxy {
     private OrganizationChartService ocService;
     public ThesisApprovationProxy() {}
 
-    public Student getStudentsInformation(Integer idStudent) throws SQLException {
+    public Student getStudentsInformation(Integer idStudent) throws SQLException, InterruptedException {
         this.ocService = new OrganizationChartService();
         return ocService.getStudentByFreshman(idStudent);
     }

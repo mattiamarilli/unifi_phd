@@ -33,7 +33,7 @@ public class Emulation {
 
     //admin
     @Test
-    void assignAdvisor() throws SQLException {
+    void assignAdvisor() throws SQLException, InterruptedException {
 
         //get all the students and faculty members
         List<Student> students = ocs.getAllStudents();
@@ -49,7 +49,7 @@ public class Emulation {
     }
 
     @Test
-    void promotesStudent() throws SQLException {
+    void promotesStudent() throws SQLException, InterruptedException {
         //get all student
         List<Student> students = ocs.getAllStudents();
 
@@ -73,7 +73,7 @@ public class Emulation {
     }
 
     @Test
-    void insertEvaluationCommittee() throws SQLException {
+    void insertEvaluationCommittee() throws SQLException, InterruptedException {
         List<Student> students = ocs.getAllStudents();
         List<Reviewer> reviewers = tas.getAllReviewers();
         Thesis t = tas.getThesisByStudent(students.get(1).getFreshman());
@@ -83,7 +83,7 @@ public class Emulation {
 
 
     @Test
-    void insertSupervisoryCommittee() throws SQLException {
+    void insertSupervisoryCommittee() throws SQLException, InterruptedException {
         List<Student> students = ocs.getAllStudents();
         List<Scientist> scientists = prs.getAllScientists();
         ProgressReport p = prs.getProgressReportByStudent(students.get(1).getFreshman());
@@ -93,13 +93,13 @@ public class Emulation {
 
     //Professor
     @Test
-    void viewEnrolledStudents() throws SQLException {
+    void viewEnrolledStudents() throws SQLException, InterruptedException {
         Professor p = dos.getAllProfessors().get(2);
         assertEquals(2,dos.getAllStudentsByProfessor(p.getFreshman()).size());
     }
 
     @Test
-    void insertVote() throws SQLException {
+    void insertVote() throws SQLException, InterruptedException {
         Professor p = dos.getAllProfessors().get(2);
         List<Student> s = dos.getAllStudentsByProfessor(p.getFreshman());
         List<AppealParticipation> ap = dos.getAppealParticipationByStudent(s.get(1).getFreshman());
@@ -125,7 +125,7 @@ public class Emulation {
     //Student
 
     @Test
-    void appealRegistration() throws SQLException {
+    void appealRegistration() throws SQLException, InterruptedException {
         List<Student> students = ocs.getAllStudents();
         Integer studentFreshman = students.get(5).getFreshman();
         List<Course> courses = dos.getAllCourses();
@@ -136,7 +136,7 @@ public class Emulation {
 
 
     @Test
-    void viewScientistProfile() throws SQLException {
+    void viewScientistProfile() throws SQLException, InterruptedException {
         List<Student> students = ocs.getAllStudents();
         Integer studentFreshman = students.get(2).getFreshman();
         List<Scientist> scientists = prs.getScientistsByStudent(studentFreshman);
@@ -144,7 +144,7 @@ public class Emulation {
     }
 
     @Test
-    void viewReviewerProfile() throws SQLException {
+    void viewReviewerProfile() throws SQLException, InterruptedException {
         List<Student> students = ocs.getAllStudents();
         Integer studentFreshman = students.get(2).getFreshman();
         System.out.println(students.get(2).getFreshman());
@@ -155,7 +155,7 @@ public class Emulation {
     //FacultyMember
 
     @Test
-    void advisoredStudentCarrear() throws SQLException {
+    void advisoredStudentCarrear() throws SQLException, InterruptedException {
         List<FacultyMember> facultyMembers = ocs.getAllFacultyMembers();
         List<Student> studentsAdivsored = ocs.getStudentsByAdvisor(facultyMembers.get(1).getFreshman());
         assertEquals(2,dos.getCoursesByStudentFreshman(studentsAdivsored.get(0).getFreshman()).size());

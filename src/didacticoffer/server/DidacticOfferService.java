@@ -102,7 +102,7 @@ public class DidacticOfferService {
     }
 
     //get students enrolled in the professor's course
-    public List<Student> getAllStudentsByProfessor(Integer professorFreshman) throws SQLException{
+    public List<Student> getAllStudentsByProfessor(Integer professorFreshman) throws SQLException, InterruptedException {
         List<Integer> studentFreshmen = professorDao.getStudentFreshmenByProfessor(professorFreshman);
         List<Student> students = new ArrayList<Student>();
 

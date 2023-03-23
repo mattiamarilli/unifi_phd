@@ -10,7 +10,7 @@ public class DidacticOfferProxy {
 
     public DidacticOfferProxy() { this.ocService = new OrganizationChartService(); }
 
-    public Student getStudentsInformation(Integer idStudent) throws SQLException {
+    public Student getStudentsInformation(Integer idStudent) throws SQLException, InterruptedException {
         return ocService.getStudentByFreshman(idStudent);
     }
 }

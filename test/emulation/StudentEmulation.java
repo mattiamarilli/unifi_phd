@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StudentEmulation {
 
-    public static void main(String[] args) throws SQLException, ParseException {
+    public static void main(String[] args) throws SQLException, ParseException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         DidacticOfferService doService = new DidacticOfferService();
 

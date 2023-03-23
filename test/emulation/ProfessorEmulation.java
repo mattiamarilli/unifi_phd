@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ProfessorEmulation {
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException, InterruptedException {
 
         final int professorFreshman = 9033829;
         final String courseCode = "C003830";

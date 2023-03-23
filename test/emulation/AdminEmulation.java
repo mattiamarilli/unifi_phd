@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AdminEmulation {
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         ProgressReportService prService = new ProgressReportService();
         DidacticOfferService doService = new DidacticOfferService();

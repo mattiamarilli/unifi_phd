@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class FacultyMemberEmulation {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
 
         final int fmFreshman = 593183;
 
