@@ -116,7 +116,7 @@ public class Emulation {
     //Scientist
 
     @Test
-    void viewStudentProfileScientist() throws SQLException {
+    void viewStudentProfileScientist() throws SQLException, InterruptedException  {
         List<Scientist> scientists = prs.getAllScientists();
         assertEquals(2,prs.getStudentBySupervisory(scientists.get(1).getFreshman()).size());
     }

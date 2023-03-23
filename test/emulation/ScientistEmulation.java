@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ScientistEmulation {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, InterruptedException  {
         final int scientistFreshman = 7237583;
 
         ProgressReportService prService = new ProgressReportService();

@@ -14,7 +14,7 @@ public class OrganizationChartProxy {
 
     public OrganizationChartProxy(){}
 
-    public void insertStudentToProgressReport(Integer studentFreshman) throws SQLException {
+    public void insertStudentToProgressReport(Integer studentFreshman) throws SQLException, InterruptedException  {
         this.prService = new ProgressReportService();
         prService.insertStudentToProgressReport(studentFreshman);
     }
@@ -29,7 +29,7 @@ public class OrganizationChartProxy {
         doService.insertStudentCareer(studentFreshman);
     }
 
-    public void deleteStudentProgressReport(Integer studentFreshman) throws SQLException{
+    public void deleteStudentProgressReport(Integer studentFreshman) throws SQLException, InterruptedException {
         this.prService = new ProgressReportService();
         prService.deleteProgressReportByStudent(studentFreshman);
     }
