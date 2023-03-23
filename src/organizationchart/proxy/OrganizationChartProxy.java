@@ -24,7 +24,7 @@ public class OrganizationChartProxy {
         taService.insertStudentToThesisApprovation(studentFreshman);
     }
 
-    public void insertStudentToDidacticOffer(Integer studentFreshman) throws SQLException{
+    public void insertStudentToDidacticOffer(Integer studentFreshman) throws SQLException, InterruptedException{
         this.doService = new DidacticOfferService();
         doService.insertStudentCareer(studentFreshman);
     }
@@ -39,7 +39,7 @@ public class OrganizationChartProxy {
         taService.deleteThesisByStudent(studentFreshman);
     }
 
-    public void deleteStudentDidacticOffer(Integer studentFreshman) throws SQLException{
+    public void deleteStudentDidacticOffer(Integer studentFreshman) throws SQLException, InterruptedException{
         this.doService = new DidacticOfferService();
         doService.deleteStudentCareer(studentFreshman);
     }

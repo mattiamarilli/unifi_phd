@@ -64,7 +64,7 @@ public class Emulation {
     }
 
     @Test
-    void assignCourse() throws SQLException {
+    void assignCourse() throws SQLException, InterruptedException {
         List<Professor> professors = dos.getAllProfessors();
         List<Course> courses = dos.getAllCourses();
         dos.updateCodeCourseProfessor(professors.get(2).getFreshman(),courses.get(3).getCode());
