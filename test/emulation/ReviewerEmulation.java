@@ -20,7 +20,7 @@ public class ReviewerEmulation {
 
     ThesisApprovationService tas = new ThesisApprovationService();
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
 
         final int reviewerFreshman = 5940249;
 

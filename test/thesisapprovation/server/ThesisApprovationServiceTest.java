@@ -20,49 +20,49 @@ class ThesisApprovationServiceTest {
     private ThesisApprovationService taService = new ThesisApprovationService();
 
     @Test
-    void insertStudentToThesisApprovation() throws SQLException{
+    void insertStudentToThesisApprovation() throws SQLException, InterruptedException {
         assertEquals(true, taService.insertStudentToThesisApprovation(3840291));
         //error student freshman (already exists)
         assertEquals(false, taService.insertStudentToThesisApprovation(7028492));
     }
 
     @Test
-    void updateThesis() throws SQLException{
+    void updateThesis() throws SQLException, InterruptedException {
         assertEquals(true, taService.updateThesis(1, "Analysis and comparison between the new file proposals of the different operating systems (update)", "Thesis description (update)", "thesisSystemOperativeUpdate.pdf", 102829));
         //error id
         assertEquals(false, taService.updateThesis(0, "Analysis and comparison between the new file proposals of the different operating systems (update)", "Thesis description (update)", "thesisSystemOperativeUpdate.pdf", 102829));
     }
 
     @Test
-    void updateStateThesis() throws SQLException{
+    void updateStateThesis() throws SQLException, InterruptedException {
         assertEquals(true, taService.updateStateThesis(7028492, "Approved"));
         //error student freshman
         assertEquals(false, taService.updateStateThesis(0, "Approved"));
     }
 
     @Test
-    void updateLoadedThesis() throws SQLException{
+    void updateLoadedThesis() throws SQLException, InterruptedException {
         assertEquals(true, taService.updateLoadedThesis(2, "Not_load"));
         //error id thesis
         assertEquals(false, taService.updateLoadedThesis(0, "Load"));
     }
 
     @Test
-    void deleteThesis() throws SQLException {
+    void deleteThesis() throws SQLException, InterruptedException {
         assertEquals(true, taService.deleteThesis(1));
         //error id thesis
         assertEquals(false, taService.deleteThesis(0));
     }
 
     @Test
-    void deleteThesisByStudent() throws SQLException{
+    void deleteThesisByStudent() throws SQLException, InterruptedException {
         assertEquals(true, taService.deleteThesisByStudent(3820392));
         //error student freshman
         assertEquals(false, taService.deleteThesisByStudent(0));
     }
 
     @Test
-    void getReviewersByStudent() throws SQLException{
+    void getReviewersByStudent() throws SQLException, InterruptedException {
         List<Reviewer> reviewers = new ArrayList<Reviewer>();
         reviewers.add(new Reviewer(3485395, "Franco", "Scarselli", "franco.scarselli@unifi.it", "Machine Learning; Artificial neural networks"));
         reviewers.add(new Reviewer(5940249, "Roberto", "Giorgi", "roberto.giorgi@iid.unisi.it", "Computer Architecture; Parallel and Distributed Computing"));
@@ -75,7 +75,7 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void getReviewByStudentReviewer() throws SQLException{
+    void getReviewByStudentReviewer() throws SQLException, InterruptedException {
         Thesis t = new Thesis(2, "Design and development of Augmented Reality Apps", "Thesis description", "thesisRealityApp.pdf", 7028492, "Not_approved", "Not_load");
         Reviewer r = new Reviewer(3485395, "Franco", "Scarselli", "franco.scarselli@unifi.it", "Machine Learning; Artificial neural networks");
         EvaluationCommittee ec = new EvaluationCommittee(t, r);
@@ -88,7 +88,7 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void getThesisById() throws SQLException{
+    void getThesisById() throws SQLException, InterruptedException {
         Thesis t = new Thesis(5, "Deep Learning Methods for Document Image Understanding", "Thesis description", "thesisDeepLearning.pdf", 3923920, "Approved", "Load");
         assertEquals(t, taService.getThesisById(5));
 
@@ -97,14 +97,14 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void insertEvaluationCommittee() throws SQLException{
+    void insertEvaluationCommittee() throws SQLException, InterruptedException {
         assertEquals(true, taService.insertEvaluationCommittee(1, 8420391));
         //error (already exist)
         assertEquals(false, taService.insertEvaluationCommittee(1, 8420391));
     }
 
     @Test
-    void getThesisByStudentReviewer() throws SQLException{
+    void getThesisByStudentReviewer() throws SQLException, InterruptedException {
         Thesis t = new Thesis(5, "Deep Learning Methods for Document Image Understanding", "Thesis description", "thesisDeepLearning.pdf", 3923920, "Approved", "Load");
         assertEquals(t, taService.getThesisByStudentReviewer(3923920, 3294503));
         //thesis not load
@@ -112,35 +112,35 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void insertReviewer() throws SQLException{
+    void insertReviewer() throws SQLException, InterruptedException {
         assertEquals(true, taService.insertReviewer(3920384, "Name Test", "Surname Test", "Password Test", "test@test.it", "Description reviewer test"));
         //error insert (freshman already exists)
         assertEquals(false,taService.insertReviewer(3920384, "Name Test", "Surname Test", "Password Test", "test@test.it", "Description reviewer test") );
     }
 
     @Test
-    void deleteReviewer() throws SQLException{
+    void deleteReviewer() throws SQLException, InterruptedException {
         assertEquals(true, taService.deleteReviewer(8420391));
         //error delete (doesn't exist)
         assertEquals(false, taService.deleteReviewer(0));
     }
 
     @Test
-    void updateReviewer() throws SQLException{
+    void updateReviewer() throws SQLException, InterruptedException {
         assertEquals(true, taService.updateReviewer(5940249, "Roberto update", "Giorgi update", "robaerto.giorgi@iid.unisi.it", "Computer Architecture; Parallel and Distributed Computing Update"));
         //error update (doesn't exist reviewer)
         assertEquals(false, taService.updateReviewer(940249, "Roberto update", "Giorgi update", "robaerto.giorgi@iid.unisi.it", "Computer Architecture; Parallel and Distributed Computing Update"));
     }
 
     @Test
-    void updatePasswordReviewer() throws SQLException {
+    void updatePasswordReviewer() throws SQLException, InterruptedException {
         assertEquals(true, taService.updatePasswordReviewer(7389203, "Password update"));
         //error update password (doesn't exist reviewer)
         assertEquals(false, taService.updatePasswordReviewer(0, "Password update"));
     }
 
     @Test
-    void getStudentsByReviewer() throws SQLException{
+    void getStudentsByReviewer() throws SQLException, InterruptedException {
         List<Student> students = new ArrayList<Student>();
 
         Cycle c1 = new Cycle("XXVII", 2020, "IComputer and automation engineering");
@@ -161,14 +161,14 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void insertReview() throws SQLException{
+    void insertReview() throws SQLException, InterruptedException {
         assertEquals(true, taService.insertReview(2, 	3485395,"test", "comment test"));
         //error insert (reviewer doesn't exist)
         assertEquals(false, taService.insertReview(2, 102829,  "test", "comment test"));
     }
 
     @Test
-    void updateReview() throws SQLException{
+    void updateReview() throws SQLException, InterruptedException {
         assertEquals(true, taService.updateReview(2, 7389203, "Title update", "Comment update"));
         //error id thesis
         assertEquals(false, taService.updateReview(0, 7389203, "Title update", "Comment update"));
@@ -176,7 +176,7 @@ class ThesisApprovationServiceTest {
     }
 
     @Test
-    void deleteReview() throws SQLException {
+    void deleteReview() throws SQLException, InterruptedException {
         assertEquals(true, taService.deleteReview(7));
         //error id review
         assertEquals(false, taService.deleteReview(0));

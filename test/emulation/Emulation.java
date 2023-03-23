@@ -108,7 +108,7 @@ public class Emulation {
 
     //Reviewer
     @Test
-    void viewStudentProfileReviewer() throws SQLException {
+    void viewStudentProfileReviewer() throws SQLException, InterruptedException {
         List<Reviewer> reviewers = tas.getAllReviewers();
         assertEquals(2,tas.getStudentsByReviewer(reviewers.get(0).getFreshman()).size());
     }
