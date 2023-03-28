@@ -579,16 +579,11 @@ public class DidacticOfferService {
         if (available) {
             emulateDelay();
             return studentCareerDao.getCoursesAccreditedByStudentFreshman(studentFreshman);
-        }
-        else
-        {
+        }else{
             Thread.sleep(millisecondsDelay);
             return null;
         }
     }
-
-
-    //visualizza corsi registrati
 
     //visualizza partecipazione appelli by student
     public List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
@@ -608,13 +603,9 @@ public class DidacticOfferService {
         if (available) {
             emulateDelay();
             return studentCareerDao.getStudyPlansByStudent(studentFreshman);
-        }
-        else
-        {
+        }else{
             Thread.sleep(millisecondsDelay);
             return null;
         }
-
     }
-
 }
