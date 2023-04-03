@@ -22,7 +22,7 @@ import java.sql.Time;
 public class EmulationPerformance {
 
     private static int numberRow = 3;
-    private static int numberColumn = 4;
+    private static int numberColumn = 6;
 
     public static void updateExcel(long number){
         final String excelFilePath = "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/PerformanceApplicativo.xlsx";
