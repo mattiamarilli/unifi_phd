@@ -2,7 +2,10 @@ package performance;
 
 
 import didacticoffer.server.DidacticOfferService;
+import multiuseremulation.DoUserThread;
 import multiuseremulation.OcUserThread;
+import multiuseremulation.PrUserThread;
+import multiuseremulation.TaUserThread;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -50,29 +53,9 @@ public class EmulationPerformance {
         }
     }
 
-    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        OrganizationChartService ocService = new OrganizationChartService();
-        ProgressReportService prService = new ProgressReportService();
-        DidacticOfferService doService = new DidacticOfferService();
-        ThesisApprovationService taService = new ThesisApprovationService();
-
-        //run all user thread
-
-
-
-
-        OcUserThread ocUserThread = new OcUserThread(ocService);
-
-        Thread user1 = new Thread(ocUserThread);
-        Thread user2 = new Thread(ocUserThread);
-        Thread user3 = new Thread(ocUserThread);
-        user1.start();
-        user2.start();
-        user3.start();
-
-
+    public static void getLatenze(OrganizationChartService ocService, ProgressReportService prService,DidacticOfferService doService,ThesisApprovationService taService) throws InterruptedException, SQLException {
         //organizationchart
-        long start, end ;
+        long start, end;
 
         Thread.sleep(1000);
 
@@ -470,6 +453,43 @@ public class EmulationPerformance {
         taService.deleteReview(7);
         end = System.currentTimeMillis();
         updateExcel(end-start);
+
+    }
+
+
+    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+        OrganizationChartService ocService = new OrganizationChartService();
+        ProgressReportService prService = new ProgressReportService();
+        DidacticOfferService doService = new DidacticOfferService();
+        ThesisApprovationService taService = new ThesisApprovationService();
+
+        OcUserThread ocUserThread = new OcUserThread(ocService);
+        Thread ocUser = new Thread(ocUserThread);
+
+        DoUserThread doUserThread = new DoUserThread(doService);
+        Thread doUser = new Thread(doUserThread);
+
+        PrUserThread prUserThread = new PrUserThread(prService);
+        Thread prUser = new Thread(prUserThread);
+
+        TaUserThread taUserThread = new TaUserThread(taService);
+        Thread taUser = new Thread(taUserThread);
+
+        for(int i = 0; i<1; i++)
+            ocUser.start();
+
+        for(int i = 0; i<1; i++)
+            doUser.start();
+
+        for(int i = 0; i<1; i++)
+            prUser.start();
+
+        for(int i = 0; i<1; i++)
+            taUser.start();
+
+        //System.out.println("helloooooooooooooo");
+        //getLatenze(ocService,prService,doService,taService);
+
     }
 
 }
