@@ -456,7 +456,6 @@ public class EmulationPerformance {
 
     }
 
-
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         ProgressReportService prService = new ProgressReportService();
@@ -485,21 +484,21 @@ public class EmulationPerformance {
             }
         });
 
-        for(int i = 0; i<1; i++)
+        for(int i = 0; i<2; i++)
             ocUser.start();
 
-        for(int i = 0; i<1; i++)
+        for(int i = 0; i<2; i++)
             doUser.start();
 
-        for(int i = 0; i<1; i++)
+        for(int i = 0; i<2; i++)
             prUser.start();
 
-        for(int i = 0; i<1; i++)
+        for(int i = 0; i<2; i++)
             taUser.start();
 
-        threadLatency.start();
+//        threadLatency.start();
 
-        //getLatences(ocService,prService,doService,taService);
+        //getLatencies(ocService,prService,doService,taService);
 
     }
 
