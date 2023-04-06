@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class EmulationPerformance {
 
@@ -462,17 +463,21 @@ public class EmulationPerformance {
         DidacticOfferService doService = new DidacticOfferService();
         ThesisApprovationService taService = new ThesisApprovationService();
 
-        OcUserThread ocUserThread = new OcUserThread(ocService);
-        Thread ocUser = new Thread(ocUserThread);
+        ArrayList<Thread> ocUsers = new ArrayList<Thread>();
+        for(int i = 0;i<10;i++)
+            ocUsers.add(new Thread(new OcUserThread(ocService)));
 
-        DoUserThread doUserThread = new DoUserThread(doService);
-        Thread doUser = new Thread(doUserThread);
+        ArrayList<Thread> doUsers = new ArrayList<Thread>();
+        for(int i = 0;i<10;i++)
+            doUsers.add(new Thread(new DoUserThread(doService)));
 
-        PrUserThread prUserThread = new PrUserThread(prService);
-        Thread prUser = new Thread(prUserThread);
+        ArrayList<Thread> prUsers = new ArrayList<Thread>();
+        for(int i = 0;i<10;i++)
+            prUsers.add(new Thread(new PrUserThread(prService)));
 
-        TaUserThread taUserThread = new TaUserThread(taService);
-        Thread taUser = new Thread(taUserThread);
+        ArrayList<Thread> taUsers = new ArrayList<Thread>();
+        for(int i = 0;i<10;i++)
+            taUsers.add(new Thread(new TaUserThread(taService)));
 
         Thread threadLatency = new Thread(() -> {
             try {
@@ -484,20 +489,21 @@ public class EmulationPerformance {
             }
         });
 
-        for(int i = 0; i<2; i++)
-            ocUser.start();
+        for(int i = 0; i<1; i++)
+            ocUsers.get(i).start();
 
-        for(int i = 0; i<2; i++)
-            doUser.start();
+        for(int i = 0; i<1; i++)
+            doUsers.get(i).start();
 
-        for(int i = 0; i<2; i++)
-            prUser.start();
+        for(int i = 0; i<1; i++)
+            prUsers.get(i).start();
 
-        for(int i = 0; i<2; i++)
-            taUser.start();
+        for(int i = 0; i<1; i++)
+            taUsers.get(i).start();
 
-//        threadLatency.start();
+        threadLatency.start();
 
+        //Thread.sleep(2000);
         //getLatencies(ocService,prService,doService,taService);
 
     }
