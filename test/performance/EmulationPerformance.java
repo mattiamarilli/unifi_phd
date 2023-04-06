@@ -2,6 +2,7 @@ package performance;
 
 
 import didacticoffer.server.DidacticOfferService;
+import multiuseremulation.OcUserThread;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -49,7 +50,19 @@ public class EmulationPerformance {
         }
     }
 
-    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+    public static void main (String[] args) throws IOException, SQLException, InterruptedException {
+        OrganizationChartService ocService = new OrganizationChartService();
+        OcUserThread ocUserThread = new OcUserThread(ocService);
+        Thread user1 = new Thread(ocUserThread);
+        Thread user2 = new Thread(ocUserThread);
+        Thread user3 = new Thread(ocUserThread);
+        user1.start();
+        user2.start();
+        user3.start();
+
+    }
+
+    public static void test(String[] args) throws IOException, SQLException, InterruptedException {
         //organizationchart
         OrganizationChartService ocService = new OrganizationChartService();
         long start, end ;

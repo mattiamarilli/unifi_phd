@@ -45,7 +45,7 @@ public class OrganizationChartService {
     //METODI DI StudentDao
 
     //inserimento student
-    public Boolean insertStudent(Integer studentFreshman, String name, String surname, String email, String password, String topics, String numberCycle) throws SQLException, InterruptedException {
+    public synchronized Boolean insertStudent(Integer studentFreshman, String name, String surname, String email, String password, String topics, String numberCycle) throws SQLException, InterruptedException {
         if(available){
             Cycle c = new Cycle(numberCycle);
             Student s = new Student(studentFreshman, name, surname, email, password, topics, c, 1);
@@ -67,7 +67,7 @@ public class OrganizationChartService {
     }
 
     //update student profile
-    public Boolean updateStudent(Integer studentFreshman, String name, String surname, String email, String topics) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStudent(Integer studentFreshman, String name, String surname, String email, String topics) throws SQLException, InterruptedException {
         if(available){
             Student s = new Student(studentFreshman, name, surname, email, topics);
             emulateDelay();
@@ -79,7 +79,7 @@ public class OrganizationChartService {
     }
 
     //update student password
-    public Boolean updateStudentPassword(Integer studentFreshman, String password) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStudentPassword(Integer studentFreshman, String password) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.updatePassword(studentFreshman, password);
@@ -90,7 +90,7 @@ public class OrganizationChartService {
     }
 
     //update student advisor (utilizzato per assegnare l'dvisor allo studente)
-    public Boolean updateStudentAdvisor(Integer studentFreshman, Integer advisorFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStudentAdvisor(Integer studentFreshman, Integer advisorFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.updateAdvisor(studentFreshman, advisorFreshman);
@@ -101,7 +101,7 @@ public class OrganizationChartService {
     }
 
     //update student year (usato quando lo studente viene passato all'anno successivo)
-    public Boolean updateStudentYear(Integer studentFreshman, Integer year) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStudentYear(Integer studentFreshman, Integer year) throws SQLException, InterruptedException {
         if(available){
             Boolean result = studentDao.updateYear(studentFreshman, year);
             if(year == 3 && result){ //inserisco lo studente nel microservizio delle tesi
@@ -117,7 +117,7 @@ public class OrganizationChartService {
     }
 
     //delete student
-    public Boolean deleteStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             Boolean result = studentDao.delete(studentFreshman);
             //elimino lo studente anche negli altri microservizi
@@ -137,7 +137,7 @@ public class OrganizationChartService {
     }
 
     //get all students
-    public List<Student> getAllStudents() throws SQLException, InterruptedException {
+    public synchronized List<Student> getAllStudents() throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.getAll();
@@ -149,7 +149,7 @@ public class OrganizationChartService {
     }
 
     //gets student by freshman
-    public Student getStudentByFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Student getStudentByFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.findByKey(studentFreshman);
@@ -160,7 +160,7 @@ public class OrganizationChartService {
     }
 
     //get all students by year
-    public List<Student> getStudentsByYear(Integer year) throws SQLException, InterruptedException {
+    public synchronized List<Student> getStudentsByYear(Integer year) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.getStudentsByYear(year);
@@ -171,7 +171,7 @@ public class OrganizationChartService {
     }
 
     //get all students by cycle
-    public List<Student> getStudentsByCycle(String cycleNumber) throws SQLException, InterruptedException {
+    public synchronized List<Student> getStudentsByCycle(String cycleNumber) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.getStudentsByCycle(cycleNumber);
@@ -182,7 +182,7 @@ public class OrganizationChartService {
     }
 
     //get students by advisor
-    public List<Student> getStudentsByAdvisor(Integer advisorFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Student> getStudentsByAdvisor(Integer advisorFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return studentDao.getStudentsByAdvisor(advisorFreshman);
@@ -196,7 +196,7 @@ public class OrganizationChartService {
     //METODI DI CycleDao
 
     //insert cycle
-    public Boolean insertCycle(String cycleNumber, Integer year, String description) throws SQLException, InterruptedException {
+    public synchronized Boolean insertCycle(String cycleNumber, Integer year, String description) throws SQLException, InterruptedException {
         if(available){
             Cycle c = new Cycle(cycleNumber, year, description);
             emulateDelay();
@@ -208,7 +208,7 @@ public class OrganizationChartService {
     }
 
     //update cycle
-    public Boolean updateCycle(String cycleNumber, Integer year, String description) throws SQLException, InterruptedException {
+    public synchronized Boolean updateCycle(String cycleNumber, Integer year, String description) throws SQLException, InterruptedException {
         if(available){
             Cycle c = new Cycle(cycleNumber, year, description);
             emulateDelay();
@@ -220,7 +220,7 @@ public class OrganizationChartService {
     }
 
     //delete cycle
-    public Boolean deleteCycle(String cycleNumber) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteCycle(String cycleNumber) throws SQLException, InterruptedException {
         if(available){
             List<Student> students = studentDao.getStudentsByCycle(cycleNumber);
             Boolean result = cycleDao.delete(cycleNumber);
@@ -241,7 +241,7 @@ public class OrganizationChartService {
     }
 
     //get all cycles
-    public List<Cycle> getAllCycles() throws SQLException, InterruptedException {
+    public synchronized List<Cycle> getAllCycles() throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return cycleDao.getAll();
@@ -254,7 +254,7 @@ public class OrganizationChartService {
     //METODI DI FacultyMembersDao
 
     //insert faculty member
-    public Boolean insertFacultyMember(Integer freshman, String name, String surname, String email, String password, String specialization, String institution, String cycleNumber) throws SQLException, InterruptedException {
+    public synchronized Boolean insertFacultyMember(Integer freshman, String name, String surname, String email, String password, String specialization, String institution, String cycleNumber) throws SQLException, InterruptedException {
         if(available){
             Cycle c = new Cycle(cycleNumber);
             FacultyMember facultyMember = new FacultyMember(freshman, name, surname, email, password, specialization, institution, c);
@@ -267,7 +267,7 @@ public class OrganizationChartService {
     }
 
     //update faculty member profile
-    public Boolean updateFacultyMember(Integer freshman, String name, String surname, String email, String specialization, String institution) throws SQLException, InterruptedException {
+    public synchronized Boolean updateFacultyMember(Integer freshman, String name, String surname, String email, String specialization, String institution) throws SQLException, InterruptedException {
         if(available){
             FacultyMember facultyMember = new FacultyMember(freshman, name, surname, email, specialization, institution);
             emulateDelay();
@@ -279,7 +279,7 @@ public class OrganizationChartService {
     }
 
     //update faculty member password
-    public Boolean updateFacultyMemberPassword(Integer fmFreshman, String password) throws SQLException, InterruptedException {
+    public synchronized Boolean updateFacultyMemberPassword(Integer fmFreshman, String password) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return facultyMemberDao.updateFacultyMemberPassword(fmFreshman, password);
@@ -290,7 +290,7 @@ public class OrganizationChartService {
     }
 
     //delete faculty member
-    public Boolean deleteFacultyMember(Integer fmFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteFacultyMember(Integer fmFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return facultyMemberDao.delete(fmFreshman);
@@ -300,7 +300,7 @@ public class OrganizationChartService {
         }
     }
 
-    public FacultyMember getFacultyMember(Integer freshman) throws SQLException, InterruptedException {
+    public synchronized FacultyMember getFacultyMember(Integer freshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return facultyMemberDao.findByKey(freshman);
@@ -311,7 +311,7 @@ public class OrganizationChartService {
     }
 
     //get all faculty members
-    public List<FacultyMember> getAllFacultyMembers() throws SQLException, InterruptedException {
+    public synchronized List<FacultyMember> getAllFacultyMembers() throws SQLException, InterruptedException {
         if(available) {
             emulateDelay();
             return facultyMemberDao.getAll();

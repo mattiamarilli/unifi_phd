@@ -9,7 +9,7 @@ public class ConnectionDao {
     public static final String USER = "root";
     public static final String PASS = "test";
 
-    public static Connection getConnection()
+    public static  Connection getConnection()
     {
         try {
             DriverManager.registerDriver(new Driver());
