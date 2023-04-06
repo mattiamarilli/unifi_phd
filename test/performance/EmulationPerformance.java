@@ -30,7 +30,7 @@ public class EmulationPerformance {
     private static int numberColumn = 6;
 
     public static void updateExcel(long number){
-        final String excelFilePath = "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/PerformanceApplicativo.xlsx";
+        final String excelFilePath = "/Users/mattiamarilli/Progetti/unifi_phd/documentation/PerformanceApplicativo.xlsx";
 
         try {
             FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
@@ -54,7 +54,7 @@ public class EmulationPerformance {
         }
     }
 
-    public static void getLatencies(OrganizationChartService ocService, ProgressReportService prService,DidacticOfferService doService,ThesisApprovationService taService) throws InterruptedException, SQLException {
+    public static void getLatenciesOc(OrganizationChartService ocService) throws InterruptedException, SQLException {
         //organizationchart
         long start, end;
 
@@ -162,8 +162,81 @@ public class EmulationPerformance {
         ocService.getAllFacultyMembers();
         end = System.currentTimeMillis();
         updateExcel(end-start);
+    }
 
+    public static void getLatenciesPr(ProgressReportService prService) throws InterruptedException, SQLException {
+        //progressreport
+        long start, end;
+
+        Thread.sleep(1000);
+
+        start = System.currentTimeMillis();
+        prService.updateProgressReport(1, "Progress Report end first year (update)", "Description progress report", "url1_2.pdf");
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.updateStateProgressReport(3820539, "Load");
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.getProgressReportByStudent(3472126);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.getScientistsByStudent(3820539);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.insertSupervisoryCommittee(1, 7237583);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.insertScientist(4802402, "Guido", "Gagliardi", "Password", "guido.gagliardi@unifi.it", "Machine learning");
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.updateScientist(7637585, "Alessio", "Vecchio", "alessio.vecchio@unipi.it", "Pervasive and mobile computing (update");
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.updatePasswordScientist(5894375, "Password (update)");
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.getStudentBySupervisory(4029304);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.getProgressReportByScientistStudent(7237583, 3472126);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.deleteScientist(9237583);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+        start = System.currentTimeMillis();
+        prService.deleteProgressReport(6);
+        end = System.currentTimeMillis();
+        updateExcel(end-start);
+
+    }
+
+    public static void getLatenciesDo(DidacticOfferService doService) throws InterruptedException, SQLException {
         //didacticoffer
+        long start, end;
+
+        Thread.sleep(1000);
         start = System.currentTimeMillis();
         doService.insertProfessor(9999999,"Name Test","Surname Test","Test Specialization","Test University","test@unifi.it","testpassword");
         end = System.currentTimeMillis();
@@ -310,70 +383,15 @@ public class EmulationPerformance {
         doService.getAppealParticipationByStudent(4728103);
         end = System.currentTimeMillis();
         updateExcel(end-start);
+    }
 
-        //progressreport
-
-        start = System.currentTimeMillis();
-        prService.updateProgressReport(1, "Progress Report end first year (update)", "Description progress report", "url1_2.pdf");
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.updateStateProgressReport(3820539, "Load");
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.getProgressReportByStudent(3472126);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.getScientistsByStudent(3820539);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.insertSupervisoryCommittee(1, 7237583);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.insertScientist(4802402, "Guido", "Gagliardi", "Password", "guido.gagliardi@unifi.it", "Machine learning");
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.updateScientist(7637585, "Alessio", "Vecchio", "alessio.vecchio@unipi.it", "Pervasive and mobile computing (update");
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.updatePasswordScientist(5894375, "Password (update)");
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.getStudentBySupervisory(4029304);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.getProgressReportByScientistStudent(7237583, 3472126);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.deleteScientist(9237583);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
-        start = System.currentTimeMillis();
-        prService.deleteProgressReport(6);
-        end = System.currentTimeMillis();
-        updateExcel(end-start);
-
+    public static void getLatenciesTa(ThesisApprovationService taService) throws InterruptedException, SQLException {
         //thesis approvation
+        long start, end;
+
+        Thread.sleep(1000);
+
+
 
         start = System.currentTimeMillis();
         taService.updateThesis(1, "Analysis and comparison between the new file proposals of the different operating systems (update)", "Thesis description (update)", "thesisSystemOperativeUpdate.pdf", 102829);
@@ -457,55 +475,62 @@ public class EmulationPerformance {
 
     }
 
+    public static void runUsers(Integer ocUsersNumber,Integer doUsersNumber,Integer prUsersNumber, Integer taUsersNumber, OrganizationChartService ocService, ProgressReportService prService,DidacticOfferService doService,ThesisApprovationService taService) throws InterruptedException, SQLException {
+        ArrayList<Thread> ocUsers = new ArrayList<Thread>();
+        for(int i = 0;i<ocUsersNumber;i++)
+            ocUsers.add(new Thread(new OcUserThread(ocService)));
+
+        ArrayList<Thread> doUsers = new ArrayList<Thread>();
+        for(int i = 0;i<doUsersNumber;i++)
+            doUsers.add(new Thread(new DoUserThread(doService)));
+
+        ArrayList<Thread> prUsers = new ArrayList<Thread>();
+        for(int i = 0;i<prUsersNumber;i++)
+            prUsers.add(new Thread(new PrUserThread(prService)));
+
+        ArrayList<Thread> taUsers = new ArrayList<Thread>();
+        for(int i = 0;i<taUsersNumber;i++)
+            taUsers.add(new Thread(new TaUserThread(taService)));
+
+        for(int i = 0; i<ocUsersNumber; i++)
+            ocUsers.get(i).start();
+
+        for(int i = 0; i<doUsersNumber; i++)
+            doUsers.get(i).start();
+
+        for(int i = 0; i<prUsersNumber; i++)
+            prUsers.get(i).start();
+
+        for(int i = 0; i<taUsersNumber; i++)
+            taUsers.get(i).start();
+    }
+
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         ProgressReportService prService = new ProgressReportService();
         DidacticOfferService doService = new DidacticOfferService();
         ThesisApprovationService taService = new ThesisApprovationService();
 
-        ArrayList<Thread> ocUsers = new ArrayList<Thread>();
-        for(int i = 0;i<10;i++)
-            ocUsers.add(new Thread(new OcUserThread(ocService)));
+        runUsers(10,10,10,10,ocService,prService,doService,taService);
 
-        ArrayList<Thread> doUsers = new ArrayList<Thread>();
-        for(int i = 0;i<10;i++)
-            doUsers.add(new Thread(new DoUserThread(doService)));
+        Thread.sleep(1000);
+        getLatenciesOc(ocService);
 
-        ArrayList<Thread> prUsers = new ArrayList<Thread>();
-        for(int i = 0;i<10;i++)
-            prUsers.add(new Thread(new PrUserThread(prService)));
-
-        ArrayList<Thread> taUsers = new ArrayList<Thread>();
-        for(int i = 0;i<10;i++)
-            taUsers.add(new Thread(new TaUserThread(taService)));
-
-        Thread threadLatency = new Thread(() -> {
-            try {
-                Thread.sleep(200);
-                getLatencies(ocService,prService,doService,taService);
-                System.out.println("bella");
-            } catch (InterruptedException | SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        for(int i = 0; i<1; i++)
-            ocUsers.get(i).start();
-
-        for(int i = 0; i<1; i++)
-            doUsers.get(i).start();
-
-        for(int i = 0; i<1; i++)
-            prUsers.get(i).start();
-
-        for(int i = 0; i<1; i++)
-            taUsers.get(i).start();
-
-        threadLatency.start();
-
-        //Thread.sleep(2000);
-        //getLatencies(ocService,prService,doService,taService);
 
     }
 
 }
+
+//        Thread threadLatency = new Thread(() -> {
+//            try {
+//                Thread.sleep(200);
+//                getLatencies(ocService,prService,doService,taService);
+//                System.out.println("bella");
+//            } catch (InterruptedException | SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+
+
+
+//threadLatency.start();

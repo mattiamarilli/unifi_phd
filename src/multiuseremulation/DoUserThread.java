@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class DoUserThread implements Runnable{
     private DidacticOfferService doService;
-    private final int millisecondsSleep = 3000;
+    private final int millisecondsSleep = 300;
 
     public DoUserThread(DidacticOfferService doService) {
         this.doService = doService;
