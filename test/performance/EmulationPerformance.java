@@ -53,7 +53,7 @@ public class EmulationPerformance {
         }
     }
 
-    public static void getLatenze(OrganizationChartService ocService, ProgressReportService prService,DidacticOfferService doService,ThesisApprovationService taService) throws InterruptedException, SQLException {
+    public static void getLatencies(OrganizationChartService ocService, ProgressReportService prService,DidacticOfferService doService,ThesisApprovationService taService) throws InterruptedException, SQLException {
         //organizationchart
         long start, end;
 
@@ -475,6 +475,16 @@ public class EmulationPerformance {
         TaUserThread taUserThread = new TaUserThread(taService);
         Thread taUser = new Thread(taUserThread);
 
+        Thread threadLatency = new Thread(() -> {
+            try {
+                Thread.sleep(200);
+                getLatencies(ocService,prService,doService,taService);
+                System.out.println("bella");
+            } catch (InterruptedException | SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         for(int i = 0; i<1; i++)
             ocUser.start();
 
@@ -487,8 +497,9 @@ public class EmulationPerformance {
         for(int i = 0; i<1; i++)
             taUser.start();
 
-        //System.out.println("helloooooooooooooo");
-        //getLatenze(ocService,prService,doService,taService);
+        threadLatency.start();
+
+        //getLatences(ocService,prService,doService,taService);
 
     }
 

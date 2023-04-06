@@ -9,17 +9,21 @@ import java.util.Random;
 public class OcUserThread implements Runnable{
 
     private OrganizationChartService ocService;
+    private final int millisecondsSleep = 300;
 
 
     public OcUserThread(OrganizationChartService ocService) {
         this.ocService = ocService;
     }
 
+    @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+        int test = 0;
+        int count = 1;
+        do {
             try {
                 Random random = new Random();
-                Integer test = random.nextInt(19) + 1;
+                test = random.nextInt(21) + 1;
 
                 try {
                     switch (test) {
@@ -31,6 +35,7 @@ public class OcUserThread implements Runnable{
                             break;
                         case 3:
                             ocService.updateStudentPassword(3923920, "Password update");
+                            break;
                         case 4:
                             ocService.updateStudentAdvisor(3920391, 5749249);
                             break;
@@ -82,11 +87,15 @@ public class OcUserThread implements Runnable{
                         case 20:
                             ocService.getAllFacultyMembers();
                             break;
+                        default:
+                            break;
                     }
+                    Thread.sleep(millisecondsSleep);
+                    count++;
                 } catch (SQLException e) { throw new RuntimeException(e);}
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }
+        }while (!Thread.currentThread().isInterrupted() && test != 21 && count != 21);
     }
 }

@@ -8,16 +8,20 @@ import java.util.Random;
 
 public class PrUserThread implements Runnable{
     private ProgressReportService prService;
+    private final int millisecondsSleep = 300;
 
     public PrUserThread(ProgressReportService prService) {
         this.prService = prService;
     }
 
+    @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+        int test = 0;
+        int count = 1;
+        do {
             try {
                 Random random = new Random();
-                Integer test = random.nextInt(11) + 1;
+                test = random.nextInt(13) + 1;
 
                 try {
                     switch (test) {
@@ -57,11 +61,15 @@ public class PrUserThread implements Runnable{
                         case 12:
                             prService.deleteProgressReport(6);
                             break;
+                        default:
+                            break;
                     }
+                    Thread.sleep(millisecondsSleep);
+                    count++;
                 } catch (SQLException e) { throw new RuntimeException(e);}
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }
+        }while (!Thread.currentThread().isInterrupted() && test != 13 && count != 13);
     }
 }

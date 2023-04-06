@@ -9,16 +9,20 @@ import java.util.Random;
 
 public class DoUserThread implements Runnable{
     private DidacticOfferService doService;
+    private final int millisecondsSleep = 300;
 
     public DoUserThread(DidacticOfferService doService) {
         this.doService = doService;
     }
 
+    @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+        int test = 0;
+        int count = 1;
+        do{
             try {
                 Random random = new Random();
-                Integer test = random.nextInt(23) + 1;
+                test = random.nextInt(25) + 1;
 
                 try {
                     switch (test) {
@@ -96,12 +100,15 @@ public class DoUserThread implements Runnable{
                         case 24:
                             doService.getAppealParticipationByStudent(4728103);
                             break;
-
+                        default:
+                            break;
                     }
+                    Thread.sleep(millisecondsSleep);
+                    count++;
                 } catch (SQLException e) { throw new RuntimeException(e);}
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }
+        }while (!Thread.currentThread().isInterrupted() && test != 25 && count != 25);
     }
 }

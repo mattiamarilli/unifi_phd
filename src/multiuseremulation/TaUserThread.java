@@ -8,16 +8,20 @@ import java.util.Random;
 
 public class TaUserThread implements Runnable{
     private ThesisApprovationService taService;
+    private final int millisecondsSleep = 300;
 
     public TaUserThread(ThesisApprovationService taService) {
         this.taService = taService;
     }
 
+    @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+        int test = 0;
+        int count = 1;
+        do {
             try {
                 Random random = new Random();
-                Integer test = random.nextInt(15) + 1;
+                test = random.nextInt(17) + 1;
 
                 try {
                     switch (test) {
@@ -69,11 +73,15 @@ public class TaUserThread implements Runnable{
                         case 16:
                             taService.deleteReview(7);
                             break;
+                        default:
+                            break;
                     }
+                    Thread.sleep(millisecondsSleep);
+                    count++;
                 } catch (SQLException e) { throw new RuntimeException(e);}
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }
+        }while (!Thread.currentThread().isInterrupted() && test != 17 && count != 18);
     }
 }
