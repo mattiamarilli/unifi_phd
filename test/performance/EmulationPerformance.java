@@ -26,18 +26,6 @@ import java.util.ArrayList;
 
 public class EmulationPerformance {
 
-    public static void initializeExcel(String excelFilePath) throws IOException {
-        FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
-        Workbook workbook = WorkbookFactory.create(inputStream);
-
-        Sheet sheet = workbook.getSheetAt(0);
-
-        for(int i = 0; i< 50; i++)
-            sheet.createRow(i);
-
-        workbook.close();
-    }
-
     public static void updateExcel(long number, String excelFilePath, int numberRow, int numberColumn){
 
         try {
