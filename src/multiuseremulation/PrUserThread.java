@@ -17,7 +17,7 @@ public class PrUserThread implements Runnable{
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Random random = new Random();
-                Integer test = random.nextInt(19) + 1;
+                Integer test = random.nextInt(11) + 1;
 
                 try {
                     switch (test) {
@@ -25,42 +25,37 @@ public class PrUserThread implements Runnable{
                             prService.updateProgressReport(1, "Progress Report end first year (update)", "Description progress report", "url1_2.pdf");
                             break;
                         case 2:
+                            prService.updateStateProgressReport(3820539, "Load");
                             break;
                         case 3:
+                            prService.getProgressReportByStudent(3472126);
                             break;
                         case 4:
+                            prService.getScientistsByStudent(3820539);
                             break;
                         case 5:
+                            prService.insertSupervisoryCommittee(1, 7237583);
                             break;
                         case 6:
+                            prService.insertScientist(4802402, "Guido", "Gagliardi", "Password", "guido.gagliardi@unifi.it", "Machine learning");
                             break;
                         case 7:
+                            prService.updateScientist(7637585, "Alessio", "Vecchio", "alessio.vecchio@unipi.it", "Pervasive and mobile computing (update");
                             break;
                         case 8:
+                            prService.updatePasswordScientist(5894375, "Password (update)");
                             break;
                         case 9:
+                            prService.getStudentBySupervisory(4029304);
                             break;
                         case 10:
+                            prService.getProgressReportByScientistStudent(7237583, 3472126);
                             break;
                         case 11:
+                            prService.deleteScientist(9237583);
                             break;
                         case 12:
-                            break;
-                        case 13:
-                            break;
-                        case 14:
-                            break;
-                        case 15:
-                            break;
-                        case 16:
-                            break;
-                        case 17:
-                            break;
-                        case 18:
-                            break;
-                        case 19:
-                            break;
-                        case 20:
+                            prService.deleteProgressReport(6);
                             break;
                     }
                 } catch (SQLException e) { throw new RuntimeException(e);}
