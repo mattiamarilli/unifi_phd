@@ -50,7 +50,7 @@ public class DidacticOfferService {
     //METODI PER ProfessorDao
 
     //inserimento professor
-    public Boolean insertProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String password) throws SQLException, InterruptedException {
+    public synchronized Boolean insertProfessor(Integer freshman, String name, String surname, String specialization, String university, String email, String password) throws SQLException, InterruptedException {
 
         if (available) {
             Professor p = new Professor(freshman, name, surname, specialization, university, email, password);
@@ -66,7 +66,7 @@ public class DidacticOfferService {
     }
 
     //course assignment to the professor
-    public Boolean updateCodeCourseProfessor(Integer professorFreshman, String codeCourse) throws SQLException, InterruptedException {
+    public synchronized Boolean updateCodeCourseProfessor(Integer professorFreshman, String codeCourse) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return professorDao.updateCodeCourseProfessor(professorFreshman, codeCourse);
@@ -79,7 +79,7 @@ public class DidacticOfferService {
     }
 
     //modifica professor by freshman
-    public Boolean updateProfessor(Integer freshman, String name, String surname, String specialization, String university, String email) throws SQLException, InterruptedException {
+    public synchronized Boolean updateProfessor(Integer freshman, String name, String surname, String specialization, String university, String email) throws SQLException, InterruptedException {
         if (available) {
             Professor p = new Professor(freshman, name, surname, specialization, university, email);
             emulateDelay();
@@ -95,7 +95,7 @@ public class DidacticOfferService {
     }
 
     //modifica password professor by freshman
-    public Boolean updatePasswordProfessor(Integer freshman, String password) throws SQLException, InterruptedException {
+    public synchronized Boolean updatePasswordProfessor(Integer freshman, String password) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return professorDao.updatePasswordProfessor(freshman, password);
@@ -108,7 +108,7 @@ public class DidacticOfferService {
     }
 
     //elimina professor
-    public Boolean deleteProfessor(Integer freshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteProfessor(Integer freshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return professorDao.delete(freshman);
@@ -121,7 +121,7 @@ public class DidacticOfferService {
     }
 
     //gets professor by freshman
-    public Professor getProfessorByFreshman(Integer professorFreshman) throws SQLException, InterruptedException {
+    public synchronized Professor getProfessorByFreshman(Integer professorFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return professorDao.findByKey(professorFreshman);
@@ -134,7 +134,7 @@ public class DidacticOfferService {
     }
 
     //get all professors
-    public List<Professor> getAllProfessors() throws SQLException, InterruptedException {
+    public synchronized List<Professor> getAllProfessors() throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return professorDao.getAll();
@@ -147,7 +147,7 @@ public class DidacticOfferService {
     }
 
     //get all professors without course
-    public List<Professor> getAllProfessorsWithoutCourse() throws SQLException, InterruptedException {
+    public synchronized List<Professor> getAllProfessorsWithoutCourse() throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return professorDao.getProfessorsWithoutCourse();
@@ -161,7 +161,7 @@ public class DidacticOfferService {
     }
 
     //get students enrolled in the professor's course
-    public List<Student> getAllStudentsByProfessor(Integer professorFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Student> getAllStudentsByProfessor(Integer professorFreshman) throws SQLException, InterruptedException {
         if (available) {
             List<Integer> studentFreshmen = professorDao.getStudentFreshmenByProfessor(professorFreshman);
             List<Student> students = new ArrayList<Student>();
@@ -183,7 +183,7 @@ public class DidacticOfferService {
 
     //METODI DI CourseDao
 
-    public List<Course> getAllCourses() throws SQLException, InterruptedException {
+    public synchronized List<Course> getAllCourses() throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return courseDao.getAll();
@@ -195,7 +195,7 @@ public class DidacticOfferService {
         }
     }
 
-    public List<Course> getCoursesNotRegisteredByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Course> getCoursesNotRegisteredByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return courseDao.getCoursesNotRegisteredByStudent(studentFreshman);
@@ -209,7 +209,7 @@ public class DidacticOfferService {
     }
 
     //inserimento course
-    public Boolean insertCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException, InterruptedException {
+    public synchronized Boolean insertCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException, InterruptedException {
         if (available) {
             Course c = new Course(code, title, description, cfu,year);
             emulateDelay();
@@ -224,7 +224,7 @@ public class DidacticOfferService {
     }
 
     //modifica course
-    public Boolean updateCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException, InterruptedException {
+    public synchronized Boolean updateCourse(String code, String title, String description, Integer cfu, Integer year) throws SQLException, InterruptedException {
         if (available) {
             Course c = new Course(code, title, description, cfu, year);
             emulateDelay();
@@ -239,7 +239,7 @@ public class DidacticOfferService {
     }
 
     //elimina course
-    public Boolean deleteCourse(String code) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteCourse(String code) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return courseDao.delete(code);
@@ -252,7 +252,7 @@ public class DidacticOfferService {
     }
 
     //update course status (usato quando il professore ha terminato il corso ed definisce il corso "frequentato")
-    public Boolean updateStateStudyPlan(String courseCode, String state) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStateStudyPlan(String courseCode, String state) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return courseDao.updateStateStudyPlan(courseCode, state);
@@ -269,7 +269,7 @@ public class DidacticOfferService {
     //METODI DI LessonDao
 
     //inserimento lesson
-    public Boolean insertLesson(Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException, InterruptedException {
+    public synchronized Boolean insertLesson(Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException, InterruptedException {
         if (available) {
             Course c = new Course(codeCourse);
             Lesson lesson = new Lesson(date, startTime, endTime, room, universityComplex, university, mode, c);
@@ -284,7 +284,7 @@ public class DidacticOfferService {
     }
 
     //modifica lesson
-    public Boolean updateLesson(Integer id, Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException, InterruptedException {
+    public synchronized Boolean updateLesson(Integer id, Date date, Time startTime, Time endTime, Integer room, String universityComplex, String university, String mode, String codeCourse) throws SQLException, InterruptedException {
         if (available) {
             Course c = new Course(codeCourse);
             Lesson lesson = new Lesson(id, date, startTime, endTime, room, universityComplex, university, mode, c);
@@ -299,7 +299,7 @@ public class DidacticOfferService {
     }
 
     //elimina lesson
-    public Boolean deleteLesson(Integer idLesson) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteLesson(Integer idLesson) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return lessonDao.delete(idLesson);
@@ -313,7 +313,7 @@ public class DidacticOfferService {
     }
 
     //get lessons by courseCode
-    public List<Lesson> getLessonsByCourseCode(String courseCode) throws SQLException, InterruptedException {
+    public synchronized List<Lesson> getLessonsByCourseCode(String courseCode) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return lessonDao.getLessonsByCourseCode(courseCode);
@@ -330,7 +330,7 @@ public class DidacticOfferService {
     //METODI DI AppealDao
 
     //inserimento appeal
-    public Boolean insertAppeal(Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException, InterruptedException {
+    public synchronized Boolean insertAppeal(Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException, InterruptedException {
         if (available) {
             Course c = new Course(codeCourse);
             Appeal appeal = new Appeal(date, startTime, room, universityComplex, university, note, mode, c);
@@ -346,7 +346,7 @@ public class DidacticOfferService {
     }
 
     //modifico appeal
-    public Boolean updateAppeal(Integer id, Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException, InterruptedException {
+    public synchronized Boolean updateAppeal(Integer id, Date date, Time startTime, Integer room, String universityComplex, String university, String note, String mode, String codeCourse) throws SQLException, InterruptedException {
         if (available) {
             Course c = new Course(codeCourse);
             Appeal appeal = new Appeal(id, date, startTime, room, universityComplex, university, note, mode, c);
@@ -362,7 +362,7 @@ public class DidacticOfferService {
     }
 
     //elimina appeal
-    public Boolean deleteAppeal(Integer idAppeal) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteAppeal(Integer idAppeal) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.delete(idAppeal);
@@ -375,7 +375,7 @@ public class DidacticOfferService {
     }
 
     //accept vote by student
-    public Boolean acceptVoteByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException, InterruptedException {
+    public synchronized Boolean acceptVoteByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException, InterruptedException {
         if (available) {
             if(appealDao.findByKey(idAppeal) == null)
                 return false;
@@ -391,7 +391,7 @@ public class DidacticOfferService {
     }
 
     //inserimento voto
-    public Boolean updateVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException, InterruptedException {
+    public synchronized Boolean updateVote(Integer studentFreshman, Integer idAppeal, String vote) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.insertVote(studentFreshman, idAppeal, vote);
@@ -405,7 +405,7 @@ public class DidacticOfferService {
     }
 
     //get students without vote in appeal participation by code course
-    public List<AppealParticipation> getAppealParticipationWithoutVoteByCourseCode(String courseCode) throws SQLException, InterruptedException {
+    public synchronized List<AppealParticipation> getAppealParticipationWithoutVoteByCourseCode(String courseCode) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.getAppealParticipationWithoutVoteByCourseCode(courseCode);
@@ -419,7 +419,7 @@ public class DidacticOfferService {
     }
 
     //visualizza appelli in base al course code
-    public List<Appeal> getAppealsByCourseCode(String courseCode) throws SQLException, InterruptedException {
+    public synchronized List<Appeal> getAppealsByCourseCode(String courseCode) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.getAppealsByCourseCode(courseCode);
@@ -431,7 +431,7 @@ public class DidacticOfferService {
         }
     }
 
-    public List<Appeal> getAppealsByStudentFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Appeal> getAppealsByStudentFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.getAppealsByStudentFreshman(studentFreshman);
@@ -444,7 +444,7 @@ public class DidacticOfferService {
 
     }
 
-    public List<Appeal> getAppealsToAccept(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Appeal> getAppealsToAccept(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.getAppealsToAccept(studentFreshman);
@@ -456,7 +456,7 @@ public class DidacticOfferService {
         }
     }
 
-    public List<Appeal> getAppealsToRegister(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Appeal> getAppealsToRegister(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return appealDao.getAppealsToRegister(studentFreshman);
@@ -472,7 +472,7 @@ public class DidacticOfferService {
     //METODI DI StudentCareerDao
 
     //inserimento student career
-    public Boolean insertStudentCareer(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean insertStudentCareer(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             StudentCareer sc = new StudentCareer(studentFreshman);
             emulateDelay();
@@ -487,7 +487,7 @@ public class DidacticOfferService {
     }
 
     //elimina student career
-    public Boolean deleteStudentCareer(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteStudentCareer(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return studentCareerDao.delete(studentFreshman);
@@ -500,7 +500,7 @@ public class DidacticOfferService {
     }
 
     //insert appeal participation
-    public Boolean insertAppealParticipation(Integer studentFreshman, Integer idAppeal) throws SQLException, InterruptedException {
+    public synchronized Boolean insertAppealParticipation(Integer studentFreshman, Integer idAppeal) throws SQLException, InterruptedException {
         if (available) {
             Appeal a = new Appeal(idAppeal);
             StudentCareer sc = new StudentCareer(studentFreshman);
@@ -517,7 +517,7 @@ public class DidacticOfferService {
     }
 
     //delete appeal participation by student freshman
-    public Boolean deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteAppealParticipationByStudent(Integer studentFreshman, Integer idAppeal) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return studentCareerDao.deleteAppealParticipationByStudent(studentFreshman, idAppeal);
@@ -531,7 +531,7 @@ public class DidacticOfferService {
     }
 
     //insert study plan by student freshman and course code
-    public Boolean insertStudyPlan(Integer studentFreshman, String courseCode, Date date) throws SQLException, InterruptedException {
+    public synchronized Boolean insertStudyPlan(Integer studentFreshman, String courseCode, Date date) throws SQLException, InterruptedException {
         if (available) {
             StudentCareer sc = new StudentCareer(studentFreshman);
             Course c = new Course(courseCode);
@@ -547,7 +547,7 @@ public class DidacticOfferService {
     }
 
     //delete study plan by student and course code
-    public Boolean deleteStudyPlan(Integer studentFreshman, String courseCode) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteStudyPlan(Integer studentFreshman, String courseCode) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return studentCareerDao.deleteStudyPlan(studentFreshman, courseCode);
@@ -561,7 +561,7 @@ public class DidacticOfferService {
     }
 
     //visualizza corsi iscritti
-    public List<Course> getCoursesByStudentFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Course> getCoursesByStudentFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return studentCareerDao.getCoursesByStudentFreshman(studentFreshman);
@@ -574,7 +574,7 @@ public class DidacticOfferService {
     }
 
     //visualizza corsi superati
-    public List<Course> getCoursesAccreditedByStudentFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Course> getCoursesAccreditedByStudentFreshman(Integer studentFreshman) throws SQLException, InterruptedException {
 
         if (available) {
             emulateDelay();
@@ -586,7 +586,7 @@ public class DidacticOfferService {
     }
 
     //visualizza partecipazione appelli by student
-    public List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<AppealParticipation> getAppealParticipationByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return studentCareerDao.getAppealParticipationByStudent(studentFreshman);
@@ -599,7 +599,7 @@ public class DidacticOfferService {
     }
 
     //get study plans by student
-    public List<StudyPlan> getStudyPlansByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<StudyPlan> getStudyPlansByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return studentCareerDao.getStudyPlansByStudent(studentFreshman);

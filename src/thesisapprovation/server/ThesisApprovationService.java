@@ -45,7 +45,7 @@ public class ThesisApprovationService {
     //METODI PER ThesisDao
 
     //inserimento student into thesis approvation
-    public Boolean insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             Thesis t = new Thesis(studentFreshman, "Not_approved");
             emulateDelay();
@@ -57,7 +57,7 @@ public class ThesisApprovationService {
     }
 
     //inserimento/modifica thesis by student freshman in bozza
-    public Boolean updateThesis(Integer id, String title, String description, String urlDocument, Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean updateThesis(Integer id, String title, String description, String urlDocument, Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             Thesis t = new Thesis(id, title, description, urlDocument, studentFreshman);
             emulateDelay();
@@ -69,7 +69,7 @@ public class ThesisApprovationService {
     }
 
     //modifica state by id thesis
-    public Boolean updateStateThesis(Integer idThesis, String state) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStateThesis(Integer idThesis, String state) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.updateStateThesis(idThesis, state);
@@ -80,7 +80,7 @@ public class ThesisApprovationService {
     }
 
     //modifica loaded by student freshman (utlizzato quando viene consegnata la tesi oppure quando viene ritirata dalla consegna)
-    public Boolean updateLoadedThesis(Integer studentFreshman, String loaded) throws SQLException, InterruptedException {
+    public synchronized Boolean updateLoadedThesis(Integer studentFreshman, String loaded) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.updateLoadedThesis(studentFreshman, loaded);
@@ -91,7 +91,7 @@ public class ThesisApprovationService {
     }
 
     //elimina thesis by id
-    public Boolean deleteThesis(Integer id) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteThesis(Integer id) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.delete(id);
@@ -102,7 +102,7 @@ public class ThesisApprovationService {
     }
 
     //delete thesis by student
-    public Boolean deleteThesisByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteThesisByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.deleteThesisByStudent(studentFreshman);
@@ -113,7 +113,7 @@ public class ThesisApprovationService {
     }
 
     //get all theses
-    public List<Thesis> getAllThesis() throws SQLException, InterruptedException {
+    public synchronized List<Thesis> getAllThesis() throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.getAll();
@@ -124,7 +124,7 @@ public class ThesisApprovationService {
     }
 
     //get all theses loaded and not approved
-    public List<Thesis> getThesesLoadedNotApproved() throws SQLException, InterruptedException {
+    public synchronized List<Thesis> getThesesLoadedNotApproved() throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.getThesesLoadedNotApproved();
@@ -135,7 +135,7 @@ public class ThesisApprovationService {
     }
 
     //visualizza reviewer della propria Evaluation Committee
-    public List<Reviewer> getReviewersByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Reviewer> getReviewersByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.getReviewersByStudent(studentFreshman);
@@ -146,7 +146,7 @@ public class ThesisApprovationService {
     }
 
     //visualizza reviews by reviewer and student
-    public Review getReviewByStudentReviewer(Integer studentFreshman, Integer freshmanReviewer) throws SQLException, InterruptedException {
+    public synchronized Review getReviewByStudentReviewer(Integer studentFreshman, Integer freshmanReviewer) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.getReviewByStudentReviewer(studentFreshman, freshmanReviewer);
@@ -157,7 +157,7 @@ public class ThesisApprovationService {
     }
 
     //visualizza thesis by id (utilizzato dallo studente per visualizzare la sua tesi)
-    public Thesis getThesisById(Integer id) throws SQLException, InterruptedException {
+    public synchronized Thesis getThesisById(Integer id) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.findByKey(id);
@@ -168,7 +168,7 @@ public class ThesisApprovationService {
     }
 
     //inserimento evaluationCommittee
-    public Boolean insertEvaluationCommittee(Integer idThesis, Integer reviewerFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean insertEvaluationCommittee(Integer idThesis, Integer reviewerFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.insertEvaluation(idThesis, reviewerFreshman);
@@ -179,7 +179,7 @@ public class ThesisApprovationService {
     }
 
     //visualizza tesi by student
-    public Thesis getThesisByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException, InterruptedException {
+    public synchronized Thesis getThesisByStudentReviewer(Integer studentFreshman, Integer reviewerFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.getThesisByStudentReviewer(studentFreshman, reviewerFreshman);
@@ -189,7 +189,7 @@ public class ThesisApprovationService {
         }
     }
 
-    public Thesis getThesisByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Thesis getThesisByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return thesisDao.getThesisByStudent(studentFreshman);
@@ -202,7 +202,7 @@ public class ThesisApprovationService {
     //METODI PER ReviewerDao
 
     //Inserimento Reviewer
-    public Boolean insertReviewer(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException, InterruptedException {
+    public synchronized Boolean insertReviewer(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException, InterruptedException {
         if(available){
             Reviewer r = new Reviewer(freshman, name, surname, password, email, description);
             emulateDelay();
@@ -213,7 +213,7 @@ public class ThesisApprovationService {
         }
     }
 
-    public List<Reviewer> getAllReviewers() throws SQLException, InterruptedException {
+    public synchronized List<Reviewer> getAllReviewers() throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewerDao.getAll();
@@ -224,7 +224,7 @@ public class ThesisApprovationService {
     }
 
     //elimina reviewer
-    public Boolean deleteReviewer(Integer freshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteReviewer(Integer freshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewerDao.delete(freshman);
@@ -235,7 +235,7 @@ public class ThesisApprovationService {
     }
 
     //modifica reviewer
-    public Boolean updateReviewer(Integer freshman, String name, String surname, String email, String description) throws SQLException, InterruptedException {
+    public synchronized Boolean updateReviewer(Integer freshman, String name, String surname, String email, String description) throws SQLException, InterruptedException {
         if(available) {
             Reviewer r = new Reviewer(freshman, name, surname, email, description);
             emulateDelay();
@@ -247,7 +247,7 @@ public class ThesisApprovationService {
     }
 
     //get reviewer by freshman
-    public Reviewer getReviewerByFreshman(Integer reviewerFreshman) throws SQLException, InterruptedException {
+    public synchronized Reviewer getReviewerByFreshman(Integer reviewerFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewerDao.findByKey(reviewerFreshman);
@@ -258,7 +258,7 @@ public class ThesisApprovationService {
     }
 
     //modifica password reviewer
-    public Boolean updatePasswordReviewer(Integer freshman, String password) throws SQLException, InterruptedException {
+    public synchronized Boolean updatePasswordReviewer(Integer freshman, String password) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewerDao.updatePassword(freshman, password);
@@ -269,7 +269,7 @@ public class ThesisApprovationService {
     }
 
     //visualizza tutti gli studenti by reviewer freshman
-    public List<Student> getStudentsByReviewer(Integer reviewerFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Student> getStudentsByReviewer(Integer reviewerFreshman) throws SQLException, InterruptedException {
         if (available) {
             List<Integer> studentFreshmen = reviewerDao.getStudentFreshmen(reviewerFreshman);
             List<Student> students = new ArrayList<Student>();
@@ -287,7 +287,7 @@ public class ThesisApprovationService {
         }
     }
 
-    public List<Thesis> getThesisLoadedNotApproved(Integer reviewerFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Thesis> getThesisLoadedNotApproved(Integer reviewerFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewerDao.getThesisLoadedNotApprovedByReviewer(reviewerFreshman);
@@ -301,7 +301,7 @@ public class ThesisApprovationService {
     //METODI PER ReviewDao
 
     //inserimento review
-    public Boolean insertReview(Integer idThesis, Integer reviewerFreshman, String title, String comment) throws SQLException, InterruptedException {
+    public synchronized Boolean insertReview(Integer idThesis, Integer reviewerFreshman, String title, String comment) throws SQLException, InterruptedException {
         if(available){
             Reviewer r = new Reviewer(reviewerFreshman);
             Thesis t = new Thesis(idThesis);
@@ -317,7 +317,7 @@ public class ThesisApprovationService {
     }
 
     //modifica review
-    public Boolean updateReview(Integer idReview, Integer reviewerFreshman, String title, String comment) throws SQLException, InterruptedException {
+    public synchronized Boolean updateReview(Integer idReview, Integer reviewerFreshman, String title, String comment) throws SQLException, InterruptedException {
         if(available){
             Reviewer r = new Reviewer(reviewerFreshman);
             Thesis t = new Thesis();
@@ -333,7 +333,7 @@ public class ThesisApprovationService {
     }
 
     //elimina review
-    public Boolean deleteReview(Integer idReview) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteReview(Integer idReview) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewDao.delete(idReview);
@@ -344,7 +344,7 @@ public class ThesisApprovationService {
     }
 
     //get all reviews by reviewer freshman
-    public List<Review> getAllReviewsByReviewer(Integer reviewerFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Review> getAllReviewsByReviewer(Integer reviewerFreshman) throws SQLException, InterruptedException {
         if(available){
             emulateDelay();
             return reviewDao.getAllReviewsByReviewer(reviewerFreshman);

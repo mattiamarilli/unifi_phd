@@ -48,7 +48,7 @@ public class ProgressReportService {
     //METODI DI ProgressReportDao
 
     //inserimento studente nel microservizio del progress report
-    public Boolean insertStudentToProgressReport(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean insertStudentToProgressReport(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             ProgressReport pr = new ProgressReport(studentFreshman);
             emulateDelay();
@@ -62,7 +62,7 @@ public class ProgressReportService {
     }
 
     //inserimento/modifica del progress report in bozza, ovvero ancora non è stato consegnato (da parte dello studente)
-    public Boolean updateProgressReport(Integer id, String title, String description, String urlDocument) throws SQLException, InterruptedException {
+    public synchronized Boolean updateProgressReport(Integer id, String title, String description, String urlDocument) throws SQLException, InterruptedException {
         if (available) {
             ProgressReport pr = new ProgressReport(id, title, description, urlDocument);
             emulateDelay();
@@ -76,7 +76,7 @@ public class ProgressReportService {
     }
 
     //modifica state progress report (usato quando viene consegnato il progress report oppure quando viene ritirato dalla consegna)
-    public Boolean updateStateProgressReport(Integer studentFreshman, String state) throws SQLException, InterruptedException {
+    public synchronized Boolean updateStateProgressReport(Integer studentFreshman, String state) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.updateState(studentFreshman, state);
@@ -90,7 +90,7 @@ public class ProgressReportService {
     }
 
     //elimina progress report
-    public Boolean deleteProgressReport(Integer id) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteProgressReport(Integer id) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.delete(id);
@@ -104,7 +104,7 @@ public class ProgressReportService {
     }
 
     //delete progress report by student freshman
-    public Boolean deleteProgressReportByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteProgressReportByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.deleteProgressReportByStudent(studentFreshman);
@@ -118,7 +118,7 @@ public class ProgressReportService {
     }
 
     //get progress report tramite la matricola studente
-    public ProgressReport getProgressReportByStudent(Integer freshman) throws SQLException, InterruptedException {
+    public synchronized ProgressReport getProgressReportByStudent(Integer freshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.findByKey(freshman);
@@ -132,7 +132,7 @@ public class ProgressReportService {
     }
 
     //get scienziati tramite matricola studente
-    public List<Scientist> getScientistsByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Scientist> getScientistsByStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.getScientists(studentFreshman);
@@ -146,7 +146,7 @@ public class ProgressReportService {
     }
 
     //inserimento SupervisoryCommittee
-    public Boolean insertSupervisoryCommittee(Integer idProgressReport, Integer idScientist) throws SQLException, InterruptedException {
+    public synchronized Boolean insertSupervisoryCommittee(Integer idProgressReport, Integer idScientist) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.insertSupervisory(idProgressReport, idScientist);
@@ -160,7 +160,7 @@ public class ProgressReportService {
     }
 
     //get all progress reports
-    public List<ProgressReport> getAllProgressReports() throws SQLException, InterruptedException {
+    public synchronized List<ProgressReport> getAllProgressReports() throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return progressReportDao.getAll();
@@ -176,7 +176,7 @@ public class ProgressReportService {
 
     //PARTE METODI ScientistDao
 
-    public List<Scientist> getAllScientists() throws SQLException, InterruptedException {
+    public synchronized List<Scientist> getAllScientists() throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return scientistDao.getAll();
@@ -189,7 +189,7 @@ public class ProgressReportService {
 
     }
     //inserimento scienziato
-    public Boolean insertScientist(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException, InterruptedException {
+    public synchronized Boolean insertScientist(Integer freshman, String name, String surname, String password, String email, String description) throws SQLException, InterruptedException {
         if (available) {
             Scientist s = new Scientist(freshman, name, surname, password, email, description);
             emulateDelay();
@@ -203,7 +203,7 @@ public class ProgressReportService {
     }
 
     //update scientist
-    public Boolean updateScientist(Integer idScientist, String name, String surname, String email, String description) throws SQLException, InterruptedException {
+    public synchronized Boolean updateScientist(Integer idScientist, String name, String surname, String email, String description) throws SQLException, InterruptedException {
         if (available) {
             Scientist s = new Scientist(idScientist, name, surname, email, description);
             emulateDelay();
@@ -217,7 +217,7 @@ public class ProgressReportService {
     }
 
     //update password scientist
-    public Boolean updatePasswordScientist(Integer idScientist, String password) throws SQLException, InterruptedException {
+    public synchronized Boolean updatePasswordScientist(Integer idScientist, String password) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return scientistDao.updatePassword(idScientist, password);
@@ -230,7 +230,7 @@ public class ProgressReportService {
     }
 
     //get scientist by freshman
-    public Scientist getScientistByFreshman(Integer scientistFreshman) throws SQLException, InterruptedException {
+    public synchronized Scientist getScientistByFreshman(Integer scientistFreshman) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return scientistDao.findByKey(scientistFreshman);
@@ -244,7 +244,7 @@ public class ProgressReportService {
     }
 
     //get studenti tramite la matricola del scientist
-    public List<Student> getStudentBySupervisory(Integer scientistFreshman) throws SQLException, InterruptedException {
+    public synchronized List<Student> getStudentBySupervisory(Integer scientistFreshman) throws SQLException, InterruptedException {
         if (available) {
             List<Integer> idStudents = scientistDao.getStudents(scientistFreshman);
             List<Student> students = new ArrayList<Student>();
@@ -265,7 +265,7 @@ public class ProgressReportService {
     }
 
     //get progress report by scientist and student (ovvero lo scienziato visualizza il progress report dello studente selezionato)
-    public List<ProgressReport> getProgressReportByScientistStudent(Integer idScientist, Integer idStudent) throws SQLException, InterruptedException {
+    public synchronized List<ProgressReport> getProgressReportByScientistStudent(Integer idScientist, Integer idStudent) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return scientistDao.getProgressReportByScientistStudent(idScientist, idStudent);
@@ -279,7 +279,7 @@ public class ProgressReportService {
     }
 
     //delete scientist
-    public Boolean deleteScientist(Integer idScientist) throws SQLException, InterruptedException {
+    public synchronized Boolean deleteScientist(Integer idScientist) throws SQLException, InterruptedException {
         if (available) {
             emulateDelay();
             return scientistDao.delete(idScientist);

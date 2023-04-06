@@ -50,9 +50,19 @@ public class EmulationPerformance {
         }
     }
 
-    public static void main (String[] args) throws IOException, SQLException, InterruptedException {
+    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
+        ProgressReportService prService = new ProgressReportService();
+        DidacticOfferService doService = new DidacticOfferService();
+        ThesisApprovationService taService = new ThesisApprovationService();
+
+        //run all user thread
+
+
+
+
         OcUserThread ocUserThread = new OcUserThread(ocService);
+
         Thread user1 = new Thread(ocUserThread);
         Thread user2 = new Thread(ocUserThread);
         Thread user3 = new Thread(ocUserThread);
@@ -60,11 +70,8 @@ public class EmulationPerformance {
         user2.start();
         user3.start();
 
-    }
 
-    public static void test(String[] args) throws IOException, SQLException, InterruptedException {
         //organizationchart
-        OrganizationChartService ocService = new OrganizationChartService();
         long start, end ;
 
         Thread.sleep(1000);
@@ -173,7 +180,6 @@ public class EmulationPerformance {
         updateExcel(end-start);
 
         //didacticoffer
-        DidacticOfferService doService = new DidacticOfferService();
         start = System.currentTimeMillis();
         doService.insertProfessor(9999999,"Name Test","Surname Test","Test Specialization","Test University","test@unifi.it","testpassword");
         end = System.currentTimeMillis();
@@ -322,7 +328,6 @@ public class EmulationPerformance {
         updateExcel(end-start);
 
         //progressreport
-        ProgressReportService prService = new ProgressReportService();
 
         start = System.currentTimeMillis();
         prService.updateProgressReport(1, "Progress Report end first year (update)", "Description progress report", "url1_2.pdf");
@@ -385,7 +390,6 @@ public class EmulationPerformance {
         updateExcel(end-start);
 
         //thesis approvation
-        ThesisApprovationService taService = new ThesisApprovationService();
 
         start = System.currentTimeMillis();
         taService.updateThesis(1, "Analysis and comparison between the new file proposals of the different operating systems (update)", "Thesis description (update)", "thesisSystemOperativeUpdate.pdf", 102829);
