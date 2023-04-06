@@ -519,9 +519,15 @@ public class EmulationPerformance {
 
         Thread.sleep(1000);
 
-
-        for(int i = 1; i<100; i++)
+        // i dovrà essere 100 come suggerito da boris, poi vediamo di sti dati cosa farne
+        for(int i = 1; i<=3; i++)
             getLatenciesOc(ocService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/Oc.xlsx",0,i);
+        for(int i = 1; i<=3; i++)
+            getLatenciesDo(doService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/Do.xlsx",0,i);
+        for(int i = 1; i<=3; i++)
+            getLatenciesPr(prService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/Pr.xlsx",0,i);
+        for(int i = 1; i<=3; i++)
+            getLatenciesTa(taService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/Ta.xlsx",0,i);
     }
 
 }
