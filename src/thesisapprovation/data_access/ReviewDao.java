@@ -52,20 +52,14 @@ public class ReviewDao implements GenericDao<Review, Integer> {
 
                 reviews.add(review);
 
-                //output review (for only testing)
-                System.out.println(review.toString());
             }
 
-            if(reviews.isEmpty()) {
-                System.out.println("Don't exist reviews");
+            if(reviews.isEmpty())
                 return null;
-            }
 
             return reviews;
 
         }catch(SQLException ex){
-            System.out.println("Error get all reviews");
-            ex.printStackTrace();
             return null;
         }
         finally {
@@ -110,14 +104,10 @@ public class ReviewDao implements GenericDao<Review, Integer> {
                 System.out.println(r.toString());
                 conn.close();
                 return review;
-            }else {
-                System.out.println("there aren't Reviews with id=" + idReview);
+            }else
                 return null;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error get review by id");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -137,20 +127,13 @@ public class ReviewDao implements GenericDao<Review, Integer> {
             ps.setInt(3, review.getEc().getThesis().getId());
             ps.setInt(4, review.getEc().getReviewer().getFreshman());
 
-            if(ps.executeUpdate() > 0) {
-                System.out.println("Insert review successful");
+            if(ps.executeUpdate() > 0)
                 return true;
-            }
             else
-            {
-                System.out.println("Insert review not successful");
                 return false;
-            }
 
 
         }catch(SQLException ex){
-            System.out.println("Error insert review");
-            ex.printStackTrace();
             return false;
         }finally{
             conn.close();
@@ -169,19 +152,12 @@ public class ReviewDao implements GenericDao<Review, Integer> {
             ps.setInt(4, review.getEc().getReviewer().getFreshman());
 
             if(ps.executeUpdate() > 0)
-            {
-                System.out.println("Update review successful");
                 return true;
-            }
-            else{
-                System.out.println("Update review not successful");
+            else
                 return false;
-            }
 
 
         }catch(SQLException ex){
-            System.out.println("Error update review");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -197,19 +173,11 @@ public class ReviewDao implements GenericDao<Review, Integer> {
             ps.setInt(1, idReview);
 
             if(ps.executeUpdate() > 0)
-            {
-                System.out.println("Delete review successful");
                 return true;
-            }
             else
-            {
-                System.out.println("Delete review not successful");
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error delete review");
-            ex.printStackTrace();
             return false;
         }finally{
             conn.close();
@@ -239,14 +207,9 @@ public class ReviewDao implements GenericDao<Review, Integer> {
                 reviews.add(new Review(id, title, comment, ec));
             }
 
-            if(reviews.size() == 0)
-                System.out.println("Don't exist reviews by reviewer freshman");
-
             return reviews;
 
         }catch (SQLException ex){
-            System.out.println("Error get all reviews by reviewer freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

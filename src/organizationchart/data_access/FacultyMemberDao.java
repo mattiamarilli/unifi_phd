@@ -40,14 +40,9 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
                 facultyMembers.add(f);
             }
 
-            if(facultyMembers.isEmpty())
-                System.out.println("Don't exist faculty members");
-
             return facultyMembers;
 
         }catch (SQLException e){
-            System.out.println("Error get all faculty members");
-            e.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -82,14 +77,10 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
                 FacultyMember f = new FacultyMember(fmFreshman, name, surname, email, specialization, institution, c);
 
                 return f;
-            }else{
-                System.out.println("Doesn't exist faculty member with freshman= " + fmFreshman);
+            }else
                 return null;
-            }
 
         }catch (SQLException e){
-            System.out.println("Error gets faculty member by number");
-            e.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -111,16 +102,12 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
             stmt.setString(7,facultyMember.getInstitution());
             stmt.setString(8, facultyMember.getCycle().getNumber());
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Insert faculty member successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Insert faculty member not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException e){
-            e.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -139,16 +126,12 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
             stmt.setString(5, facultyMember.getInstitution());
             stmt.setInt(6, facultyMember.getFreshman());
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Update faculty member successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update faculty member not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException e){
-            e.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -162,15 +145,12 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
             conn = ConnectionDao.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM FacultyMembers WHERE Freshman = ?");
             preparedStatement.setInt(1, fmFreshman);
-            if(preparedStatement.executeUpdate() > 0) {
-                System.out.println("Delete faculty member successful");
+            if(preparedStatement.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Delete faculty member not successful");
+            else
                 return false;
-            }
+
         }catch (SQLException e){
-            e.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -184,17 +164,12 @@ public class FacultyMemberDao implements GenericDao<FacultyMember,Integer> {
             stmt.setString(1, password);
             stmt.setInt(2, fmFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update faculty member password successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update faculty member password not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error update faculty member password");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();

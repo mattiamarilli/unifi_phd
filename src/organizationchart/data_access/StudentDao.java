@@ -58,8 +58,6 @@ public class StudentDao implements GenericDao<Student,Integer> {
             return students;
 
         }catch (SQLException e){
-            System.out.println("Error get all students");
-            e.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -113,14 +111,10 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 }
 
                 return s;
-            }else{
-                System.out.println("Doesn't exist student with freshman= " + studentFreshman);
+            }else
                 return null;
-            }
 
         }catch (SQLException e){
-            System.out.println("Error gets student by freshman");
-            e.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -143,17 +137,12 @@ public class StudentDao implements GenericDao<Student,Integer> {
             stmt.setString(7, student.getCycle().getNumber());
             stmt.setInt(8, student.getYear());
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Insert student successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Insert student not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException e){
-            System.out.println("Error insert student");
-            e.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -172,15 +161,12 @@ public class StudentDao implements GenericDao<Student,Integer> {
             stmt.setString(4, student.getTopics());
             stmt.setInt(5, student.getFreshman());
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Update student successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Update student not successful");
+            else
                 return false;
-            }
+
         }catch (SQLException e){
-            e.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -195,16 +181,12 @@ public class StudentDao implements GenericDao<Student,Integer> {
                     "DELETE FROM Students WHERE Freshman = ?");
             stmt.setInt(1, freshman);
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Delete student successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Delete student not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException e){
-            e.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -218,17 +200,12 @@ public class StudentDao implements GenericDao<Student,Integer> {
             stmt.setString(1, password);
             stmt.setInt(2, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update student password successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update student password not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update student password");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -242,17 +219,13 @@ public class StudentDao implements GenericDao<Student,Integer> {
             stmt.setInt(1, advisorFreshman);
             stmt.setInt(2, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update student advisor successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update student advisor not successful");
+            else
                 return false;
-            }
+
 
         }catch(SQLException ex){
-            System.out.println("Error update student advisor");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -266,17 +239,12 @@ public class StudentDao implements GenericDao<Student,Integer> {
             stmt.setInt(1, year);
             stmt.setInt(2, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update student year successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update student year not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update student year");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -328,13 +296,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 }
             }
 
-            if(students.isEmpty())
-                System.out.println("There aren't students in this year");
-
             return students;
 
         }catch(SQLException ex){
-            System.out.println("Error get students by year");
             ex.printStackTrace();
             return null;
         }finally {
@@ -384,15 +348,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 }
 
             }
-
-            if(students.isEmpty())
-                System.out.println("There aren't students in this cycle");
-
             return students;
 
         }catch (SQLException ex){
-            System.out.println("Error get students by cycle");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -429,14 +387,9 @@ public class StudentDao implements GenericDao<Student,Integer> {
                 students.add(new Student(studentFreshman, studentName, studentSurname, studentEmail, studentTopics, cycle, studentYear, advisor));
             }
 
-            if(students.isEmpty())
-                System.out.println("Doesn't advise any student");
-
             return students;
 
         }catch (SQLException ex){
-            System.out.println("Error get students by advisor freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

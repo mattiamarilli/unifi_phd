@@ -46,8 +46,6 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             return appeals;
 
         }catch(SQLException ex){
-            System.out.println("Error get all appeals");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -124,17 +122,12 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 stmt.setString(5, appeal.getCourse().getCode());
             }
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert appeal successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert appeal not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error insert appeal");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -157,17 +150,12 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             stmt.setString(8, appeal.getCourse().getCode());
             stmt.setInt(9, appeal.getId());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update appeal successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update appeal not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error update appeal");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -181,17 +169,11 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Appeals WHERE Id = ?");
             stmt.setInt(1, idAppeal);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete appeal successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete appeal not successful");
+            else
                 return false;
-            }
-
         }catch (SQLException ex){
-            System.out.println("Error delete appeal");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -206,17 +188,11 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             stmt.setInt(2, studentFreshman);
             stmt.setString(3, courseCode);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update state student study plan successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update state student study plan not successful");
+            else
                 return false;
-            }
-
         }catch(SQLException ex){
-            System.out.println("Error update state student study plan");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -257,8 +233,6 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             return appeals;
 
         }catch(SQLException ex){
-            System.out.println("Error get appeals by course code");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -273,17 +247,12 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
             stmt.setInt(2, studentFreshman);
             stmt.setInt(3, idAppeal);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert vote by student freshman and id appeal successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert vote by student freshman and id appeal not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error insert vote by student freshman and id appeal");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -308,14 +277,9 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 appealParticipations.add(new AppealParticipation(sc, a));
             }
 
-            if(appealParticipations.isEmpty())
-                System.out.println("Don't exist appeal participation without vote by course code");
-
             return appealParticipations;
 
         }catch(SQLException ex){
-            System.out.println("Error get student freshmen without vote by course code");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -355,13 +319,8 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 appeals.add(a);
             }
 
-            if(appeals.isEmpty())
-                System.out.println("Don't exist appeals");
-
             return appeals;
         }catch(SQLException ex){
-            System.out.println("Error get appeals by student freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -402,14 +361,9 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 appeals.add(a);
             }
 
-            if(appeals.isEmpty())
-                System.out.println("Don't exist appeals you want accept");
-
             return appeals;
 
         }catch (SQLException ex){
-            System.out.println("Error get appeals to accept");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -449,14 +403,9 @@ public class AppealDao implements GenericDao<Appeal, Integer> {
                 appeals.add(a);
             }
 
-            if(appeals.isEmpty())
-                System.out.println("Don't exist appeals you want register");
-
             return appeals;
 
         }catch (SQLException ex){
-            System.out.println("Error get appeals to register");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

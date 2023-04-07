@@ -34,15 +34,9 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
 
                 scientists.add(scientist);
             }
-
-            if(scientists.isEmpty())
-                System.out.println("Don't exist scientists");
-
             return scientists;
 
         }catch (SQLException ex){
-            System.out.println("Error get all scientists");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -70,14 +64,11 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
                 Scientist scientist = new Scientist(f, n, s, p, e, d);
 
                 return scientist;
-            }else{
-                System.out.println("Doesn't exist scientist with id=" + integer);
+            }else
                 return null;
-            }
+
 
         }catch (SQLException ex){
-            System.out.println("Error get scientist by id");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -98,17 +89,12 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             stmt.setString(5, scientist.getEmail());
             stmt.setString(6, scientist.getDescription());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert scientist successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert scientist not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error insert scientist");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -127,17 +113,12 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             stmt.setString(4, scientist.getDescription());
             stmt.setInt(5, scientist.getFreshman());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update scientist successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update scientist not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update scientist");
-            ex.printStackTrace();
             return false;
         }
         finally {
@@ -153,17 +134,12 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Scientists WHERE Freshman= ?");
             stmt.setInt(1, integer);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete scientist successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete scientist not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error delete scientist");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -189,8 +165,6 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
 
             return idStudents;
         }catch (SQLException ex){
-            System.out.println("Error getting id's ");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -220,15 +194,9 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
                 progressReports.add(new ProgressReport(id, title, description, url, studentFreshman));
             }
 
-            if(progressReports.isEmpty()){
-                System.out.println("Student doesn't load the progress report");
-            }
-
             return progressReports;
 
         }catch(SQLException ex){
-            System.out.println("Error get progress report by scientist and student");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -242,17 +210,12 @@ public class ScientistDao implements GenericDao<Scientist, Integer> {
             stmt.setString(1, password);
             stmt.setInt(2, idScientist);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update password successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update password not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update password");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();

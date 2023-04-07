@@ -29,8 +29,6 @@ public class CycleDao implements GenericDao<Cycle, String> {
             return cycles;
 
         }catch (SQLException e){
-            System.out.println("Error get all cycles");
-            e.printStackTrace();
             return null;
         }finally {
             connection.close();
@@ -52,14 +50,10 @@ public class CycleDao implements GenericDao<Cycle, String> {
                 Cycle c = new Cycle(number, year, description);
 
                 return c;
-            }else{
-                System.out.println("Doesn't exist cycle with number= " + number);
+            }else
                 return null;
-            }
 
         }catch (SQLException e){
-            System.out.println("Error gets cycle by number");
-            e.printStackTrace();
             return null;
         }finally {
             connection.close();
@@ -77,17 +71,13 @@ public class CycleDao implements GenericDao<Cycle, String> {
             stmt.setInt(2, cycle.getYear());
             stmt.setString(3, cycle.getDescription());
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Insert cycle successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Insert cycle not successful");
+            else
                 return false;
-            }
+
 
         }catch (SQLException e){
-            System.out.println("Error insert cycle");
-            e.printStackTrace();
             return false;
         }finally {
             connection.close();
@@ -104,16 +94,13 @@ public class CycleDao implements GenericDao<Cycle, String> {
             stmt.setString(2, cycle.getDescription());
             stmt.setString(3, cycle.getNumber());
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Update cycle successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Update cycle not successful");
+            else
                 return false;
-            }
+
 
         }catch (SQLException e){
-            e.printStackTrace();
             return false;
         }finally {
             connection.close();
@@ -127,17 +114,12 @@ public class CycleDao implements GenericDao<Cycle, String> {
             PreparedStatement stmt = connection.prepareStatement("DELETE FROM Cycles WHERE Number = ?");
             stmt.setString(1, number);
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Delete cycle successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else {
-                System.out.println("Delete cycle not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException e){
-            System.out.println("Error delete cycle");
-            e.printStackTrace();
             return false;
         }finally {
             connection.close();

@@ -31,17 +31,11 @@ public class CourseDao implements GenericDao<Course, String>{
                 courses.add(c);
             }
 
-            if(courses.isEmpty()) {
-                System.out.println("Don't exist courses");
+            if(courses.isEmpty())
                 return null;
-            }
 
             return courses;
-
-
         }catch(SQLException ex){
-            System.out.println("Error get all courses");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -69,15 +63,10 @@ public class CourseDao implements GenericDao<Course, String>{
 
                 return c;
 
-            }else{
-                System.out.println("Doesn't exist course with code= " + s);
+            }else
                 return null;
-            }
-
 
         }catch (SQLException ex){
-            System.out.println("Error get course by id");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -97,17 +86,12 @@ public class CourseDao implements GenericDao<Course, String>{
             stmt.setInt(4, course.getCfu());
             stmt.setInt(5, course.getYear());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert course successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert course not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error insert course");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -125,17 +109,11 @@ public class CourseDao implements GenericDao<Course, String>{
             stmt.setInt(4, course.getYear());
             stmt.setString(5, course.getCode());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update course successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update course not successful");
+            else
                 return false;
-            }
-
         }catch (SQLException ex){
-            System.out.println("Error update course");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -149,17 +127,11 @@ public class CourseDao implements GenericDao<Course, String>{
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Courses WHERE Code = ?");
             stmt.setString(1, s);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete course successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete course not successful");
+            else
                 return false;
-            }
-
         }catch (SQLException ex){
-            System.out.println("Error delete course");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -174,17 +146,13 @@ public class CourseDao implements GenericDao<Course, String>{
             stmt.setString(2, courseCode);
 
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update state study plan successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update state study plan not successful");
+            else
                 return false;
-            }
+
 
         }catch (SQLException ex){
-            System.out.println("Error update state study plane");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -217,17 +185,13 @@ public class CourseDao implements GenericDao<Course, String>{
                 courses.add(c);
             }
 
-            if(courses.isEmpty()) {
-                System.out.println("Don't exist courses");
+            if(courses.isEmpty())
                 return null;
-            }
 
             return courses;
 
 
         }catch(SQLException ex){
-            System.out.println("Error get all courses");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

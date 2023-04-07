@@ -36,16 +36,12 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 thesisList.add(t);
             }
 
-            if(thesisList.isEmpty()) {
-                System.out.println("Don't exist thesis");
+            if(thesisList.isEmpty())
                 return null;
-            }
 
             return thesisList;
 
         }catch(SQLException ex){
-            System.out.println("Error get all thesis");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -73,13 +69,9 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
                 return t;
 
-            }else{
-                System.out.println("Doesn't exist thesis with id=" + id);
+            }else
                 return null;
-            }
         }catch (SQLException ex){
-            System.out.println("Error get thesis by id");
-            ex.printStackTrace();
             return null;
         }finally{
             conn.close();
@@ -97,19 +89,11 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             stmt.setString(3, String.valueOf(thesis.getLoad()));
 
             if(stmt.executeUpdate() > 0)
-            {
-                System.out.println("Insert thesis successful");
                 return true;
-            }
             else
-            {
-                System.out.println("Insert thesis not successful");
                 return false;
-            }
 
         }catch(SQLException ex){
-            ex.printStackTrace();
-            System.out.println("Error insert thesis");
             return false;
         }finally {
             conn.close();
@@ -127,17 +111,12 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             stmt.setInt(4, thesis.getId());
 
             if(stmt.executeUpdate() > 0)
-            {
-                System.out.println("Update thesis successful");
                 return true;
-            }else{
-                System.out.println("Update thesis not successful");
+            else
                 return false;
-            }
+
 
         }catch (SQLException ex){
-            System.out.println("Error update thesis ");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -152,17 +131,11 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             stmt.setInt(1, id);
 
             if(stmt.executeUpdate() > 0)
-            {
-                System.out.println("Delete thesis successful");
                 return true;
-            }else{
-                System.out.println("Delete thesis not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error delete thesis");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -178,17 +151,11 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
 
             if(stmt.executeUpdate() > 0)
-            {
-                System.out.println("Insert evaluation successful");
                 return true;
-            }else{
-                System.out.println("Insert evaluation not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            ex.printStackTrace();
-            System.out.println("Error insert evaluation");
             return false;
         }finally {
             conn.close();
@@ -202,17 +169,12 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             stmt.setString(1, state);
             stmt.setInt(2, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update state successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update state not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update state");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -226,17 +188,12 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             stmt.setString(1, stateLoaded);
             stmt.setInt(2, idThesis);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update loaded successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update loaded not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update loaded by student");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -267,8 +224,6 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             return reviewers;
 
         }catch(SQLException ex){
-            System.out.println("Error get reviewers by student");
-            ex.printStackTrace();
             return null;
         }finally{
             conn.close();
@@ -312,14 +267,10 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
                 return review;
 
-            }else{
-                System.out.println("Doesn't exist review ");
+            }else
                 return null;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error gets review by student and reviewer");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -347,15 +298,10 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
                 Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
                 return t;
-            }else{
-                System.out.println("Doesn't load thesis by student");
+            }else
                 return null;
-            }
-
 
         }catch(SQLException ex){
-            System.out.println("Error gets thesis by student freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -383,15 +329,11 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
 
                 Thesis t = new Thesis(id, title, description, url, studentFreshman, state, load);
                 return t;
-            }else{
-                System.out.println("Doesn't load thesis by student");
+            }else
                 return null;
-            }
 
 
         }catch(SQLException ex){
-            System.out.println("Error gets thesis by student freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -406,17 +348,10 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
             stmt.setInt(1, studentFreshman);
 
             if(stmt.executeUpdate() > 0)
-            {
-                System.out.println("Delete thesis by student successful");
                 return true;
-            }else{
-                System.out.println("Delete thesis by student not successful");
+            else
                 return false;
-            }
-
         }catch (SQLException ex){
-            System.out.println("Error delete thesis by student");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -445,13 +380,8 @@ public class ThesisDao implements GenericDao<Thesis, Integer> {
                 theses.add(new Thesis(id,title, description, url, studentFreshman, state, load));
             }
 
-            if(theses.isEmpty())
-                System.out.println("Don't exist theses loaded and not approved");
-
             return theses;
         }catch(SQLException ex){
-            System.out.println("Error get all theses not approved");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

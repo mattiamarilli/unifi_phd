@@ -44,8 +44,6 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
             return lessons;
 
         }catch(SQLException ex){
-            System.out.println("Error get all lessons");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -78,15 +76,11 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
                 Course course = new Course(code, title, description, cfu, year);
 
                 return new Lesson(idLesson, date, startTime, endTime, room, universityComplex, university, mode, course);
-            }else{
-                System.out.println("Doesn't exist lesson with id =" + idLesson);
+            }else
                 return null;
-            }
 
 
         }catch (SQLException ex){
-            System.out.println("Error gets lesson by id");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -119,17 +113,12 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
                 stmt.setString(5, lesson.getCourse().getCode());
             }
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Insert lesson successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert lesson not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error insert lesson");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -151,17 +140,12 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
             stmt.setString(8, lesson.getCourse().getCode());
             stmt.setInt(9, lesson.getId());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update lesson successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update lesson not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex) {
-            System.out.println("Error update lesson");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -175,16 +159,12 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Lessons WHERE Id = ?");
             stmt.setInt(1, idLesson);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete lesson successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete lesson not successful");
+            else
                 return false;
-            }
+
         }catch (SQLException ex){
-            System.out.println("Error delete lesson");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -226,8 +206,6 @@ public class LessonDao implements GenericDao<Lesson, Integer>{
             return lessons;
 
         }catch (SQLException ex){
-            System.out.println("Error get lessons by course code");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

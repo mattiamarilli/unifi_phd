@@ -27,8 +27,6 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             return studentCareers;
 
         }catch (SQLException ex){
-            System.out.println("Error get all student careers");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -46,14 +44,10 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             if(rs.next()){
                 int freshmanStudent = rs.getInt("StudentFreshman");
                 return new StudentCareer(freshmanStudent);
-            }else{
-                System.out.println("Doesn't exist student career with freshman = " + studentFreshman);
+            }else
                 return null;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error gets student career by freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -67,17 +61,12 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO StudentCareers (StudentFreshman) VALUES (?)");
             stmt.setInt(1, studentCareer.getFreshmanStudent());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert student career successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert student career not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error insert student career");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -96,17 +85,13 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM StudentCareers WHERE StudentFreshman = ?");
             stmt.setInt(1, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete student career successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete student career not successful");
+            else
                 return false;
-            }
+
 
         }catch(SQLException ex){
-            System.out.println("Error delete student career");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -122,17 +107,11 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             stmt.setString(3, String.valueOf(studyPlan.getState()));
             stmt.setDate(4, studyPlan.getRegistrationDate());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert study plan successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert study plan not successful");
+            else
                 return false;
-            }
-
         }catch(SQLException ex){
-            System.out.println("Error insert study plan");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -147,17 +126,12 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             stmt.setInt(1, studentFreshman);
             stmt.setString(2, courseCode);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete study plan successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete study plan not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error delete study plan");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -172,17 +146,12 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             stmt.setInt(1, appealParticipation.getStudentCareer().getFreshmanStudent());
             stmt.setInt(2, appealParticipation.getAppeal().getId());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert appeal participation successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert appeal participation not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error appeal participation");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -197,17 +166,11 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             stmt.setInt(1, idAppeal);
             stmt.setInt(2, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete appeal participation by student successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete appeal participation by student not successful");
+            else
                 return false;
-            }
-
         }catch (SQLException ex){
-            System.out.println("Error delete appeal participation by student");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -241,8 +204,6 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             return courses;
 
         }catch (SQLException ex){
-            System.out.println("Error get courses by student freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -276,8 +237,6 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             return courses;
 
         }catch(SQLException ex){
-            System.out.println("Error get courses accredited by student freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -319,8 +278,6 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
             return appealParticipation;
 
         }catch(SQLException ex){
-            System.out.println("Error get appeal participation by student");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -349,14 +306,9 @@ public class StudentCareerDao implements GenericDao<StudentCareer, Integer> {
                 studyPlans.add(new StudyPlan(sc, c, state, registrationDat));
             }
 
-            if(studyPlans.isEmpty())
-                System.out.println("Don't exist study plans");
-
             return studyPlans;
 
         }catch (SQLException ex){
-            System.out.println("Error get study plans by student");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();

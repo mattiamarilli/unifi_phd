@@ -33,16 +33,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
                 progressReports.add(pr);
             }
 
-            if(progressReports.isEmpty()) {
-                System.out.println("Don't exist progress reports");
+            if(progressReports.isEmpty())
                 return null;
-            }
 
             return progressReports;
 
         }catch(SQLException ex){
-            System.out.println("Error get all progress reports");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -73,21 +69,15 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
                 System.out.println(pr.toString());
 
                 return pr;
-            }else{
-                System.out.println("Doesn't exist progress report with id=" + integer);
+            }else
                 return null;
-            }
 
 
         }catch(SQLException ex){
-            System.out.println("Error get progress report by id");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
         }
-
-
     }
 
     @Override
@@ -102,18 +92,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             stmt.setString(4, String.valueOf(progressReport.getState()));
             stmt.setInt(5, progressReport.getFreshmanStudent());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert progress report successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert progress report not successful");
+            else
                 return false;
-            }
-
 
         }catch(SQLException ex){
-            System.out.println("Error insert progress report");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -132,17 +116,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             stmt.setString(3, progressReport.getUrlDocument());
             stmt.setInt(4, progressReport.getId());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update progress report successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update progress report not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update progress report");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -158,17 +137,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM ProgressReports WHERE Id= ?");
             stmt.setInt(1, integer);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete progress report successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete progress report not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error delete progress report");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -184,17 +158,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             stmt.setInt(2, idScientist);
 
 
-            if(stmt.executeUpdate() > 0) {
-                System.out.println("Insert evaluation successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert evaluation not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            ex.printStackTrace();
-            System.out.println("Error insert evaluation");
             return false;
         }finally {
             conn.close();
@@ -208,17 +177,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             stmt.setString(1, state);
             stmt.setInt(2, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update state progress report successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update state progress report not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error update state progress report");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -253,8 +217,6 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             return scientists;
 
         }catch(SQLException ex){
-            System.out.println("Error get scientists by student freshman");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -268,17 +230,12 @@ public class ProgressReportDao implements GenericDao<ProgressReport, Integer> {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM ProgressReports WHERE StudentFreshman = ?");
             stmt.setInt(1, studentFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete progress report by student successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete progress report by student not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error delete progress report by student");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();

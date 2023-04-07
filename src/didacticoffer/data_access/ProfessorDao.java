@@ -41,17 +41,13 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
 
             }
 
-            if(professors.isEmpty()){
-                System.out.println("Don't exist professors");
+            if(professors.isEmpty())
                 return null;
-            }
 
             return professors;
 
 
         }catch (SQLException ex) {
-            System.out.println("Error get all professors");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -86,15 +82,11 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
                 Professor p = new Professor(freshman, name, surname, specialization, university, email, password, c);
 
                 return p;
-            }else{
-                System.out.println("Doesn't exist professor with freshman= " + integer);
+            }else
                 return null;
-            }
 
 
         }catch(SQLException ex){
-            System.out.println("Error get professor");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -115,17 +107,12 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             stmt.setString(6, professor.getEmail());
             stmt.setString(7, professor.getPassword());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Insert professor successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Insert professor not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error insert professor");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -145,17 +132,12 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             stmt.setString(5, professor.getEmail());
             stmt.setInt(6, professor.getFreshman());
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update professor successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update professor not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error update professor");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -169,17 +151,12 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Professors WHERE Freshman = ?");
             stmt.setInt(1, integer);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Delete professor successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Delete professor not successful");
+            else
                 return false;
-            }
 
         }catch(SQLException ex){
-            System.out.println("Error delete professor");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -193,17 +170,13 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             stmt.setString(1, password);
             stmt.setInt(2, freshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update password professor successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update password professor not successful");
+            else
                 return false;
-            }
+
 
         }catch (SQLException ex){
-            System.out.println("Error update password professor");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -217,17 +190,12 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             stmt.setString(1, codeCourse);
             stmt.setInt(2, professorFreshman);
 
-            if(stmt.executeUpdate() > 0){
-                System.out.println("Update password professor successful");
+            if(stmt.executeUpdate() > 0)
                 return true;
-            }else{
-                System.out.println("Update password professor not successful");
+            else
                 return false;
-            }
 
         }catch (SQLException ex){
-            System.out.println("Error update password professor");
-            ex.printStackTrace();
             return false;
         }finally {
             conn.close();
@@ -255,8 +223,6 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
             return studentFreshmen;
 
         }catch (SQLException ex){
-            System.out.println("Error get student freshmen by professor");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
@@ -282,14 +248,10 @@ public class ProfessorDao implements GenericDao <Professor, Integer> {
 
                 professors.add(new Professor(freshman, name, surname, specialization, university, email));
             }
-            if(professors.isEmpty())
-                System.out.println("Don't exist professors without course");
 
             return professors;
 
         }catch(SQLException ex){
-            System.out.println("Error get professors without course");
-            ex.printStackTrace();
             return null;
         }finally {
             conn.close();
