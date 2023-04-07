@@ -19,6 +19,15 @@ import java.util.function.BiPredicate;
 
 public class ThesisApprovationService {
 
+    public int getLag() {
+        return lag;
+    }
+
+    public void setLag(int lag) {
+        this.lag = lag;
+    }
+
+    private int lag = 0;
     private final int millisecondsDelay = 5000;
 
     private Boolean available = true;
@@ -32,14 +41,19 @@ public class ThesisApprovationService {
         this.reviewerDao = new ReviewerDao();
     }
 
-    public static void emulateDelay() throws InterruptedException {
-        Random random = new Random();
-        int number = random.nextInt(100);
+    public void emulateDelay() throws InterruptedException {
+        if(this.lag == 0)
+        {
+            Random random = new Random();
+            int number = random.nextInt(100);
 
-        if(number <= 95)
-            Thread.sleep(random.nextInt(7) + 3);
+            if(number <= 95)
+                Thread.sleep(random.nextInt(7) + 3);
+            else
+                Thread.sleep(random.nextInt(20) + 20);
+        }
         else
-            Thread.sleep(random.nextInt(20) + 20);
+            Thread.sleep(this.lag);
     }
 
     //METODI PER ThesisDao

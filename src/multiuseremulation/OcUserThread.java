@@ -9,7 +9,7 @@ import java.util.Random;
 public class OcUserThread implements Runnable{
 
     private OrganizationChartService ocService;
-    private final int millisecondsSleep = 300;
+    private final int millisecondsSleep = 3000;
 
 
     public OcUserThread(OrganizationChartService ocService) {
@@ -24,6 +24,7 @@ public class OcUserThread implements Runnable{
             try {
                 Random random = new Random();
                 test = random.nextInt(21) + 1;
+                System.out.println(Thread.currentThread().getName());
 
                 try {
                     switch (test) {
@@ -96,6 +97,6 @@ public class OcUserThread implements Runnable{
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }while (!Thread.currentThread().isInterrupted() && test != 21 && count != 21);
+        }while (!Thread.currentThread().isInterrupted());
     }
 }

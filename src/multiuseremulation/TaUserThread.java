@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class TaUserThread implements Runnable{
     private ThesisApprovationService taService;
-    private final int millisecondsSleep = 300;
+    private final int millisecondsSleep = 3000;
 
     public TaUserThread(ThesisApprovationService taService) {
         this.taService = taService;
@@ -22,6 +22,7 @@ public class TaUserThread implements Runnable{
             try {
                 Random random = new Random();
                 test = random.nextInt(17) + 1;
+                System.out.println(Thread.currentThread().getName());
 
                 try {
                     switch (test) {
@@ -82,6 +83,6 @@ public class TaUserThread implements Runnable{
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }while (!Thread.currentThread().isInterrupted() && test != 17 && count != 18);
+        }while (!Thread.currentThread().isInterrupted());
     }
 }

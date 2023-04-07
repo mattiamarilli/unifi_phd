@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class DoUserThread implements Runnable{
     private DidacticOfferService doService;
-    private final int millisecondsSleep = 300;
+    private final int millisecondsSleep = 3000;
 
     public DoUserThread(DidacticOfferService doService) {
         this.doService = doService;
@@ -23,6 +23,7 @@ public class DoUserThread implements Runnable{
             try {
                 Random random = new Random();
                 test = random.nextInt(25) + 1;
+                System.out.println(Thread.currentThread().getName());
 
                 try {
                     switch (test) {
@@ -109,6 +110,6 @@ public class DoUserThread implements Runnable{
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }while (!Thread.currentThread().isInterrupted() && test != 25 && count != 25);
+        }while (!Thread.currentThread().isInterrupted());
     }
 }

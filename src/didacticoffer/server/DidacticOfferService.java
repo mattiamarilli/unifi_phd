@@ -14,6 +14,16 @@ import java.util.Random;
 
 public class DidacticOfferService {
 
+    public int getLag() {
+        return lag;
+    }
+
+    public void setLag(int lag) {
+        this.lag = lag;
+    }
+
+    private int lag = 0;
+
     final int millisecondsDelay = 5000;
     private  Boolean available = true;
     private ProfessorDao professorDao;
@@ -40,12 +50,18 @@ public class DidacticOfferService {
     }
 
     public void emulateDelay() throws InterruptedException {
-        Random random = new Random();
-        int number = random.nextInt(100);
-        if (number <= 95)
-            Thread.sleep(random.nextInt(7)+3);
+        if(this.lag == 0)
+        {
+            Random random = new Random();
+            int number = random.nextInt(100);
+
+            if(number <= 95)
+                Thread.sleep(random.nextInt(7) + 3);
+            else
+                Thread.sleep(random.nextInt(20) + 20);
+        }
         else
-            Thread.sleep(random.nextInt(20)+20);
+            Thread.sleep(this.lag);
     }
     //METODI PER ProfessorDao
 

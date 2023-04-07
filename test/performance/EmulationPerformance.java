@@ -497,26 +497,64 @@ public class EmulationPerformance {
             taUsers.get(i).start();
     }
 
-    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+    public static void main_(String[] args) throws IOException, SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         ProgressReportService prService = new ProgressReportService();
         DidacticOfferService doService = new DidacticOfferService();
         ThesisApprovationService taService = new ThesisApprovationService();
 
-        runUsers(2,2,2,2,ocService,prService,doService,taService);
+        //multi user increase
 
-        Thread.sleep(1000);
+        for (int i = 0; i < 10; i++) {
+            runUsers(10, 10, 10, 10, ocService, prService, doService, taService);
 
-        // i dovrà essere 100 come suggerito da boris, poi vediamo di sti dati cosa farne
-        for(int i = 1; i<=3; i++)
-            getLatenciesOc(ocService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/IncreaseMultiUsers.xlsx",0,i,0);
-        for(int i = 1; i<=3; i++)
-            getLatenciesDo(doService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/IncreaseMultiUsers.xlsx",0,i,1);
-        for(int i = 1; i<=3; i++)
-            getLatenciesPr(prService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/IncreaseMultiUsers.xlsx",0,i,2);
-        for(int i = 1; i<=3; i++)
-            getLatenciesTa(taService,"/Users/mattiamarilli/Progetti/unifi_phd/documentation/IncreaseMultiUsers.xlsx",0,i,3);
+            for (int j = 1; j <= 10; j++)
+                getLatenciesOc(ocService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/MultiUserIncreaseOc.xlsx", 0, j, i);
+            for (int j = 1; j <= 10; j++)
+                getLatenciesDo(doService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/MultiUserIncreaseDo.xlsx", 0, j, i);
+            for (int j = 1; j <= 10; j++)
+                getLatenciesPr(prService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/MultiUserIncreasePr.xlsx", 0, j, i);
+            for (int j = 1; j <= 10; j++)
+                getLatenciesTa(taService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/MultiUserIncreaseTa.xlsx", 0, j, i);
+        }
+
+        //increase lag time
+
     }
+
+    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+        OrganizationChartService ocService = new OrganizationChartService();
+        ocService.setLag(10);
+        ProgressReportService prService = new ProgressReportService();
+        prService.setLag(10);
+        DidacticOfferService doService = new DidacticOfferService();
+        doService.setLag(10);
+        ThesisApprovationService taService = new ThesisApprovationService();
+        taService.setLag(10);
+
+        runUsers(10, 10, 10, 10, ocService, prService, doService, taService);
+
+        for(int i=0; i<10;i++)
+        {
+            ocService.setLag(i*100);
+            prService.setLag(i*100);
+            doService.setLag(i*100);
+            taService.setLag(i*100);
+
+            for (int j = 1; j <= 3; j++)
+                getLatenciesOc(ocService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);
+            for (int j = 1; j <= 3; j++)
+                getLatenciesDo(doService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseDo.xlsx", 0, j, i);
+            for (int j = 1; j <= 3; j++)
+                getLatenciesPr(prService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
+            for (int j = 1; j <= 3; j++)
+                getLatenciesTa(taService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
+
+        }
+
+    }
+
+
 
 }
 
