@@ -497,7 +497,7 @@ public class EmulationPerformance {
             taUsers.get(i).start();
     }
 
-    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+    public static void main_(String[] args) throws IOException, SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         ProgressReportService prService = new ProgressReportService();
         DidacticOfferService doService = new DidacticOfferService();
@@ -518,31 +518,30 @@ public class EmulationPerformance {
             for (int j = 1; j <= 10; j++)
                 getLatenciesTa(taService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/MultiUserIncreaseTa.xlsx", 0, j, i);
 
-
         }
 
         //increase lag time
 
     }
 
-    public static void main_(String[] args) throws IOException, SQLException, InterruptedException {
+    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
         OrganizationChartService ocService = new OrganizationChartService();
         ocService.setLag(10);
         ProgressReportService prService = new ProgressReportService();
-        prService.setLag(10);
+        //prService.setLag(10);
         DidacticOfferService doService = new DidacticOfferService();
-        doService.setLag(10);
+        //doService.setLag(10);
         ThesisApprovationService taService = new ThesisApprovationService();
-        taService.setLag(10);
+        //taService.setLag(10);
 
         runUsers(10, 10, 10, 10, ocService, prService, doService, taService);
 
         for(int i=0; i<10;i++)
         {
             ocService.setLag(i*100);
-            prService.setLag(i*100);
-            doService.setLag(i*100);
-            taService.setLag(i*100);
+            //prService.setLag(i*100);
+            //doService.setLag(i*100);
+            //taService.setLag(i*100);
 
             for (int j = 1; j <= 3; j++)
                 getLatenciesOc(ocService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);
@@ -553,6 +552,9 @@ public class EmulationPerformance {
             for (int j = 1; j <= 3; j++)
                 getLatenciesTa(taService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
         }
+
+        for (int j = 1; j <= 200; j++)
+            System.out.println("finito");
 
     }
 
