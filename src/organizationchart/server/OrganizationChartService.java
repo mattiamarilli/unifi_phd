@@ -147,12 +147,10 @@ public class OrganizationChartService {
         if(available){
             Boolean result = studentDao.delete(studentFreshman);
             //elimino lo studente anche negli altri microservizi
-            if(result) {
-                this.ocProxy = new OrganizationChartProxy();
-                ocProxy.deleteStudentDidacticOffer(studentFreshman);
-                ocProxy.deleteStudentProgressReport(studentFreshman);
-                ocProxy.deleteStudentThesisApprovation(studentFreshman);
-            }
+            this.ocProxy = new OrganizationChartProxy();
+            ocProxy.deleteStudentDidacticOffer(studentFreshman);
+            ocProxy.deleteStudentProgressReport(studentFreshman);
+            ocProxy.deleteStudentThesisApprovation(studentFreshman);
             emulateDelay();
             return result;
         }else{

@@ -533,8 +533,8 @@ public class EmulationPerformance {
 
         for(int i=0; i<10;i++)
         {
-            ocService.setLag((i+1)*30);
-            //prService.setLag((i+1)*100);
+            //ocService.setLag((i+1)*30);
+            prService.setLag((i+1)*30);
             //doService.setLag((i+1)*100);
             //taService.setLag((i+1)*100);
 
@@ -548,8 +548,6 @@ public class EmulationPerformance {
                 getLatenciesTa(taService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
         }
     }
-
-
 
 }
 
