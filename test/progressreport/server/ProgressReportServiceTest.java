@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProgressReportServiceTest {
 
-    final ProgressReportService prService = new ProgressReportService();
+    final ProgressReportService prService = ProgressReportService.getInstance();
 
     @Test
     void insertStudentToProgressReport() throws SQLException, InterruptedException  {

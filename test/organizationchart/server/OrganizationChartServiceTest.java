@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrganizationChartServiceTest {
 
-    private OrganizationChartService ocService = new OrganizationChartService();
+    private OrganizationChartService ocService = OrganizationChartService.getInstance();
 
 
     @Test

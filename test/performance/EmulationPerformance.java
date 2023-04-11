@@ -497,11 +497,11 @@ public class EmulationPerformance {
             taUsers.get(i).start();
     }
 
-    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        OrganizationChartService ocService = new OrganizationChartService();
-        ProgressReportService prService = new ProgressReportService();
-        DidacticOfferService doService = new DidacticOfferService();
-        ThesisApprovationService taService = new ThesisApprovationService();
+    public static void main_(String[] args) throws IOException, SQLException, InterruptedException {
+        OrganizationChartService ocService = OrganizationChartService.getInstance();
+        ProgressReportService prService = ProgressReportService.getInstance();
+        DidacticOfferService doService = DidacticOfferService.getInstance();
+        ThesisApprovationService taService = ThesisApprovationService.getInstance();
 
         //multi user increase
         for (int i = 0; i < 10; i++) {
@@ -519,24 +519,24 @@ public class EmulationPerformance {
         }
     }
 
-    public static void main_(String[] args) throws IOException, SQLException, InterruptedException {
-        OrganizationChartService ocService = new OrganizationChartService();
-        ocService.setLag(10);
-        ProgressReportService prService = new ProgressReportService();
+    public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+        OrganizationChartService ocService = OrganizationChartService.getInstance();
+        //ocService.setLag(10);
+        ProgressReportService prService = ProgressReportService.getInstance();
         //prService.setLag(10);
-        DidacticOfferService doService = new DidacticOfferService();
+        DidacticOfferService doService = DidacticOfferService.getInstance();
         //doService.setLag(10);
-        ThesisApprovationService taService = new ThesisApprovationService();
+        ThesisApprovationService taService = ThesisApprovationService.getInstance();
         //taService.setLag(10);
 
         runUsers(10, 10, 10, 10, ocService, prService, doService, taService);
 
         for(int i=0; i<10;i++)
         {
-            ocService.setLag(i*100);
-            //prService.setLag(i*100);
-            //doService.setLag(i*100);
-            //taService.setLag(i*100);
+            ocService.setLag((i+1)*30);
+            //prService.setLag((i+1)*100);
+            //doService.setLag((i+1)*100);
+            //taService.setLag((i+1)*100);
 
             for (int j = 1; j <= 10; j++)
                 getLatenciesOc(ocService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);

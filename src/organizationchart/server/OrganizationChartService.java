@@ -1,4 +1,5 @@
 package organizationchart.server;
+import didacticoffer.server.DidacticOfferService;
 import organizationchart.Cycle;
 import organizationchart.FacultyMember;
 import organizationchart.Student;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 public class OrganizationChartService {
+
+    private static OrganizationChartService ocs;
 
     public int getLag() {
         return lag;
@@ -26,11 +29,19 @@ public class OrganizationChartService {
     private CycleDao cycleDao;
     private FacultyMemberDao facultyMemberDao;
     private OrganizationChartProxy ocProxy;
-    public OrganizationChartService() {
+    private OrganizationChartService() {
         this.studentDao = new StudentDao();
         this.cycleDao = new CycleDao();
         this.facultyMemberDao = new FacultyMemberDao();
     }
+
+
+    public static OrganizationChartService getInstance() {
+        return ocs == null ?
+                ocs = new OrganizationChartService() :
+                ocs;
+    }
+
 
     public Boolean getAvailable() {
         return available;

@@ -25,11 +25,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //test class made for emulating usage scenarios of the application
 public class Emulation {
 
-    OrganizationChartService ocs = new OrganizationChartService();
-    ProgressReportService prs = new ProgressReportService();
+    OrganizationChartService ocs = OrganizationChartService.getInstance();
+    ProgressReportService prs = ProgressReportService.getInstance();
 
-    ThesisApprovationService tas = new ThesisApprovationService();
-    DidacticOfferService dos = new DidacticOfferService();
+    ThesisApprovationService tas = ThesisApprovationService.getInstance();
+    DidacticOfferService dos = DidacticOfferService.getInstance();
 
     //admin
     @Test

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ThesisApprovationServiceTest {
 
-    private ThesisApprovationService taService = new ThesisApprovationService();
+    private ThesisApprovationService taService = ThesisApprovationService.getInstance();
 
     @Test
     void insertStudentToThesisApprovation() throws SQLException, InterruptedException {

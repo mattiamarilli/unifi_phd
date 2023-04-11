@@ -18,7 +18,7 @@ public class FacultyMemberEmulation {
 
         final int fmFreshman = 593183;
 
-        OrganizationChartService ocService = new OrganizationChartService();
+        OrganizationChartService ocService = OrganizationChartService.getInstance();
 
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
 

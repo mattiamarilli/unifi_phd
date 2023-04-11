@@ -1,6 +1,7 @@
 package thesisapprovation.server;
 
 import organizationchart.Student;
+import progressreport.server.ProgressReportService;
 import thesisapprovation.EvaluationCommittee;
 import thesisapprovation.Review;
 import thesisapprovation.Reviewer;
@@ -12,12 +13,15 @@ import thesisapprovation.proxy.ThesisApprovationProxy;
 
 import java.awt.desktop.SystemEventListener;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiPredicate;
 
 public class ThesisApprovationService {
+
+    private static ThesisApprovationService tas;
 
     public int getLag() {
         return lag;
@@ -35,10 +39,16 @@ public class ThesisApprovationService {
     private ReviewDao reviewDao;
     private ReviewerDao reviewerDao;
     private ThesisApprovationProxy thesisApprovationProxy;
-    public ThesisApprovationService(){
+    private ThesisApprovationService(){
         this.thesisDao = new ThesisDao();
         this.reviewDao = new ReviewDao();
         this.reviewerDao = new ReviewerDao();
+    }
+
+    public static ThesisApprovationService getInstance() {
+        return tas == null ?
+                tas = new ThesisApprovationService() :
+                tas;
     }
 
     public void emulateDelay() throws InterruptedException {

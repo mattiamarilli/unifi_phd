@@ -19,7 +19,7 @@ public class ProfessorEmulation {
         final int professorFreshman = 9033829;
         final String courseCode = "C003830";
 
-        DidacticOfferService doService = new DidacticOfferService();
+        DidacticOfferService doService = DidacticOfferService.getInstance();
 
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
 

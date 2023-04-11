@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReviewerEmulation {
 
-    ThesisApprovationService tas = new ThesisApprovationService();
+    ThesisApprovationService tas = ThesisApprovationService.getInstance();
 
     public static void main(String[] args) throws SQLException, InterruptedException {
 
         final int reviewerFreshman = 5940249;
 
-        ThesisApprovationService taService = new ThesisApprovationService();
+        ThesisApprovationService taService = ThesisApprovationService.getInstance();
         List<Review> reviews;
         int idReview;
         int studentFreshman;

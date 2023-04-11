@@ -10,7 +10,7 @@ public class ProgressReportProxy {
     public ProgressReportProxy() {}
 
     public Student getStudentsInformation(Integer idStudent) throws SQLException, InterruptedException {
-        this.ocService = new OrganizationChartService();
+        this.ocService = OrganizationChartService.getInstance();
         return ocService.getStudentByFreshman(idStudent);
     }
 

@@ -14,6 +14,8 @@ import java.util.Random;
 
 public class DidacticOfferService {
 
+    private static DidacticOfferService dos;
+
     public int getLag() {
         return lag;
     }
@@ -33,12 +35,18 @@ public class DidacticOfferService {
     private StudentCareerDao studentCareerDao;
     private DidacticOfferProxy didacticOfferProxy;
 
-    public DidacticOfferService(){
+    private DidacticOfferService(){
         this.professorDao = new ProfessorDao();
         this.courseDao = new CourseDao();
         this.lessonDao = new LessonDao();
         this.appealDao = new AppealDao();
         this.studentCareerDao = new StudentCareerDao();
+    }
+
+    public static DidacticOfferService getInstance() {
+        return dos == null ?
+                dos = new DidacticOfferService() :
+                dos;
     }
 
     public Boolean getAvailable() {

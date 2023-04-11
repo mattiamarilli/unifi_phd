@@ -1,6 +1,7 @@
 package progressreport.server;
 
 import didacticoffer.Professor;
+import didacticoffer.server.DidacticOfferService;
 import organizationchart.Student;
 import progressreport.ProgressReport;
 import progressreport.Scientist;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Random;
 
 public class ProgressReportService {
+
+    private static ProgressReportService prs;
     public int getLag() {
         return lag;
     }
@@ -31,10 +34,16 @@ public class ProgressReportService {
     private ScientistDao scientistDao;
     private ProgressReportProxy progressReportProxy;
 
-    public ProgressReportService() {
+    private ProgressReportService() {
         progressReportDao = new ProgressReportDao();
         reviewDao = new ReviewDao();
         scientistDao = new ScientistDao();
+    }
+
+    public static ProgressReportService getInstance() {
+        return prs == null ?
+                prs = new ProgressReportService() :
+                prs;
     }
 
     public Boolean getAvailable() {

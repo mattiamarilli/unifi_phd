@@ -20,7 +20,7 @@ class DidacticOfferServiceTest {
 
 
 
-    private DidacticOfferService doService = new DidacticOfferService();
+    private DidacticOfferService doService = DidacticOfferService.getInstance();
 
     @Test
     void insertProfessor() throws SQLException, IOException, InterruptedException {

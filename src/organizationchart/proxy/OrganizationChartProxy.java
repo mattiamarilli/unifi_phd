@@ -15,32 +15,32 @@ public class OrganizationChartProxy {
     public OrganizationChartProxy(){}
 
     public void insertStudentToProgressReport(Integer studentFreshman) throws SQLException, InterruptedException  {
-        this.prService = new ProgressReportService();
+        this.prService =ProgressReportService.getInstance();
         prService.insertStudentToProgressReport(studentFreshman);
     }
 
     public void insertStudentToThesisApprovation(Integer studentFreshman) throws SQLException, InterruptedException {
-        this.taService = new ThesisApprovationService();
+        this.taService = ThesisApprovationService.getInstance();
         taService.insertStudentToThesisApprovation(studentFreshman);
     }
 
     public void insertStudentToDidacticOffer(Integer studentFreshman) throws SQLException, InterruptedException{
-        this.doService = new DidacticOfferService();
+        this.doService = DidacticOfferService.getInstance();
         doService.insertStudentCareer(studentFreshman);
     }
 
     public void deleteStudentProgressReport(Integer studentFreshman) throws SQLException, InterruptedException {
-        this.prService = new ProgressReportService();
+        this.prService = ProgressReportService.getInstance();
         prService.deleteProgressReportByStudent(studentFreshman);
     }
 
     public void deleteStudentThesisApprovation(Integer studentFreshman) throws SQLException, InterruptedException {
-        this.taService = new ThesisApprovationService();
+        this.taService = ThesisApprovationService.getInstance();
         taService.deleteThesisByStudent(studentFreshman);
     }
 
     public void deleteStudentDidacticOffer(Integer studentFreshman) throws SQLException, InterruptedException{
-        this.doService = new DidacticOfferService();
+        this.doService = DidacticOfferService.getInstance();
         doService.deleteStudentCareer(studentFreshman);
     }
 
