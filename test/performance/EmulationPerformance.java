@@ -538,13 +538,13 @@ public class EmulationPerformance {
             //doService.setLag(i*100);
             //taService.setLag(i*100);
 
-            for (int j = 1; j <= 3; j++)
+            for (int j = 1; j <= 10; j++)
                 getLatenciesOc(ocService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);
-            for (int j = 1; j <= 3; j++)
+            for (int j = 1; j <= 10; j++)
                 getLatenciesDo(doService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseDo.xlsx", 0, j, i);
-            for (int j = 1; j <= 3; j++)
+            for (int j = 1; j <= 10; j++)
                 getLatenciesPr(prService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
-            for (int j = 1; j <= 3; j++)
+            for (int j = 1; j <= 10; j++)
                 getLatenciesTa(taService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
         }
     }
