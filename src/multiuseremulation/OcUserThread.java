@@ -9,7 +9,7 @@ import java.util.Random;
 public class OcUserThread implements Runnable{
 
     private OrganizationChartService ocService;
-    private final int millisecondsSleep = 3000;
+    private final int millisecondsSleep = 5000;
 
 
     public OcUserThread(OrganizationChartService ocService) {
