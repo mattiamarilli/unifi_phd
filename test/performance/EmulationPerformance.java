@@ -540,16 +540,16 @@ public class EmulationPerformance {
         for(int i=0; i<10;i++)
         {
             //ocService.setLag((i+1)*30);
-            //prService.setLag((i+1)*30);
-            doService.setLag((i+1)*30);
+            prService.setLag((i+1)*30);
+            //doService.setLag((i+1)*30);
             //taService.setLag((i+1)*100);
 
+            for (int j = 1; j <= 10; j++)
+                getLatenciesPr(prService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
             for (int j = 1; j <= 10; j++)
                 getLatenciesDo(doService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreaseDo.xlsx", 0, j, i);
             for (int j = 1; j <= 10; j++)
                 getLatenciesOc(ocService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);
-            for (int j = 1; j <= 10; j++)
-                getLatenciesPr(prService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
             for (int j = 1; j <= 10; j++)
                 getLatenciesTa(taService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
         }
