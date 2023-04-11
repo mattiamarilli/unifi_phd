@@ -540,9 +540,9 @@ public class EmulationPerformance {
         for(int i=0; i<10;i++)
         {
             //ocService.setLag((i+1)*30);
-            prService.setLag((i+1)*30);
+            //prService.setLag((i+1)*30);
             //doService.setLag((i+1)*30);
-            //taService.setLag((i+1)*100);
+            taService.setLag((i+1)*30);
 
             for (int j = 1; j <= 10; j++)
                 getLatenciesPr(prService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
