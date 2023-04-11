@@ -159,68 +159,74 @@ public class EmulationPerformance {
     public static void getLatenciesPr(ProgressReportService prService,String excelFilePath,int numberRow, int numberColumn,int numberSheet) throws InterruptedException, SQLException {
         //progressreport
         long start, end;
+        try{
+            Thread.sleep(1000);
 
-        Thread.sleep(1000);
+            start = System.currentTimeMillis();
+            prService.updateProgressReport(1, "Progress Report end first year (update)", "Description progress report", "url1_2.pdf");
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.updateProgressReport(1, "Progress Report end first year (update)", "Description progress report", "url1_2.pdf");
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.updateStateProgressReport(3820539, "Load");
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.updateStateProgressReport(3820539, "Load");
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.getProgressReportByStudent(3472126);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.getProgressReportByStudent(3472126);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.getScientistsByStudent(3820539);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.getScientistsByStudent(3820539);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.insertSupervisoryCommittee(1, 7237583);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.insertSupervisoryCommittee(1, 7237583);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.insertScientist(4802402, "Guido", "Gagliardi", "Password", "guido.gagliardi@unifi.it", "Machine learning");
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.insertScientist(4802402, "Guido", "Gagliardi", "Password", "guido.gagliardi@unifi.it", "Machine learning");
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.updateScientist(7637585, "Alessio", "Vecchio", "alessio.vecchio@unipi.it", "Pervasive and mobile computing (update");
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.updateScientist(7637585, "Alessio", "Vecchio", "alessio.vecchio@unipi.it", "Pervasive and mobile computing (update");
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.updatePasswordScientist(5894375, "Password (update)");
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.updatePasswordScientist(5894375, "Password (update)");
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.getStudentBySupervisory(4029304);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.getStudentBySupervisory(4029304);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.getProgressReportByScientistStudent(7237583, 3472126);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.getProgressReportByScientistStudent(7237583, 3472126);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.deleteScientist(9237583);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
-        start = System.currentTimeMillis();
-        prService.deleteScientist(9237583);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+            start = System.currentTimeMillis();
+            prService.deleteProgressReport(6);
+            end = System.currentTimeMillis();
+            updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
+        }catch (InterruptedException ie){
+            ie.printStackTrace();
+        }catch (SQLException sql){
+            sql.printStackTrace();
+        }
 
-        start = System.currentTimeMillis();
-        prService.deleteProgressReport(6);
-        end = System.currentTimeMillis();
-        updateExcel(end-start,excelFilePath,numberRow++,numberColumn,numberSheet);
 
     }
 
@@ -520,11 +526,11 @@ public class EmulationPerformance {
     }
 
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
+        DidacticOfferService doService = DidacticOfferService.getInstance();
         OrganizationChartService ocService = OrganizationChartService.getInstance();
         //ocService.setLag(10);
         ProgressReportService prService = ProgressReportService.getInstance();
         //prService.setLag(10);
-        DidacticOfferService doService = DidacticOfferService.getInstance();
         //doService.setLag(10);
         ThesisApprovationService taService = ThesisApprovationService.getInstance();
         //taService.setLag(10);
@@ -534,18 +540,18 @@ public class EmulationPerformance {
         for(int i=0; i<10;i++)
         {
             //ocService.setLag((i+1)*30);
-            prService.setLag((i+1)*30);
-            //doService.setLag((i+1)*100);
+            //prService.setLag((i+1)*30);
+            doService.setLag((i+1)*30);
             //taService.setLag((i+1)*100);
 
             for (int j = 1; j <= 10; j++)
-                getLatenciesOc(ocService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);
+                getLatenciesDo(doService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreaseDo.xlsx", 0, j, i);
             for (int j = 1; j <= 10; j++)
-                getLatenciesDo(doService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseDo.xlsx", 0, j, i);
+                getLatenciesOc(ocService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreaseOc.xlsx", 0, j, i);
             for (int j = 1; j <= 10; j++)
-                getLatenciesPr(prService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
+                getLatenciesPr(prService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreasePr.xlsx", 0, j, i);
             for (int j = 1; j <= 10; j++)
-                getLatenciesTa(taService, "/Users/mattiamarilli/Progetti/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
+                getLatenciesTa(taService, "/Users/giacomoponzuoli/Desktop/unifi_phd/documentation/LagIncreaseTa.xlsx", 0, j, i);
         }
     }
 

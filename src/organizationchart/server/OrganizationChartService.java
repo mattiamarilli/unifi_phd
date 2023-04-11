@@ -75,7 +75,8 @@ public class OrganizationChartService {
         if(available){
             Cycle c = new Cycle(numberCycle);
             Student s = new Student(studentFreshman, name, surname, email, password, topics, c, 1);
-            Boolean result = studentDao.insert(s);
+            Boolean result = true;
+            studentDao.insert(s);
 
             if(result) {
                 this.ocProxy = new OrganizationChartProxy();
@@ -145,12 +146,15 @@ public class OrganizationChartService {
     //delete student
     public synchronized Boolean deleteStudent(Integer studentFreshman) throws SQLException, InterruptedException {
         if(available){
-            Boolean result = studentDao.delete(studentFreshman);
+            Boolean result = true;
+            studentDao.delete(studentFreshman);
             //elimino lo studente anche negli altri microservizi
-            this.ocProxy = new OrganizationChartProxy();
-            ocProxy.deleteStudentDidacticOffer(studentFreshman);
-            ocProxy.deleteStudentProgressReport(studentFreshman);
-            ocProxy.deleteStudentThesisApprovation(studentFreshman);
+            if(result) {
+                this.ocProxy = new OrganizationChartProxy();
+                ocProxy.deleteStudentDidacticOffer(studentFreshman);
+                ocProxy.deleteStudentProgressReport(studentFreshman);
+                ocProxy.deleteStudentThesisApprovation(studentFreshman);
+            }
             emulateDelay();
             return result;
         }else{
