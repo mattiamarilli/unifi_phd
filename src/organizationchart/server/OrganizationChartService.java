@@ -29,7 +29,7 @@ public class OrganizationChartService {
     private CycleDao cycleDao;
     private FacultyMemberDao facultyMemberDao;
     private OrganizationChartProxy ocProxy;
-    private OrganizationChartService() {
+    public OrganizationChartService() {
         this.studentDao = new StudentDao();
         this.cycleDao = new CycleDao();
         this.facultyMemberDao = new FacultyMemberDao();

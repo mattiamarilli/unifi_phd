@@ -504,10 +504,10 @@ public class EmulationPerformance {
     }
 
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        OrganizationChartService ocService = OrganizationChartService.getInstance();
-        ProgressReportService prService = ProgressReportService.getInstance();
-        DidacticOfferService doService = DidacticOfferService.getInstance();
-        ThesisApprovationService taService = ThesisApprovationService.getInstance();
+        OrganizationChartService ocService = new OrganizationChartService();
+        ProgressReportService prService = new ProgressReportService();
+        DidacticOfferService doService = new DidacticOfferService();
+        ThesisApprovationService taService = new ThesisApprovationService();
 
         //multi user increase
         for (int i = 0; i < 10; i++) {

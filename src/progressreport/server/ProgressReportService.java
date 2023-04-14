@@ -34,7 +34,7 @@ public class ProgressReportService {
     private ScientistDao scientistDao;
     private ProgressReportProxy progressReportProxy;
 
-    private ProgressReportService() {
+    public ProgressReportService() {
         progressReportDao = new ProgressReportDao();
         reviewDao = new ReviewDao();
         scientistDao = new ScientistDao();

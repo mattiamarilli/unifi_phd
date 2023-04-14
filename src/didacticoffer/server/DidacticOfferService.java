@@ -35,7 +35,7 @@ public class DidacticOfferService {
     private StudentCareerDao studentCareerDao;
     private DidacticOfferProxy didacticOfferProxy;
 
-    private DidacticOfferService(){
+    public DidacticOfferService(){
         this.professorDao = new ProfessorDao();
         this.courseDao = new CourseDao();
         this.lessonDao = new LessonDao();

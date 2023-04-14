@@ -39,7 +39,7 @@ public class ThesisApprovationService {
     private ReviewDao reviewDao;
     private ReviewerDao reviewerDao;
     private ThesisApprovationProxy thesisApprovationProxy;
-    private ThesisApprovationService(){
+    public ThesisApprovationService(){
         this.thesisDao = new ThesisDao();
         this.reviewDao = new ReviewDao();
         this.reviewerDao = new ReviewerDao();
