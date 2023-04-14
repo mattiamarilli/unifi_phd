@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class TaUserThread implements Runnable{
     private ThesisApprovationService taService;
-    private final int millisecondsSleep = 5000;
+    private final int millisecondsSleep = 1000;
 
     public TaUserThread(ThesisApprovationService taService) {
         this.taService = taService;
